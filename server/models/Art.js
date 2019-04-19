@@ -18,9 +18,6 @@ const artSchema = new mongoose.Schema({
     type: [String],
     default: []
   },
-  area: {
-    type: Number,
-  },
   description: {
     type: String,
   },
