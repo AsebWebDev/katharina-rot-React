@@ -1,6 +1,6 @@
 .DS_Store
 node_modules
-server/bin/seeds.js
+seeds.js
 
 # Environment Variables should NEVER be published
 .env
