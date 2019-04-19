@@ -3,7 +3,11 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   username: String,
-  password: String
+  password: String,
+  isAdmin: {
+    type: Boolean,
+    default: false
+  }
 }, {
     timestamps: {
       createdAt: 'created_at',

@@ -1,12 +1,20 @@
 const mongoose = require('mongoose');
 
-const countrySchema = new mongoose.Schema({
-  name: {
+const artSchema = new mongoose.Schema({
+  title: {
     type: String,
-    required: [true, 'The country name is required'],
+    required: [true, 'The title is required'],
     minlength: 1
   },
-  capitals: {
+  titlePic: {
+    type: String,
+    required: [true, 'Default Picture URL'],
+  },
+  pictures: {
+    type: [String],
+    default: []
+  },
+  tags: {
     type: [String],
     default: []
   },
@@ -18,6 +26,6 @@ const countrySchema = new mongoose.Schema({
   },
 });
 
-const Country = mongoose.model('Country', countrySchema);
+const Art = mongoose.model('Art', artSchema);
 
-module.exports = Country;
+module.exports = Art;
