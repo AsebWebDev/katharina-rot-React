@@ -2,20 +2,15 @@ const path = require('path')
 require('dotenv').config({ path: path.join(__dirname, '../.env') })
 
 const mongoose = require("mongoose");
-// const User = require("../models/User");
+const User = require("../models/User");
+
+// Bcrypt to encrypt passwords
+const bcrypt = require("bcrypt")
+const bcryptSalt = 10
 
 require('../configs/database')
 
-let users = [
-  {
-    username: "alice",
-    password: bcrypt.hashSync("alice", bcrypt.genSaltSync(bcryptSalt)),
-  },
-  {
-    username: "bob",
-    password: bcrypt.hashSync("bob", bcrypt.genSaltSync(bcryptSalt)),
-  }
-]
+
 
 User.deleteMany()
   .then(() => {
