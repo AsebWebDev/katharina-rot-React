@@ -10,7 +10,13 @@ const bcryptSalt = 10
 
 require('../configs/database')
 
-
+let users = [
+  {
+    username: "admin",
+    password: bcrypt.hashSync("admin", bcrypt.genSaltSync(bcryptSalt)),
+    isAdmin: true
+  }
+]
 
 User.deleteMany()
   .then(() => {
