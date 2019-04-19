@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { withRouter } from "react-router-dom";
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
 import api from '../api';
 
-export default class LoginBox extends Component {
+class LoginBox extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -27,6 +28,8 @@ export default class LoginBox extends Component {
     api.login(this.state.username, this.state.password)
       .then(result => {
         console.log('SUCCESS!')
+        this.setState({ message: 'Success!' })
+        console.log(this.props)
         this.props.history.push("/") // Redirect to the home page
       })
       .catch(err => this.setState({ message: err }))
@@ -64,10 +67,14 @@ export default class LoginBox extends Component {
             <div className="text-center">
               <MDBBtn type="submit">Login</MDBBtn>
             </div>
+            {this.state.message && <h2>{this.state.message}</h2>}
           </form>
+          
         </MDBCol>
       </MDBRow>
     </MDBContainer>
     )
   }
 }
+
+export default withRouter(LoginBox)
