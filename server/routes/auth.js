@@ -9,6 +9,7 @@ const bcryptSalt = 10
 
 router.post("/login", (req, res, next) => {
   const { username, password } = req.body
+	console.log("TCL: req.body", req.body)
 
   User.findOne({ username })
     .then(userDoc => {
