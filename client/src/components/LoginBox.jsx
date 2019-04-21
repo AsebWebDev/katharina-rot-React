@@ -29,7 +29,6 @@ class LoginBox extends Component {
       .then(result => {
         console.log('SUCCESS!')
         this.setState({ message: 'Success!' })
-        console.log(this.props)
         this.props.history.push("/") // Redirect to the home page
       })
       .catch(err => this.setState({ message: err }))

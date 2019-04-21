@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Link, NavLink} from 'react-router-dom';
+import { Link, NavLink, withRouter} from 'react-router-dom';
 import api from '../api';
 
 
-export default class Header extends Component {
+class Header extends Component {
   handleLogoutClick(e) {
-    api.logout()
+    api.logout();
+    this.props.history.push("/") // Redirect to the home page
   }
 
   render() {
@@ -20,3 +21,4 @@ export default class Header extends Component {
     )
   }
 }
+export default  withRouter(Header)
