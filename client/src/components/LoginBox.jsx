@@ -12,10 +12,6 @@ class LoginBox extends Component {
       message: null
     }
   }
-
-  handleSubmit = event => {
-    event.preventDefault();
-  }
   
   handleInputChange(stateFieldName, event) {
     this.setState({

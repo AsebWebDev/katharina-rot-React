@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { withRouter } from "react-router-dom";
 import api from '../../api';
 
-export default class Admin extends Component {
+class Admin extends Component {
   constructor() {
     super();
     this.state = {
@@ -80,7 +81,8 @@ export default class Admin extends Component {
   }
 
   render() {
-    return (
+    if (api.isLoggedIn()) {
+      return (
       <div>
         <h1>Admin</h1>
         <button onClick={this.uploadWidget} id="upload-title" className="upload-button">Add Title-Image</button>          
@@ -98,6 +100,11 @@ export default class Admin extends Component {
         {this.state.message && <h2>{this.state.message}</h2>}
         {this.state.pictures && this.state.pictures.map((picture, i) => <img src={picture} key ={i} alt="" width="70px"/>)}
       </div>
-    )
+    )} else {
+      this.props.history.push("/login") // Redirect to the login page
+      return null
+    }
   }
 }
+
+export default withRouter(Admin)
