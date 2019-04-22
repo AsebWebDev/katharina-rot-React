@@ -17,6 +17,7 @@ class Admin extends Component {
 
   uploadWidget = (e) => {
     e.preventDefault();
+    // UPLOAD SINGLE PICTURE FOR THE TITLE
     if (e.target.id === "upload-title") {
       window.cloudinary.openUploadWidget({ 
         cloud_name: 'Djyjdargg', 
@@ -30,6 +31,7 @@ class Admin extends Component {
           }
           if (error) console.log(error.message);
       }); 
+    // UPLOAD MULTIPLE PICTURES FOR THE GALLERY
     } else {
       window.cloudinary.openUploadWidget({ 
         cloud_name: 'Djyjdargg', 
