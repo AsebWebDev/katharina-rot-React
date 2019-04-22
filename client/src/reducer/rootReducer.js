@@ -11,7 +11,6 @@ export default function rootReducer(state=initialState, action) {
       return {
         ...newState,
         arts: action.arts
-        // arts: [...newState.arts, action.arts]
       };
     }
     

@@ -20,8 +20,8 @@ class Admin extends Component {
     // UPLOAD SINGLE PICTURE FOR THE TITLE
     if (e.target.id === "upload-title") {
       window.cloudinary.openUploadWidget({ 
-        cloud_name: 'Djyjdargg', 
-        upload_preset: 'mu7bkqlz',
+        cloud_name: process.env.REACT_APP_CLOUD_NAME, 
+        upload_preset: process.env.REACT_APP_UPLOAD_PRESET,
         tags: this.state.tags,
         multiple: false
       },
@@ -34,8 +34,8 @@ class Admin extends Component {
     // UPLOAD MULTIPLE PICTURES FOR THE GALLERY
     } else {
       window.cloudinary.openUploadWidget({ 
-        cloud_name: 'Djyjdargg', 
-        upload_preset: 'mu7bkqlz',
+        cloud_name: process.env.REACT_APP_CLOUD_NAME, 
+        upload_preset: process.env.REACT_APP_UPLOAD_PRESET,
         tags: this.state.tags
       },
         (error, result) => {
