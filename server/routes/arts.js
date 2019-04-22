@@ -11,9 +11,10 @@ router.get('/', (req, res, next) => {
     .catch(err => next(err))
 });
 
+//TODO: protect route (is admin?)
 router.post('/', (req, res, next) => {
-  let { title, titlePic, tags, description } = req.body
-  Art.create({ title, titlePic, tags, description })
+  let { title, titlePic, pictures, tags, description } = req.body
+  Art.create({ title, titlePic, pictures, tags, description })
     .then(Art => {
       res.json({
         success: true,
