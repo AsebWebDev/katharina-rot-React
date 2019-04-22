@@ -8,7 +8,8 @@ const artSchema = new mongoose.Schema({
   },
   titlePic: {
     type: String,
-    required: [true, 'Default Picture URL'],
+    default: 'https://n-allo.be/wp-content/uploads/2016/08/ef3-placeholder-image-450x350.jpg'
+    // required: [true, 'Default Picture URL'],
   },
   pictures: {
     type: [String],

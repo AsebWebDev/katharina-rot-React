@@ -52,12 +52,13 @@ export default {
   //     .catch(errHandler)
   // },
 
-  // addCountry(body) {
-  //   return service
-  //     .post('/countries', body)
-  //     .then(res => res.data)
-  //     .catch(errHandler)
-  // },
+  addArt(body) {
+    //TODO: Turn Tag-String into Array of Tags before posting
+    return service
+      .post('/arts', body)
+      .then(res => res.data)
+      .catch(errHandler)
+  },
 
   // getSecret() {
   //   return service
