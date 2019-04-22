@@ -8,7 +8,6 @@ export default class Admin extends Component {
       title: '',
       titlePic: '',
       pictures: [],
-      pickedImages: [],
       tags: [],
       description: '',
       message: null
@@ -17,35 +16,34 @@ export default class Admin extends Component {
 
   uploadWidget = (e) => {
     e.preventDefault();
-    window.cloudinary.openUploadWidget({ 
-      cloud_name: 'Djyjdargg', 
-      upload_preset: 'mu7bkqlz',
-      tags: this.state.tags
-    },
-      (error, result) => {
-        if (result) {
-          console.log(result);
-          console.log(result[0].secure_url);
-          //TODO: Add all uploaded picture urls to picture array and upload
-          let newPictures = [ ...this.state.pictures ];
-          result.forEach(upload => newPictures.push(upload.secure_url));
-          console.log(newPictures);
-          this.setState({
-            pictures: newPictures
-          })
-        }
-        if (error) console.log(error.message);
+    if (e.target.id === "upload-title") {
+      window.cloudinary.openUploadWidget({ 
+        cloud_name: 'Djyjdargg', 
+        upload_preset: 'mu7bkqlz',
+        tags: this.state.tags,
+        multiple: false
+      },
+        (error, result) => {
+          if (result) {
+            this.setState({ titlePic: result[0].secure_url })
+          }
+          if (error) console.log(error.message);
       }); 
-  }
-
-  handleFilePick = (e) => {
-    let pickedImages = [];
-    for (let i = 0; i < e.target.files.length; i++) {
-      pickedImages.push(URL.createObjectURL(e.target.files[i]))
+    } else {
+      window.cloudinary.openUploadWidget({ 
+        cloud_name: 'Djyjdargg', 
+        upload_preset: 'mu7bkqlz',
+        tags: this.state.tags
+      },
+        (error, result) => {
+          if (result) {
+            let newPictures = [ ...this.state.pictures ];
+            result.forEach(upload => newPictures.push(upload.secure_url));
+            this.setState({ pictures: newPictures })
+          }
+          if (error) console.log(error.message);
+      }); 
     }
-    this.setState({
-      pickedImages: pickedImages
-    })
   }
 
   handleChange = (e) => {
@@ -67,6 +65,7 @@ export default class Admin extends Component {
       this.setState({
         title: '',
         titlePic: '',
+        pictures: null,
         tags: '',
         description: '',
         message: `Your Art '${result.Art.title}' has been created`
@@ -84,21 +83,20 @@ export default class Admin extends Component {
     return (
       <div>
         <h1>Admin</h1>
+        <button onClick={this.uploadWidget} id="upload-title" className="upload-button">Add Title-Image</button>          
+        {this.state.titlePic && <img src={this.state.titlePic} alt="" width="70px"/>}
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="title">Title</label>
           <input type="text" name="title" id="title" value={this.state.title} onChange={this.handleChange}/><br />
-          <label htmlFor="titlePic">Picture</label>
-          <input type="text" name="titlePic" id="titlePic" value={this.state.titlePic} onChange={this.handleChange}/><br />
           <label htmlFor="tags">Tags</label>
           <input type="text" name="tags" id="tags" value={this.state.tags} onChange={this.handleChange}/><br />
           <label htmlFor="tags">Description</label>
           <input type="textarea" name="description" id="description" value={this.state.description} onChange={this.handleChange}/><br />
-          <button type="submit">Submit</button>
           <button onClick={this.uploadWidget} className="upload-button">Add Image</button>
-          <input type="file" name="filefield" multiple="multiple" onChange={this.handleFilePick}/>
+          <button type="submit">Submit</button>
         </form>
         {this.state.message && <h2>{this.state.message}</h2>}
-        {this.state.pictures.map((picture, i) => <img src={picture} key ={i} alt="" width="70px"/>)}
+        {this.state.pictures && this.state.pictures.map((picture, i) => <img src={picture} key ={i} alt="" width="70px"/>)}
       </div>
     )
   }
