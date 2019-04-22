@@ -45,12 +45,12 @@ export default {
       .get('/logout')
   },
 
-  // getCountries() {
-  //   return service
-  //     .get('/countries')
-  //     .then(res => res.data)
-  //     .catch(errHandler)
-  // },
+  getArts() {
+    return service
+      .get('/arts')
+      .then(res => res.data)
+      .catch(errHandler)
+  },
 
   addArt(body) {
     //TODO: Turn Tag-String into Array of Tags before posting

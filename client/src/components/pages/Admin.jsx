@@ -73,13 +73,8 @@ class Admin extends Component {
         description: '',
         message: `Your Art '${result.Art.title}' has been created`
       })
-      setTimeout(() => {
-        this.setState({
-          message: null
-        })
-      }, 2000)
-    })
-    .catch(err => this.setState({ message: err.toString() }));
+      setTimeout(() => { this.setState({ message: null })}, 2000)
+    }).catch(err => this.setState({ message: err.toString() }));
   }
 
   render() {

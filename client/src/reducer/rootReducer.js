@@ -1,19 +1,20 @@
-import { LOGIN, LOGOUT } from '../actioncreators';
+import { GET_DATA } from '../actioncreators';
 
 const initialState = {
-  count: 0
+  arts: []
 }
 
 export default function rootReducer(state=initialState, action) {
+  let newState = { ...state }
   switch(action.type) {
-    case LOGIN: {
-      console.log("Login hit")
-      return state;
+    case GET_DATA: {
+      return {
+        ...newState,
+        arts: action.arts
+        // arts: [...newState.arts, action.arts]
+      };
     }
-    case LOGOUT: {
-      console.log("Logout hit");
-      return state;
-    } 
+    
     default: return state;
   }
 }
