@@ -24,11 +24,8 @@ class Admin extends Component {
         upload_preset: process.env.REACT_APP_UPLOAD_PRESET,
         tags: this.state.tags,
         multiple: false
-      },
-        (error, result) => {
-          if (result) {
-            this.setState({ titlePic: result[0].secure_url })
-          }
+      },(error, result) => {
+          if (result) { this.setState({ titlePic: result[0].secure_url })}
           if (error) console.log(error.message);
       }); 
     // UPLOAD MULTIPLE PICTURES FOR THE GALLERY
@@ -37,8 +34,7 @@ class Admin extends Component {
         cloud_name: process.env.REACT_APP_CLOUD_NAME, 
         upload_preset: process.env.REACT_APP_UPLOAD_PRESET,
         tags: this.state.tags
-      },
-        (error, result) => {
+      },(error, result) => {
           if (result) {
             let newPictures = [ ...this.state.pictures ];
             result.forEach(upload => newPictures.push(upload.secure_url));
