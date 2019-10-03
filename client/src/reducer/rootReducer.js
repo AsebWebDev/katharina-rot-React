@@ -1,7 +1,7 @@
 import { GET_DATA } from '../actioncreators';
 
 const initialState = {
-  arts: []
+  collections: []
 }
 
 export default function rootReducer(state=initialState, action) {
@@ -10,7 +10,7 @@ export default function rootReducer(state=initialState, action) {
     case GET_DATA: {
       return {
         ...newState,
-        arts: action.arts
+        collections: action.collections
       };
     }
     

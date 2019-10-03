@@ -5,7 +5,7 @@ export default function Card(props) {
     let handleDelete = () => {
         console.log("handle")
     }
-    let {title, titlePic, pictures, tags, description, _id} = props.art;
+    let {title, titlePic, pictures, tags, description, _id} = props.collection;
     return (
         <MDBCol>
             <MDBCard style={{ width: "22rem" }}>

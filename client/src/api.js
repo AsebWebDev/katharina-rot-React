@@ -45,38 +45,18 @@ export default {
       .get('/logout')
   },
 
-  getArts() {
+  getCollections() {
     return service
-      .get('/arts')
+      .get('/collections')
       .then(res => res.data)
       .catch(errHandler)
   },
 
-  addArt(body) {
+  addCollection(body) {
     //TODO: Turn Tag-String into Array of Tags before posting
     return service
-      .post('/arts', body)
+      .post('/collections', body)
       .then(res => res.data)
       .catch(errHandler)
-  },
-
-  // getSecret() {
-  //   return service
-  //     .get('/secret')
-  //     .then(res => res.data)
-  //     .catch(errHandler)
-  // },
-
-  addPicture(file) {
-    const formData = new FormData()
-    formData.append("picture", file)
-    return service
-      .post('/endpoint/to/add/a/picture', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      })
-      .then(res => res.data)
-      .catch(errHandler)
-  },
+  }
 }

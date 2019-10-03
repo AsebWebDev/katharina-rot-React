@@ -46,7 +46,7 @@ class Admin extends Component {
       tags: this.state.tags.split(' '),
       description: this.state.description
     };
-    api.addArt(data)
+    api.addCollection(data)
     .then(result => {
       console.log('SUCCESS!')
       this.setState({
@@ -55,7 +55,7 @@ class Admin extends Component {
         pictures: null,
         tags: '',
         description: '',
-        message: `Your Art '${result.Art.title}' has been created`
+        message: `Your Collection '${result.Collection.title}' has been created`
       })
       setTimeout(() => { this.setState({ message: null })}, 2000)
     }).catch(err => this.setState({ message: err.toString() }));

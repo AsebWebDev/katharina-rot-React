@@ -14,10 +14,10 @@ class App extends Component {
 
   componentDidMount(){
     // GET ALL ART-DATA FROM BACKEND-DATABASE
-    api.getArts()
-    .then(arts => this.props.dispatch({
+    api.getCollections()
+    .then(collections => this.props.dispatch({
       type: "GET_DATA", 
-      arts
+      collections
     })).catch (err => console.log(err))
   }
   
@@ -38,7 +38,7 @@ class App extends Component {
 
 function mapStateToProps(reduxState){
   return {
-    arts: reduxState.arts
+    collections: reduxState.collections
   }
 }
 

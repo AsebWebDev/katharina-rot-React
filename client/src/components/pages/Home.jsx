@@ -5,10 +5,11 @@ import Card from '../Card'
 class Home extends Component {
 
   render() {  
+    console.log(this.props)
     return (
       <div className="Home">
         <h2>Home</h2>
-        {this.props.arts && this.props.arts.map((art, i) => <Card key={art._id} art={art}/>)}
+        {this.props.collections && this.props.collections.map((collection, i) => <Card key={collection._id} collection={collection}/>)}
       </div>
     );
   }
@@ -16,7 +17,7 @@ class Home extends Component {
 
 function mapStateToProps(reduxState){
   return {
-    arts: reduxState.arts
+    collections: reduxState.collections
   }
 }
 
