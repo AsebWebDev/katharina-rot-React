@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
+import {Image, Video, Transformation, CloudinaryContext} from 'cloudinary-react';
+import myWidgets from '../../configs/cloudinary'
 import api from '../../api';
 
 class Admin extends Component {
@@ -15,35 +17,53 @@ class Admin extends Component {
     };
   } 
 
-  uploadWidget = (e) => {
-    e.preventDefault();
-    // UPLOAD SINGLE PICTURE FOR THE TITLE
-    if (e.target.id === "upload-title") {
-      window.cloudinary.openUploadWidget({ 
-        cloud_name: process.env.REACT_APP_CLOUD_NAME, 
-        upload_preset: process.env.REACT_APP_UPLOAD_PRESET,
-        tags: this.state.tags,
-        multiple: false
-      },(error, result) => {
-          if (result) { this.setState({ titlePic: result[0].secure_url })}
-          if (error) console.log(error.message);
-      }); 
-    // UPLOAD MULTIPLE PICTURES FOR THE GALLERY
-    } else {
-      window.cloudinary.openUploadWidget({ 
-        cloud_name: process.env.REACT_APP_CLOUD_NAME, 
-        upload_preset: process.env.REACT_APP_UPLOAD_PRESET,
-        tags: this.state.tags
-      },(error, result) => {
-          if (result) {
-            let newPictures = [ ...this.state.pictures ];
-            result.forEach(upload => newPictures.push(upload.secure_url));
-            this.setState({ pictures: newPictures })
-          }
-          if (error) console.log(error.message);
-      }); 
-    }
+  componentDidMount(){
+    // document.getElementById("upload_widget").addEventListener("click", function(){
+    //   myWidgets.uploadTitle.open();
+    // }, false);
   }
+
+  handleUploadTitle(){
+    console.log("upload title")
+    // myWidgets.uploadTitle.open()
+    window.cloudinary.createUploadWidget({
+      uploadPreset: 'mu7bkqlz'}, (error, result) => { 
+          if (!error && result && result.event === "success") { 
+          console.log('Done! Here is the image info: ', result.info); 
+          console.log(result.info.secure_url)
+          } else if (error) console.log(error)
+    }).open()
+  }
+
+  // uploadWidget = (e) => {
+  //   e.preventDefault();
+  //   // UPLOAD SINGLE PICTURE FOR THE TITLE
+  //   if (e.target.id === "upload-title") {
+  //     window.cloudinary.openUploadWidget({ 
+  //       cloud_name: process.env.REACT_APP_CLOUD_NAME, 
+  //       upload_preset: process.env.REACT_APP_UPLOAD_PRESET,
+  //       tags: this.state.tags,
+  //       multiple: false
+  //     },(error, result) => {
+  //         if (result) { this.setState({ titlePic: result[0].secure_url })}
+  //         if (error) console.log(error.message);
+  //     }); 
+  //   // UPLOAD MULTIPLE PICTURES FOR THE GALLERY
+  //   } else {
+  //     window.cloudinary.openUploadWidget({ 
+  //       cloud_name: process.env.REACT_APP_CLOUD_NAME, 
+  //       upload_preset: process.env.REACT_APP_UPLOAD_PRESET,
+  //       tags: this.state.tags
+  //     },(error, result) => {
+  //         if (result) {
+  //           let newPictures = [ ...this.state.pictures ];
+  //           result.forEach(upload => newPictures.push(upload.secure_url));
+  //           this.setState({ pictures: newPictures })
+  //         }
+  //         if (error) console.log(error.message);
+  //     }); 
+  //   }
+  // }
 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
@@ -78,7 +98,10 @@ class Admin extends Component {
       return (
       <div>
         <h1>Admin</h1>
-        <button onClick={this.uploadWidget} id="upload-title" className="upload-button">Add Title-Image</button>          
+        <CloudinaryContext cloudName="djyjdargg">
+          <button onClick={this.handleUploadTitle} id="upload_widget" className="cloudinary-button">Upload files</button>
+        </CloudinaryContext>
+        <button onClick={this.handleUploadTitle} id="upload-title" className="upload-button">Add Title-Image</button>          
         {this.state.titlePic && <img src={this.state.titlePic} alt="" width="70px"/>}
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="title">Title</label>

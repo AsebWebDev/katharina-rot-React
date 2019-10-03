@@ -1,0 +1,1 @@
+window.cloudinary.setCloudName("djyjdargg");

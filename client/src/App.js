@@ -12,16 +12,7 @@ class App extends Component {
 
   //TODO: USE HOOKS TO AVOID LIFECYCLE-METHODS
 
-  componentDidUpdate() {
-    // api.getArts()
-    // .then(arts => this.props.dispatch({
-    //   type: "GET_DATA", 
-    //   arts
-    // })).catch (err => console.log(err))
-  }
-
   componentDidMount(){
-    console.log(this.props)
     // GET ALL ART-DATA FROM BACKEND-DATABASE
     api.getArts()
     .then(arts => this.props.dispatch({
