@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Art from '../Art'
+import Card from '../Card'
 
 class Home extends Component {
 
   render() {  
-    console.log(this.props)  
     return (
       <div className="Home">
         <h2>Home</h2>
-        {this.props.arts && this.props.arts.map((art, i) => <Art key={i} art={art}/>)}
+        {this.props.arts && this.props.arts.map((art, i) => <Card key={art._id} art={art}/>)}
       </div>
     );
   }
