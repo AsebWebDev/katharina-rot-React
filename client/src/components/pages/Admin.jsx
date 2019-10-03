@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { withRouter } from "react-router-dom";
+// import { withRouter } from "react-router-dom";
 import {Image, Video, Transformation, CloudinaryContext} from 'cloudinary-react';
 import '../../configs/cloudinary'
-import '../../helperfunctions/helper'
 import api from '../../api';
 
 class Admin extends Component {
@@ -90,4 +89,5 @@ class Admin extends Component {
   }
 }
 
-export default withRouter(Admin)
+// export default withRouter(Admin)
+export default Admin
