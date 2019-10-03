@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 
 class Home extends Component {
 
-  render() {    
+  render() {  
+    console.log(this.props)  
     return (
       <div className="Home">
         <h2>Home</h2>

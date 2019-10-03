@@ -6,6 +6,7 @@ const router = express.Router();
 router.get('/', (req, res, next) => {
   Art.find()
     .then(arts => {
+      console.log(arts)
       res.json(arts);
     })
     .catch(err => next(err))
