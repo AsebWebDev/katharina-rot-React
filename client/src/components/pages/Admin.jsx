@@ -18,29 +18,18 @@ class Admin extends Component {
   } 
 
   uploadWidget = (e) => {
+    let multiple = (e.target.id === "upload-art"); // Multiple pictures for the gallery or one picture as title
     e.preventDefault();
-    // UPLOAD SINGLE PICTURE FOR THE TITLE
-    if (e.target.id === "upload-title") {
-      window.cloudinary.createUploadWidget({ 
-        upload_preset: 'mu7bkqlz',
-        multiple: false
-      },(error, result) => {
-          if (!error && result && result.event === "success") { 
-            this.setState({ titlePic: result.info.secure_url })
-          } else if (error) console.log(error)
-      }).open(); 
-    // UPLOAD MULTIPLE PICTURES FOR THE GALLERY
-    } else {
-      window.cloudinary.createUploadWidget({ 
-        upload_preset: 'mu7bkqlz',
-        multiple: true
-      },(error, result) => {
-          if (!error && result && result.event === "success") {
-            this.setState({ pictures: [...this.state.pictures, result.info.secure_url] })
-          }
-          if (error) console.log(error.message);
-      }).open(); 
-    }
+    window.cloudinary.createUploadWidget({ 
+      upload_preset: 'mu7bkqlz',
+      multiple
+    },(error, result) => {
+        if (!error && result && result.event === "success") { 
+          (multiple) 
+          ? this.setState({ pictures: [...this.state.pictures, result.info.secure_url] }) // UPLOAD SINGLE PICTURE FOR THE TITLE
+          : this.setState({ titlePic: result.info.secure_url }) // UPLOAD MULTIPLE PICTURES FOR THE GALLERY
+        } else if (error) console.log(error)
+    }).open(); 
   }
 
   handleChange = (e) => {
@@ -77,7 +66,7 @@ class Admin extends Component {
       <div>
         <h1>Admin</h1>
         <CloudinaryContext cloudName="djyjdargg">
-          <button onClick={this.uploadWidget} id="upload-title" className="cloudinary-button">Add Title Image</button>
+          <button onClick={this.uploadWidget} className="cloudinary-button">Add Title Image</button>
         </CloudinaryContext>
         {this.state.titlePic && <img src={this.state.titlePic} alt="" width="70px"/>}
         <form onSubmit={this.handleSubmit}>
@@ -87,7 +76,7 @@ class Admin extends Component {
           <input type="text" name="tags" id="tags" value={this.state.tags} onChange={this.handleChange}/><br />
           <label htmlFor="tags">Description</label>
           <input type="textarea" name="description" id="description" value={this.state.description} onChange={this.handleChange}/><br />
-          <button onClick={this.uploadWidget} className="upload-button">Add Image</button>
+          <button onClick={this.uploadWidget} id="upload-art" className="upload-button">Upload Art</button>
           <button type="submit">Submit</button>
         </form>
         {this.state.message && <h2>{this.state.message}</h2>}
