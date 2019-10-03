@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import {Image, Video, Transformation, CloudinaryContext} from 'cloudinary-react';
 import '../../configs/cloudinary'
+import '../../helperfunctions/helper'
 import api from '../../api';
 
 class Admin extends Component {
@@ -42,7 +43,7 @@ class Admin extends Component {
       title: this.state.title,
       titlePic: this.state.titlePic,
       pictures: this.state.pictures,
-      tags: this.state.tags,
+      tags: this.state.tags.split(' '),
       description: this.state.description
     };
     api.addArt(data)
@@ -67,7 +68,6 @@ class Admin extends Component {
         <h1>Admin</h1>
         <CloudinaryContext cloudName="djyjdargg">
           <button onClick={this.uploadWidget} className="cloudinary-button">Add Title Image</button>
-        </CloudinaryContext>
         {this.state.titlePic && <img src={this.state.titlePic} alt="" width="70px"/>}
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="title">Title</label>
@@ -76,9 +76,10 @@ class Admin extends Component {
           <input type="text" name="tags" id="tags" value={this.state.tags} onChange={this.handleChange}/><br />
           <label htmlFor="tags">Description</label>
           <input type="textarea" name="description" id="description" value={this.state.description} onChange={this.handleChange}/><br />
-          <button onClick={this.uploadWidget} id="upload-art" className="upload-button">Upload Art</button>
-          <button type="submit">Submit</button>
+          <button onClick={this.uploadWidget} id="upload-art" className="cloudinary-button">Upload Art</button>
+          <button type="submit" className="cloudinary-button">Submit</button>
         </form>
+        </CloudinaryContext>
         {this.state.message && <h2>{this.state.message}</h2>}
         {this.state.pictures && this.state.pictures.map((picture, i) => <img src={picture} key ={i} alt="" width="70px"/>)}
       </div>
