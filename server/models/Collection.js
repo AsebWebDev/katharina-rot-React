@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const artSchema = new mongoose.Schema({
+const collectionSchema = new mongoose.Schema({
   title: {
     type: String,
     required: [true, 'The title is required'],
@@ -24,6 +24,6 @@ const artSchema = new mongoose.Schema({
   },
 });
 
-const Art = mongoose.model('Art', artSchema);
+const Collection = mongoose.model('Collection', collectionSchema);
 
-module.exports = Art;
+module.exports = Collection;

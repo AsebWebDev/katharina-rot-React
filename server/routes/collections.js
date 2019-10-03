@@ -1,13 +1,14 @@
 const express = require('express');
-const Art = require('../models/Art')
+const Collection = require('../models/Collection')
 
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-  Art.find()
-    .then(arts => {
-      console.log(arts)
-      res.json(arts);
+  console.log("hit!")
+  Collection.find()
+    .then(collections => {
+      console.log(collections)
+      res.json(collections);
     })
     .catch(err => next(err))
 });
@@ -15,11 +16,11 @@ router.get('/', (req, res, next) => {
 //TODO: protect route (is admin?)
 router.post('/', (req, res, next) => {
   let { title, titlePic, pictures, tags, description } = req.body
-  Art.create({ title, titlePic, pictures, tags, description })
-    .then(Art => {
+  Collection.create({ title, titlePic, pictures, tags, description })
+    .then(Collection => {
       res.json({
         success: true,
-        Art
+        Collection
       });
     })
     .catch(err => next(err))
