@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux';
 
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol, MDBNavLink, MDBBadge } from 'mdbreact';
-import Notification from './Notification'
+import {newNotification} from '../actioncreators'
 import api from '../api';
 
 const Card = function (props) {
@@ -10,20 +10,13 @@ const Card = function (props) {
     let {title, titlePic, pictures, tags, description, _id} = props.collection;
     let {dispatch} = props;
     
-    let dispatchNotification = (message) => {
-        dispatch({
-            type: "ADD_NOTIFICATION",
-            notification: message
-        })
-    }
-    
     let handleDelete = () => {
         api.deleteCollection(_id)
         .then(result => {
-            dispatchNotification((result.success) 
+            dispatch(newNotification((result.success) 
                 ? `Your Collection '${title}' has been deleted`
                 : `Sorry, your Collection could not be deleted.`
-            )
+            ))
             api.getCollections()
                 .then(collections => {
                     dispatch({
@@ -34,7 +27,7 @@ const Card = function (props) {
                 .catch (err => console.log(err))
 
         })
-        .catch(err => dispatchNotification(err.toString()));
+        .catch(err => dispatch(newNotification(err.toString())));
     }
 
     return (
@@ -53,7 +46,6 @@ const Card = function (props) {
                     <MDBBtn href="#">MDBBtn</MDBBtn>
                 </MDBCardBody>
             </MDBCard>
-            {/* {message && <Notification message={message}/>} */}
         </MDBCol>
     )
 }

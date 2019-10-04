@@ -6,3 +6,12 @@ export function login() {
     type: GET_DATA,
   }
 }
+
+export function newNotification(message) {
+  console.log("Dispatch ActionCreator hit with : " + message)
+  return {
+    type: ADD_NOTIFICATION,
+    notification: message
+  }
+}
+

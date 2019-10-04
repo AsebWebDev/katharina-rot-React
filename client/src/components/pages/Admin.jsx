@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-// import { withRouter } from "react-router-dom";
+import { connect } from 'react-redux';
 import {Image, Video, Transformation, CloudinaryContext} from 'cloudinary-react';
-import Notification from '../Notification'
+import {newNotification} from '../../actioncreators'
 import '../../configs/cloudinary'
 import api from '../../api';
 
@@ -14,7 +14,6 @@ class Admin extends Component {
       pictures: [],
       tags: [],
       description: '',
-      messages: []
     };
   } 
 
@@ -49,16 +48,16 @@ class Admin extends Component {
     api.addCollection(data)
     .then(result => {
       console.log('SUCCESS!')
+      this.props.dispatch(newNotification(`Your Collection '${result.Collection.title}' has been created`))
       this.setState({
         title: '',
         titlePic: '',
         pictures: null,
         tags: '',
         description: '',
-        messages: [...this.state.messages, `Your Collection '${result.Collection.title}' has been created`]
       })
-      // let deleteMessage = () => setTimeout(() => { this.setState({ message: null })}, 2000)
-    }).catch(err => this.setState({ message: err.toString() }));
+    // }).catch(err => this.setState({ message: err.toString() }));
+    }).catch(err => this.props.dispatch(newNotification(err.toString())));
   }
 
   render() {
@@ -80,9 +79,7 @@ class Admin extends Component {
           <button type="submit" className="cloudinary-button">Submit</button>
         </form>
         </CloudinaryContext>
-        {/* {this.state.message && <h2>{this.state.message}</h2>} */}
         {this.state.pictures && this.state.pictures.map((picture, i) => <img src={picture} key ={i} alt="" width="70px"/>)}
-        {/* {!!this.state.messages.length && this.state.messages.map((message,i) => <Notification key={i} message={message}/>)} */}
       </div>
     )} else {
       this.props.history.push("/login") // Redirect to the login page
@@ -91,5 +88,11 @@ class Admin extends Component {
   }
 }
 
-// export default withRouter(Admin)
-export default Admin
+function mapStateToProps(reduxState){
+  return {
+    collections: reduxState.collections,
+    notifications: reduxState.notifications
+  }
+}
+
+export default connect(mapStateToProps)(Admin)

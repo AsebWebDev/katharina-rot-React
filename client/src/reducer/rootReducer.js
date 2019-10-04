@@ -16,10 +16,6 @@ export default function rootReducer(state=initialState, action) {
     }
 
     case ADD_NOTIFICATION: {
-      console.log("Dispatch Add Notif hit!")
-      console.log(action)
-      // return
-
       return {
         ...newState,
         notifications: [...state.notifications, action.notification]
