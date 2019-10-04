@@ -1,5 +1,4 @@
-import { GET_DATA, ADD_NOTIFICATION, LOGOUT } from '../actioncreators';
-import api from '../api'
+import { GET_DATA, ADD_NOTIFICATION } from '../actioncreators';
 
 const initialState = {
   collections: [],

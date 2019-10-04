@@ -1,36 +1,16 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { NavLink, withRouter} from 'react-router-dom';
-import api from '../api';
+import NavBar from './NavBar'
+import logo from '../media/Logo_800pxbreit-1.jpg'
+import './Header.css'
 
-
-function Header (props) {
-
-  let handleLogoutClick= (e) => {
-    api.logout()
-    api.getCollections()
-      .then(collections => props.dispatch({
-        type: "GET_DATA", 
-        collections
-      })).catch (err => console.log(err))
-  }
+function Header () {
 
     return (
-      <div>
-          <h1 className="App-title">Katharina Rot</h1>
-          <NavLink to="/">Home</NavLink>
-          {api.isLoggedIn() && <NavLink to="/admin">Admin</NavLink>}
-          {!api.isLoggedIn() && <NavLink to="/login">Login</NavLink>}
-          {api.isLoggedIn() && <NavLink to="/" onClick={handleLogoutClick}>Logout</NavLink>}
+      <div className="header">
+          <img src={logo} alt="" width="400"/>
+          <NavBar />
       </div>
     )
 }
 
-function mapStateToProps(reduxState){
-  return {
-    collections: reduxState.collections,
-    notifications: reduxState.notifications
-  }
-}
-
-export default withRouter(connect(mapStateToProps)(Header));
+export default Header

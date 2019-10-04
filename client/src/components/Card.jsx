@@ -8,7 +8,7 @@ import './Card.css'
 
 const Card = function (props) {
     let [isFlipped, setIsFlipped] = useState(false);
-    let {title, titlePic, pictures, tags, description, _id} = props.collection;
+    let {title, titlePic, description, _id} = props.collection;
     let {dispatch} = props;
     
     let handleDelete = () => {
