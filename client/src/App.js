@@ -22,7 +22,6 @@ class App extends Component {
           <Route path="/login" component={Login} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
-        {/* {!!this.props.notifications.length && this.props.notifications.map((notification,i) => <Notification key={i} notification={notification}/>)} */}
         <div style={{
                 position: "fixed",
                 top: "10px",
