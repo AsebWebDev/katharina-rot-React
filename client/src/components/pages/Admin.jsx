@@ -82,7 +82,7 @@ class Admin extends Component {
         </CloudinaryContext>
         {/* {this.state.message && <h2>{this.state.message}</h2>} */}
         {this.state.pictures && this.state.pictures.map((picture, i) => <img src={picture} key ={i} alt="" width="70px"/>)}
-        {!!this.state.messages.length && this.state.messages.map((message,i) => <Notification key={i} message={message}/>)}
+        {/* {!!this.state.messages.length && this.state.messages.map((message,i) => <Notification key={i} message={message}/>)} */}
       </div>
     )} else {
       this.props.history.push("/login") // Redirect to the login page

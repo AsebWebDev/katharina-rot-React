@@ -8,7 +8,7 @@ function Notification (props) {
             fade
             iconClassName="text-primary"
             title="Bootstrap"
-            message={props.message}
+            message={props.notification}
             text="11 mins ago"
             style={{
                 position: "fixed",

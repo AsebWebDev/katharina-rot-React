@@ -5,11 +5,14 @@ import Home from './components/pages/Home';
 import Login from './components/pages/Login';
 import Admin from './components/pages/Admin';
 import Header from './components/Header';
+import Notification from './components/Notification'
 import './App.css';
 
 class App extends Component {
   
   render() {
+    console.log("App props:")
+    console.log(this.props)
     return (
       <div className="App">
         <Header />
@@ -19,6 +22,7 @@ class App extends Component {
           <Route path="/login" component={Login} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
+        {!!this.props.notifications.length && this.props.notifications.map((notification,i) => <Notification key={i} notification={notification}/>)}
       </div>
     );
   }
@@ -26,7 +30,8 @@ class App extends Component {
 
 function mapStateToProps(reduxState){
   return {
-    collections: reduxState.collections
+    collections: reduxState.collections,
+    notifications: reduxState.notifications
   }
 }
 

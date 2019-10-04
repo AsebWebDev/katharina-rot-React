@@ -1,30 +1,40 @@
 import React from 'react'
-import { useState } from 'react';
+import { connect } from 'react-redux';
+
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol, MDBNavLink, MDBBadge } from 'mdbreact';
+import Notification from './Notification'
 import api from '../api';
 
-
-export default function Card(props) {
-    let [message, setMessage] = useState(null);
+const Card = function (props) {
+    // let [message, setMessage] = useState(null);
     let {title, titlePic, pictures, tags, description, _id} = props.collection;
     let {dispatch} = props;
     
+    let dispatchNotification = (message) => {
+        dispatch({
+            type: "ADD_NOTIFICATION",
+            notification: message
+        })
+    }
+    
     let handleDelete = () => {
-        console.log(props)
-        console.log(dispatch)
         api.deleteCollection(_id)
         .then(result => {
-            (result.success) 
-                ? setMessage(`Your Collection '${title}' has been deleted`)
-                : setMessage(`Sorry, your Collection could not be deleted.`)
+            dispatchNotification((result.success) 
+                ? `Your Collection '${title}' has been deleted`
+                : `Sorry, your Collection could not be deleted.`
+            )
             api.getCollections()
-                .then(collections => dispatch({
-                type: "GET_DATA", 
-                collections
-                })).catch (err => console.log(err))
+                .then(collections => {
+                    dispatch({
+                        type: "GET_DATA", 
+                        collections
+                    })
+                })
+                .catch (err => console.log(err))
+
         })
-        // .then(() => setTimeout(() => setMessage(null), 2000))
-        .catch(err => setMessage(err.toString()));
+        .catch(err => dispatchNotification(err.toString()));
     }
 
     return (
@@ -43,7 +53,18 @@ export default function Card(props) {
                     <MDBBtn href="#">MDBBtn</MDBBtn>
                 </MDBCardBody>
             </MDBCard>
-            {message && <h2>{message}</h2>}
+            {/* {message && <Notification message={message}/>} */}
         </MDBCol>
     )
 }
+
+function mapStateToProps(reduxState){
+    return {
+      collections: reduxState.collections,
+      notifications: reduxState.notifications
+    }
+}
+
+export default connect(mapStateToProps)(Card)
+
+// export default Card

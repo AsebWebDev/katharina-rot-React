@@ -1,7 +1,8 @@
-import { GET_DATA } from '../actioncreators';
+import { GET_DATA, ADD_NOTIFICATION } from '../actioncreators';
 
 const initialState = {
-  collections: []
+  collections: [],
+  notifications: []
 }
 
 export default function rootReducer(state=initialState, action) {
@@ -12,6 +13,17 @@ export default function rootReducer(state=initialState, action) {
         ...newState,
         collections: action.collections
       };
+    }
+
+    case ADD_NOTIFICATION: {
+      console.log("Dispatch Add Notif hit!")
+      console.log(action)
+      // return
+
+      return {
+        ...newState,
+        notifications: [...state.notifications, action.notification]
+      }
     }
     
     default: return state;

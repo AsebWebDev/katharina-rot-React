@@ -29,7 +29,8 @@ class Home extends Component {
 
 function mapStateToProps(reduxState){
   return {
-    collections: reduxState.collections
+    collections: reduxState.collections,
+    notifications: reduxState.notifications
   }
 }
 
