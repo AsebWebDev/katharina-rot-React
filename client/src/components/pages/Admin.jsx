@@ -12,7 +12,7 @@ function Admin (props){
   let [title, setTitle] = useState('');
   let [titlePic, setTitlePic] = useState('');
   let [pictures, setPictures] = useState([]);
-  let [tags, setTags] = useState([]);
+  let [tags, setTags] = useState('');
   let [description, setDescription] = useState('');
 
   let uploadWidget = (e) => {

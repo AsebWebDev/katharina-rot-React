@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol, MDBNavLink, MDBBadge } from 'mdbreact';
 import {newNotification} from '../actioncreators'
 import api from '../api';
+import './Card.css'
 
 const Card = function (props) {
     // let [message, setMessage] = useState(null);
@@ -38,7 +39,7 @@ const Card = function (props) {
                 </MDBNavLink>
                 <MDBCardBody>
                     <MDBCardTitle>{title} 
-                        {api.isLoggedIn() && <MDBBadge onClick={handleDelete} color="danger">Delete</MDBBadge>}
+                        <br />{api.isLoggedIn() && <MDBBadge onClick={handleDelete} color="danger">Delete</MDBBadge>}
                     </MDBCardTitle>
                     <MDBCardText>
                         {description}

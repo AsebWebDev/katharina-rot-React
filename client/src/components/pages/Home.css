@@ -1,0 +1,9 @@
+.gallery {
+    display: flex;
+    flex-direction: row;
+}
+
+Card {
+    width: 100px;
+    background-color: green;
+}

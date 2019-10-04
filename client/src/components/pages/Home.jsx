@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import api from '../../api';
 import Card from '../Card'
+import './Home.css'
 
 class Home extends Component {
 
@@ -15,13 +16,14 @@ class Home extends Component {
     })).catch (err => console.log(err))
   }
 
-  render() {  
-    
+  render() {      
     return (
       <div className="Home">
         <h2>Home</h2>
-        {this.props.collections && this.props.collections.map((collection, i) => 
-          <Card key={collection._id} collection={collection} dispatch={this.props.dispatch}/>)}
+        <div className="gallery">
+          {this.props.collections && this.props.collections.map((collection, i) => 
+          <div><Card key={collection._id} collection={collection} dispatch={this.props.dispatch}/></div>)}
+        </div>
       </div>
     );
   }
@@ -35,4 +37,3 @@ function mapStateToProps(reduxState){
 }
 
 export default connect(mapStateToProps)(Home)
-// export default Home
