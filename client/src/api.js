@@ -53,9 +53,15 @@ export default {
   },
 
   addCollection(body) {
-    //TODO: Turn Tag-String into Array of Tags before posting
     return service
       .post('/collections', body)
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
+  deleteCollection(id) {
+    return service
+      .post('/collections/'+id+'/delete')
       .then(res => res.data)
       .catch(errHandler)
   }

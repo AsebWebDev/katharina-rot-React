@@ -5,25 +5,11 @@ import Home from './components/pages/Home';
 import Login from './components/pages/Login';
 import Admin from './components/pages/Admin';
 import Header from './components/Header';
-import api from './api';
 import './App.css';
 
 class App extends Component {
-
-  //TODO: USE HOOKS TO AVOID LIFECYCLE-METHODS
-
-  // componentDidMount(){
-  //   // GET ALL ART-DATA FROM BACKEND-DATABASE
-  //   api.getCollections()
-  //   .then(collections => this.props.dispatch({
-  //     type: "GET_DATA", 
-  //     collections
-  //   })).catch (err => console.log(err))
-  // }
   
   render() {
-    console.log("Props from app")
-    console.log(this.props)
     return (
       <div className="App">
         <Header />
