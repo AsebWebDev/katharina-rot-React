@@ -20,7 +20,8 @@ class Home extends Component {
     return (
       <div className="Home">
         <h2>Home</h2>
-        {this.props.collections && this.props.collections.map((collection, i) => <Card key={collection._id} collection={collection}/>)}
+        {this.props.collections && this.props.collections.map((collection, i) => 
+          <Card key={collection._id} collection={collection} dispatch={this.props.dispatch}/>)}
       </div>
     );
   }

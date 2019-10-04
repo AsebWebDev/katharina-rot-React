@@ -5,17 +5,26 @@ import api from '../api';
 
 
 export default function Card(props) {
-    let {title, titlePic, pictures, tags, description, _id} = props.collection;
     let [message, setMessage] = useState(null);
+    let {title, titlePic, pictures, tags, description, _id} = props.collection;
+    let {dispatch} = props;
     
     let handleDelete = () => {
+        console.log(props)
+        console.log(dispatch)
         api.deleteCollection(_id)
         .then(result => {
             (result.success) 
                 ? setMessage(`Your Collection '${title}' has been deleted`)
                 : setMessage(`Sorry, your Collection could not be deleted.`)
-            setTimeout(() => setMessage(null), 2000)
-        }).catch(err => this.setState({ message: err.toString() }));
+            api.getCollections()
+                .then(collections => dispatch({
+                type: "GET_DATA", 
+                collections
+                })).catch (err => console.log(err))
+        })
+        // .then(() => setTimeout(() => setMessage(null), 2000))
+        .catch(err => setMessage(err.toString()));
     }
 
     return (

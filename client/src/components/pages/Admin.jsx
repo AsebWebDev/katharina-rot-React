@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import { withRouter } from "react-router-dom";
 import {Image, Video, Transformation, CloudinaryContext} from 'cloudinary-react';
+import Notification from '../Notification'
 import '../../configs/cloudinary'
 import api from '../../api';
 
@@ -13,7 +14,7 @@ class Admin extends Component {
       pictures: [],
       tags: [],
       description: '',
-      message: null
+      messages: []
     };
   } 
 
@@ -54,9 +55,9 @@ class Admin extends Component {
         pictures: null,
         tags: '',
         description: '',
-        message: `Your Collection '${result.Collection.title}' has been created`
+        messages: [...this.state.messages, `Your Collection '${result.Collection.title}' has been created`]
       })
-      setTimeout(() => { this.setState({ message: null })}, 2000)
+      // let deleteMessage = () => setTimeout(() => { this.setState({ message: null })}, 2000)
     }).catch(err => this.setState({ message: err.toString() }));
   }
 
@@ -79,8 +80,9 @@ class Admin extends Component {
           <button type="submit" className="cloudinary-button">Submit</button>
         </form>
         </CloudinaryContext>
-        {this.state.message && <h2>{this.state.message}</h2>}
+        {/* {this.state.message && <h2>{this.state.message}</h2>} */}
         {this.state.pictures && this.state.pictures.map((picture, i) => <img src={picture} key ={i} alt="" width="70px"/>)}
+        {!!this.state.messages.length && this.state.messages.map((message,i) => <Notification key={i} message={message}/>)}
       </div>
     )} else {
       this.props.history.push("/login") // Redirect to the login page
