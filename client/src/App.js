@@ -22,7 +22,15 @@ class App extends Component {
           <Route path="/login" component={Login} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
-        {!!this.props.notifications.length && this.props.notifications.map((notification,i) => <Notification key={i} notification={notification}/>)}
+        {/* {!!this.props.notifications.length && this.props.notifications.map((notification,i) => <Notification key={i} notification={notification}/>)} */}
+        <div style={{
+                position: "fixed",
+                top: "10px",
+                right: "10px",
+                zIndex: 9999
+            }}>
+            {!!this.props.notifications.length && <Notification notifications={this.props.notifications}/>}
+        </div>
       </div>
     );
   }
