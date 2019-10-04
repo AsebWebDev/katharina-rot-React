@@ -13,6 +13,18 @@ router.get('/', (req, res, next) => {
     .catch(err => next(err))
 });
 
+router.post('/:id/delete', (req, res, next) => {
+  console.log("Hit Delete-ID: "+ req.params.id)
+  Collection.deleteOne( { _id : req.params.id } )
+  .then(result => {
+    res.json({
+      success: true,
+      result
+    });
+  })
+  .catch(err => next(err))
+});
+
 //TODO: protect route (is admin?)
 router.post('/', (req, res, next) => {
   let { title, titlePic, pictures, tags, description } = req.body
@@ -25,5 +37,7 @@ router.post('/', (req, res, next) => {
     })
     .catch(err => next(err))
 });
+
+
 
 module.exports = router;
