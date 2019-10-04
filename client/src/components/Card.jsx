@@ -1,13 +1,13 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { connect } from 'react-redux';
-
+import ReactCardFlip from 'react-card-flip';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol, MDBNavLink, MDBBadge } from 'mdbreact';
 import {newNotification} from '../actioncreators'
 import api from '../api';
 import './Card.css'
 
 const Card = function (props) {
-    // let [message, setMessage] = useState(null);
+    let [isFlipped, setIsFlipped] = useState(false);
     let {title, titlePic, pictures, tags, description, _id} = props.collection;
     let {dispatch} = props;
     
@@ -30,24 +30,38 @@ const Card = function (props) {
         })
         .catch(err => dispatch(newNotification(err.toString())));
     }
+    
+    let handleClick = () => {
+        setIsFlipped(!isFlipped)
+    }
 
     return (
-        <MDBCol>
-            <MDBCard style={{ width: "22rem" }}>
-                <MDBNavLink to={"/collection/"+ _id}>
-                    <MDBCardImage className="img-fluid" src={titlePic} waves />
-                </MDBNavLink>
+        <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
+        <MDBCol key="front" onClick={handleClick}>
+            <MDBCard style={{ width: "18rem", height: "30rem" }}>
+                <MDBCardImage className="img-fluid" src={titlePic} waves />
                 <MDBCardBody>
                     <MDBCardTitle>{title} 
                         <br />{api.isLoggedIn() && <MDBBadge onClick={handleDelete} color="danger">Delete</MDBBadge>}
                     </MDBCardTitle>
-                    <MDBCardText>
-                        {description}
-                    </MDBCardText>
-                    <MDBBtn href="#">MDBBtn</MDBBtn>
+                    <MDBNavLink to={"/collection/"+ _id}><MDBBtn>Details</MDBBtn></MDBNavLink>
                 </MDBCardBody>
             </MDBCard>
         </MDBCol>
+
+        <MDBCol key="back" onClick={handleClick}>
+            <MDBCard style={{ width: "18rem", height: "30rem" }}>
+                {/* <MDBCardImage className="img-fluid" src={titlePic} waves /> */}
+                <MDBCardBody>
+                    <MDBCardTitle>{title}</MDBCardTitle>
+                    <MDBCardText>
+                        {description}
+                    </MDBCardText>
+                    <MDBNavLink to={"/collection/"+ _id}><MDBBtn>Details</MDBBtn></MDBNavLink>                    
+                </MDBCardBody>
+            </MDBCard>
+        </MDBCol>
+        </ReactCardFlip>
     )
 }
 
