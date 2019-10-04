@@ -51,7 +51,6 @@ const Card = function (props) {
 
         <MDBCol key="back" onClick={handleClick}>
             <MDBCard style={{ width: "18rem", height: "30rem" }}>
-                {/* <MDBCardImage className="img-fluid" src={titlePic} waves /> */}
                 <MDBCardBody>
                     <MDBCardTitle>{title}</MDBCardTitle>
                     <MDBCardText>

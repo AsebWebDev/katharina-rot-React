@@ -11,8 +11,6 @@ import './App.css';
 class App extends Component {
   
   render() {
-    console.log("App props:")
-    console.log(this.props)
     return (
       <div className="App">
         <Header />
@@ -28,7 +26,7 @@ class App extends Component {
                 right: "10px",
                 zIndex: 9999
             }}>
-            {!!this.props.notifications.length && <Notification notifications={this.props.notifications}/>}
+            {this.props.notifications && !!this.props.notifications.length && <Notification notifications={this.props.notifications}/>}
         </div>
       </div>
     );

@@ -7,6 +7,7 @@ export function login() {
   }
 }
 
+
 export function newNotification(message) {
   console.log("Dispatch ActionCreator hit with : " + message)
   return {
