@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { connect } from 'react-redux';
 import ReactCardFlip from 'react-card-flip';
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol, MDBNavLink, MDBBadge } from 'mdbreact';
+import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol, MDBNavLink, MDBBadge, MDBView } from 'mdbreact';
 import {newNotification} from '../actioncreators'
 import api from '../api';
 import './Card.css'
@@ -35,14 +35,22 @@ const Card = function (props) {
         setIsFlipped(!isFlipped)
     }
 
+    let handleEdit = () => {
+        console.log("Edit")
+    }
+
     return (
         <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
         <MDBCol key="front" onClick={handleClick}>
             <MDBCard style={{ width: "18rem", height: "30rem" }}>
-                <MDBCardImage className="img-fluid" src={titlePic} waves />
+                <MDBView hover zoom>
+                    <MDBCardImage className="img-fluid" src={titlePic} waves />
+                </MDBView>
+                    
                 <MDBCardBody>
-                    <MDBCardTitle>{title} 
-                        <br />{api.isLoggedIn() && <MDBBadge onClick={handleDelete} color="danger">Delete</MDBBadge>}
+                    <MDBCardTitle><p>{title}</p>
+                        {api.isLoggedIn() && <MDBBadge onClick={handleDelete} color="danger"><i className="fas fa-trash-alt"></i>Delete</MDBBadge>}
+                        {api.isLoggedIn() && <MDBBadge onClick={handleEdit} color="blue"><i className="fas fa-edit"></i>Edit</MDBBadge>}
                     </MDBCardTitle>
                     <MDBNavLink to={"/collection/"+ _id}><MDBBtn>Details</MDBBtn></MDBNavLink>
                 </MDBCardBody>

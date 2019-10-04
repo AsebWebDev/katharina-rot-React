@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import api from '../../api';
 import Card from '../Card'
 import './Home.css'
+import greenBanner from '../../media/banner-greenfuture-1-1024x287.jpg'
 
 class Home extends Component {
 
@@ -18,7 +19,7 @@ class Home extends Component {
   render() {      
     return (
       <div className="Home">
-        <h2>Home</h2>
+        <img className="banner" src={greenBanner} alt="green banner"/>
         <div className="gallery">
           {this.props.collections && this.props.collections.map((collection, i) => 
           <div key={collection._id}><Card collection={collection} dispatch={this.props.dispatch}/></div>)}

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { connect } from 'react-redux';
 import {
     MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBFormInline,
     MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem
 } from "mdbreact";
-import { NavLink, withRouter} from 'react-router-dom';
+import { withRouter} from 'react-router-dom';
 import api from '../api';
 
 
@@ -11,7 +12,7 @@ function NavbarPage (props) {
     let [isOpen, setIsOpen] = useState(false)
 
 let toggleCollapse = () => {
-  this.setState({ isOpen: !this.state.isOpen });
+  setIsOpen(!isOpen)
 }
 
 let handleLogoutClick= (e) => {
@@ -24,38 +25,57 @@ let handleLogoutClick= (e) => {
   }
 
   return (
-      <MDBNavbar color="indigo" dark expand="md">
-          <NavLink to="/">Home</NavLink>
-          {api.isLoggedIn() && <NavLink to="/admin">Admin</NavLink>}
-          {!api.isLoggedIn() && <NavLink to="/login">Login</NavLink>}
-          {api.isLoggedIn() && <NavLink to="/" onClick={handleLogoutClick}>Logout</NavLink>}
-        {/* <MDBNavbarBrand>
-          <strong className="white-text">Navbar</strong>
+      <MDBNavbar  light expand="md">
+        <MDBNavbarBrand>
+          <strong className="black-text">Katharina Rot</strong>
         </MDBNavbarBrand>
-        <MDBNavbarToggler onClick={this.toggleCollapse} />
-        <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
+        <MDBNavbarToggler onClick={toggleCollapse} />
+        <MDBCollapse id="navbarCollapse3" isOpen={isOpen} navbar>
           <MDBNavbarNav left>
-            <MDBNavItem active>
-              <MDBNavLink to="#!">Home</MDBNavLink>
-            </MDBNavItem>
             <MDBNavItem>
-              <MDBNavLink to="#!">Features</MDBNavLink>
-            </MDBNavItem>
-            <MDBNavItem>
-              <MDBNavLink to="#!">Pricing</MDBNavLink>
+              <MDBNavLink to="/">Aktuelles</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
               <MDBDropdown>
                 <MDBDropdownToggle nav caret>
-                  <span className="mr-2">Dropdown</span>
+                  <span className="mr-2">Portfolio</span>
                 </MDBDropdownToggle>
                 <MDBDropdownMenu>
-                  <MDBDropdownItem href="#!">Action</MDBDropdownItem>
-                  <MDBDropdownItem href="#!">Another Action</MDBDropdownItem>
-                  <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
-                  <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
+                  <MDBDropdownItem href="#!">Übersicht</MDBDropdownItem>
+                  <MDBDropdownItem href="#!">Portfolio PDF</MDBDropdownItem>
+                  <MDBDropdownItem href="#!">Informative Illustration</MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
+            </MDBNavItem>
+            <MDBNavItem>
+              <MDBDropdown>
+                <MDBDropdownToggle nav caret>
+                  <span className="mr-2">About</span>
+                </MDBDropdownToggle>
+                <MDBDropdownMenu>
+                  <MDBDropdownItem href="#!">Über mich</MDBDropdownItem>
+                  <MDBDropdownItem href="#!">Grüne Illustration</MDBDropdownItem>
+                  <MDBDropdownItem href="#!">AGB</MDBDropdownItem>
+                </MDBDropdownMenu>
+              </MDBDropdown>
+            </MDBNavItem>
+            <MDBNavItem>
+              <MDBDropdown>
+                <MDBDropdownToggle nav caret>
+                  <span className="mr-2">Contact</span>
+                </MDBDropdownToggle>
+                <MDBDropdownMenu>
+                  <MDBDropdownItem href="#!">Contact</MDBDropdownItem>
+                  <MDBDropdownItem href="#!">Impressum / Legals</MDBDropdownItem>
+                </MDBDropdownMenu>
+              </MDBDropdown>
+            </MDBNavItem>
+            <MDBNavItem>
+             {!api.isLoggedIn() && <MDBNavLink to="/login">Login</MDBNavLink>}
+             {api.isLoggedIn() && <MDBNavLink to="/" onClick={handleLogoutClick}>Logout</MDBNavLink>}
+            </MDBNavItem>
+            <MDBNavItem>
+              {api.isLoggedIn() && <MDBNavLink to="/admin">Admin</MDBNavLink>}
             </MDBNavItem>
           </MDBNavbarNav>
           <MDBNavbarNav right>
@@ -67,9 +87,18 @@ let handleLogoutClick= (e) => {
               </MDBFormInline>
             </MDBNavItem>
           </MDBNavbarNav>
-        </MDBCollapse> */}
+        </MDBCollapse>
       </MDBNavbar>
     );
 }
 
-export default withRouter(NavbarPage)
+function mapStateToProps(reduxState){
+    return {
+      collections: reduxState.collections,
+      notifications: reduxState.notifications
+    }
+  }
+  
+// export default connect(mapStateToProps)(Home)
+
+export default withRouter(connect(mapStateToProps)(NavbarPage))

@@ -1,6 +1,11 @@
 .gallery {
     display: flex;
     flex-direction: row;
+    margin-top: 30px;
+}
+
+.banner {
+    width: 60vw;
 }
 
 Card {
