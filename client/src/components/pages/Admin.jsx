@@ -10,7 +10,6 @@ function Admin (props){
   let [currentCollection, setCurrentCollection] = useState({})
   let [titlePic, setTitlePic] = useState('');
   let [pictures, setPictures] = useState([]);
-  let [tags, setTags] = useState('');
 
   let uploadWidget = (e) => {
     e.preventDefault();
@@ -41,14 +40,12 @@ function Admin (props){
   let handleSubmit = (e) => {
     e.preventDefault();
     let data = {...currentCollection, pictures, titlePic}
-    //FIXME: turn tags from string to array on the backend
     api.addCollection(data)
     .then(result => {
       console.log('SUCCESS!')
       dispatch(newNotification(`Your Collection '${result.Collection.title}' has been created`))
       setCurrentCollection({})
       setPictures([])
-      // setTags([])
     }).catch(err => dispatch(newNotification(err.toString())));
   }
   

@@ -55,7 +55,8 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/', isAdmin, (req, res, next) => {
-  let { title, titlePic, pictures, tags, description } = req.body
+  let { title, titlePic, pictures, description } = req.body
+  let tags = req.body.tags.split(' '); //turn string of tags into array
   Collection.create({ title, titlePic, pictures, tags, description })
     .then(Collection => {
       res.json({
