@@ -19,13 +19,13 @@ function Admin (props){
       upload_preset: 'mu7bkqlz',
       multiple
     },(error, result) => {
-        if (!error && result && result.event === "success") { // If one file is uploaded, store in array to be pushed after user closes widget
-          uploadedPictures.push(result.info.secure_url)
-        }
-        if (!error && result && result.event === "close") { // If user closes widget use all uploaded pictures stored while uploading
+        if (!error && result && result.event === "success") { 
           (multiple) 
-          ? setPictures(uploadedPictures) // UPLOAD MULTIPLE PICTURES FOR THE GALLERY 
-          : setTitlePic(result.info.secure_url) // UPLOAD SINGLE PICTURE FOR THE TITLE  
+          ? uploadedPictures.push(result.info.secure_url)   // If one of few files is uploaded, store in array to be pushed after user closes widget
+          : setTitlePic(result.info.secure_url)             // UPLOAD SINGLE PICTURE FOR THE TITLE ON UPLOAD FINISH
+        }
+        if (!error && result && result.event === "close" && multiple) {   // If user closes widget use all uploaded pictures stored while uploading
+          setPictures(uploadedPictures)                     // UPLOAD MULTIPLE PICTURES FOR THE GALLERY ON CLOSE
         }
     }).open(); 
   }
