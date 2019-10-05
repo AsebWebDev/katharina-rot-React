@@ -31,12 +31,24 @@ const Card = function (props) {
         .catch(err => dispatch(newNotification(err.toString())));
     }
     
-    let handleClick = () => {
+    let handleClick = (e) => {
+        e.preventDefault();
+        console.log(e)
+        console.log(e.target)
         setIsFlipped(!isFlipped)
     }
 
-    let handleEdit = () => {
+    let handleEdit = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         console.log("Edit")
+        dispatch({
+            type: "TOGGLE_EDIT_MODAL",
+            modal: {
+                isOpen: !props.modal.isOpen,
+                isEdit: !props.modal.isEdit
+              }
+        })
     }
 
     return (
@@ -75,7 +87,8 @@ const Card = function (props) {
 function mapStateToProps(reduxState){
     return {
       collections: reduxState.collections,
-      notifications: reduxState.notifications
+      notifications: reduxState.notifications,
+      modal: reduxState.modal
     }
 }
 

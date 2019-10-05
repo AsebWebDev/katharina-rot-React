@@ -1,8 +1,12 @@
-import { GET_DATA, ADD_NOTIFICATION } from '../actioncreators';
+import { GET_DATA, ADD_NOTIFICATION, TOGGLE_EDIT_MODAL } from '../actioncreators';
 
 const initialState = {
   collections: [],
-  notifications: []
+  notifications: [],
+  modal: {
+    isOpen: false,
+    isEdit: false
+  }
 }
 
 export default function rootReducer(state=initialState, action) {
@@ -19,6 +23,13 @@ export default function rootReducer(state=initialState, action) {
       return {
         ...newState,
         notifications: [...state.notifications, action.notification]
+      }
+    }
+
+    case TOGGLE_EDIT_MODAL: {
+      return {
+        ...newState,
+        modal: action.modal
       }
     }
     

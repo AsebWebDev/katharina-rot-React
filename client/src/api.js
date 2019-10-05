@@ -47,21 +47,21 @@ export default {
 
   getCollections() {
     return service
-      .get('/collections')
+      .get('/collection')
       .then(res => res.data)
       .catch(errHandler)
   },
 
   addCollection(body) {
     return service
-      .post('/collections', body)
+      .post('/collection', body)
       .then(res => res.data)
       .catch(errHandler)
   },
 
   deleteCollection(id) {
     return service
-      .post('/collections/'+id+'/delete')
+      .post('/collection/'+id+'/delete')
       .then(res => res.data)
       .catch(errHandler)
   }

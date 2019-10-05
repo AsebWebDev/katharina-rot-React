@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import api from '../../api';
 import Card from '../Card'
+import ModalPage from '../pages/ModalPage'
 import './Home.css'
 import greenBanner from '../../media/banner-greenfuture-1-1024x287.jpg'
 
@@ -24,6 +25,7 @@ class Home extends Component {
           {this.props.collections && this.props.collections.map((collection, i) => 
           <div key={collection._id}><Card collection={collection} dispatch={this.props.dispatch}/></div>)}
         </div>
+        {this.props.modal.isOpen && this.props.modal.isEdit && <ModalPage />}
       </div>
     );
   }
@@ -32,7 +34,8 @@ class Home extends Component {
 function mapStateToProps(reduxState){
   return {
     collections: reduxState.collections,
-    notifications: reduxState.notifications
+    notifications: reduxState.notifications,
+    modal: reduxState.modal
   }
 }
 
