@@ -17,3 +17,15 @@ export function newNotification(message, typeOfNotification) {
   }
 }
 
+export function toggleModal(modal) {
+  console.log(modal)
+  return {
+    type: TOGGLE_EDIT_MODAL,
+    modal: {
+      isOpen: !modal.isOpen,
+      isEdit: !modal.isEdit,
+      currentId: (modal.isOpen) ? '' : modal.currentId // If modal is about to close, removegit  currentId
+    }
+  }
+}
+

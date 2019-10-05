@@ -1,33 +1,26 @@
 import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
-import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBInputGroup, MDBInput } from 'mdbreact';
+import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBInputGroup, MDBCardImage, MDBView, MDBMask } from 'mdbreact';
+import { toggleModal } from '../../actioncreators'
+import EditPictures from './EditPictures'
 import api from '../../api';
 import './EditModal.css'
 
 function EditModal(props) {
   console.log(props.modal.currentId)
+  let {dispatch} = props;
   let currentId = props.modal.currentId;
   let [currentCollection, setCurrentCollection] = useState({})
+  // let [titlePic, setTitlePic] = useState('')
+  // let [pictures, setPictures] = useState([])
 
   useEffect(() => {
-    // BACKEND REQUEST AND SET DATA TO STATE
-    api.getOneCollection(currentId)
-    .then(res => {
-      setCurrentCollection(res.collection)
-    })
+    api.getOneCollection(currentId) // BACKEND REQUEST AND SET DATA TO STATE
+    .then(res => { setCurrentCollection(res.collection) })
     .catch (err => console.log(err))
   }, [currentId])
 
-  let toggle = (e) => {
-    props.dispatch({
-      type: "TOGGLE_EDIT_MODAL",
-      modal: {
-        isOpen: !props.modal.isOpen,
-        isEdit: !props.modal.isEdit,
-        currentId: (props.modal.isOpen) ? '' : props.modal.currentId // If modal is about to close, removegit  currentId
-      }
-    })
-  }
+  let toggle = () => { dispatch(toggleModal(props.modal)) }
 
   let handleSubmit = (e) => {
     e.preventDefault();
@@ -41,7 +34,6 @@ function EditModal(props) {
     })
   }
 
-  console.log(currentCollection)
   return (
     <MDBContainer>
       <MDBModal size="lg" isOpen={props.modal.isOpen} toggle={toggle}>
@@ -50,6 +42,7 @@ function EditModal(props) {
             <MDBInputGroup id="title" containerClassName="mb-3" onChange={handleChange} value={currentCollection.title} prepend="Title" hint="Title"/>
           </MDBModalHeader>
           <MDBModalBody>
+            <EditPictures />
             <MDBInputGroup id="tags" containerClassName="mb-3" onChange={handleChange} value={(currentCollection.tags)?currentCollection.tags.join(' '):''} prepend="Tags" hint="Tags"/>
             <div id="input-description">
               <MDBInputGroup id="description" onChange={handleChange} value={currentCollection.description} prepend="Description" type="textarea"/>

@@ -7,6 +7,21 @@
     margin: 0!important
 }
 
+/* pverwrite preset MDB heigth */
 #input-description .modal-body .input-group {
     height: 10vh;
+}
+
+.modal-body .img-fluid {
+    height: 136px
+}
+
+.edit-pictures {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between
+}
+
+.edit-gallery, edit-titlePic{
+    width: 50vw
 }
