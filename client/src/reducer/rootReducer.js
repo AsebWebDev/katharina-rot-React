@@ -28,6 +28,7 @@ export default function rootReducer(state=initialState, action) {
     }
 
     case TOGGLE_EDIT_MODAL: {
+      console.log("Current ID: "+action.modal.currentId)
       return {
         ...newState,
         modal: action.modal

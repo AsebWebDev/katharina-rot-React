@@ -14,7 +14,7 @@ function EditModal(props) {
       modal: {
         isOpen: !props.modal.isOpen,
         isEdit: !props.modal.isEdit,
-        currentId: (e.target.id === "btn-close") ? '' : props.modal.currentId
+        currentId: (props.modal.isOpen) ? '' : props.modal.currentId // If modal is about to close, remove currentId
       }
     })
   }
@@ -22,12 +22,12 @@ function EditModal(props) {
   return (
     <MDBContainer>
       <MDBModal isOpen={props.modal.isOpen} toggle={toggle}>
-        <MDBModalHeader toggle={toggle}>MDBModal title</MDBModalHeader>
+        <MDBModalHeader toggle={toggle} name="close">MDBModal title</MDBModalHeader>
         <MDBModalBody>
           (...)
         </MDBModalBody>
         <MDBModalFooter>
-          <MDBBtn color="secondary" id="btn-close" onClick={toggle}>Close</MDBBtn>
+          <MDBBtn color="secondary" name="close" onClick={toggle}>Close</MDBBtn>
           <MDBBtn color="primary">Save changes</MDBBtn>
         </MDBModalFooter>
       </MDBModal>
