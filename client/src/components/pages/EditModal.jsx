@@ -11,8 +11,6 @@ function EditModal(props) {
   let {dispatch} = props;
   let currentId = props.modal.currentId;
   let [currentCollection, setCurrentCollection] = useState({})
-  // let [titlePic, setTitlePic] = useState('')
-  // let [pictures, setPictures] = useState([])
 
   useEffect(() => {
     api.getOneCollection(currentId) // BACKEND REQUEST AND SET DATA TO STATE
