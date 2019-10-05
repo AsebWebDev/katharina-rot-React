@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
 
-function ModalPage(props) {
+function EditModal(props) {
 
   let toggle = () => {
     props.dispatch({
@@ -42,4 +42,4 @@ function mapStateToProps(reduxState){
   }
 }
 
-export default connect(mapStateToProps)(ModalPage)
+export default connect(mapStateToProps)(EditModal)
