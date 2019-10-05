@@ -27,7 +27,7 @@ let handleLogoutClick= (e) => {
   return (
       <MDBNavbar  light expand="md">
         <MDBNavbarBrand>
-          <strong className="black-text">Katharina Rot</strong>
+          <MDBNavLink to="/"><strong className="black-text">Katharina Rot</strong></MDBNavLink>
         </MDBNavbarBrand>
         <MDBNavbarToggler onClick={toggleCollapse} />
         <MDBCollapse id="navbarCollapse3" isOpen={isOpen} navbar>
