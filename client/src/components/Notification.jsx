@@ -25,7 +25,7 @@ function Notification (props) {
                     key={i}
                     show
                     fade
-                    iconClassName="text-primary"
+                    iconClassName={(notification.typeOfNotification === "Deleted")?"text-danger":"text-primary"}
                     title={notification.typeOfNotification}
                     message={notification.notification}
                     text="11 mins ago"
