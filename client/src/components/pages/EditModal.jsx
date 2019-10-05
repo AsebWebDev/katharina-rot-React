@@ -1,13 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBInputGroup, MDBCardImage, MDBView, MDBMask } from 'mdbreact';
-import { toggleModal } from '../../actioncreators'
+import { toggleModal, setUploadedPics } from '../../actioncreators'
 import EditPictures from './EditPictures'
 import api from '../../api';
 import './EditModal.css'
 
 function EditModal(props) {
-  console.log(props.modal.currentId)
   let {dispatch} = props;
   let currentId = props.modal.currentId;
   let [currentCollection, setCurrentCollection] = useState({})
@@ -21,8 +20,13 @@ function EditModal(props) {
   let toggle = () => { dispatch(toggleModal(props.modal)) }
 
   let handleSubmit = (e) => {
-    e.preventDefault();
     console.log("Handle Submit clicked")
+    e.preventDefault();
+    
+    dispatch(setUploadedPics([],'')) //clear uploaded pictures after successfull submit
+    console.log(props.uploadedTitlePic)
+    console.log(props.uploadedpictures)
+    toggle();
   }
 
   let handleChange = (e) => {
@@ -35,7 +39,7 @@ function EditModal(props) {
   return (
     <MDBContainer>
       <MDBModal size="lg" isOpen={props.modal.isOpen} toggle={toggle}>
-        <form onSubmit={handleSubmit}>    
+        <form>    
           <MDBModalHeader toggle={toggle}>
             <MDBInputGroup id="title" containerClassName="mb-3" onChange={handleChange} value={currentCollection.title} prepend="Title" hint="Title"/>
           </MDBModalHeader>
@@ -48,7 +52,7 @@ function EditModal(props) {
           </MDBModalBody>
           <MDBModalFooter>
             <MDBBtn color="secondary" onClick={toggle}>Close</MDBBtn>
-            <MDBBtn color="primary">Save changes</MDBBtn>
+            <MDBBtn color="primary" onClick={handleSubmit}>Save changes</MDBBtn>
           </MDBModalFooter>
         </form>
       </MDBModal>
@@ -59,7 +63,9 @@ function EditModal(props) {
 
 function mapStateToProps(reduxState){
   return {
-    modal: reduxState.modal
+    modal: reduxState.modal,
+    uploadedpictures: reduxState.uploadedpictures,
+    uploadedTitlePic: reduxState.uploadedTitlePic
   }
 }
 
