@@ -59,6 +59,13 @@ export default {
       .catch(errHandler)
   },
 
+  updateCollection(id) {
+    return service
+      .post('/collection/'+id)
+      .then(res => res.data)
+      .catch(errHandler)
+  }
+
   addCollection(body) {
     return service
       .post('/collection', body)
