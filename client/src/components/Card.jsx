@@ -48,7 +48,7 @@ const Card = function (props) {
                 </MDBView>
                     
                 <MDBCardBody>
-                    <MDBCardTitle><p>{title}</p>
+                    <MDBCardTitle><p className="title">{title}</p>
                         {api.isLoggedIn() && <MDBBadge onClick={handleDelete} color="danger"><i className="fas fa-trash-alt"></i>Delete</MDBBadge>}
                         {api.isLoggedIn() && <MDBBadge onClick={handleEdit} color="blue"><i className="fas fa-edit"></i>Edit</MDBBadge>}
                     </MDBCardTitle>
