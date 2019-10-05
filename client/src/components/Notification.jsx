@@ -12,15 +12,14 @@ function Notification (props) {
 
     return (
         <MDBContainer>
-            {props.notifications.length > 1 && <MDBNotification
+            {props.notifications.length > 1 && <MDBNotification // Erscheint nur bei mehr als einer Notification
                     show
                     fade
                     iconClassName="text-warning"
-                    title="Notifications"
                     message="Alle Notifications schließen"
                     onClick={handleClick}
             />}
-            {props.notifications.map((notification,i) => 
+            {props.notifications.map((notification,i) => // Liste alle Notifications auf
                 <MDBNotification
                     key={i}
                     show
