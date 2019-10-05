@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Home from './components/pages/Home';
@@ -8,9 +8,8 @@ import Header from './components/Header';
 import Notification from './components/Notification'
 import './App.css';
 
-class App extends Component {
+function App(props) {
   
-  render() {
     return (
       <div className="App">
         <Header />
@@ -26,12 +25,11 @@ class App extends Component {
                 right: "10px",
                 zIndex: 9999
             }}>
-            {this.props.notifications && !!this.props.notifications.length && <Notification notifications={this.props.notifications}/>}
+            {props.notifications && !!props.notifications.length && <Notification notifications={props.notifications}/>}
         </div>
       </div>
     );
   }
-}
 
 function mapStateToProps(reduxState){
   return {
