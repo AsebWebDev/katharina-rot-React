@@ -33,8 +33,6 @@ const Card = function (props) {
     
     let handleClick = (e) => {
         e.preventDefault();
-        console.log(e)
-        console.log(e.target)
         setIsFlipped(!isFlipped)
     }
 
