@@ -52,6 +52,13 @@ export default {
       .catch(errHandler)
   },
 
+  getOneCollection(id) {
+    return service
+      .get('/collection/'+id)
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
   addCollection(body) {
     return service
       .post('/collection', body)

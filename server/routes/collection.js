@@ -24,7 +24,7 @@ router.post('/:id/delete', isAdmin, (req, res, next) => {
   .catch(err => next(err))
 });
 
-router.get('/:id/delete', isAdmin, (req, res, next) => {
+router.get('/:id/edit', isAdmin, (req, res, next) => {
   console.log("Hit Edit-ID: "+ req.params.id)
   // Collection.findByIdAndUpdate(req.params.id, {
   //   title: req.body.title,
@@ -40,6 +40,18 @@ router.get('/:id/delete', isAdmin, (req, res, next) => {
   //     })
   //   })
   //   .catch(err => next(err))
+});
+
+router.get('/:id', (req, res, next) => {
+  console.log("Hit Get-ID: "+ req.params.id)
+  Collection.findById(req.params.id) // To access the updated collection (and not the old collection)
+    .then(collection => {
+      res.json({
+        message: "SUCCESS",
+        collection
+      })
+    })
+    .catch(err => next(err))
 });
 
 router.post('/', isAdmin, (req, res, next) => {
