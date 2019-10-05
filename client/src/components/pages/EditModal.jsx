@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
-import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBInputGroup } from 'mdbreact';
+import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBInputGroup, MDBInput } from 'mdbreact';
 import api from '../../api';
 import './EditModal.css'
 
@@ -12,12 +12,13 @@ function EditModal(props) {
   useEffect(() => {
     // BACKEND REQUEST AND SET DATA TO STATE
     api.getOneCollection(currentId)
-    .then(res => setCurrentCollection(res.collection))
+    .then(res => {
+      setCurrentCollection(res.collection)
+    })
     .catch (err => console.log(err))
   }, [currentId])
 
   let toggle = (e) => {
-    console.log(e.target.id)
     props.dispatch({
       type: "TOGGLE_EDIT_MODAL",
       modal: {
@@ -43,13 +44,16 @@ function EditModal(props) {
   console.log(currentCollection)
   return (
     <MDBContainer>
-      <MDBModal isOpen={props.modal.isOpen} toggle={toggle}>
+      <MDBModal size="lg" isOpen={props.modal.isOpen} toggle={toggle}>
         <form onSubmit={handleSubmit}>    
           <MDBModalHeader toggle={toggle}>
             <MDBInputGroup id="title" containerClassName="mb-3" onChange={handleChange} value={currentCollection.title} prepend="Title" hint="Title"/>
           </MDBModalHeader>
           <MDBModalBody>
-            (...)
+            <MDBInputGroup id="tags" containerClassName="mb-3" onChange={handleChange} value={(currentCollection.tags)?currentCollection.tags.join(' '):''} prepend="Tags" hint="Tags"/>
+            <div id="input-description">
+              <MDBInputGroup id="description" onChange={handleChange} value={currentCollection.description} prepend="Description" type="textarea"/>
+            </div>
           </MDBModalBody>
           <MDBModalFooter>
             <MDBBtn color="secondary" onClick={toggle}>Close</MDBBtn>
