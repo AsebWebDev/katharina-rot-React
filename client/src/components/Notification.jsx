@@ -16,6 +16,7 @@ function Notification (props) {
                     show
                     fade
                     iconClassName="text-warning"
+                    title="Notifications"
                     message="Alle Notifications schließen"
                     onClick={handleClick}
             />}
