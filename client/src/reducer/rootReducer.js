@@ -1,4 +1,4 @@
-import { GET_DATA, ADD_NOTIFICATION, TOGGLE_EDIT_MODAL, CLEAR_NOTIFICATIONS } from '../actioncreators';
+import { GET_DATA, ADD_NOTIFICATION, TOGGLE_EDIT_MODAL, CLEAR_NOTIFICATIONS, SET_PIC_UPLOADS } from '../actioncreators';
 
 const initialState = {
   collections: [],
@@ -7,7 +7,9 @@ const initialState = {
     isOpen: false,
     isEdit: false,
     currentID: ''
-  }
+  },
+  uploadedpictures: [],
+  uploadedTitlePic: ''
 }
 
 export default function rootReducer(state=initialState, action) {
@@ -42,6 +44,15 @@ export default function rootReducer(state=initialState, action) {
       return {
         ...newState,
         modal: action.modal
+      }
+    }
+
+    case SET_PIC_UPLOADS: {
+      console.log("SET_PIC_UPLOADS")
+      return {
+        ...newState,
+        uploadedpictures: action.uploadedpictures,
+        uploadedTitlePic: action.uploadedTitlePic
       }
     }
     

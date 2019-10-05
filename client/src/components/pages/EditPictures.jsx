@@ -1,14 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import { MDBBtn, MDBCardImage, MDBView, MDBMask } from 'mdbreact';
+import { setUploadedPics } from '../../actioncreators'
 import api from '../../api';
 
 function EditPictures(props) {
     let {dispatch} = props;
     let currentId = props.modal.currentId;
     let [currentCollection, setCurrentCollection] = useState({})
-    let [titlePic, setTitlePic] = useState('')
-    let [pictures, setPictures] = useState([])
+    let [titlePic, setTitlePic] = useState(null)
+    let [pictures, setPictures] = useState(null)
 
     useEffect(() => {
         api.getOneCollection(currentId) // BACKEND REQUEST AND SET DATA TO STATE
@@ -31,6 +32,7 @@ function EditPictures(props) {
             }
             if (!error && result && result.event === "close" && multiple) {   // If user closes widget use all uploaded pictures stored while uploading
               setPictures(uploadedPictures)                     // UPLOAD MULTIPLE PICTURES FOR THE GALLERY ON CLOSE
+              dispatch(setUploadedPics(uploadedPictures, titlePic))                     // UPLOAD MULTIPLE PICTURES FOR THE GALLERY ON CLOSE
             }
         }).open(); 
       }
@@ -40,16 +42,17 @@ function EditPictures(props) {
             <MDBBtn color="primary" onClick={uploadWidget}>Edit Title Picture</MDBBtn>
             <div onClick={uploadWidget} className="edit-titlePic">
             <MDBView hover>
-                <MDBCardImage className="img-fluid" src={currentCollection.titlePic} waves /> 
+                <MDBCardImage className="img-fluid" src={titlePic ? titlePic : currentCollection.titlePic} waves /> 
                 <MDBMask className="flex-center" overlay="red-strong">
-                <p className="white-text">Click to edit</p>
+                    <p className="white-text">Click to edit</p>
                 </MDBMask>
             </MDBView>
             </div>
             <div className="edit-gallery">
-            {currentCollection.pictures && currentCollection.pictures.map((pic,i) => 
-                <MDBCardImage className="img-fluid" key={i} src={pic} waves /> 
-            )}
+            {pictures && pictures //If there are updated/uploaded pictures, show new ones, else show old ones 
+                ? pictures.map((pic,i) => <MDBCardImage className="img-fluid" key={i} src={pic} waves />)
+                : currentCollection.pictures && currentCollection.pictures.map((pic,i) => <MDBCardImage className="img-fluid" key={i} src={pic} waves />)
+            }
             </div>
             <MDBBtn color="secondary" onClick={uploadWidget} id="upload-art">Edit Gallery</MDBBtn>
         </div>
@@ -58,7 +61,9 @@ function EditPictures(props) {
 
 function mapStateToProps(reduxState){
     return {
-      modal: reduxState.modal
+      modal: reduxState.modal,
+      uploadedpictures: reduxState.uploadedpictures,
+      uploadedTitlePic: reduxState.uploadedTitlePic
     }
   }
   
