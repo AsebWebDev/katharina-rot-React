@@ -46,7 +46,8 @@ const Card = function (props) {
             type: "TOGGLE_EDIT_MODAL",
             modal: {
                 isOpen: !props.modal.isOpen,
-                isEdit: !props.modal.isEdit
+                isEdit: !props.modal.isEdit,
+                currentId: _id
               }
         })
     }

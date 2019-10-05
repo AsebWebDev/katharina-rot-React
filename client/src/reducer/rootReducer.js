@@ -5,7 +5,8 @@ const initialState = {
   notifications: [],
   modal: {
     isOpen: false,
-    isEdit: false
+    isEdit: false,
+    currentID: ''
   }
 }
 

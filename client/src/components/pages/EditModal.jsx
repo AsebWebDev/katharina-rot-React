@@ -5,19 +5,19 @@ import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalF
 
 function EditModal(props) {
 
-  let toggle = () => {
+  console.log(props.modal.currentId)
+
+  let toggle = (e) => {
+    console.log(e.target.id)
     props.dispatch({
       type: "TOGGLE_EDIT_MODAL",
       modal: {
         isOpen: !props.modal.isOpen,
-        isEdit: !props.modal.isEdit
+        isEdit: !props.modal.isEdit,
+        currentId: (e.target.id === "btn-close") ? '' : props.modal.currentId
       }
     })
   }
-
-  console.log("Aus Modal Page")
-  console.log("props Modal open:")
-  console.log(props.modal.isOpen)
 
   return (
     <MDBContainer>
@@ -27,7 +27,7 @@ function EditModal(props) {
           (...)
         </MDBModalBody>
         <MDBModalFooter>
-          <MDBBtn color="secondary" onClick={toggle}>Close</MDBBtn>
+          <MDBBtn color="secondary" id="btn-close" onClick={toggle}>Close</MDBBtn>
           <MDBBtn color="primary">Save changes</MDBBtn>
         </MDBModalFooter>
       </MDBModal>
