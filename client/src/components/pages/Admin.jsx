@@ -43,7 +43,7 @@ function Admin (props){
     api.addCollection(data)
     .then(result => {
       console.log('SUCCESS!')
-      dispatch(newNotification(`Your Collection '${result.Collection.title}' has been created`))
+      dispatch(newNotification(`Your Collection '${result.Collection.title}' has been created`, 'Created'))
       setCurrentCollection({})
       setPictures([])
     }).catch(err => dispatch(newNotification(err.toString())));

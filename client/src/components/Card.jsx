@@ -14,9 +14,11 @@ const Card = function (props) {
     let handleDelete = () => {
         api.deleteCollection(_id)
         .then(result => {
-            dispatch(newNotification((result.success) 
+            dispatch(newNotification(
+                (result.success) 
                 ? `Your Collection '${title}' has been deleted`
                 : `Sorry, your Collection could not be deleted.`
+                , 'Deleted'
             ))
             api.getCollections()
                 .then(collections => {

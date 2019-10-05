@@ -1,4 +1,4 @@
-import { GET_DATA, ADD_NOTIFICATION, TOGGLE_EDIT_MODAL } from '../actioncreators';
+import { GET_DATA, ADD_NOTIFICATION, TOGGLE_EDIT_MODAL, CLEAR_NOTIFICATIONS } from '../actioncreators';
 
 const initialState = {
   collections: [],
@@ -23,7 +23,17 @@ export default function rootReducer(state=initialState, action) {
     case ADD_NOTIFICATION: {
       return {
         ...newState,
-        notifications: [...state.notifications, action.notification]
+        notifications: [...state.notifications, {
+          notification: action.notification,
+          typeOfNotification: action.typeOfNotification
+        }]
+      }
+    }
+
+    case CLEAR_NOTIFICATIONS: {
+      return {
+        ...newState,
+        notifications: []
       }
     }
 
