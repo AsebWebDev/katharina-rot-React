@@ -8,41 +8,45 @@ function EditPictures(props) {
     let {dispatch} = props;
     let currentId = props.modal.currentId;
     let [currentCollection, setCurrentCollection] = useState({})
+    let [isUploadDone, setIsUploadDone] = useState(false)
     let [uploadedPictures, setUploadedPictures] = useState(props.uploadedPictures)
     let [uploadedTitlePic, setUploadedTitlePic] = useState(props.uploadedTitlePic)
-    // FIXME:   When uploading multiple pictures, only one is shown at first. After rerender (f.e. because a titlePic has been uploaded)
-    //          they appear. So when the Widget is closed, a rerender is not triggert. FIXME: rerender after widgest closes 
 
     useEffect(() => {
         api.getOneCollection(currentId) // BACKEND REQUEST AND SET DATA TO STATE
         .then(res => { setCurrentCollection(res.collection) })
         .catch (err => console.log(err))
-    }, [currentId])
-
-
-    useEffect(() => {
-        dispatch(setUploadedPics(
-            uploadedPictures,
-            uploadedTitlePic
-        ))
-    }, [uploadedPictures, uploadedTitlePic, dispatch])
+    }, [currentId, dispatch])
 
     useEffect(() => {
+        if (isUploadDone) {
+            dispatch(setUploadedPics(
+                uploadedPictures,
+                uploadedTitlePic
+            ))
+            setIsUploadDone(false)
+        }
+    }, [isUploadDone, uploadedPictures, uploadedTitlePic, dispatch])
+
+    useEffect(() => {
+        dispatch(setUploadedPics(null, null))
         setUploadedPictures(null)   // clear formerly uploaded Pictures, when model is opened
         setUploadedTitlePic(null)   // clear formerly uploaded Title Picture, when model is opened
-    }, [props.modal.isOpen])
+    }, [props.modal.isOpen, dispatch])
     
     let uploadWidget = (e) => {
         e.preventDefault();
-        let newArr = props.uploadedPictures?[...props.uploadedPictures]:[];
+        let newArr = uploadedPictures?[...uploadedPictures]:[];
         let multiple = (e.target.id === "upload-art"); // Multiple pictures for the gallery or one picture as title
         window.cloudinary.createUploadWidget({ 
           upload_preset: 'mu7bkqlz',
           multiple,
         },(error, result) => {
+            if (!error && result && result.event === "queues-end") { setIsUploadDone(true) } //FIXME: only one pic picked, "queues-end not triggered"
             if (!error && result && result.event === "success") { 
               if (multiple) {
                 newArr.push(result.info.secure_url) 
+                console.log("TCL: uploadWidget -> newArr", newArr)
                 setUploadedPictures(newArr)
               } else {
                 let newURL = result.info.secure_url  
@@ -64,10 +68,10 @@ function EditPictures(props) {
             </MDBView>
             </div>
             <div className="edit-gallery">
-            {uploadedPictures                  // if not undefined...
-                && uploadedPictures.length > 0 // ...and not empty...
-                && uploadedPictures            // ... show uploaded ones, else show old ones 
-                    ? uploadedPictures && uploadedPictures.map((pic,i) => <MDBCardImage className="img-fluid" key={i} src={pic} waves />)
+            {props.uploadedPictures                  // if not undefined...
+                && props.uploadedPictures.length > 0 // ...and not empty...
+                && props.uploadedPictures            // ... show uploaded ones, else show old ones 
+                    ? props.uploadedPictures && props.uploadedPictures.map((pic,i) => <MDBCardImage className="img-fluid" key={i} src={pic} waves />)
                     : currentCollection.pictures && currentCollection.pictures.map((pic,i) => <MDBCardImage className="img-fluid" key={i} src={pic} waves />)
             }
             </div>
