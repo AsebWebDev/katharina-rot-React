@@ -6,6 +6,9 @@ import EditPictures from './EditPictures'
 import api from '../../api';
 import './EditModal.css'
 
+// FIXME: Klick neben das Modal, schließt es, uploads werden allerdings nicht gelöscht. 
+// Was wird getriggert beim Click neben das Modal? Bzw. wieso wird es dadurch nicht mehr angezeigt?
+
 function EditModal(props) {
   let {dispatch} = props;
   let currentId = props.modal.currentId;
@@ -20,12 +23,14 @@ function EditModal(props) {
   let toggle = () => { dispatch(toggleModal(props.modal)) }
 
   let handleSubmit = (e) => {
-    console.log("Handle Submit clicked")
     e.preventDefault();
-    
-    dispatch(setUploadedPics([],'')) //clear uploaded pictures after successfull submit
-    console.log(props.uploadedTitlePic)
-    console.log(props.uploadedpictures)
+    let body = {
+      ...currentCollection, 
+      pictures: props.uploadedPictures ? props.uploadedPictures : currentCollection.pictures, // use uploaded pictures if exists
+      titlePic: props.uploadedTitlePic ? props.uploadedTitlePic : currentCollection.titlePic // use uploaded Titlepic if exists
+    }
+    api.updateCollection(currentId, body)
+    dispatch(setUploadedPics(null,null)) //clear uploaded pictures after successfull submit
     toggle();
   }
 
@@ -34,6 +39,11 @@ function EditModal(props) {
       ...currentCollection,
       [e.target.id]: e.target.value
     })
+  }
+
+  let handleclose = () => {
+    dispatch(setUploadedPics(null,null)) //clear uploaded pictures after cancelling
+    toggle()
   }
 
   return (
@@ -51,7 +61,7 @@ function EditModal(props) {
             </div>
           </MDBModalBody>
           <MDBModalFooter>
-            <MDBBtn color="secondary" onClick={toggle}>Close</MDBBtn>
+            <MDBBtn color="secondary" onClick={handleclose}>Close</MDBBtn>
             <MDBBtn color="primary" onClick={handleSubmit}>Save changes</MDBBtn>
           </MDBModalFooter>
         </form>
@@ -64,7 +74,7 @@ function EditModal(props) {
 function mapStateToProps(reduxState){
   return {
     modal: reduxState.modal,
-    uploadedpictures: reduxState.uploadedpictures,
+    uploadedPictures: reduxState.uploadedPictures,
     uploadedTitlePic: reduxState.uploadedTitlePic
   }
 }

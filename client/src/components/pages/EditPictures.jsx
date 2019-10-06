@@ -8,50 +8,67 @@ function EditPictures(props) {
     let {dispatch} = props;
     let currentId = props.modal.currentId;
     let [currentCollection, setCurrentCollection] = useState({})
-    let [titlePic, setTitlePic] = useState(null)
-    let [pictures, setPictures] = useState(null)
+    let [uploadedPictures, setUploadedPictures] = useState(props.uploadedPictures)
+    let [uploadedTitlePic, setUploadedTitlePic] = useState(props.uploadedTitlePic)
+    // FIXME:   When uploading multiple pictures, only one is shown at first. After rerender (f.e. because a titlePic has been uploaded)
+    //          they appear. So when the Widget is closed, a rerender is not triggert. FIXME: rerender after widgest closes 
 
     useEffect(() => {
         api.getOneCollection(currentId) // BACKEND REQUEST AND SET DATA TO STATE
         .then(res => { setCurrentCollection(res.collection) })
         .catch (err => console.log(err))
     }, [currentId])
+
+
+    useEffect(() => {
+        dispatch(setUploadedPics(
+            uploadedPictures,
+            uploadedTitlePic
+        ))
+    }, [uploadedPictures, uploadedTitlePic, dispatch])
+
+    useEffect(() => {
+        setUploadedPictures(null)   // clear formerly uploaded Pictures, when model is opened
+        setUploadedTitlePic(null)   // clear formerly uploaded Title Picture, when model is opened
+    }, [props.modal.isOpen])
     
     let uploadWidget = (e) => {
         e.preventDefault();
-        let uploadedPictures = []
+        let newArr = props.uploadedPictures?[...props.uploadedPictures]:[];
         let multiple = (e.target.id === "upload-art"); // Multiple pictures for the gallery or one picture as title
         window.cloudinary.createUploadWidget({ 
           upload_preset: 'mu7bkqlz',
-          multiple
+          multiple,
         },(error, result) => {
             if (!error && result && result.event === "success") { 
-              (multiple) 
-              ? uploadedPictures.push(result.info.secure_url)   // If one of few files is uploaded, store in array to be pushed after user closes widget
-              : setTitlePic(result.info.secure_url)             // UPLOAD SINGLE PICTURE FOR THE TITLE ON UPLOAD FINISH
+              if (multiple) {
+                newArr.push(result.info.secure_url) 
+                setUploadedPictures(newArr)
+              } else {
+                let newURL = result.info.secure_url  
+                setUploadedTitlePic(newURL)
+              }
             }
-            if (!error && result && result.event === "close" && multiple) {   // If user closes widget use all uploaded pictures stored while uploading
-              setPictures(uploadedPictures)                     // UPLOAD MULTIPLE PICTURES FOR THE GALLERY ON CLOSE
-              dispatch(setUploadedPics(uploadedPictures, titlePic))                     // UPLOAD MULTIPLE PICTURES FOR THE GALLERY ON CLOSE
-            }
-        }).open(); 
-      }
-    
+        }).open()
+    }
+          
     return (
         <div className="edit-pictures">
             <MDBBtn color="primary" onClick={uploadWidget}>Edit Title Picture</MDBBtn>
             <div onClick={uploadWidget} className="edit-titlePic">
             <MDBView hover>
-                <MDBCardImage className="img-fluid" src={titlePic ? titlePic : currentCollection.titlePic} waves /> 
+                <MDBCardImage className="img-fluid" src={props.uploadedTitlePic ? props.uploadedTitlePic : currentCollection.titlePic} waves /> 
                 <MDBMask className="flex-center" overlay="red-strong">
                     <p className="white-text">Click to edit</p>
                 </MDBMask>
             </MDBView>
             </div>
             <div className="edit-gallery">
-            {pictures && pictures //If there are updated/uploaded pictures, show new ones, else show old ones 
-                ? pictures.map((pic,i) => <MDBCardImage className="img-fluid" key={i} src={pic} waves />)
-                : currentCollection.pictures && currentCollection.pictures.map((pic,i) => <MDBCardImage className="img-fluid" key={i} src={pic} waves />)
+            {uploadedPictures                  // if not undefined...
+                && uploadedPictures.length > 0 // ...and not empty...
+                && uploadedPictures            // ... show uploaded ones, else show old ones 
+                    ? uploadedPictures && uploadedPictures.map((pic,i) => <MDBCardImage className="img-fluid" key={i} src={pic} waves />)
+                    : currentCollection.pictures && currentCollection.pictures.map((pic,i) => <MDBCardImage className="img-fluid" key={i} src={pic} waves />)
             }
             </div>
             <MDBBtn color="secondary" onClick={uploadWidget} id="upload-art">Edit Gallery</MDBBtn>
@@ -62,7 +79,7 @@ function EditPictures(props) {
 function mapStateToProps(reduxState){
     return {
       modal: reduxState.modal,
-      uploadedpictures: reduxState.uploadedpictures,
+      uploadedPictures: reduxState.uploadedPictures,
       uploadedTitlePic: reduxState.uploadedTitlePic
     }
   }

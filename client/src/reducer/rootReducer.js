@@ -8,8 +8,8 @@ const initialState = {
     isEdit: false,
     currentID: ''
   },
-  uploadedpictures: [],
-  uploadedTitlePic: ''
+  uploadedPictures: null,
+  uploadedTitlePic: null
 }
 
 export default function rootReducer(state=initialState, action) {
@@ -40,7 +40,6 @@ export default function rootReducer(state=initialState, action) {
     }
 
     case TOGGLE_EDIT_MODAL: {
-      console.log("Current ID: "+action.modal.currentId)
       return {
         ...newState,
         modal: action.modal
@@ -48,10 +47,9 @@ export default function rootReducer(state=initialState, action) {
     }
 
     case SET_PIC_UPLOADS: {
-      console.log("SET_PIC_UPLOADS")
       return {
         ...newState,
-        uploadedpictures: action.uploadedpictures,
+        uploadedPictures: action.uploadedPictures,
         uploadedTitlePic: action.uploadedTitlePic
       }
     }

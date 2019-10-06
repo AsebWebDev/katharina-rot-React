@@ -42,7 +42,6 @@ function Admin (props){
     let data = {...currentCollection, pictures, titlePic}
     api.addCollection(data)
     .then(result => {
-      console.log('SUCCESS!')
       dispatch(newNotification(`Your Collection '${result.Collection.title}' has been created`, 'Created'))
       setCurrentCollection({})
       setPictures([])

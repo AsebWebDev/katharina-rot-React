@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { connect } from 'react-redux';
 import ReactCardFlip from 'react-card-flip';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol, MDBNavLink, MDBBadge, MDBView } from 'mdbreact';
-import {newNotification} from '../actioncreators'
+import { newNotification, toggleModal } from '../actioncreators'
 import api from '../api';
 import './Card.css'
 
@@ -41,16 +41,10 @@ const Card = function (props) {
     let handleEdit = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        console.log("Edit")
-        dispatch({
-            type: "TOGGLE_EDIT_MODAL",
-            modal: {
-                isOpen: !props.modal.isOpen,
-                isEdit: !props.modal.isEdit,
-                currentId: _id
-              }
-        })
+        toggle()
     }
+
+    let toggle = () => { dispatch(toggleModal(props.modal, _id)) }
 
     return (
         <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
