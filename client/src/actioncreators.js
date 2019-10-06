@@ -19,9 +19,6 @@ export function newNotification(message, typeOfNotification) {
 }
 
 export function setUploadedPics(uploadedPictures, uploadedTitlePic) {
-  // console.log("TCL: setUploadedPics -> setUploadedPics")
-  // console.log("TCL: setUploadedPics -> uploadedTitlePic", uploadedTitlePic)
-  // console.log("TCL: setUploadedPics -> uploadedPictures", uploadedPictures)
   return {
     type: SET_PIC_UPLOADS,
     uploadedPictures,
@@ -30,8 +27,6 @@ export function setUploadedPics(uploadedPictures, uploadedTitlePic) {
 }
 
 export function toggleModal(modal, currentId) {
-  console.log("set modal from " +  modal.isOpen + " to " + !modal.isOpen)
-  setUploadedPics(null, null)
   return {
     type: TOGGLE_EDIT_MODAL,
     modal: {
