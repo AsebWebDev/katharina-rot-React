@@ -18,23 +18,26 @@ export function newNotification(message, typeOfNotification) {
   }
 }
 
-export function setUploadedPics(uploadedpictures, uploadedTitlePic) {
-  console.log("TCL: setUploadedPics -> setUploadedPics")
+export function setUploadedPics(uploadedPictures, uploadedTitlePic) {
+  // console.log("TCL: setUploadedPics -> setUploadedPics")
+  // console.log("TCL: setUploadedPics -> uploadedTitlePic", uploadedTitlePic)
+  // console.log("TCL: setUploadedPics -> uploadedPictures", uploadedPictures)
   return {
     type: SET_PIC_UPLOADS,
-    uploadedpictures,
+    uploadedPictures,
     uploadedTitlePic
   }
 }
 
-export function toggleModal(modal) {
-  console.log(modal)
+export function toggleModal(modal, currentId) {
+  console.log("set modal from " +  modal.isOpen + " to " + !modal.isOpen)
+  setUploadedPics(null, null)
   return {
     type: TOGGLE_EDIT_MODAL,
     modal: {
       isOpen: !modal.isOpen,
       isEdit: !modal.isEdit,
-      currentId: (modal.isOpen) ? '' : modal.currentId // If modal is about to close, removegit  currentId
+      currentId: (modal.isOpen) ? '' : currentId // If modal is about to close, remove currentId
     }
   }
 }
