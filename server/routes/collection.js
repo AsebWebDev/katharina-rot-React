@@ -6,7 +6,6 @@ const router = express.Router();
 router.get('/', (req, res, next) => {
   Collection.find()
     .then(collections => {
-      console.log(collections)
       res.json(collections);
     })
     .catch(err => next(err))
@@ -24,8 +23,9 @@ router.post('/:id/delete', isAdmin, (req, res, next) => {
   .catch(err => next(err))
 });
 
-router.get('/:id/edit', isAdmin, (req, res, next) => {
+router.post('/:id/', isAdmin, (req, res, next) => {
   console.log("Hit Edit-ID: "+ req.params.id)
+  console.log(req.body)
   // Collection.findByIdAndUpdate(req.params.id, {
   //   title: req.body.title,
   //   titlePic: req.body.titlePic,

@@ -23,7 +23,6 @@ class LoginBox extends Component {
     e.preventDefault();
     api.login(this.state.username, this.state.password)
       .then(result => {
-        console.log('SUCCESS!')
         this.setState({ message: 'Success!' })
         this.props.history.push("/") // Redirect to the home page
       })

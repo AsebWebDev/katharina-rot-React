@@ -4,7 +4,6 @@ function isLoggedIn(req, res, next) {
 }
 
 function isAdmin(req, res, next) {  
-  console.log("Is Admin Middleware hit")   
   if (req.user.isAdmin) next()
   else next({ status: 403, message: 'Unauthorized. No Admin' })
 }
