@@ -31,12 +31,9 @@ router.post('/:id/', isAdmin, (req, res, next) => {
     description: req.body.description,
   }, { new: true }) // To access the updated collection (and not the old collection)
     .then(collection => {
-      res.json({
-        message: "Your collection has been updated",
-        collection
-      })
-    })
-    .catch(err => next(err))
+      Collection.find()
+      .then(collections => { res.json({ collections }) })
+    }).catch(err => next(err))
 });
 
 router.get('/:id', (req, res, next) => {
