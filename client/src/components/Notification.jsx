@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from 'react-redux';
 import { MDBNotification, MDBContainer} from "mdbreact";
 import moment from 'moment';
-import { returnNotificationColor } from '../helpers'
+import { returnNotificationColor, returnNotificationSymbol } from '../helpers'
 
 function Notification (props) {
 
@@ -27,10 +27,13 @@ function Notification (props) {
                     key={i}
                     show
                     fade
+                    icon={returnNotificationSymbol(notification.typeOfNotification)}
                     iconClassName={returnNotificationColor(notification.typeOfNotification)}
                     title={notification.typeOfNotification}
                     message={notification.notification}
-                    text={moment().startOf(notification.created).fromNow()}
+                    text={moment(notification.created).calendar()}
+                    // text={moment(notification.created).startOf(notification.created).fromNow()} //TODO: implement relativ time
+                    
                 />
             )}
         </MDBContainer>
