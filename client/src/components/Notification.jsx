@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux';
 import { MDBNotification, MDBContainer} from "mdbreact";
+import { returnNotificationColor } from '../helpers'
 
 function Notification (props) {
 
@@ -25,7 +26,7 @@ function Notification (props) {
                     key={i}
                     show
                     fade
-                    iconClassName={(notification.typeOfNotification === "Deleted")?"text-danger":"text-primary"}
+                    iconClassName={returnNotificationColor(notification.typeOfNotification)}
                     title={notification.typeOfNotification}
                     message={notification.notification}
                     text="11 mins ago"
