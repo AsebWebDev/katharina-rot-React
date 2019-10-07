@@ -1,13 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBInputGroup, MDBCardImage, MDBView, MDBMask } from 'mdbreact';
-import { toggleModal, setUploadedPics } from '../../actioncreators'
+import { toggleModal, setUploadedPics, newNotification } from '../../actioncreators'
 import EditPictures from './EditPictures'
 import api from '../../api';
 import './EditModal.css'
-
-// FIXME: Klick neben das Modal, schließt es, uploads werden allerdings nicht gelöscht. 
-// Was wird getriggert beim Click neben das Modal? Bzw. wieso wird es dadurch nicht mehr angezeigt?
 
 function EditModal(props) {
   let {dispatch} = props;
@@ -30,6 +27,13 @@ function EditModal(props) {
       titlePic: props.uploadedTitlePic ? props.uploadedTitlePic : currentCollection.titlePic // use uploaded Titlepic if exists
     }
     api.updateCollection(currentId, body)
+      .then(result => {
+        dispatch({
+          type: "GET_DATA", 
+          collections: result.collections
+        })
+        dispatch(newNotification(`Your Collection '${currentCollection.title}' has been deleted`))
+      }).catch (err => console.log(err))
     dispatch(setUploadedPics(null,null)) //clear uploaded pictures after successfull submit
     toggle();
   }
