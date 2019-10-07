@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux';
 import { MDBNotification, MDBContainer} from "mdbreact";
+import moment from 'moment';
 import { returnNotificationColor } from '../helpers'
 
 function Notification (props) {
@@ -29,7 +30,7 @@ function Notification (props) {
                     iconClassName={returnNotificationColor(notification.typeOfNotification)}
                     title={notification.typeOfNotification}
                     message={notification.notification}
-                    text="11 mins ago"
+                    text={moment().startOf(notification.created).fromNow()}
                 />
             )}
         </MDBContainer>
