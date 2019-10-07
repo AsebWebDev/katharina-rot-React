@@ -25,7 +25,7 @@ export default function rootReducer(state=initialState, action) {
     case ADD_NOTIFICATION: {
       return {
         ...newState,
-        notifications: [...state.notifications, {
+        notifications: [...state.notifications.slice(state.notifications.length-3, state.notifications.length), {
           notification: action.notification,
           typeOfNotification: action.typeOfNotification,
           created: new Date()
