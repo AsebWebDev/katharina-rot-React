@@ -32,7 +32,7 @@ function EditModal(props) {
           type: "GET_DATA", 
           collections: result.collections
         })
-        dispatch(newNotification(`Your Collection '${currentCollection.title}' has been deleted`))
+        dispatch(newNotification(`Your Collection '${currentCollection.title}' has been updated.`, 'Updated'))
       }).catch (err => console.log(err))
     dispatch(setUploadedPics(null,null)) //clear uploaded pictures after successfull submit
     toggle();
