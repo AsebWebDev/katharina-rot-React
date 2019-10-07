@@ -20,6 +20,8 @@ const app = express()
 
 app.use(nocache())
 
+mongoose.set('useFindAndModify', false) // prevent deprecation warning of fineByIdAndUpdate()
+
 // Set "Access-Control-Allow-Origin" header
 app.use(cors({
   origin: (origin, cb) => {
