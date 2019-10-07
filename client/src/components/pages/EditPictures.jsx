@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
-import { MDBBtn, MDBCardImage, MDBView, MDBMask } from 'mdbreact';
+import { MDBBtn } from 'mdbreact';
 import { setUploadedPics } from '../../actioncreators'
 import api from '../../api';
 import './EditPictures.css'
@@ -58,7 +58,7 @@ function EditPictures(props) {
           
     return (
         <div className="edit-pictures">
-            <div class="left">
+            <div className="left">
                 <div className="title-pic">
                     <img className="mini-pic z-depth-3" src={props.uploadedTitlePic ? props.uploadedTitlePic : currentCollection.titlePic} alt="tital" /> 
                 </div>
@@ -66,12 +66,12 @@ function EditPictures(props) {
                     {props.uploadedPictures                  // if not undefined...
                         && props.uploadedPictures.length > 0 // ...and not empty...
                         && props.uploadedPictures            // ... show uploaded ones, else show old ones 
-                            ? props.uploadedPictures && props.uploadedPictures.map((pic,i) => <img className="mini-pic hoverable" key={i} src={pic} alt="gallery-pic" />)
-                            : currentCollection.pictures && currentCollection.pictures.map((pic,i) => <img className="mini-pic hoverable" key={i} src={pic} alt="gallery-pic" />)
+                            ? props.uploadedPictures && props.uploadedPictures.slice(0,3).map((pic,i) => <img className="mini-pic hoverable" key={i} src={pic} alt="gallery-pic" />)
+                            : currentCollection.pictures && currentCollection.pictures.slice(0,3).map((pic,i) => <img className="mini-pic hoverable" key={i} src={pic} alt="gallery-pic" />)
                     }
                 </div>
             </div>
-            <div class="right">
+            <div className="right">
                 <div><MDBBtn color="primary" onClick={uploadWidget}>Edit Title Picture</MDBBtn></div>
                 <div><MDBBtn color="secondary" onClick={uploadWidget} id="upload-art">Edit Gallery</MDBBtn></div>
             </div>
@@ -87,4 +87,4 @@ function mapStateToProps(reduxState){
     }
   }
   
-  export default connect(mapStateToProps)(EditPictures)
+export default connect(mapStateToProps)(EditPictures)
