@@ -26,20 +26,20 @@ router.post('/:id/delete', isAdmin, (req, res, next) => {
 router.post('/:id/', isAdmin, (req, res, next) => {
   console.log("Hit Edit-ID: "+ req.params.id)
   console.log(req.body)
-  // Collection.findByIdAndUpdate(req.params.id, {
-  //   title: req.body.title,
-  //   titlePic: req.body.titlePic,
-  //   pictures: req.body.pictures,
-  //   tags: req.body.tags,
-  //   description: req.body.description,
-  // }, { new: true }) // To access the updated collection (and not the old collection)
-  //   .then(collection => {
-  //     res.json({
-  //       message: "Your collection has been updated",
-  //       collection
-  //     })
-  //   })
-  //   .catch(err => next(err))
+  Collection.findByIdAndUpdate(req.params.id, {
+    title: req.body.title,
+    titlePic: req.body.titlePic,
+    pictures: req.body.pictures,
+    tags: req.body.tags,
+    description: req.body.description,
+  }, { new: true }) // To access the updated collection (and not the old collection)
+    .then(collection => {
+      res.json({
+        message: "Your collection has been updated",
+        collection
+      })
+    })
+    .catch(err => next(err))
 });
 
 router.get('/:id', (req, res, next) => {
