@@ -1,0 +1,81 @@
+.edit-pictures {
+    /* display: flex; */
+    margin: 15px 0 15px 0;
+}
+
+.left {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 70%;
+}
+
+.title-pic {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 120px;
+    width: 20%;
+}
+
+.mini-pic {
+    width: 80px;
+    min-height: 50px;
+    border-radius: 4px;
+    margin: 0 5px 0 5px;
+}
+
+.mini-gallery {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 120px;
+    width: 80%;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+}
+
+/* .edit-titlePic {
+    display: flex;
+    align-items: center;
+    border: 2px solid green;
+}
+
+.mini-title {
+    width: 50px;
+}
+
+.edit-gallery {
+    display: flex;
+    align-items: center;
+    border: 2px solid yellow;
+}
+
+.mini-gallery {
+    border: 2px solid blue;
+} */
+
+/* .edit-titlePic {
+    border: 2px solid blue;
+    width: 50%;
+    height: 100%;
+}
+
+.smallPic {
+    height: 50px;
+}
+
+.smallPic .img-fluid{
+    border: 2px solid red;
+    width: 50px;
+    height: 50px;
+}
+
+.btn {
+    height: 70%;
+} */

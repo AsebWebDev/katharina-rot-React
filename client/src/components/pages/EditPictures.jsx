@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { MDBBtn, MDBCardImage, MDBView, MDBMask } from 'mdbreact';
 import { setUploadedPics } from '../../actioncreators'
 import api from '../../api';
+import './EditPictures.css'
 
 function EditPictures(props) {
     let {dispatch} = props;
@@ -46,7 +47,6 @@ function EditPictures(props) {
             if (!error && result && result.event === "success") { 
               if (multiple) {
                 newArr.push(result.info.secure_url) 
-                console.log("TCL: uploadWidget -> newArr", newArr)
                 setUploadedPictures(newArr)
               } else {
                 let newURL = result.info.secure_url  
@@ -58,24 +58,23 @@ function EditPictures(props) {
           
     return (
         <div className="edit-pictures">
-            <MDBBtn color="primary" onClick={uploadWidget}>Edit Title Picture</MDBBtn>
-            <div onClick={uploadWidget} className="edit-titlePic">
-            <MDBView hover>
-                <MDBCardImage className="img-fluid" src={props.uploadedTitlePic ? props.uploadedTitlePic : currentCollection.titlePic} waves /> 
-                <MDBMask className="flex-center" overlay="red-strong">
-                    <p className="white-text">Click to edit</p>
-                </MDBMask>
-            </MDBView>
+            <div class="left">
+                <div className="title-pic">
+                    <img className="mini-pic z-depth-3" src={props.uploadedTitlePic ? props.uploadedTitlePic : currentCollection.titlePic} alt="tital" /> 
+                </div>
+                <div className="mini-gallery">
+                    {props.uploadedPictures                  // if not undefined...
+                        && props.uploadedPictures.length > 0 // ...and not empty...
+                        && props.uploadedPictures            // ... show uploaded ones, else show old ones 
+                            ? props.uploadedPictures && props.uploadedPictures.map((pic,i) => <img className="mini-pic hoverable" key={i} src={pic} alt="gallery-pic" />)
+                            : currentCollection.pictures && currentCollection.pictures.map((pic,i) => <img className="mini-pic hoverable" key={i} src={pic} alt="gallery-pic" />)
+                    }
+                </div>
             </div>
-            <div className="edit-gallery">
-            {props.uploadedPictures                  // if not undefined...
-                && props.uploadedPictures.length > 0 // ...and not empty...
-                && props.uploadedPictures            // ... show uploaded ones, else show old ones 
-                    ? props.uploadedPictures && props.uploadedPictures.map((pic,i) => <MDBCardImage className="img-fluid" key={i} src={pic} waves />)
-                    : currentCollection.pictures && currentCollection.pictures.map((pic,i) => <MDBCardImage className="img-fluid" key={i} src={pic} waves />)
-            }
+            <div class="right">
+                <div><MDBBtn color="primary" onClick={uploadWidget}>Edit Title Picture</MDBBtn></div>
+                <div><MDBBtn color="secondary" onClick={uploadWidget} id="upload-art">Edit Gallery</MDBBtn></div>
             </div>
-            <MDBBtn color="secondary" onClick={uploadWidget} id="upload-art">Edit Gallery</MDBBtn>
         </div>
     )
 }
