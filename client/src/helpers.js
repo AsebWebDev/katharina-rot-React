@@ -5,3 +5,12 @@ export function returnNotificationColor (string) {
         default: return "text-primary"
     }
 }
+
+export function returnNotificationSymbol (string) {
+    switch(string) {
+        case("Deleted"): return "trash";
+        case("Updated"): return "check-circle";
+        case("Created"): return "plus-circle";
+        default: return "envelope"
+    }
+}
