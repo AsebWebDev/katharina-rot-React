@@ -27,7 +27,8 @@ export default function rootReducer(state=initialState, action) {
         ...newState,
         notifications: [...state.notifications, {
           notification: action.notification,
-          typeOfNotification: action.typeOfNotification
+          typeOfNotification: action.typeOfNotification,
+          created: new Date()
         }]
       }
     }
