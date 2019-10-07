@@ -51,6 +51,7 @@ function EditPictures(props) {
               } else {
                 let newURL = result.info.secure_url  
                 setUploadedTitlePic(newURL)
+                setIsUploadDone(true)
               }
             }
         }).open()
