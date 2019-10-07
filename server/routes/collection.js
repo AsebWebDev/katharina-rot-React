@@ -12,7 +12,6 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/:id/delete', isAdmin, (req, res, next) => {
-  console.log("Hit Delete-ID: "+ req.params.id)
   Collection.deleteOne( { _id : req.params.id } )
   .then(result => {
     res.json({
@@ -24,8 +23,6 @@ router.post('/:id/delete', isAdmin, (req, res, next) => {
 });
 
 router.post('/:id/', isAdmin, (req, res, next) => {
-  console.log("Hit Edit-ID: "+ req.params.id)
-  console.log(req.body)
   Collection.findByIdAndUpdate(req.params.id, {
     title: req.body.title,
     titlePic: req.body.titlePic,
@@ -43,7 +40,6 @@ router.post('/:id/', isAdmin, (req, res, next) => {
 });
 
 router.get('/:id', (req, res, next) => {
-  console.log("Hit Get-ID: "+ req.params.id)
   Collection.findById(req.params.id) // To access the updated collection (and not the old collection)
     .then(collection => {
       res.json({
