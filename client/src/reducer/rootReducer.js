@@ -6,7 +6,7 @@ const initialState = {
   modal: {
     isOpen: false,
     isEdit: false,
-    currentID: ''
+    currentId: ''
   },
   uploadedPictures: null,
   uploadedTitlePic: null
