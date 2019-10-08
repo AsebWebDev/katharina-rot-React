@@ -4,8 +4,9 @@ import api from '../../api';
 
 function Collection(props) {
   let [currentId] = useState(props.match.params.id)
-  let [currentCollection, setCurrentCollection] = useState([])
+  let [currentCollection, setCurrentCollection] = useState(null)
   let [error, setError] = useState(null)
+  console.log(currentCollection)
 
   useEffect(() => {
     api.getOneCollection(currentId)
@@ -13,13 +14,15 @@ function Collection(props) {
     .catch (err => setError(err))
   }, [currentId])
   
-  return (
+  if (currentCollection)
+    return (
       <div>
-          <p>Collection</p>
           <p>{currentCollection.title}</p>
-          {error && <p>{error}</p>}
+          {/* //TODO: add Lighbox Button and Lightbox */}
+          {currentCollection.pictures.length > 0 && currentCollection.pictures.map((img,i) => <img key={i} src={img} alt="art"/>)}
       </div>
-  )
+    )
+  else return (error && <p>{error}</p>)
 }
 
 function mapStateToProps(reduxState){
