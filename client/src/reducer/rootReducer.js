@@ -1,4 +1,4 @@
-import { GET_DATA, ADD_NOTIFICATION, TOGGLE_EDIT_MODAL, CLEAR_NOTIFICATIONS, SET_PIC_UPLOADS } from '../actioncreators';
+import { GET_DATA, ADD_NOTIFICATION, TOGGLE_EDIT_MODAL, CLEAR_NOTIFICATIONS, SET_PIC_UPLOADS, PREPAREDELETE_NOTIFICATION, UPDATE_NOTIFICATIONS } from '../actioncreators';
 
 const initialState = {
   collections: [],
@@ -25,7 +25,7 @@ export default function rootReducer(state=initialState, action) {
     case ADD_NOTIFICATION: {
       return {
         ...newState,
-        notifications: [...state.notifications.slice(state.notifications.length-3, state.notifications.length), {
+        notifications: [...state.notifications, {
           notification: action.notification,
           typeOfNotification: action.typeOfNotification,
           created: new Date()
@@ -38,6 +38,21 @@ export default function rootReducer(state=initialState, action) {
         ...newState,
         notifications: []
       }
+    }
+
+    case UPDATE_NOTIFICATIONS: {
+      let cleanedNotifications = newState.notifications.filter(item => item.created !== action.timestamp)
+      return {
+        ...newState,
+        notifications: cleanedNotifications
+      }
+    }
+
+    case PREPAREDELETE_NOTIFICATION: {
+      let indexOfTarget = newState.notifications.findIndex(elem => elem.created === action.timestamp); // find Index of Notification by Timestamp
+      newState.notifications[indexOfTarget].toBeDeleted = true;
+      console.log(newState.notifications[indexOfTarget].notification + " is marked to be deleted.")
+      return newState
     }
 
     case TOGGLE_EDIT_MODAL: {
