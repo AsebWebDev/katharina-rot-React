@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { MDBJumbotron, MDBBtn, MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import Create from './Create'
+import Preferences from './Preferences'
 import '../../configs/cloudinary'
 import api from '../../api';
+import './Admin.css'
 
 function Admin (props){
   let [mode, setMode] = useState("default")
@@ -11,6 +13,7 @@ function Admin (props){
   let toggle = (choice) => {
     switch (choice) {
       case 'create': setMode('create'); break;
+      case 'preferences': setMode('preferences'); break;
       default: console.log("Default")
     }
   }
@@ -28,12 +31,15 @@ function Admin (props){
               <p>Make a choice :)</p>
               <p className="lead">
                 <MDBBtn color="primary" onClick={() => toggle('create')}>Create Collection</MDBBtn>
+                <MDBBtn color="secondary" onClick={() => toggle('preferences')}>Preferences</MDBBtn>
               </p>
             </MDBJumbotron>
           </MDBCol>
         </MDBRow>
       </MDBContainer>
       {(mode === "create") && <Create />}
+      {(mode === "preferences") && <Preferences />}
+      {(mode === "default") && <div />}
       
     </div>
   )} else {
