@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { MDBJumbotron, MDBBtn, MDBContainer, MDBRow, MDBCol, MDBIcon, MDBInputGroup } from "mdbreact";
 import { CloudinaryContext } from 'cloudinary-react';
 import api from '../../api';
-import { setUploadedPics, newNotification } from '../../actioncreators'
+import { newNotification } from '../../actioncreators'
+import './Create.css'
 
 function Create(props) {
     let {dispatch} = props;
@@ -49,23 +51,30 @@ function Create(props) {
     }
 
     return (
-        <div>
-            <CloudinaryContext cloudName="djyjdargg">
-                <button onClick={uploadWidget} className="cloudinary-button">Add Title Image</button>
-                {titlePic && <img src={titlePic} alt="" width="70px"/>}
-                <form onSubmit={handleSubmit}>
-                <label htmlFor="title">Title</label>
-                <input type="text" name="title" id="title" value={currentCollection.title || ''} onChange={handleChange}/><br />
-                <label htmlFor="tags">Tags</label>
-                <input type="text" name="tags" id="tags" value={currentCollection.tags || ''} onChange={handleChange}/><br />
-                <label htmlFor="tags">Description</label>
-                <input type="textarea" name="description" id="description" value={currentCollection.description || ''} onChange={handleChange}/><br />
-                <button onClick={uploadWidget} id="upload-art" className="cloudinary-button">Upload Art</button>
-                <button type="submit" className="cloudinary-button">Submit</button>
-                </form>
-            </CloudinaryContext>
-            {pictures && pictures.map((picture, i) => <img src={picture} key ={i} alt="" width="70px"/>)}
-        </div>
+        <MDBContainer className="mt-5 text-center">
+            <MDBRow>
+            <MDBCol>
+                <MDBJumbotron>
+                    <h4 className="h5 display-5">Create a new Collection</h4>
+                    <CloudinaryContext cloudName="djyjdargg">
+                    <button onClick={uploadWidget} className="cloudinary-button">Add Title Image</button>
+                    {titlePic && <img src={titlePic} alt="" width="70px"/>}
+                    <form onSubmit={handleSubmit}>
+                        <MDBInputGroup id="title" containerClassName="mb-3" onChange={handleChange} value={currentCollection.title} prepend="Title" hint="..."/>
+                        {/* <input type="text" name="title" id="title" value={currentCollection.title || ''} onChange={handleChange}/><br /> */}
+                        <label htmlFor="tags">Tags</label>
+                        <input type="text" name="tags" id="tags" value={currentCollection.tags || ''} onChange={handleChange}/><br />
+                        <label htmlFor="tags">Description</label>
+                        <input type="textarea" name="description" id="description" value={currentCollection.description || ''} onChange={handleChange}/><br />
+                        <button onClick={uploadWidget} id="upload-art" className="cloudinary-button">Upload Art</button>
+                        <button type="submit" className="cloudinary-button">Submit</button>
+                    </form>
+                    </CloudinaryContext>
+                    {pictures && pictures.map((picture, i) => <img src={picture} key ={i} alt="" width="70px"/>)}
+                </MDBJumbotron>
+            </MDBCol>
+            </MDBRow>
+        </MDBContainer>
     )
 }
 

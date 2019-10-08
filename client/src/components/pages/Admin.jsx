@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { MDBJumbotron, MDBBtn, MDBContainer, MDBRow, MDBCol, MDBIcon } from "mdbreact";
+import { MDBJumbotron, MDBBtn, MDBContainer, MDBRow, MDBCol, MDBIcon, MDBAnimation } from "mdbreact";
 import Create from './Create'
 import Preferences from './Preferences'
 import '../../configs/cloudinary'
@@ -9,11 +9,13 @@ import './Admin.css'
 
 function Admin (props){
   let [mode, setMode] = useState("default")
-
+  
   let toggle = (choice) => {
+    if (mode === choice) choice = "default"
     switch (choice) {
       case 'create': setMode('create'); break;
       case 'preferences': setMode('preferences'); break;
+      case 'default': setMode('default'); break;
       default: console.log("Default")
     }
   }
@@ -25,10 +27,12 @@ function Admin (props){
         <MDBRow>
           <MDBCol>
             <MDBJumbotron>
-              <h2 className="h1 display-3">Hello, Sarah!</h2>
-              <p className="lead">This is your admin page. Play around!</p>
-              <hr className="my-2" />
-              <p>Make a choice :)</p>
+              {(mode === "default") && <MDBAnimation type="fadeIn">
+                <h2 className="h1 display-3">Hello, Sarah!</h2>
+                <p className="lead">This is your admin page. Play around!</p>
+                <hr className="my-2" />
+                <p>Make a choice :)</p>
+              </MDBAnimation>}
               <p className="lead">
                 <MDBBtn color="primary" onClick={() => toggle('create')}><MDBIcon far icon="plus-square" />Create Collection</MDBBtn>
                 <MDBBtn color="secondary" onClick={() => toggle('preferences')}><MDBIcon icon="tools" />Preferences</MDBBtn>
