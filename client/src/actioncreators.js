@@ -2,13 +2,31 @@ export const GET_DATA = "GET_DATA";
 export const ADD_NOTIFICATION = "ADD_NOTIFICATION";
 export const TOGGLE_EDIT_MODAL = "TOGGLE_EDIT_MODAL";
 export const CLEAR_NOTIFICATIONS = "CLEAR_NOTIFICATIONS";
+export const PREPAREDELETE_NOTIFICATION = "PREPAREDELETE_NOTIFICATION";
+export const UPDATE_NOTIFICATIONS = "UPDATE_NOTIFICATIONS";
 export const SET_PIC_UPLOADS = "SET_PIC_UPLOADS";
+
 
 export function newNotification(message, typeOfNotification) {
   return {
     type: ADD_NOTIFICATION,
     notification: message,
     typeOfNotification
+  }
+}
+
+// FIXME: make action creater work
+export function prepareDeleteNotification(timestamp) {
+  return {
+    type: PREPAREDELETE_NOTIFICATION,
+    timestamp
+  }
+}
+
+// FIXME: make action creater work
+export function updateNotifications(timestamp) {
+  return {
+    type: UPDATE_NOTIFICATIONS,
   }
 }
 
