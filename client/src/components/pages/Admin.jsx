@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { MDBJumbotron, MDBBtn, MDBContainer, MDBRow, MDBCol } from "mdbreact";
+import { MDBJumbotron, MDBBtn, MDBContainer, MDBRow, MDBCol, MDBIcon } from "mdbreact";
 import Create from './Create'
 import Preferences from './Preferences'
 import '../../configs/cloudinary'
@@ -30,8 +30,8 @@ function Admin (props){
               <hr className="my-2" />
               <p>Make a choice :)</p>
               <p className="lead">
-                <MDBBtn color="primary" onClick={() => toggle('create')}>Create Collection</MDBBtn>
-                <MDBBtn color="secondary" onClick={() => toggle('preferences')}>Preferences</MDBBtn>
+                <MDBBtn color="primary" onClick={() => toggle('create')}><MDBIcon far icon="plus-square" />Create Collection</MDBBtn>
+                <MDBBtn color="secondary" onClick={() => toggle('preferences')}><MDBIcon icon="tools" />Preferences</MDBBtn>
               </p>
             </MDBJumbotron>
           </MDBCol>
