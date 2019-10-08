@@ -5,6 +5,7 @@ import Home from './components/pages/Home';
 import Login from './components/pages/Login';
 import Admin from './components/pages/Admin';
 import Header from './components/Header';
+import Collection from './components/pages/Collection';
 import Notification from './components/Notification'
 import './App.css';
 
@@ -26,6 +27,7 @@ class App extends Component {
           <Route path="/" exact component={Home} />
           <Route path="/admin" component={Admin} />
           <Route path="/login" component={Login} />
+          <Route path="/collection/:id" component={Collection} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
         <div style={{
