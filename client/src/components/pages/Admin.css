@@ -1,11 +1,11 @@
-.lead {
+.admin-page .lead {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     margin: 0;
 }
 
-.jumbotron {
+.admin-page .main-menu .jumbotron {
     padding: 10px;
     margin: 0;
     display: flex;
@@ -14,7 +14,7 @@
     align-content: center;
 }
 
-.btn {
+.admin-page .btn {
     display: flex;
     flex-direction: row;
     align-items: center;

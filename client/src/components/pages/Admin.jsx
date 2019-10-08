@@ -22,11 +22,11 @@ function Admin (props){
   
   if (api.isLoggedIn()) {
     return (
-    <div>
-      <MDBContainer className="mt-5 text-center">
+    <div className="admin-page">
+      <MDBContainer className="main-menu mt-5 text-center">
         <MDBRow>
           <MDBCol>
-            <MDBJumbotron>
+            <MDBJumbotron className="main-jumbo">
               {(mode === "default") && <MDBAnimation type="fadeIn">
                 <h2 className="h1 display-3">Hello, Sarah!</h2>
                 <p className="lead">This is your admin page. Play around!</p>
@@ -44,7 +44,6 @@ function Admin (props){
       {(mode === "create") && <Create />}
       {(mode === "preferences") && <Preferences />}
       {(mode === "default") && <div />}
-      
     </div>
   )} else {
     props.history.push("/login") // Redirect to the login page

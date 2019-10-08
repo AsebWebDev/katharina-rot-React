@@ -1,9 +1,39 @@
-#title {
+.form-control {
     max-width: 70%;
 }
 
-.jumbotron h4 {
+.create-page .jumbotron {
+    padding: 20px;
+}
+
+.create-page .jumbotron h4 {
     text-align: left;
-    margin: 0 0 20px 10px;
+    margin: 0 0 10px 10px;
     color: grey
 }
+
+.create-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-form .cloudinary-button {
+    margin: 0 0 20px 0;
+}
+
+.create-form .title-pic {
+    min-width: 50px;
+    margin: 10px;
+}
+
+.create-form .upload-thumbnail {
+    width: 50px;
+    margin-right: 10px;
+}
+
+.create-form .jumbotron {
+    padding: 20px;
+}
+
+

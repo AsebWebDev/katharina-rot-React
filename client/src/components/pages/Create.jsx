@@ -5,6 +5,7 @@ import { CloudinaryContext } from 'cloudinary-react';
 import api from '../../api';
 import { newNotification } from '../../actioncreators'
 import './Create.css'
+import uploadThumbnail from '../../media/upload-thumbnail2.gif'
 
 function Create(props) {
     let {dispatch} = props;
@@ -51,23 +52,28 @@ function Create(props) {
     }
 
     return (
-        <MDBContainer className="mt-5 text-center">
+        <MDBContainer className="create-page mt-5 text-center">
             <MDBRow>
             <MDBCol>
                 <MDBJumbotron>
                     <h4 className="h5 display-5">Create a new Collection</h4>
                     <CloudinaryContext cloudName="djyjdargg">
-                    <button onClick={uploadWidget} className="cloudinary-button">Add Title Image</button>
-                    {titlePic && <img src={titlePic} alt="" width="70px"/>}
-                    <form onSubmit={handleSubmit}>
+                    <form className="create-form" onSubmit={handleSubmit}>
                         <MDBInputGroup id="title" containerClassName="mb-3" onChange={handleChange} value={currentCollection.title} prepend="Title" hint="..."/>
-                        {/* <input type="text" name="title" id="title" value={currentCollection.title || ''} onChange={handleChange}/><br /> */}
-                        <label htmlFor="tags">Tags</label>
-                        <input type="text" name="tags" id="tags" value={currentCollection.tags || ''} onChange={handleChange}/><br />
+                        
+                        {titlePic && <img onClick={uploadWidget} className="title-pic" src={titlePic} alt=""/>}
+                        {!titlePic && <p><MDBBtn onClick={uploadWidget} className="cloudinary-button">
+                            <img className="upload-thumbnail" src={uploadThumbnail} alt="upload-thumbnail"/>Add Title Image
+                        </MDBBtn></p>}
+                        <MDBInputGroup id="tags" containerClassName="mb-3" onChange={handleChange} value={(currentCollection.tags)?currentCollection.tags.join(' '):''} prepend="Tags" hint="..."/>
+
+                        {/* <label htmlFor="tags">Tags</label>
+                        <input type="text" name="tags" id="tags" value={currentCollection.tags || ''} onChange={handleChange}/><br /> */}
                         <label htmlFor="tags">Description</label>
                         <input type="textarea" name="description" id="description" value={currentCollection.description || ''} onChange={handleChange}/><br />
-                        <button onClick={uploadWidget} id="upload-art" className="cloudinary-button">Upload Art</button>
-                        <button type="submit" className="cloudinary-button">Submit</button>
+              
+                        <p><MDBBtn onClick={uploadWidget} id="upload-art" className="cloudinary-button">Upload Art</MDBBtn></p>
+                        <p><MDBBtn type="submit" className="cloudinary-button">Submit</MDBBtn></p>
                     </form>
                     </CloudinaryContext>
                     {pictures && pictures.map((picture, i) => <img src={picture} key ={i} alt="" width="70px"/>)}
