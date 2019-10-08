@@ -1,9 +1,12 @@
 import React from "react";
 import LoginBox from '../LoginBox'
+import './Login.css'
 
 const Login = () => {
   return (
-    <LoginBox />
+    <div className="login-box">
+      <LoginBox />
+    </div>
   );
 };
 

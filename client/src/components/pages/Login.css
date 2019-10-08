@@ -1,0 +1,13 @@
+.login-box {
+    margin-top: 100px;
+}
+
+/* //TODO: Make this box mobile friendly */
+.login-box .container {
+    width: 50vw
+}
+
+.login-box .text-center {
+    display: flex;
+    justify-content: center
+}
