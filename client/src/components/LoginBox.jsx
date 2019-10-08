@@ -33,7 +33,7 @@ class LoginBox extends Component {
     return (
       <MDBContainer>
       <MDBRow>
-        <MDBCol md="6">
+        <MDBCol md="8">
           <form onSubmit={(e) => this.handleClick(e)}>
             <p className="h5 text-center mb-4">Sign in</p>
             <div className="grey-text">
@@ -41,7 +41,7 @@ class LoginBox extends Component {
                 label="Type your username"
                 icon="envelope"
                 group
-                type="test"
+                type="text"
                 validate
                 error="wrong"
                 success="right"
