@@ -26,9 +26,7 @@ const Card = function (props) {
                         type: "GET_DATA", 
                         collections
                     })
-                })
-                .catch (err => console.log(err))
-
+                }).catch (err => console.log(err))
         })
         .catch(err => dispatch(newNotification(err.toString())));
     }
