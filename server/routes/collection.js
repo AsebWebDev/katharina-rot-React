@@ -29,7 +29,7 @@ router.post('/:id/', isAdmin, (req, res, next) => {
     title: req.body.title,
     titlePic: req.body.titlePic,
     pictures: req.body.pictures,
-    tags: req.body.tags,
+    tags: req.body.tags.filter(tag => tag !== ''), // filter all blank spaces from array
     description: req.body.description,
   }, { new: true }) // To access the updated collection (and not the old collection)
     .then(collection => {
