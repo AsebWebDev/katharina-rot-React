@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { MDBJumbotron, MDBBtn, MDBContainer, MDBRow, MDBCol, MDBIcon, MDBInputGroup } from "mdbreact";
 import { CloudinaryContext } from 'cloudinary-react';
 import api from '../../api';
-import { newNotification } from '../../actioncreators'
+import { newNotification, setUploadedPics } from '../../actioncreators'
 import '../../styles/Create.css'
 import uploadThumbnail from '../../media/upload-thumbnail2.gif'
 
@@ -49,6 +49,7 @@ function Create(props) {
             dispatch(newNotification(`Your Collection '${result.Collection.title}' has been created`, 'Created'))
             setCurrentCollection({})
             setPictures([])
+            setTitlePic('')
         }).catch(err => dispatch(newNotification(err.toString())));
     }
 
