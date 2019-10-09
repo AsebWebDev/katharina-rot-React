@@ -17,17 +17,15 @@ function Home (props) {
     })).catch (err => console.log(err))
   }, [dispatch])
 
-  useEffect(() => {
-    console.log("Props ändern sich")
-    console.log(props)
-  }, [props])
-
+  let isInQuery = (item) => ( item.title && item.title.toLowerCase().includes(query.toLowerCase()) ) // check title for query 
+        || ( item.tags  && item.tags.map(item => item.toLowerCase()).includes(query.toLowerCase()) ) // check tags for query
+  
   return (
     <div className="Home">
       <img className="banner" src={greenBanner} alt="green banner"/>
       <div className="gallery">
         {props.collections && props.collections
-        .filter(item => item.title && item.title.toUpperCase().includes(query.toUpperCase()))
+        .filter(item => isInQuery(item))
         .map((collection, i) => 
         <div key={collection._id}><Card collection={collection} dispatch={props.dispatch}/></div>)}
       </div>
