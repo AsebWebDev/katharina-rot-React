@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { connect } from 'react-redux';
 import ReactCardFlip from 'react-card-flip';
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol, MDBNavLink, MDBBadge, MDBView } from 'mdbreact';
+import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol, MDBNavLink, MDBBadge, MDBView, MDBIcon} from 'mdbreact';
 import { newNotification, toggleModal } from '../actioncreators'
 import { calcFont } from '../helpers'
 import api from '../api';
@@ -10,7 +10,7 @@ import '../styles/Card.css'
 const Card = function (props) {
 
     let [isFlipped, setIsFlipped] = useState(false);
-    let {title, titlePic, description, _id} = props.collection;
+    let {title, titlePic, description, tags, _id} = props.collection;
     let {dispatch} = props;
     
     let handleDelete = (e) => {
@@ -76,6 +76,9 @@ const Card = function (props) {
                         <MDBCardText>
                             {description}
                         </MDBCardText>
+                        <div className="tags">
+                            {tags.map(tag => <MDBBadge color="light-green accent-4" ><MDBIcon fas icon="tag" />{tag}</MDBBadge>)}
+                        </div>
                         <MDBNavLink to={"/collection/"+ _id}><MDBBtn>Details</MDBBtn></MDBNavLink>                    
                     </MDBCardBody>
                 </MDBCard>
