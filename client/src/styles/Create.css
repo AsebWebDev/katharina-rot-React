@@ -29,10 +29,6 @@
     width: 15vw
 }
 
-/* #upload-widget-btn {
-    width: 32%;
-} */
-
 .admin-page {
     display: flex;
     flex-direction: column;
