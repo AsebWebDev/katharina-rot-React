@@ -51,6 +51,7 @@ function Create(props) {
         }).catch(err => dispatch(newNotification(err.toString())));
     }
 
+    console.log(currentCollection)
     return (
         <MDBContainer className="create-page mt-5 text-center">
             <MDBRow>
@@ -61,22 +62,24 @@ function Create(props) {
                     <form className="create-form" onSubmit={handleSubmit}>
                         <MDBInputGroup id="title" containerClassName="mb-3" onChange={handleChange} value={currentCollection.title} prepend="Title" hint="..."/>
                         
-                        {titlePic && <img onClick={uploadWidget} className="title-pic" src={titlePic} alt=""/>}
-                        {!titlePic && <p><MDBBtn onClick={uploadWidget} className="cloudinary-button">
+                        {titlePic && <img onClick={uploadWidget} className="mini-pic hoverable" src={titlePic} alt=""/>}
+                        {!titlePic && <p><MDBBtn onClick={uploadWidget} color="primary">
                             <img className="upload-thumbnail" src={uploadThumbnail} alt="upload-thumbnail"/>Add Title Image
                         </MDBBtn></p>}
-                        <MDBInputGroup id="tags" containerClassName="mb-3" onChange={handleChange} value={(currentCollection.tags)?currentCollection.tags.join(' '):''} prepend="Tags" hint="..."/>
+                        <MDBInputGroup id="tags" containerClassName="mb-3" onChange={handleChange} value={(currentCollection.tags)?currentCollection.tags:''} prepend="Tags" hint="..."/>
 
-                        {/* <label htmlFor="tags">Tags</label>
-                        <input type="text" name="tags" id="tags" value={currentCollection.tags || ''} onChange={handleChange}/><br /> */}
-                        <label htmlFor="tags">Description</label>
-                        <input type="textarea" name="description" id="description" value={currentCollection.description || ''} onChange={handleChange}/><br />
-              
-                        <p><MDBBtn onClick={uploadWidget} id="upload-art" className="cloudinary-button">Upload Art</MDBBtn></p>
-                        <p><MDBBtn type="submit" className="cloudinary-button">Submit</MDBBtn></p>
+                        <div id="input-description-create">
+                           <MDBInputGroup id="description" onChange={handleChange} value={currentCollection.description} prepend="Description" type="textarea"/>
+                        </div>
+                        <p id="main-menu-buttons">
+                            <p><MDBBtn onClick={uploadWidget} id="upload-art" className="cloudinary-button">Upload Art</MDBBtn></p>
+                            <p><MDBBtn type="submit" color="success">Submit</MDBBtn></p>
+                        </p>
                     </form>
                     </CloudinaryContext>
-                    {pictures && pictures.map((picture, i) => <img src={picture} key ={i} alt="" width="70px"/>)}
+                    <div id="gallery-create">
+                        {pictures && pictures.map((picture, i) => <img className="mini-pic hoverable" src={picture} key ={i} alt=""/>)}
+                    </div>
                 </MDBJumbotron>
             </MDBCol>
             </MDBRow>
