@@ -5,3 +5,8 @@ MDBBadge {
 .notification {
     margin-bottom: 5px;
 }
+
+@font-face {
+    font-family: 'DKLemonYellowSun';
+    src: local('DKLemonYellowSun'), url(./fonts/DKLemonYellowSun.otf) format('opentype');
+}
