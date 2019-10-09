@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import ReactCardFlip from 'react-card-flip';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol, MDBNavLink, MDBBadge, MDBView } from 'mdbreact';
 import { newNotification, toggleModal } from '../actioncreators'
+import { calcFont } from '../helpers'
 import api from '../api';
 import './Card.css'
 
 const Card = function (props) {
+
     let [isFlipped, setIsFlipped] = useState(false);
     let {title, titlePic, description, _id} = props.collection;
     let {dispatch} = props;
@@ -45,35 +47,39 @@ const Card = function (props) {
     let toggle = () => { dispatch(toggleModal(props.modal, _id)) }
 
     return (
-        <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
-        <MDBCol key="front" onClick={handleClick}>
-            <MDBCard style={{ width: "18rem", height: "30rem" }}>
-                <MDBView hover zoom>
-                    <MDBCardImage className="img-fluid" src={titlePic} waves />
-                </MDBView>
-                    
-                <MDBCardBody>
-                    <MDBCardTitle><p className="title">{title}</p>
-                        {api.isLoggedIn() && <MDBBadge onClick={handleDelete} color="danger"><i className="fas fa-trash-alt"></i>Delete</MDBBadge>}
-                        {api.isLoggedIn() && <MDBBadge onClick={handleEdit} color="blue"><i className="fas fa-edit"></i>Edit</MDBBadge>}
-                    </MDBCardTitle>
-                    <MDBNavLink to={"/collection/"+ _id}><MDBBtn>Details</MDBBtn></MDBNavLink>
-                </MDBCardBody>
-            </MDBCard>
-        </MDBCol>
+        <div id="card">
+            <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
+            <MDBCol key="front" onClick={handleClick}>
+                <MDBCard style={{ width: "15rem", height: "26rem" }}>
+                    <MDBView hover zoom>
+                        <MDBCardImage className="img-fluid" src={titlePic} waves />
+                    </MDBView>
+                    <MDBCardBody>
+                        <MDBCardTitle>
+                            <div style={{ fontSize: calcFont(title.length) }} className="title">{title}</div>
+                            <div className="card-buttons">
+                                {api.isLoggedIn() && <MDBBadge onClick={handleDelete} color="danger"><i className="fas fa-trash-alt"></i>Delete</MDBBadge>}
+                                {api.isLoggedIn() && <MDBBadge onClick={handleEdit} color="blue"><i className="fas fa-edit"></i>Edit</MDBBadge>}
+                            </div>
+                        </MDBCardTitle>
+                        <MDBNavLink to={"/collection/"+ _id}><MDBBtn>Details</MDBBtn></MDBNavLink>
+                    </MDBCardBody>
+                </MDBCard>
+            </MDBCol>
 
-        <MDBCol key="back" onClick={handleClick}>
-            <MDBCard style={{ width: "18rem", height: "30rem" }}>
-                <MDBCardBody>
-                    <MDBCardTitle>{title}</MDBCardTitle>
-                    <MDBCardText>
-                        {description}
-                    </MDBCardText>
-                    <MDBNavLink to={"/collection/"+ _id}><MDBBtn>Details</MDBBtn></MDBNavLink>                    
-                </MDBCardBody>
-            </MDBCard>
-        </MDBCol>
-        </ReactCardFlip>
+            <MDBCol key="back" onClick={handleClick}>
+                <MDBCard style={{ width: "15rem", height: "26rem" }}>
+                    <MDBCardBody>
+                        <MDBCardTitle>{title}</MDBCardTitle>
+                        <MDBCardText>
+                            {description}
+                        </MDBCardText>
+                        <MDBNavLink to={"/collection/"+ _id}><MDBBtn>Details</MDBBtn></MDBNavLink>                    
+                    </MDBCardBody>
+                </MDBCard>
+            </MDBCol>
+            </ReactCardFlip>
+        </div>
     )
 }
 
