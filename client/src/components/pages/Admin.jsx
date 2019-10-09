@@ -28,7 +28,7 @@ function Admin (props){
           <MDBCol>
             <MDBJumbotron className="main-jumbo">
               {(mode === "default") && <MDBAnimation type="fadeIn">
-                <h2 className="h1 display-3">Hello, Sarah!</h2>
+                <h2 className="h1 display-3">Hello Sarah!</h2>
                 <p className="lead">This is your admin page. Play around!</p>
                 <hr className="my-2" />
                 <p>Make a choice :)</p>
