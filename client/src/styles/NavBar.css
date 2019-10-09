@@ -1,0 +1,4 @@
+.navbar-nav:first-child {
+    align-items: flex-start;
+    margin-left: 10px;
+}

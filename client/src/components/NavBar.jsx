@@ -7,6 +7,7 @@ import {
 import { withRouter } from 'react-router-dom';
 import { updateQuery } from '../actioncreators'
 import api from '../api';
+import '../styles/NavBar.css'
 
 function NavbarPage (props) {
   let [isOpen, setIsOpen] = useState(false)
