@@ -1,3 +1,8 @@
+/* overwrite preset MDB heigth */
+#input-description .modal-body .input-group {
+    height: 10vh;
+}
+
 .modal-title {
     width: 100%;
 }
@@ -7,10 +12,6 @@
     margin: 0!important
 }
 
-/* pverwrite preset MDB heigth */
-#input-description .modal-body .input-group {
-    height: 10vh;
-}
 
 .modal-body .img-fluid {
     height: 136px
