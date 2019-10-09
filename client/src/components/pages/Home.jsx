@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import api from '../../api';
 import Card from '../Card'
 import EditModal from '../pages/EditModal'
-import './Home.css'
+import '../../styles/Home.css'
 import greenBanner from '../../media/banner-greenfuture-1-1024x287.jpg'
 
 function Home (props) {

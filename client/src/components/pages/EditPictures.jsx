@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { MDBBtn } from 'mdbreact';
 import { setUploadedPics } from '../../actioncreators'
 import api from '../../api';
-import './EditPictures.css'
+import '../../styles/EditPictures.css'
 
 function EditPictures(props) {
     let {dispatch} = props;

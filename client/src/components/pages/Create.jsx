@@ -4,7 +4,7 @@ import { MDBJumbotron, MDBBtn, MDBContainer, MDBRow, MDBCol, MDBIcon, MDBInputGr
 import { CloudinaryContext } from 'cloudinary-react';
 import api from '../../api';
 import { newNotification } from '../../actioncreators'
-import './Create.css'
+import '../../styles/Create.css'
 import uploadThumbnail from '../../media/upload-thumbnail2.gif'
 
 function Create(props) {

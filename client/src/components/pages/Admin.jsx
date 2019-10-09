@@ -5,7 +5,7 @@ import Create from './Create'
 import Preferences from './Preferences'
 import '../../configs/cloudinary'
 import api from '../../api';
-import './Admin.css'
+import '../../styles/Admin.css'
 
 function Admin (props){
   let [mode, setMode] = useState("default")

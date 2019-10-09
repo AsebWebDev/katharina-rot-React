@@ -4,7 +4,7 @@ import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalF
 import { toggleModal, setUploadedPics, newNotification } from '../../actioncreators'
 import EditPictures from './EditPictures'
 import api from '../../api';
-import './EditModal.css'
+import '../../styles/EditModal.css'
 
 function EditModal(props) {
   let {dispatch} = props;

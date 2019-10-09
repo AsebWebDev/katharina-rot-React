@@ -5,7 +5,7 @@ import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, 
 import { newNotification, toggleModal } from '../actioncreators'
 import { calcFont } from '../helpers'
 import api from '../api';
-import './Card.css'
+import '../styles/Card.css'
 
 const Card = function (props) {
 

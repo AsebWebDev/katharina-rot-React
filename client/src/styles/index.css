@@ -8,5 +8,5 @@ MDBBadge {
 
 @font-face {
     font-family: 'DKLemonYellowSun';
-    src: local('DKLemonYellowSun'), url(./fonts/DKLemonYellowSun.otf) format('opentype');
+    src: local('DKLemonYellowSun'), url(../fonts/DKLemonYellowSun.otf) format('opentype');
 }
