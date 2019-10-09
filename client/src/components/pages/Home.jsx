@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import api from '../../api';
+import { MDBJumbotron, MDBContainer } from "mdbreact";
 import Card from '../Card'
-import EditModal from '../pages/EditModal'
+import EditModal from './EditModal'
+import Spinner from '../Spinner'
+import api from '../../api';
 import '../../styles/Home.css'
 import greenBanner from '../../media/banner-greenfuture-1-1024x287.jpg'
 
@@ -24,10 +26,21 @@ function Home (props) {
     <div className="Home">
       <img className="banner" src={greenBanner} alt="green banner"/>
       <div className="gallery">
+        {/* DATA EXISTS */}
         {props.collections && props.collections
         .filter(item => isInQuery(item))
         .map((collection, i) => 
         <div key={collection._id}><Card collection={collection} dispatch={props.dispatch}/></div>)}
+
+        {/* NO DATA EXISTS */}
+        { props.collections && props.collections.length === 0 &&
+          <MDBJumbotron fluid>
+            <MDBContainer>
+              <h2 className="display-4">Loading content</h2>
+              <p className="lead">No data is yet provided, still loading...</p>
+              <Spinner />
+            </MDBContainer>
+          </MDBJumbotron>}
       </div>
       {props.modal.isOpen && props.modal.isEdit && <EditModal />}
     </div>
