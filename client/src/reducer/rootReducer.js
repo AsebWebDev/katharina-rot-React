@@ -1,4 +1,4 @@
-import { GET_DATA, ADD_NOTIFICATION, TOGGLE_EDIT_MODAL, CLEAR_NOTIFICATIONS, SET_PIC_UPLOADS, PREPAREDELETE_NOTIFICATION, UPDATE_NOTIFICATIONS } from '../actioncreators';
+import { GET_DATA, UPDATE_QUERY, ADD_NOTIFICATION, TOGGLE_EDIT_MODAL, CLEAR_NOTIFICATIONS, SET_PIC_UPLOADS, PREPAREDELETE_NOTIFICATION, UPDATE_NOTIFICATIONS } from '../actioncreators';
 
 const initialState = {
   collections: [],
@@ -9,7 +9,8 @@ const initialState = {
     currentId: ''
   },
   uploadedPictures: null,
-  uploadedTitlePic: null
+  uploadedTitlePic: null,
+  query: ''
 }
 
 export default function rootReducer(state=initialState, action) {
@@ -19,6 +20,13 @@ export default function rootReducer(state=initialState, action) {
       return {
         ...newState,
         collections: action.collections
+      };
+    }
+
+    case UPDATE_QUERY: {
+      return {
+        ...newState,
+        query: action.query
       };
     }
 

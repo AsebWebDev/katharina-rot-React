@@ -7,7 +7,7 @@ import '../../styles/Home.css'
 import greenBanner from '../../media/banner-greenfuture-1-1024x287.jpg'
 
 function Home (props) {
-  let { dispatch } = props;
+  let { dispatch, query } = props;
 
   useEffect(() => {
     api.getCollections()
@@ -17,11 +17,18 @@ function Home (props) {
     })).catch (err => console.log(err))
   }, [dispatch])
 
+  useEffect(() => {
+    console.log("Props ändern sich")
+    console.log(props)
+  }, [props])
+
   return (
     <div className="Home">
       <img className="banner" src={greenBanner} alt="green banner"/>
       <div className="gallery">
-        {props.collections && props.collections.map((collection, i) => 
+        {props.collections && props.collections
+        .filter(item => item.title && item.title.toUpperCase().includes(query.toUpperCase()))
+        .map((collection, i) => 
         <div key={collection._id}><Card collection={collection} dispatch={props.dispatch}/></div>)}
       </div>
       {props.modal.isOpen && props.modal.isEdit && <EditModal />}
@@ -33,7 +40,8 @@ function mapStateToProps(reduxState){
   return {
     collections: reduxState.collections,
     notifications: reduxState.notifications,
-    modal: reduxState.modal
+    modal: reduxState.modal,
+    query: reduxState.query
   }
 }
 
