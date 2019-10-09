@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
-import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBInputGroup, MDBCardImage, MDBView, MDBMask } from 'mdbreact';
+import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBInputGroup } from 'mdbreact';
 import { toggleModal, setUploadedPics, newNotification } from '../../actioncreators'
 import EditPictures from './EditPictures'
+import InputTag from '../InputTag'
 import api from '../../api';
 import '../../styles/EditModal.css'
 
@@ -41,7 +42,9 @@ function EditModal(props) {
   let handleChange = (e) => {
     setCurrentCollection({
       ...currentCollection,
-      [e.target.id]: e.target.value
+      [e.target.id]: (e.target.id==="tags") 
+                        ? e.target.value.split(' ') // turn input value into array
+                        : e.target.value        
     })
   }
 
@@ -59,7 +62,9 @@ function EditModal(props) {
           </MDBModalHeader>
           <MDBModalBody>
             <EditPictures />
+            {/* <MDBInputGroup id="tags" containerClassName="mb-3" onChange={handleChange} value={(currentCollection.tags)?currentCollection.tags.join(' '):''} prepend="Tags" hint="Tags"/> */}
             <MDBInputGroup id="tags" containerClassName="mb-3" onChange={handleChange} value={(currentCollection.tags)?currentCollection.tags.join(' '):''} prepend="Tags" hint="Tags"/>
+            <InputTag id="input-tag"/>
             <div id="input-description">
               <MDBInputGroup id="description" onChange={handleChange} value={currentCollection.description} prepend="Description" type="textarea"/>
             </div>
