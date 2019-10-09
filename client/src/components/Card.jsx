@@ -13,7 +13,9 @@ const Card = function (props) {
     let {title, titlePic, description, _id} = props.collection;
     let {dispatch} = props;
     
-    let handleDelete = () => {
+    let handleDelete = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         api.deleteCollection(_id)
         .then(result => {
             dispatch(newNotification(
