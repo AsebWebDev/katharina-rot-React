@@ -14,3 +14,11 @@ export function returnNotificationSymbol (string) {
         default: return "envelope"
     }
 }
+
+export function calcFont (length) {
+    switch(true) {
+        case length < 10: return "2.5rem"; 
+        case length > 29: return "1rem"; 
+        default: return "1.4rem"
+    }
+}
