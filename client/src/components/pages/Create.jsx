@@ -35,9 +35,10 @@ function Create(props) {
 
     let handleChange = (e) => {
         setCurrentCollection({
-        ...currentCollection,
-        [e.target.id]: e.target.value
+            ...currentCollection,
+            [e.target.id]: e.target.value
         })
+        console.log(currentCollection)
     }
 
     let handleSubmit = (e) => {
@@ -51,7 +52,6 @@ function Create(props) {
         }).catch(err => dispatch(newNotification(err.toString())));
     }
 
-    console.log(currentCollection)
     return (
         <MDBContainer className="create-page mt-5 text-center">
             <MDBRow>
@@ -60,7 +60,7 @@ function Create(props) {
                     <h4 className="h5 display-5">Create a new Collection</h4>
                     <CloudinaryContext cloudName="djyjdargg">
                     <form className="create-form" onSubmit={handleSubmit}>
-                        <MDBInputGroup id="title" containerClassName="mb-3" onChange={handleChange} value={currentCollection.title} prepend="Title" hint="..."/>
+                        <MDBInputGroup id="title" containerClassName="mb-3" onChange={handleChange} value={currentCollection.title || ''} prepend="Title" hint="..."/>
                         
                         {titlePic && <img onClick={uploadWidget} className="mini-pic hoverable" src={titlePic} alt=""/>}
                         {!titlePic && <p><MDBBtn onClick={uploadWidget} color="primary">
@@ -69,7 +69,7 @@ function Create(props) {
                         <MDBInputGroup id="tags" containerClassName="mb-3" onChange={handleChange} value={(currentCollection.tags)?currentCollection.tags:''} prepend="Tags" hint="..."/>
 
                         <div id="input-description-create">
-                           <MDBInputGroup id="description" onChange={handleChange} value={currentCollection.description} prepend="Description" type="textarea"/>
+                           <MDBInputGroup id="description" onChange={handleChange} value={currentCollection.description || ''} prepend="Description" type="textarea"/>
                         </div>
                         <p id="main-menu-buttons">
                             <p><MDBBtn onClick={uploadWidget} id="upload-art" className="cloudinary-button">Upload Art</MDBBtn></p>
