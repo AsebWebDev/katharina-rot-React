@@ -8,8 +8,7 @@ const collectionSchema = new mongoose.Schema({
   },
   titlePic: {
     type: String,
-    default: 'https://n-allo.be/wp-content/uploads/2016/08/ef3-placeholder-image-450x350.jpg'
-    // required: [true, 'Default Picture URL'],
+    default: 'https://community.adobe.com/legacyfs/online/avatars/a754554_Capture.png'
   },
   pictures: {
     type: [String],

@@ -7,7 +7,7 @@ const { seedDB } = require('../bin/seeds')
 router.get('/', (req, res, next) => {
   Collection.find()
     .then(collections => {
-      if (collections.length < 1) seedDB(); // automatic reseed
+      // if (collections.length < 1) seedDB(); // automatic reseed
       res.json(collections);
     })
     .catch(err => next(err))
@@ -50,10 +50,13 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/', isAdmin, (req, res, next) => {
-  let { title, titlePic, pictures, description } = req.body
+  let { title, pictures, description } = req.body
+  let titlePic;
+  if (req.body.titlePic) titlePic = req.body.titlePic // leave undefined if not provided, so Mongoose default is set
   let tags = req.body.tags.split(' '); //turn string of tags into array
   Collection.create({ title, titlePic, pictures, tags, description })
     .then(Collection => {
+      console.log(Collection)
       res.json({
         success: true,
         Collection
