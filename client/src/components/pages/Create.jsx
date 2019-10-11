@@ -13,7 +13,7 @@ function Create(props) {
     let [pictures, setPictures] = useState([]);
     let [currentCollection, setCurrentCollection] = useState({})
 
-
+    //TODO: Selbe Logik wie bei EditPictures.jsx
     let uploadWidget = (e) => {
         e.preventDefault();
         let uploadedPictures = []

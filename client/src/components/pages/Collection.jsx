@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux';
+import SimplaxTest from '../SimplaxTest'
 import api from '../../api';
 
 function Collection(props) {
@@ -18,8 +19,9 @@ function Collection(props) {
     return (
       <div>
           <p>{currentCollection.title}</p>
+          <SimplaxTest currentId={currentId}/>
           {/* //TODO: add Lighbox Button and Lightbox */}
-          {currentCollection.pictures.length > 0 && currentCollection.pictures.map((img,i) => <img key={i} src={img} alt="art"/>)}
+          {/* {currentCollection.pictures.length > 0 && currentCollection.pictures.map((img,i) => <img key={i} src={img} alt="art"/>)} */}
       </div>
     )
   else return (error && <p>{error}</p>)
