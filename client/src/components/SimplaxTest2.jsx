@@ -2,6 +2,7 @@
 import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux';
 import Plx from "react-plx";
+import { Parallax, Background } from 'react-parallax';
 import api from '../api';
 
 // import "./styles.css";
@@ -22,13 +23,21 @@ function SimplaxTest(props) {
 
   return (
     <div>
-      <div style={{ height: "11vh" }} />
 
         {currentCollection && currentCollection.pictures.map(pic => 
-        <Plx parallaxData={parallaxData} style={style}><img alt="art" src={pic} width="200vw" /></Plx>
+        <Parallax
+        blur={{ min: 10, max: 0 }}
+        bgImage={pic}
+        bgImageAlt="the cat"
+        strength={200}
+        opacity='0'
+      >
+        <img alt="art" src={pic} style={{ width:"500px", marginTop: '150px' }} />
+        <div style={{ height: '60vh'}} />
+      </Parallax>
         )}
 
-      <div style={{ height: "100vh" }} />
+      
     </div>
   );
 }
