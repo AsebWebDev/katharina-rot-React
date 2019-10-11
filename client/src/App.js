@@ -7,7 +7,7 @@ import Admin from './components/pages/Admin';
 import Header from './components/Header';
 import Collection from './components/pages/Collection';
 import Notification from './components/Notification'
-import './styles/App.css';
+import './styles/App.scss';
 
 // TODO: * Implement User-Settings
 
