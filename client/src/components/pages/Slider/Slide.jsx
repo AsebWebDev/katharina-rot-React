@@ -1,73 +1,63 @@
-import React from 'react'
-import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
+import React, { useState } from 'react'
 
-export default class Slide extends React.Component {
-    
-  constructor(props) {
-    super(props)
-
-    this.handleMouseMove = this.handleMouseMove.bind(this)
-    this.handleMouseLeave = this.handleMouseLeave.bind(this)
-    this.handleSlideClick = this.handleSlideClick.bind(this)
-    this.imageLoaded = this.imageLoaded.bind(this)
-    this.slide = React.createRef()
-  }
-
-  handleMouseMove(event) {
-    const el = this.slide.current
+function Slide (props) {
+  
+  let [slide, setSlide] = useState(React.createRef())
+  
+  let handleMouseMove = (event) => {
+    const el = slide.current
     const r = el.getBoundingClientRect()
 
     el.style.setProperty('--x', event.clientX - (r.left + Math.floor(r.width / 2)))
     el.style.setProperty('--y', event.clientY - (r.top + Math.floor(r.height / 2)))
   }
 
-  handleMouseLeave(event) {    
-    this.slide.current.style.setProperty('--x', 0)
-    this.slide.current.style.setProperty('--y', 0)
+  let handleMouseLeave = (event) => {    
+    slide.current.style.setProperty('--x', 0)
+    slide.current.style.setProperty('--y', 0)
   }
 
-  handleSlideClick(event) {
-    this.props.handleSlideClick(this.props.slide.index)
+  let handleSlideClick = (event) => {
+    props.handleSlideClick(props.slide.index)
   }
 
-  imageLoaded(event) {
+  let imageLoaded = (event) => {
     event.target.style.opacity = 1
   }
 
-  render() {
-    const { src, button, headline, index } = this.props.slide
-    const current = this.props.current
-    let classNames = 'slide'
-    
-    if (current === index) classNames += ' slide--current'
-    else if (current - 1 === index) classNames += ' slide--previous'
-    else if (current + 1 === index) classNames += ' slide--next'
-        
-    return (
-      <li 
-        ref={this.slide}
-        className={classNames} 
-        onClick={this.handleSlideClick}
-        onMouseMove={this.handleMouseMove}
-        onMouseLeave={this.handleMouseLeave}
-      >
-        <div className="slide__image-wrapper">
-          <img 
-            className="slide__image"
-            alt={headline}
-            src={src}
-            onLoad={this.imageLoaded}
-            key={index}
-          />
-        </div>
-        
-        <article className="slide__content">
-          <h2 className="slide__headline">{headline}</h2>
-          {/* <button className="slide__action btn">{button}</button> */}
-        </article>
-        {/* {this.state.modalIsOpen && <ModalPage img={src}/>} */}
-      </li>
-    )
-  }
+  const { src, button, headline, index } = props.slide
+  const current = props.current
+  let classNames = 'slide'
+  
+  if (current === index) classNames += ' slide--current'
+  else if (current - 1 === index) classNames += ' slide--previous'
+  else if (current + 1 === index) classNames += ' slide--next'
+      
+  return (
+    <li 
+      ref={slide}
+      className={classNames} 
+      onClick={handleSlideClick}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div className="slide__image-wrapper">
+        <img 
+          className="slide__image"
+          alt={headline}
+          src={src}
+          onLoad={imageLoaded}
+          key={index}
+        />
+      </div>
+      
+      <article className="slide__content">
+        <h2 className="slide__headline">{headline}</h2>
+        {/* <button className="slide__action btn">{button}</button> */}
+      </article>
+    </li>
+  )
 }
+
+export default Slide
 
