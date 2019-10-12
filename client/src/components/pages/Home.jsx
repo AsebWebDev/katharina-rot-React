@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { MDBJumbotron, MDBContainer } from "mdbreact";
+import { MDBJumbotron, MDBContainer, MDBAnimation } from "mdbreact";
 import Card from '../Card'
 import EditModal from './EditModal'
 import Spinner from '../Spinner'
@@ -24,7 +24,9 @@ function Home (props) {
   
   return (
     <div className="Home">
-      <img className="banner" src={greenBanner} alt="green banner"/>
+      <MDBAnimation type="fadeIn" delay="0.3s">
+        <img className="banner" src={greenBanner} alt="green banner"/>
+      </MDBAnimation>
       <div className="gallery">
         {/* DATA EXISTS */}
         {props.collections && props.collections
