@@ -1,34 +1,30 @@
-import React, { Component } from 'react';
-import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
+import React from 'react';
+import { connect } from 'react-redux';
+import { toggleModal } from '../../../actioncreators'
+import { MDBContainer, MDBModal } from 'mdbreact';
+import '../../../styles/SlideModal.css'
 
-class SlideModal extends Component {
-state = {
-  modal: false
-}
+function SlideModal (props) {
 
-toggle = () => {
-  this.setState({
-    modal: !this.state.modal
-  });
-}
+  let toggle = () => {
+    props.dispatch(toggleModal(props.modal))
+  }
 
-render() {
   return (
     <MDBContainer>
-      <MDBBtn onClick={this.toggle}>Modal</MDBBtn>
-      <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
-        <MDBModalHeader toggle={this.toggle}>MDBModal title</MDBModalHeader>
-        <MDBModalBody>
-          (...)
-        </MDBModalBody>
-        <MDBModalFooter>
-          <MDBBtn color="secondary" onClick={this.toggle}>Close</MDBBtn>
-          <MDBBtn color="primary">Save changes</MDBBtn>
-        </MDBModalFooter>
+      <MDBModal size="fluid" isOpen={props.modal.isOpen} toggle={toggle}>
+        <div className="imgbox">
+          <img className="center-fit" onClick={toggle} alt="" src={props.img} />    
+        </div>
       </MDBModal>
     </MDBContainer>
     );
+}
+
+function mapStateToProps(reduxState){
+  return {
+    modal: reduxState.modal
   }
 }
 
-export default SlideModal;
+export default connect(mapStateToProps)(SlideModal)
