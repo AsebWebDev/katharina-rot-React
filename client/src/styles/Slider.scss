@@ -17,6 +17,10 @@
   box-sizing: border-box;
 }
 
+ul {
+  padding: 0
+}
+
 .visuallyhidden { 
   clip: rect(1px, 1px, 1px, 1px);  
   height: 1px; 
@@ -106,7 +110,7 @@
 // =========================
 
 .slider {
-  --slide-size: 70vmin;
+  --slide-size: 60vmin;
   --slide-margin: 4vmin;
   
   height: var(--slide-size);

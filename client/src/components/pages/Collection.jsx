@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Slider from './Slider/Slider'
 import SlideModal from './Slider/SlideModal'
 import api from '../../api';
+import '../../styles/Collection.css'
 
 function Collection(props) {
   let [currentId] = useState(props.match.params.id)
@@ -35,7 +36,7 @@ function Collection(props) {
   
   if (currentCollection)
     return (
-      <div>
+      <div className="collection">
           <p>{currentCollection.title}</p>
           {currentCollection && currentCollection.pictures.length > 0 && <Slider heading="Example Slider" slides={parsedPictures} id={currentId} />}
           {/* <SimplaxTest currentId={currentId}/> */}
