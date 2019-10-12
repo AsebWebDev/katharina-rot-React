@@ -46,13 +46,13 @@ export function setUploadedPics(uploadedPictures, uploadedTitlePic) {
   }
 }
 
-export function toggleModal(modal, currentId) {
+export function toggleModal(modal, currentId, currentIndex) { 
   return {
     type: TOGGLE_EDIT_MODAL,
     modal: {
       isOpen: !modal.isOpen,
-      isEdit: !modal.isEdit,
-      currentId: (modal.isOpen) ? '' : currentId // If modal is about to close, remove currentId
+      currentId: (modal.isOpen) ? '' : currentId,// If modal is about to close, remove currentId
+      currentIndex: (modal.isOpen) ? '' : currentIndex // If modal is about to close, remove currentId
     }
   }
 }
