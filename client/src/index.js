@@ -9,7 +9,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { createStore } from 'redux';
 import rootReducer from './reducer/rootReducer';
 import { Provider } from 'react-redux';
-import { ParallaxProvider } from 'react-scroll-parallax';
 
 const store = createStore(
   rootReducer,
@@ -19,9 +18,7 @@ const store = createStore(
 ReactDOM.render(
 <Provider store={store}>
   <Router>
-  <ParallaxProvider>
     <App />
-    </ParallaxProvider>
   </Router>
 </Provider>
 , document.getElementById('root'));
