@@ -3,16 +3,15 @@ import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux';
 import Plx from "react-plx";
 import api from '../api';
-import { parallaxDataGalleryLeft } from '../configs/parallax'
+import { parallaxDataGalleryRight } from '../configs/parallax'
 import '../styles/CollectionParallax.css'
   
-function CollectionParallaxLeft(props) {
+function CollectionParallaxRight(props) {
 
   let [currentId] = useState(props.currentId)
   let [currentCollection, setCurrentCollection] = useState(null)
   // eslint-disable-next-line
   let [error, setError] = useState(null)
-  let count = (currentCollection)?currentCollection.pictures.length:null;
 
   useEffect(() => {
     api.getOneCollection(currentId)
@@ -22,11 +21,12 @@ function CollectionParallaxLeft(props) {
 
   return (
     <div>
-          {currentCollection && currentCollection.pictures.map(pic => {
-            let style = { zIndex: count, position: "relative", height: "70vh" }
-            count-- //set Index - 1 to let the next one overlap this instance
-            return (<Plx parallaxData={parallaxDataGalleryLeft} style={style}><img alt="art" src={pic} width="400vw"/></Plx>)
-          })}
+      <Plx 
+        parallaxData={parallaxDataGalleryRight} 
+        // style={style}
+      >
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa porro sed quam tempore asperiores, vitae nisi, labore pariatur corporis architecto, sequi accusamus quisquam iure earum sunt molestiae fugiat eos animi?</p>
+      </Plx>
     </div>
   );
 }
@@ -37,4 +37,4 @@ function mapStateToProps(reduxState){
     }
   }
   
-export default connect(mapStateToProps)(CollectionParallaxLeft)
+export default connect(mapStateToProps)(CollectionParallaxRight)

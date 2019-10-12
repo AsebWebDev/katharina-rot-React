@@ -5,11 +5,13 @@
 }
 
 #plx-left {
+    border: 2px solid green;
     width: 60%;
     padding: 1%;
 }
 
 #plx-right {
+    border: 2px solid red;
     width: 40%
 }
 

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux';
 import ParallaxLeft from '../CollectionParallaxLeft'
+import ParallaxRight from '../CollectionParallaxRight'
 import Slider from './Slider/Slider'
 import SlideModal from './Slider/SlideModal'
 import api from '../../api';
@@ -39,7 +40,14 @@ function Collection(props) {
       <div className="collection">
           <p className="title">{currentCollection.title}</p>
           {currentCollection && currentCollection.pictures.length > 0 && <Slider heading="Example Slider" slides={parsedPictures} id={currentId} />}
-          <ParallaxLeft currentId={currentId}/>
+          <div id="plx-collection">
+            <div id="plx-left" className="plx">
+              <ParallaxLeft currentId={currentId}/>
+            </div>
+            <div id="plx-right" className="plx">
+              <ParallaxRight currentId={currentId}/>  
+            </div>
+          </div>
           {/* {currentCollection.pictures.length > 0 && currentCollection.pictures.map((img,i) => <img key={i} src={img} alt="art"/>)} */}
           {props.modal && props.modal.isOpen && currentCollection.pictures && <SlideModal img={currentCollection.pictures[props.modal.currentIndex]} />}
       </div>
