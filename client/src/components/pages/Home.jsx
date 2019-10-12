@@ -36,7 +36,7 @@ function Home (props) {
 
         {/* NO DATA EXISTS */}
         { props.collections && props.collections.length === 0 &&
-          <MDBJumbotron fluid>
+          <MDBJumbotron className="jumbo-spinner" fluid>
             <MDBContainer>
               <h2 className="display-4">Loading content</h2>
               <p className="lead">No data is yet provided, still loading...</p>

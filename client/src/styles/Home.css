@@ -11,6 +11,10 @@
     width: 40vw;
 }
 
+.jumbo-spinner {
+    padding: 20px
+}
+
 Card {
     width: 100px;
     background-color: green;
