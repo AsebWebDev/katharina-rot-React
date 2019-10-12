@@ -1,9 +1,11 @@
 import React from 'react'
+import { connect } from 'react-redux';
+import { toggleModal } from '../../../actioncreators'
 import SliderControl from './SliderControl'
 import Slide from './Slide'
-import './Slider.scss'
+import '../../../styles/Slider.scss'
 
-export default class Slider extends React.Component {
+class Slider extends React.Component {
     constructor(props) {
       super(props)
       
@@ -34,6 +36,7 @@ export default class Slider extends React.Component {
     }
     
     handleSlideClick(index) {
+      if (this.state.current === index) this.props.dispatch(toggleModal(this.props.modal, this.props.id, this.state.current))
       if (this.state.current !== index) {
         this.setState({
           current: index
@@ -42,7 +45,7 @@ export default class Slider extends React.Component {
     }
   
     render() {
-      const { current, direction } = this.state
+      const { current } = this.state
       const { slides, heading } = this.props 
       const headingId = `slider-heading__${heading.replace(/\s+/g, '-').toLowerCase()}`
       const wrapperTransform = {
@@ -83,3 +86,11 @@ export default class Slider extends React.Component {
       )
     }
   }
+
+  function mapStateToProps(reduxState){
+    return {
+      modal: reduxState.modal,
+    }
+  }
+  
+export default connect(mapStateToProps)(Slider)
