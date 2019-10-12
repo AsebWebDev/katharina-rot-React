@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux';
 // import SimplaxTest from '../SimplaxTest2'
-import Slider from './SlideTest/Slider'
+import Slider from './Slider/Slider'
+import SlideModal from './Slider/SlideModal'
 import api from '../../api';
 
 function Collection(props) {
@@ -18,13 +19,14 @@ function Collection(props) {
 
   useEffect(() => {
    let parsedPictures = [];
-   if (currentCollection && currentCollection.pictures) parsedPictures = parseDataForSlider(currentCollection.pictures)
+   if (currentCollection && currentCollection.pictures) parsedPictures = parseDataForSlider(currentCollection.pictures, currentId)
    setParsedPictures(parsedPictures)
-  }, [setParsedPictures, currentCollection])
+  }, [setParsedPictures, currentCollection, currentId])
 
-  let parseDataForSlider = array => {
+  let parseDataForSlider = (array, id) => {
     return array.map((img,i) => ({
       index: i,
+      id,
       headline: '',
       button: '',
       src: img
@@ -34,28 +36,22 @@ function Collection(props) {
   if (currentCollection)
     return (
       <div>
-                {/* <div style={{ 
-            width: "20vw",
-            height: "100vh",
-            borderRight: "2px solid black",
-            position: "fixed",
-            // top: "30vh",
-            top: 0,
-            left: 10
-        }}/> */}
           <p>{currentCollection.title}</p>
-          {currentCollection && currentCollection.pictures.length > 0 && <Slider heading="Example Slider" slides={parsedPictures} />}
+          {currentCollection && currentCollection.pictures.length > 0 && <Slider heading="Example Slider" slides={parsedPictures} id={currentId} />}
           {/* <SimplaxTest currentId={currentId}/> */}
           {/* {currentCollection.pictures.length > 0 && currentCollection.pictures.map((img,i) => <img key={i} src={img} alt="art"/>)} */}
+          {props.modal && props.modal.isOpen && currentCollection.pictures && <SlideModal img={currentCollection.pictures[props.modal.currentIndex]} />}
       </div>
+
     )
   else return (error && <p>{error}</p>)
 }
 
 function mapStateToProps(reduxState){
-    return {
-      collections: reduxState.collections,
-    }
+  return {
+    collections: reduxState.collections,
+    modal: reduxState.modal
   }
+}
   
 export default connect(mapStateToProps)(Collection)
