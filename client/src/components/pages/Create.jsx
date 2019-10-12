@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { MDBJumbotron, MDBBtn, MDBContainer, MDBRow, MDBCol, MDBIcon, MDBInputGroup } from "mdbreact";
+import { MDBJumbotron, MDBBtn, MDBContainer, MDBRow, MDBCol, MDBInputGroup } from "mdbreact";
 import { CloudinaryContext } from 'cloudinary-react';
 import api from '../../api';
-import { newNotification, setUploadedPics } from '../../actioncreators'
+import { newNotification } from '../../actioncreators'
 import '../../styles/Create.css'
 import uploadThumbnail from '../../media/upload-thumbnail2.gif'
 
