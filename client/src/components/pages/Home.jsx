@@ -42,7 +42,7 @@ function Home (props) {
             </MDBContainer>
           </MDBJumbotron>}
       </div>
-      {props.modal.isOpen && props.modal.isEdit && <EditModal />}
+      {props.modal.isOpen && <EditModal />}
     </div>
   );
 }
