@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 function Slide (props) {
   
-  let [slide, setSlide] = useState(React.createRef())
+  let [slide] = useState(React.createRef())
   
   let handleMouseMove = (event) => {
     const el = slide.current
@@ -25,7 +25,7 @@ function Slide (props) {
     event.target.style.opacity = 1
   }
 
-  const { src, button, headline, index } = props.slide
+  const { src, headline, index } = props.slide
   const current = props.current
   let classNames = 'slide'
   
@@ -53,7 +53,6 @@ function Slide (props) {
       
       <article className="slide__content">
         <h2 className="slide__headline">{headline}</h2>
-        {/* <button className="slide__action btn">{button}</button> */}
       </article>
     </li>
   )
