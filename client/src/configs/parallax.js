@@ -25,11 +25,11 @@ export const parallaxDataGalleryLeft = [
             unit: ""
             },
             {
-            startValue: 1,
-            endValue: 0,
-            property: "grayscale",
+            startValue: 0.2,
+            endValue: 1,
+            property: "opacity",
             unit: ""
-            }
+            }    
         ]
     },
     {
@@ -74,11 +74,15 @@ export const parallaxDataGalleryLeft = [
                 unit: ""
             },
             {
-                startValue: 0,
-                endValue: 1,
-                property: "grayscale",
+                startValue: 1,
+                endValue: 0.2,
+                property: "opacity",
                 unit: ""
-            }
+            }  
         ]
     }
+];
+
+export const parallaxDataGalleryRight = [
+    
 ];
