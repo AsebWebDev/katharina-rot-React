@@ -1,0 +1,22 @@
+#plx-collection {
+    display: flex;
+    flex-direction: row;
+    margin-top: 100px;
+}
+
+#plx-left {
+    width: 60%;
+    padding: 1%;
+}
+
+#plx-right {
+    width: 40%
+}
+
+.react-parallax {
+    margin-bottom: 20px;
+}
+
+.plx img{
+    box-shadow: 0 0 5px 5px black;
+}
