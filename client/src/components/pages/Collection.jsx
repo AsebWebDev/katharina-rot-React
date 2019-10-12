@@ -37,7 +37,7 @@ function Collection(props) {
   if (currentCollection)
     return (
       <div className="collection">
-          <p>{currentCollection.title}</p>
+          <p className="title">{currentCollection.title}</p>
           {currentCollection && currentCollection.pictures.length > 0 && <Slider heading="Example Slider" slides={parsedPictures} id={currentId} />}
           {/* <SimplaxTest currentId={currentId}/> */}
           {/* {currentCollection.pictures.length > 0 && currentCollection.pictures.map((img,i) => <img key={i} src={img} alt="art"/>)} */}
