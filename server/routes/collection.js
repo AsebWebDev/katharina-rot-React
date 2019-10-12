@@ -2,7 +2,7 @@ const express = require('express');
 const Collection = require('../models/Collection')
 const {isLoggedIn, isAdmin} = require('../middlewares')
 const router = express.Router();
-const { seedDB } = require('../bin/seeds')
+// const { seedDB } = require('../bin/seeds')
 
 router.get('/', (req, res, next) => {
   Collection.find()

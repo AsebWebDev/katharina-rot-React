@@ -14,7 +14,7 @@ yarn-debug.log*
 yarn-error.log*
 
 /client/build
-/server/bin/seeds.js
+# /server/bin/seeds.js
 
 
 # Temp

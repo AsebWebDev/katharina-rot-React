@@ -1,6 +1,6 @@
 .DS_Store
 node_modules
-seeds.js
+# seeds.js
 
 # Environment Variables should NEVER be published
 .env
@@ -14,7 +14,7 @@ yarn-debug.log*
 yarn-error.log*
 
 /client/build
-/server/bin/seeds.js
+# /server/bin/seeds.js
 
 
 # Temp
