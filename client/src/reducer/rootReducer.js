@@ -5,8 +5,8 @@ const initialState = {
   notifications: [],
   modal: {
     isOpen: false,
-    isEdit: false,
-    currentId: ''
+    currentId: '',
+    currentIndex: null
   },
   uploadedPictures: null,
   uploadedTitlePic: null,
