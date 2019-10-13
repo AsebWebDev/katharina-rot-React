@@ -17,11 +17,10 @@ router.post("/login", (req, res, next) => {
         return
       }
 
-      // TODO: Enable Password Encryption
-      // if (!bcrypt.compareSync(password, userDoc.password)) {
-      //   next(new Error("Password is wrong"))
-      //   return
-      // }
+      if (!bcrypt.compareSync(password, userDoc.password)) {
+        next(new Error("Password is wrong"))
+        return
+      }
 
       req.logIn(userDoc, () => {
         userDoc.password = undefined
