@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Plx from "react-plx";
 import api from '../api';
 import { parallaxDataGalleryRight } from '../configs/parallax'
-import '../styles/CollectionParallax.css'
+import '../styles/CollectionParallax.scss'
   
 function CollectionParallaxRight(props) {
 
@@ -20,14 +20,16 @@ function CollectionParallaxRight(props) {
   }, [currentId])
 
   return (
-    <div>
       <Plx 
         parallaxData={parallaxDataGalleryRight} 
         // style={style}
       >
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa porro sed quam tempore asperiores, vitae nisi, labore pariatur corporis architecto, sequi accusamus quisquam iure earum sunt molestiae fugiat eos animi?</p>
+      <div className="flex">
+        <div id="plx-description">
+          {currentCollection && <p>{currentCollection.description}</p>}
+        </div>
+      </div>
       </Plx>
-    </div>
   );
 }
 

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Plx from "react-plx";
 import api from '../api';
 import { parallaxDataGalleryLeft } from '../configs/parallax'
-import '../styles/CollectionParallax.css'
+import '../styles/CollectionParallax.scss'
   
 function CollectionParallaxLeft(props) {
 
