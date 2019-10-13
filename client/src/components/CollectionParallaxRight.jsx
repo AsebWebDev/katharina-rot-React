@@ -20,16 +20,16 @@ function CollectionParallaxRight(props) {
   }, [currentId])
 
   return (
-      <Plx 
-        parallaxData={parallaxDataGalleryRight} 
-        // style={style}
-      >
-      <div className="flex">
-        <div id="plx-description">
-          {currentCollection && <p>{currentCollection.description}</p>}
-        </div>
+    <Plx 
+      parallaxData={parallaxDataGalleryRight} 
+      // style={style}
+    >
+    <div className="flex">
+      <div id="plx-description">
+        {currentCollection && <p>{currentCollection.description}</p>}
       </div>
-      </Plx>
+    </div>
+    </Plx>
   );
 }
 

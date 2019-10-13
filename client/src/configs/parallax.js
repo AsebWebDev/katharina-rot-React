@@ -7,8 +7,8 @@ export const parallaxDataGalleryLeft = [
         easing: "easeInSine",
         properties: [
             {
-                startValue: -15,
-                endValue: 25,
+                startValue: -18,
+                endValue: 10,
                 property: "translateX",
                 unit: "vw"
             },
@@ -56,7 +56,7 @@ export const parallaxDataGalleryLeft = [
         easing: "easeInSine",
         properties: [
             {
-                startValue: 25,
+                startValue: 10,
                 endValue: -18,
                 property: "translateX",
                 unit: "vw"
@@ -84,5 +84,40 @@ export const parallaxDataGalleryLeft = [
 ];
 
 export const parallaxDataGalleryRight = [
-    
+    {
+        start: "self",
+        startOffset: "",
+        end: "self",
+        endOffset: "60vh",
+        easing: "easeInSine",
+        properties: [
+            {
+            startValue: 18,
+            endValue: -7,
+            property: "translateX",
+            unit: "vw"
+            }
+        ]
+    },
+    {
+        start: "self",
+        startOffset: "",
+        end: "self",
+        endOffset: "80vh",
+        easing: "easeInSine",
+        properties: [
+            {
+            startValue: 0,
+            endValue: 1,
+            property: "opacity",
+            unit: ""
+            },
+            {
+            startValue: -7,
+            endValue: 15,
+            property: "translateY",
+            unit: "vw"
+            },
+        ]
+    }
 ];
