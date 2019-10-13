@@ -77,7 +77,7 @@ const Card = function (props) {
                             {description}
                         </MDBCardText>
                         <div className="tags">
-                            {tags.map(tag => <MDBBadge color="light-green accent-4" ><MDBIcon fas icon="tag" />{tag}</MDBBadge>)}
+                            {tags.map((tag,i) => <MDBBadge key={i} color="light-green accent-4" ><MDBIcon fas="true" icon="tag" />{tag}</MDBBadge>)}
                         </div>
                         <MDBNavLink to={"/collection/"+ _id}><MDBBtn>Details</MDBBtn></MDBNavLink>                    
                     </MDBCardBody>
