@@ -20,6 +20,13 @@ function EditModal(props) {
 
   let toggle = () => { dispatch(toggleModal(props.modal)) }
 
+  let updateTags = (newTags) => {
+    setCurrentCollection({
+      ...currentCollection,
+      tags: newTags  
+    })
+  }
+
   let handleSubmit = (e) => {
     e.preventDefault();
     let body = {
@@ -29,10 +36,7 @@ function EditModal(props) {
     }
     api.updateCollection(currentId, body)
       .then(result => {
-        dispatch({
-          type: "GET_DATA", 
-          collections: result.collections
-        })
+        dispatch({ type: "GET_DATA", collections: result.collections })
         dispatch(newNotification(`Your Collection '${currentCollection.title}' has been updated.`, 'Updated'))
       }).catch (err => console.log(err))
     dispatch(setUploadedPics(null,null)) //clear uploaded pictures after successfull submit
@@ -63,8 +67,7 @@ function EditModal(props) {
           <MDBModalBody>
             <EditPictures />
             {/* <MDBInputGroup id="tags" containerClassName="mb-3" onChange={handleChange} value={(currentCollection.tags)?currentCollection.tags.join(' '):''} prepend="Tags" hint="Tags"/> */}
-            <MDBInputGroup id="tags" containerClassName="mb-3" onChange={handleChange} value={(currentCollection.tags)?currentCollection.tags.join(' '):''} prepend="Tags" hint="Tags"/>
-            <InputTag id="input-tag"/>
+            {currentCollection && currentCollection.tags && <InputTag id="input-tag" tags={currentCollection.tags} updateTags={updateTags}/>}
             <div id="input-description">
               <MDBInputGroup id="description" onChange={handleChange} value={currentCollection.description} prepend="Description" type="textarea"/>
             </div>

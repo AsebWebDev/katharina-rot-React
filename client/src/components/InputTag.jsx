@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import '../styles/InputTag.css'
 
-export default class InputTag extends Component {
+class InputTag extends Component {
     constructor() {
       super();
       
@@ -11,6 +12,10 @@ export default class InputTag extends Component {
           'Input'
         ]
       };
+    }
+
+    componentDidMount(){
+      this.setState({tags: this.props.tags})
     }
     
     removeTag = (i) => {
@@ -26,6 +31,7 @@ export default class InputTag extends Component {
           return;
         }
         this.setState({ tags: [...this.state.tags, val]});
+        this.props.updateTags([...this.state.tags, val])
         this.tagInput.value = null;
       } else if (e.key === 'Backspace' && !val) {
         this.removeTag(this.state.tags.length - 1);
@@ -50,3 +56,13 @@ export default class InputTag extends Component {
       );
     }
   }
+
+  function mapStateToProps(reduxState){
+    return {
+      modal: reduxState.modal,
+      uploadedPictures: reduxState.uploadedPictures,
+      uploadedTitlePic: reduxState.uploadedTitlePic
+    }
+  }
+  
+  export default connect(mapStateToProps)(InputTag)
