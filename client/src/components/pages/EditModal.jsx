@@ -30,7 +30,7 @@ function EditModal(props) {
   let handleSubmit = (e) => {
     e.preventDefault();
     let body = {
-      ...currentCollection, 
+      ...currentCollection,
       pictures: props.uploadedPictures ? props.uploadedPictures : currentCollection.pictures, // use uploaded pictures if exists
       titlePic: props.uploadedTitlePic ? props.uploadedTitlePic : currentCollection.titlePic // use uploaded Titlepic if exists
     }
@@ -66,7 +66,6 @@ function EditModal(props) {
           </MDBModalHeader>
           <MDBModalBody>
             <EditPictures />
-            {/* <MDBInputGroup id="tags" containerClassName="mb-3" onChange={handleChange} value={(currentCollection.tags)?currentCollection.tags.join(' '):''} prepend="Tags" hint="Tags"/> */}
             {currentCollection && currentCollection.tags && <InputTag id="input-tag" tags={currentCollection.tags} updateTags={updateTags}/>}
             <div id="input-description">
               <MDBInputGroup id="description" onChange={handleChange} value={currentCollection.description} prepend="Description" type="textarea"/>
