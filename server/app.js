@@ -1,5 +1,9 @@
-const path = require('path')
-require('dotenv').config({ path: path.join(__dirname, '.env') })
+//TODO: use OAuth
+//TODO: try / practice GraphQl
+//TODO: add decent animations
+//TODO: Add scrolling background to gallery (parallax)
+
+
 
 const bodyParser = require('body-parser')
 const cors = require('cors')
