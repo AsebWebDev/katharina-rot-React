@@ -39,7 +39,7 @@ function NavbarPage (props) {
       <MDBCollapse id="navbarCollapse3" isOpen={isOpen} navbar>
         <MDBNavbarNav left>
           <MDBNavItem>
-            <MDBNavLink to="/">Aktuelles</MDBNavLink>
+            <MDBNavLink to="#!">Aktuelles</MDBNavLink>
           </MDBNavItem>
           <MDBNavItem>
             <MDBDropdown>
@@ -47,9 +47,9 @@ function NavbarPage (props) {
                 <span className="mr-2">Portfolio</span>
               </MDBDropdownToggle>
               <MDBDropdownMenu>
-                <MDBDropdownItem href="#!">Übersicht</MDBDropdownItem>
-                <MDBDropdownItem href="#!">Portfolio PDF</MDBDropdownItem>
-                <MDBDropdownItem href="#!">Informative Illustration</MDBDropdownItem>
+                <MDBDropdownItem href="#!"><MDBNavLink to="/">Übersicht</MDBNavLink></MDBDropdownItem>
+                <MDBDropdownItem href="#!"><MDBNavLink to="/">Portfolio PDF</MDBNavLink></MDBDropdownItem>
+                <MDBDropdownItem href="#!"><MDBNavLink to="/">Informative Illustration</MDBNavLink></MDBDropdownItem>
               </MDBDropdownMenu>
             </MDBDropdown>
           </MDBNavItem>
@@ -59,9 +59,9 @@ function NavbarPage (props) {
                 <span className="mr-2">About</span>
               </MDBDropdownToggle>
               <MDBDropdownMenu>
-                <MDBDropdownItem href="#!">Über mich</MDBDropdownItem>
-                <MDBDropdownItem href="#!">Grüne Illustration</MDBDropdownItem>
-                <MDBDropdownItem href="#!">AGB</MDBDropdownItem>
+                <MDBDropdownItem href="#!"><MDBNavLink to="/">Über mich</MDBNavLink></MDBDropdownItem>
+                <MDBDropdownItem href="#!"><MDBNavLink to="/">Grüne Illustration</MDBNavLink></MDBDropdownItem>
+                <MDBDropdownItem href="#!"><MDBNavLink to="/">AGB</MDBNavLink></MDBDropdownItem>
               </MDBDropdownMenu>
             </MDBDropdown>
           </MDBNavItem>
@@ -71,8 +71,8 @@ function NavbarPage (props) {
                 <span className="mr-2">Contact</span>
               </MDBDropdownToggle>
               <MDBDropdownMenu>
-                <MDBDropdownItem href="#!">Contact</MDBDropdownItem>
-                <MDBDropdownItem href="#!">Impressum / Legals</MDBDropdownItem>
+                <MDBDropdownItem href="#!"><MDBNavLink to="/">Contact</MDBNavLink></MDBDropdownItem>
+                <MDBDropdownItem href="#!"><MDBNavLink to="/">Impressum / Legals</MDBNavLink></MDBDropdownItem>
               </MDBDropdownMenu>
             </MDBDropdown>
           </MDBNavItem>
