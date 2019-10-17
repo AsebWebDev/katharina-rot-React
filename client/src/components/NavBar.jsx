@@ -88,7 +88,7 @@ function NavbarPage (props) {
           <MDBNavItem>
             <MDBFormInline waves>
               <div className="md-form my-0">
-                <input onChange={handleChange} className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
+                <input onChange={handleChange} className="searchbar form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
               </div>
             </MDBFormInline>
           </MDBNavItem>
