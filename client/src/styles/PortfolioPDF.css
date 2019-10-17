@@ -1,0 +1,12 @@
+#portfolioPDF {
+    margin: 100px 30px 0 30px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+#portfolioPDF img{
+    width: 50%;
+    align-self: center;
+    margin: 40px 0;
+}

@@ -7,6 +7,7 @@ import Admin from './components/pages/Admin';
 import Header from './components/Header';
 import Collection from './components/pages/Collection';
 import Notification from './components/Notification'
+import PortfolioPDF from './components/pages/PortfolioPDF'
 import './styles/App.scss';
 
 // TODO: * Implement User-Settings
@@ -27,6 +28,7 @@ class App extends Component {
           <Route path="/" exact component={Home} />
           <Route path="/admin" component={Admin} />
           <Route path="/login" component={Login} />
+          <Route path="/portfoliopdf" component={PortfolioPDF} />
           <Route path="/collection/:id" component={Collection} />
           <Route render={() => <h2>404</h2>} />
         </Switch>

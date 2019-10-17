@@ -48,7 +48,7 @@ function NavbarPage (props) {
               </MDBDropdownToggle>
               <MDBDropdownMenu>
                 <MDBDropdownItem href="#!"><MDBNavLink to="/">Übersicht</MDBNavLink></MDBDropdownItem>
-                <MDBDropdownItem href="#!"><MDBNavLink to="/">Portfolio PDF</MDBNavLink></MDBDropdownItem>
+                <MDBDropdownItem href="#!"><MDBNavLink to="/portfoliopdf">Portfolio PDF</MDBNavLink></MDBDropdownItem>
                 <MDBDropdownItem href="#!"><MDBNavLink to="/">Informative Illustration</MDBNavLink></MDBDropdownItem>
               </MDBDropdownMenu>
             </MDBDropdown>
