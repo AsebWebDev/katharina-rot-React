@@ -16,7 +16,7 @@ const newsSchema = new mongoose.Schema({
   },
   category: {
     type: [String],
-    default: 'Allgemein'
+    default: 'News'
   },
   description: {
     type: String,
