@@ -25,6 +25,11 @@ class App extends Component {
   }
 
   componentDidUpdate() {
+    api.getNews()
+      .then(news => this.props.dispatch({
+        type: "GET_NEWS", 
+        news
+      })).catch (err => console.log(err))
   }
 
   render() {
