@@ -25,7 +25,7 @@ function MiniNews(props) {
                 {news.category}   
               </p>
             </a>
-            <strong>{news.title}</strong>
+            <strong>{news.title.slice(0,10)}{news.title.length > 10 ? "..." : ""}</strong>
             </div>
             
             <p>
@@ -42,11 +42,4 @@ function MiniNews(props) {
     )
 }
 
-// function mapStateToProps(reduxState){
-//     return {
-//       news: reduxState.news
-//     }
-//   }
-  
-// export default connect(mapStateToProps)(MiniNews)
 export default MiniNews
