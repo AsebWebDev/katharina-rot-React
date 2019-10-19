@@ -1,22 +1,23 @@
 import React from 'react'
 // import { connect } from 'react-redux';
-import {  MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBIcon, MDBView, MDBBtn } from "mdbreact";
+import {  MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBIcon, MDBView, MDBContainer,  MDBBtn } from "mdbreact";
 import '../styles/MiniNews.scss'
 
 
 function MiniNews(props) {
     let news = props.news;
     return (
-      <MDBCard className="my-5 px-1 pb-1" id="footer2">
+      <MDBCard className="my-5 px-1 pb-1" id="mini-news">
       <MDBCardBody>
+      <MDBContainer>
         <MDBRow>
-          <MDBCol lg="3">
+          <MDBCol size="3">
             <MDBView className="rounded z-depth-2 mb-lg-0 mb-1" hover waves>
               <img className="img-fluid" src={news.thumbnail} alt=""/>
               <a href="#!"><MDBMask overlay="white-slight" /></a>
             </MDBView>
           </MDBCol>
-          <MDBCol lg="7" id="footer-news-info">
+          <MDBCol size="7" id="footer-news-info">
             <div id="footer-title-category">
             <a href="#!" className="green-text">
               <p className="font-weight-bold mb-1">
@@ -24,11 +25,11 @@ function MiniNews(props) {
                 {news.category}   
               </p>
             </a>
-            <strong>{news.title.slice(0,10)}{news.title.length > 10 ? "..." : ""}</strong>
+            <strong>{news.title.slice(0,22)}{news.title.length > 22 ? "..." : ""}</strong>
             </div>
             
             <p>
-              by
+              <span>by</span>
               <a href="#!">
                 <strong>Katharina Rot</strong>
               </a>
@@ -36,6 +37,7 @@ function MiniNews(props) {
             </p>
           </MDBCol>
         </MDBRow>
+      </MDBContainer>
       </MDBCardBody>
     </MDBCard>
     )

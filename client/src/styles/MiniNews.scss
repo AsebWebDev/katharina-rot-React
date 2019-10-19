@@ -1,5 +1,4 @@
-#footer2 {
-    // width: 300px;
+#mini-news {
     background-color: inherit;
     padding: 0!important;
     margin: 0!important;
@@ -35,6 +34,8 @@
 #footer-title-category {
     display: flex;
     justify-content: left;
+    overflow: hidden;
+    flex-wrap: wrap;
 
     i {
         margin: 0;
@@ -45,8 +46,8 @@
         margin: 0!important;
     }
 
-    strong {
-        margin-left: 1vw;
+    a {
+        margin-right: 0.5vw
     }
 }
 
@@ -54,8 +55,24 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-align: left;
     
-    strong {
-        padding-left: 0.5vw;
+    span {
+        margin-right: 1vw
+    }
+}
+
+@media only screen and (max-width: 765px) {
+    .card-body {
+        margin-bottom: 2vh;
+    }
+
+    #footer-title-category  {
+        direction: flex;
+        justify-content: space-between;
+    }
+
+    #footer-news-info {
+        padding: 0             
     }
 }

@@ -1,5 +1,8 @@
 #footer {
     padding-left: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #footer-news {
@@ -7,4 +10,15 @@
             text-align: center;
             justify-content: center;
         }
+}
+
+@media only screen and (max-width: 765px) {
+    #footer {
+        padding: 0 10px;
+
+        .mobile {
+            border-bottom: 1px solid rgb(173, 156, 156);
+            margin-bottom: 20px;
+        }
+    }
 }

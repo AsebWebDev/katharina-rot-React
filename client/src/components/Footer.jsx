@@ -8,15 +8,15 @@ import '../styles/Footer.scss'
 const FooterPage = (props) => {
   return (
     <MDBFooter color="black" id="footer" className="font-small pt-5 mt-5">
-      <MDBContainer fluid className="text-center text-md-left">
+      <MDBContainer fluid className="text-center text-md-left flex-row">
         <MDBRow>
-          <MDBCol md="4">
+          <MDBCol md="4" className="mobile">
             <h5 className="footer-title">About</h5>
             <p>
             Sarah Heuzeroth ist Illustratorin aus Hamburg mit Schwerpunkt auf Wissenschaftsillustration und den Themenbereichen Nachhaltigkeit, Transformationsdesign, Natur und Tiere. Manchmal arbeitet sie auch unter dem Künstlernamen „Katharina Rot“.
             </p>
           </MDBCol>
-          <MDBCol md="2">
+          <MDBCol md="2" className="mobile">
             <h5 className="footer-title">Follow me</h5>
             <ul>
               <li className="list-unstyled">
@@ -27,7 +27,7 @@ const FooterPage = (props) => {
               </li>
             </ul>
           </MDBCol>
-          <MDBCol md="1">
+          <MDBCol md="1" className="mobile">
             <h5 className="footer-title">Links</h5>
             <ul>
               <li className="list-unstyled">
