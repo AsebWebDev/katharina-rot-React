@@ -6,10 +6,10 @@ import { PREPAREDELETE_NOTIFICATION, UPDATE_NOTIFICATIONS } from '../actioncreat
 import { returnNotificationColor, returnNotificationSymbol } from '../helpers'
 
 import TimeAgo from 'react-timeago'
-import frenchStrings from 'react-timeago/lib/language-strings/de'
+import germanStrings from 'react-timeago/lib/language-strings/de'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
 
-const formatter = buildFormatter(frenchStrings)
+const formatter = buildFormatter(germanStrings)
 
 function Notification (props) {
 
