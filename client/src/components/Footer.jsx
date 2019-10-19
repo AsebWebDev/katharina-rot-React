@@ -49,7 +49,7 @@ const FooterPage = (props) => {
           <MDBCol md="5" id="footer-news">
             <h5 className="footer-title">News</h5>
             {/* <FooterNewsBlock /> */}
-            {props.news.map((news,i) => <MiniNews />)}
+            {props.news.map((news,i) => <MiniNews key={i} news={news} />)}
           </MDBCol>
         </MDBRow>
       </MDBContainer>
