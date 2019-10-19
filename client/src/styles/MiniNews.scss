@@ -1,0 +1,61 @@
+#footer2 {
+    // width: 300px;
+    background-color: inherit;
+    padding: 0!important;
+    margin: 0!important;
+
+    p {
+        font-size: 0.7rem;
+        margin: 0;
+    }
+
+    img {
+        width: 100%
+    }
+
+    strong {
+        font-size: 0.7rem
+    }
+
+    .row {
+        flex-wrap: nowrap;
+        justify-content: center;
+        margin: 0
+    }
+
+    .col {
+        padding: 0;
+    }
+
+    .card-body {
+        padding: 0.2rem 0.3rem
+    }
+}
+
+#footer-title-category {
+    display: flex;
+    justify-content: left;
+
+    i {
+        margin: 0;
+        padding-right: 0.2rem!important;
+    }
+
+    p {
+        margin: 0!important;
+    }
+
+    strong {
+        margin-left: 1vw;
+    }
+}
+
+#footer-news-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    strong {
+        padding-left: 0.5vw;
+    }
+}

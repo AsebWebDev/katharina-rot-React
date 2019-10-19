@@ -54,7 +54,7 @@ function CreateCollection(props) {
         api.addCollection(data)
         .then(result => {
             dispatch(newNotification(`Your Collection '${result.Collection.title}' has been created`, 'Created'))
-            setCurrentCollection({})
+            setCurrentCollection({tags: []})
             setPictures([])
             setTitlePic('')
         }).catch(err => dispatch(newNotification(err.toString())));
@@ -74,7 +74,6 @@ function CreateCollection(props) {
                         {!titlePic && <p id="upload-widget-btn"><MDBBtn onClick={uploadWidget} color="primary">
                             <img className="upload-thumbnail" src={uploadThumbnail} alt="upload-thumbnail"/>Add Title Image
                         </MDBBtn></p>}
-                        {/* <MDBInputGroup id="tags" containerClassName="mb-3" onChange={handleChange} value={(currentCollection.tags)?currentCollection.tags:''} prepend="Tags" hint="..."/> */}
                         {currentCollection && currentCollection.tags && <InputTag id="input-tag" tags={currentCollection.tags} updateTags={e => updateTags(e)}/>}
                         <div id="input-description-create">
                            <MDBInputGroup id="description" onChange={handleChange} value={currentCollection.description || ''} prepend="Description" type="textarea"/>

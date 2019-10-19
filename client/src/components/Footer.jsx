@@ -1,9 +1,10 @@
 import React from "react";
+import { connect } from 'react-redux';
 import { MDBCol, MDBContainer, MDBRow, MDBFooter, MDBIcon } from "mdbreact";
-import FooterNewsBlock from './FooterNewsBlock'
-import '../styles/Footer.css'
+import MiniNews from './MiniNews'
+import '../styles/Footer.scss'
 
-const FooterPage = () => {
+const FooterPage = (props) => {
   return (
     <MDBFooter color="black" id="footer" className="font-small pt-5 mt-5">
       <MDBContainer fluid className="text-center text-md-left">
@@ -14,7 +15,7 @@ const FooterPage = () => {
             Sarah Heuzeroth ist Illustratorin aus Hamburg mit Schwerpunkt auf Wissenschaftsillustration und den Themenbereichen Nachhaltigkeit, Transformationsdesign, Natur und Tiere. Manchmal arbeitet sie auch unter dem Künstlernamen „Katharina Rot“.
             </p>
           </MDBCol>
-          <MDBCol md="3">
+          <MDBCol md="2">
             <h5 className="footer-title">Follow me</h5>
             <ul>
               <li className="list-unstyled">
@@ -25,7 +26,7 @@ const FooterPage = () => {
               </li>
             </ul>
           </MDBCol>
-          <MDBCol md="2">
+          <MDBCol md="1">
             <h5 className="footer-title">Links</h5>
             <ul>
               <li className="list-unstyled">
@@ -45,9 +46,10 @@ const FooterPage = () => {
               </li>
             </ul>
           </MDBCol>
-          <MDBCol md="3">
+          <MDBCol md="5" id="footer-news">
             <h5 className="footer-title">News</h5>
-            <FooterNewsBlock />
+            {/* <FooterNewsBlock /> */}
+            {props.news.map((news,i) => <MiniNews />)}
           </MDBCol>
         </MDBRow>
       </MDBContainer>
@@ -60,4 +62,10 @@ const FooterPage = () => {
   );
 }
 
-export default FooterPage;
+function mapStateToProps(reduxState){
+  return {
+    news: reduxState.news
+  }
+}
+
+export default connect(mapStateToProps)(FooterPage)
