@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from 'react-redux';
 import { MDBCol, MDBContainer, MDBRow, MDBFooter, MDBIcon } from "mdbreact";
 import MiniNews from './MiniNews'
+import Spinner from './Spinner'
 import '../styles/Footer.scss'
 
 const FooterPage = (props) => {
@@ -48,8 +49,12 @@ const FooterPage = (props) => {
           </MDBCol>
           <MDBCol md="5" id="footer-news">
             <h5 className="footer-title">News</h5>
-            {/* <FooterNewsBlock /> */}
-            {props.news.map((news,i) => <MiniNews key={i} news={news} />)}
+            {props.news && props.news.length > 0 && 
+              <div>
+                {props.news.slice(0,4).map((news,i) => <MiniNews key={i} news={news} />)}
+              </div>
+            }
+            {props.news && props.news.length === 0 && <Spinner />}
           </MDBCol>
         </MDBRow>
       </MDBContainer>
