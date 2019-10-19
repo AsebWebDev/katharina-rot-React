@@ -53,6 +53,14 @@ export default {
       .catch(errHandler)
   },
 
+  addNews(body) {
+    console.log("Add News Api triggered.")
+    return service
+      .post('/news', body)
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
   getCollections() {
     return service
       .get('/collection')
