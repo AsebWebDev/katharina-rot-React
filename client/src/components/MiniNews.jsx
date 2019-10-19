@@ -1,17 +1,22 @@
 import React from 'react'
-// import { connect } from 'react-redux';
 import {  MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBIcon, MDBView, MDBContainer,  MDBBtn } from "mdbreact";
+import TimeAgo from 'react-timeago'
+import germanStrings from 'react-timeago/lib/language-strings/de'
+import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
 import '../styles/MiniNews.scss'
 
+const formatter = buildFormatter(germanStrings)
 
 function MiniNews(props) {
     let news = props.news;
+    console.log("TCL: MiniNews -> news", news)
+    
     return (
       <MDBCard className="my-5 px-1 pb-1" id="mini-news">
       <MDBCardBody>
       <MDBContainer>
         <MDBRow>
-          <MDBCol size="3">
+          <MDBCol size="3" className="flex-row">
             <MDBView className="rounded z-depth-2 mb-lg-0 mb-1" hover waves>
               <img className="img-fluid" src={news.thumbnail} alt=""/>
               <a href="#!"><MDBMask overlay="white-slight" /></a>
@@ -33,7 +38,7 @@ function MiniNews(props) {
               <a href="#!">
                 <strong>Katharina Rot</strong>
               </a>
-              , 19/08/2018
+              , {<TimeAgo date={news.created_at} formatter={formatter} />}   
             </p>
           </MDBCol>
         </MDBRow>
