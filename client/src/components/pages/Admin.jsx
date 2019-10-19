@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { MDBJumbotron, MDBBtn, MDBContainer, MDBRow, MDBCol, MDBIcon, MDBAnimation } from "mdbreact";
-import Create from './Create'
+import CreateCollection from './CreateCollection'
+import CreateNews from './CreateNews'
 import Preferences from './Preferences'
 import '../../configs/cloudinary'
 import api from '../../api';
@@ -13,7 +14,8 @@ function Admin (props){
   let toggle = (choice) => {
     if (mode === choice) choice = "default"
     switch (choice) {
-      case 'create': setMode('create'); break;
+      case 'createCollection': setMode('createCollection'); break;
+      case 'createNews': setMode('createNews'); break;
       case 'preferences': setMode('preferences'); break;
       case 'default': setMode('default'); break;
       default: console.log("Default")
@@ -34,14 +36,16 @@ function Admin (props){
                 <p>Make a choice :)</p>
               </MDBAnimation>}
               <p className="lead">
-                <MDBBtn color="primary" onClick={() => toggle('create')}><MDBIcon far icon="plus-square" />Create Collection</MDBBtn>
+                <MDBBtn color="primary" onClick={() => toggle('createCollection')}><MDBIcon far icon="plus-square" />Create Collection</MDBBtn>
+                <MDBBtn color="info" onClick={() => toggle('createNews')}><MDBIcon far icon="plus-square" />Create News</MDBBtn>
                 <MDBBtn color="secondary" onClick={() => toggle('preferences')}><MDBIcon icon="tools" />Preferences</MDBBtn>
               </p>
             </MDBJumbotron>
           </MDBCol>
         </MDBRow>
       </MDBContainer>
-      {(mode === "create") && <Create />}
+      {(mode === "createCollection") && <CreateCollection />}
+      {(mode === "createNews") && <CreateNews />}
       {(mode === "preferences") && <Preferences />}
       {(mode === "default") && <div />}
     </div>

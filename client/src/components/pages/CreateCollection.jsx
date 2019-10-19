@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { MDBJumbotron, MDBBtn, MDBContainer, MDBRow, MDBCol, MDBInputGroup } from "mdbreact";
 import { CloudinaryContext } from 'cloudinary-react';
+import InputTag from '../InputTag'
 import api from '../../api';
 import { newNotification } from '../../actioncreators'
 import '../../styles/Create.css'
 import uploadThumbnail from '../../media/upload-thumbnail2.gif'
 
-function Create(props) {
+function CreateCollection(props) {
     let {dispatch} = props;
     let [titlePic, setTitlePic] = useState('');
     let [pictures, setPictures] = useState([]);
-    let [currentCollection, setCurrentCollection] = useState({})
+    let [currentCollection, setCurrentCollection] = useState({tags: []})
 
-    //TODO: Selbe Logik wie bei EditPictures.jsx
     let uploadWidget = (e) => {
         e.preventDefault();
         let uploadedPictures = []
@@ -31,6 +31,13 @@ function Create(props) {
                 setPictures(uploadedPictures)                     // UPLOAD MULTIPLE PICTURES FOR THE GALLERY ON CLOSE
             }
         }).open(); 
+    }
+
+    let updateTags = (newTags) => {
+        setCurrentCollection({
+        ...currentCollection,
+        tags: newTags  
+        })
     }
 
     let handleChange = (e) => {
@@ -60,21 +67,21 @@ function Create(props) {
                 <MDBJumbotron>
                     <h4 className="h5 display-5">Create a new Collection</h4>
                     <CloudinaryContext cloudName="djyjdargg">
-                    <form className="create-form" onSubmit={handleSubmit}>
+                    <form className="create-form" >
                         <MDBInputGroup id="title" containerClassName="mb-3" onChange={handleChange} value={currentCollection.title || ''} prepend="Title" hint="..."/>
                         
                         {titlePic && <img onClick={uploadWidget} className="mini-pic hoverable" src={titlePic} alt=""/>}
                         {!titlePic && <p id="upload-widget-btn"><MDBBtn onClick={uploadWidget} color="primary">
                             <img className="upload-thumbnail" src={uploadThumbnail} alt="upload-thumbnail"/>Add Title Image
                         </MDBBtn></p>}
-                        <MDBInputGroup id="tags" containerClassName="mb-3" onChange={handleChange} value={(currentCollection.tags)?currentCollection.tags:''} prepend="Tags" hint="..."/>
-
+                        {/* <MDBInputGroup id="tags" containerClassName="mb-3" onChange={handleChange} value={(currentCollection.tags)?currentCollection.tags:''} prepend="Tags" hint="..."/> */}
+                        {currentCollection && currentCollection.tags && <InputTag id="input-tag" tags={currentCollection.tags} updateTags={e => updateTags(e)}/>}
                         <div id="input-description-create">
                            <MDBInputGroup id="description" onChange={handleChange} value={currentCollection.description || ''} prepend="Description" type="textarea"/>
                         </div>
                         <p id="main-menu-buttons">
                             <p><MDBBtn onClick={uploadWidget} id="upload-art" className="cloudinary-button">Upload Art</MDBBtn></p>
-                            <p><MDBBtn type="submit" color="success">Submit</MDBBtn></p>
+                            <p><MDBBtn onClick={handleSubmit} color="success">Submit</MDBBtn></p>
                         </p>
                     </form>
                     </CloudinaryContext>
@@ -95,4 +102,4 @@ function mapStateToProps(reduxState){
     }
 }
   
-export default connect(mapStateToProps)(Create)
+export default connect(mapStateToProps)(CreateCollection)

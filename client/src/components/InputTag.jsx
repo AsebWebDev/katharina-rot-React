@@ -51,7 +51,7 @@ class InputTag extends Component {
                 <button type="button" onClick={() => { this.removeTag(i); }}>+</button>
               </li>
             ))}
-            <li className="input-tag__tags__input"><input type="text" onKeyDown={this.inputKeyDown} ref={c => { this.tagInput = c; }} /></li>
+            <li className="input-tag__tags__input"><input type="text" placeholder="New Tag..." onKeyDown={this.inputKeyDown} ref={c => { this.tagInput = c; }} /></li>
           </ul>
         </div>
       );

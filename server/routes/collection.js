@@ -50,10 +50,9 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/', isAdmin, (req, res, next) => {
-  let { title, pictures, description } = req.body
+  let { title, pictures, description, tags} = req.body
   let titlePic;
   if (req.body.titlePic) titlePic = req.body.titlePic // leave undefined if not provided, so Mongoose default is set
-  let tags = req.body.tags.split(' '); //turn string of tags into array
   Collection.create({ title, titlePic, pictures, tags, description })
     .then(Collection => {
       console.log(Collection)
