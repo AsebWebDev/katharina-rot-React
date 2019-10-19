@@ -15,15 +15,11 @@ const newsSchema = new mongoose.Schema({
     default: []
   },
   category: {
-    type: [String],
+    type: String,
     default: 'News'
   },
   description: {
     type: String,
-  },
-  comments: {
-    type: [String],
-    default: []
   },
   likes: {
     type: Number,
