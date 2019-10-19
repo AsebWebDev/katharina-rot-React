@@ -6,7 +6,6 @@ import '../styles/MiniNews.scss'
 
 function MiniNews(props) {
     let news = props.news;
-    console.log("TCL: MiniNews -> news", news)
     return (
       <MDBCard className="my-5 px-1 pb-1" id="footer2">
       <MDBCardBody>
