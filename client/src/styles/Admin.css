@@ -19,3 +19,9 @@
     flex-direction: row;
     align-items: center;
 }
+
+@media only screen and (max-width: 765px) {
+    .admin-page .btn {
+        font-size: 0.6rem
+    }
+}
