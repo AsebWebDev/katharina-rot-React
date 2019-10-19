@@ -7,7 +7,7 @@ import '../styles/Footer.scss'
 
 const FooterPage = (props) => {
   return (
-    <MDBFooter color="black" id="footer" className="font-small pt-5 mt-5">
+    <MDBFooter color="black" id="footer" className="font-small pt-5 mt-5 flex-column">
       <MDBContainer fluid className="text-center text-md-left flex-row">
         <MDBRow>
           <MDBCol md="4" className="mobile">
@@ -29,7 +29,7 @@ const FooterPage = (props) => {
           </MDBCol>
           <MDBCol md="1" className="mobile">
             <h5 className="footer-title">Links</h5>
-            <ul>
+            <ul id="footer-links">
               <li className="list-unstyled">
                 <a href="www.katharina-rot.de">Work</a>
               </li>
@@ -59,8 +59,10 @@ const FooterPage = (props) => {
         </MDBRow>
       </MDBContainer>
       <div className="footer-copyright text-center py-3">
-        <MDBContainer fluid>
-          &copy; {new Date().getFullYear()} Copyright: <a href="http://www.katharina-rot.de/"> Sarah Katharina Heuzeroth // illustration[at]katharina-rot.de</a>
+        <MDBContainer fluid className="flex-column">
+          <div> &copy; {new Date().getFullYear()} Copyright: </div>
+          <a href="http://www.katharina-rot.de/"> Sarah Katharina Heuzeroth</a>
+          <a href="mailto:illustration@katharina-rot.de">illustration[at]katharina-rot.de</a>
         </MDBContainer>
       </div>
     </MDBFooter>
