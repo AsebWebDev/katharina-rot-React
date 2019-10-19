@@ -45,6 +45,14 @@ export default {
       .get('/logout')
   },
 
+  getNews() {
+    console.log("Get News Api triggered.")
+    return service
+      .get('/news')
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
   getCollections() {
     return service
       .get('/collection')

@@ -1,8 +1,19 @@
-import { GET_DATA, UPDATE_QUERY, ADD_NOTIFICATION, TOGGLE_EDIT_MODAL, CLEAR_NOTIFICATIONS, SET_PIC_UPLOADS, PREPAREDELETE_NOTIFICATION, UPDATE_NOTIFICATIONS } from '../actioncreators';
+import { 
+  GET_DATA, 
+  GET_NEWS,
+  UPDATE_QUERY, 
+  ADD_NOTIFICATION, 
+  TOGGLE_EDIT_MODAL, 
+  CLEAR_NOTIFICATIONS, 
+  SET_PIC_UPLOADS, 
+  PREPAREDELETE_NOTIFICATION, 
+  UPDATE_NOTIFICATIONS 
+} from '../actioncreators';
 
 const initialState = {
   collections: [],
   notifications: [],
+  news: [],
   modal: {
     isOpen: false,
     currentId: '',
@@ -20,6 +31,13 @@ export default function rootReducer(state=initialState, action) {
       return {
         ...newState,
         collections: action.collections
+      };
+    }
+
+    case GET_NEWS: {
+      return {
+        ...newState,
+        news: action.news
       };
     }
 

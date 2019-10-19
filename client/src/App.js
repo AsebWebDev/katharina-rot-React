@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import Collection from './components/pages/Collection';
 import Notification from './components/Notification'
 import PortfolioPDF from './components/pages/PortfolioPDF'
+import api from './api';
 import './styles/App.scss';
 
 // TODO: * Implement User-Settings
@@ -16,6 +17,11 @@ import './styles/App.scss';
 class App extends Component {
 
   componentDidMount(){
+    api.getNews()
+      .then(news => this.props.dispatch({
+        type: "GET_NEWS", 
+        news
+      })).catch (err => console.log(err))
   }
 
   componentDidUpdate() {

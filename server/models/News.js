@@ -1,0 +1,42 @@
+const mongoose = require('mongoose');
+
+const newsSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: [true, 'The title is required'],
+    minlength: 1
+  },
+  thumbnail: {
+    type: String,
+    default: 'https://community.adobe.com/legacyfs/online/avatars/a754554_Capture.png'
+  },
+  tags: {
+    type: [String],
+    default: []
+  },
+  category: {
+    type: [String],
+    default: 'Allgemein'
+  },
+  description: {
+    type: String,
+  },
+  comments: {
+    type: [String],
+    default: []
+  },
+  likes: {
+    type: Number,
+    default: 0
+  }
+},
+{
+    timestamps: {
+        createdAt: 'created_at',
+        updatedAt: 'updated_at'
+    }
+});
+
+const News = mongoose.model('News', newsSchema);
+
+module.exports = News;

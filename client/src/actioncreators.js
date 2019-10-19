@@ -1,4 +1,5 @@
 export const GET_DATA = "GET_DATA";
+export const GET_NEWS = "GET_NEWS";
 export const UPDATE_QUERY = "UPDATE_QUERY";
 export const ADD_NOTIFICATION = "ADD_NOTIFICATION";
 export const TOGGLE_EDIT_MODAL = "TOGGLE_EDIT_MODAL";
