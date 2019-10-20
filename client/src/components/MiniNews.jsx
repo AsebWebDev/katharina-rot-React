@@ -1,5 +1,5 @@
 import React from 'react'
-import {  MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBIcon, MDBView, MDBContainer,  MDBBtn } from "mdbreact";
+import {  MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBIcon, MDBView, MDBContainer } from "mdbreact";
 import TimeAgo from 'react-timeago'
 import germanStrings from 'react-timeago/lib/language-strings/de'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
@@ -16,7 +16,7 @@ function MiniNews(props) {
             <MDBRow>
               <MDBCol size="3" className="flex-row">
                 <MDBView className="rounded z-depth-2 mb-lg-0 mb-1" hover waves>
-                  <img className="img-fluid" src={news.thumbnail} alt=""/>
+                  <img className="img-fluid" src={news.titlePic} alt=""/>
                   <a href="#!"><MDBMask overlay="white-slight" /></a>
                 </MDBView>
               </MDBCol>
