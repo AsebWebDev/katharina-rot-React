@@ -39,7 +39,7 @@ function NavbarPage (props) {
       <MDBCollapse id="navbarCollapse3" isOpen={isOpen} navbar>
         <MDBNavbarNav left>
           <MDBNavItem>
-            <MDBNavLink to="#!">Aktuelles</MDBNavLink>
+            <MDBNavLink to="/news">Aktuelles</MDBNavLink>
           </MDBNavItem>
           <MDBNavItem>
             <MDBDropdown>
