@@ -15,7 +15,7 @@ const FooterPage = (props) => {
         else if ($(window).width() > 1080) setNNewsMax(3) // show only 3 news max
         else if ($(window).width() < 1080) setNNewsMax(4) // show 4 news max
     })
-  }, [$(window).width(), nNewsMax])
+  }, [nNewsMax])
 
 
   return (
