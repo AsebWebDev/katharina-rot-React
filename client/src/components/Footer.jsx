@@ -7,7 +7,7 @@ import '../styles/Footer.scss'
 
 const FooterPage = (props) => {
   return (
-    <MDBFooter color="black" id="footer" className="font-small pt-5 mt-5 flex-column">
+    <MDBFooter color="elegant-color" id="footer" className="font-small pt-5 mt-5 flex-column">
       <MDBContainer fluid className="text-center text-md-left flex-row">
         <MDBRow>
           <MDBCol md="4" className="mobile">

@@ -26,6 +26,14 @@
         padding: 0.2rem 0.3rem;
         margin: 0.2rem 0;
     }
+
+    .flex-row {
+        align-items: center;
+         
+        .Ripple-parent {
+            height: fit-content;
+        }
+    }
 }
 
 #footer-title-category {
