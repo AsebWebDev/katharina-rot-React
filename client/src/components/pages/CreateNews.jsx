@@ -11,18 +11,19 @@ import uploadThumbnail from '../../media/upload-thumbnail2.gif'
 function CreateNews(props) {
     let {dispatch} = props;
     let [titlePic, setTitlePic] = useState('');
+    let [thumbnail, setThumbnail] = useState('');
     let [currentNews, setCurrentNews] = useState({tags: []})
 
     let uploadWidget = (e) => {
         e.preventDefault();
-        // let uploadedPictures = []
-        // let multiple = (e.target.id === "upload-art"); // Multiple pictures for the gallery or one picture as title
         window.cloudinary.createUploadWidget({ 
-            upload_preset: 'mu7bkqlz',
+            upload_preset: 'ypmn3qkk',
             multiple: false
         },(error, result) => {
+        console.log("TCL: uploadWidget -> result", result.info)
             if (!error && result && result.event === "success") { 
                 setTitlePic(result.info.secure_url)             // UPLOAD SINGLE PICTURE FOR THE TITLE ON UPLOAD FINISH
+                setThumbnail(result.info.thumbnail_url)
             }
             // if (!error && result && result.event === "close" && multiple) {   // If user closes widget use all uploaded pictures stored while uploading
             //     setPictures(uploadedPictures)                     // UPLOAD MULTIPLE PICTURES FOR THE GALLERY ON CLOSE
@@ -46,14 +47,13 @@ function CreateNews(props) {
 
     let handleSubmit = (e) => {
         e.preventDefault();
-        let data = {...currentNews, titlePic}
+        let data = {...currentNews, titlePic, thumbnail}
         api.addNews(data)
         .then(result => {
-            console.log("Results after Submit")
-            console.log(result)
             dispatch(newNotification(`Your News '${result.news.title}' has been created`, 'Created'))
             setCurrentNews({tags: []})
             setTitlePic('')
+            setThumbnail('')
         }).catch(err => dispatch(newNotification(err.toString())));
     }
 
