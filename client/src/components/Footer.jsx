@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux';
 import { MDBCol, MDBContainer, MDBRow, MDBFooter, MDBIcon } from "mdbreact";
 import MiniNews from './MiniNews'
 import Spinner from './Spinner'
+import $ from "jquery";
 import '../styles/Footer.scss'
 
 const FooterPage = (props) => {
+  let [nNewsMax, setNNewsMax] = useState(4); // maximum number of news to show
+  
+  useEffect(() => {
+    $(window).resize(function(){
+        if ($(window).width() > 1400) setNNewsMax(2)      // show only 2 news max
+        else if ($(window).width() > 1080) setNNewsMax(3) // show only 3 news max
+        else if ($(window).width() < 1080) setNNewsMax(4) // show 4 news max
+    })
+  }, [$(window).width(), nNewsMax])
+
+
   return (
     <MDBFooter color="elegant-color" id="footer" className="font-small pt-5 mt-5 flex-column">
       <MDBContainer fluid className="text-center text-md-left flex-row">
@@ -51,7 +63,7 @@ const FooterPage = (props) => {
             <h5 className="footer-title">News</h5>
             {props.news && props.news.length > 0 && 
               <div>
-                {props.news.slice(0,4).map((news,i) => <MiniNews key={i} news={news} />)}
+                {props.news.slice(0,nNewsMax).map((news,i) => <MiniNews key={i} news={news} />)}
               </div>
             }
             {props.news && props.news.length === 0 && <Spinner />}

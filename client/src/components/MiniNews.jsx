@@ -8,9 +8,7 @@ import '../styles/MiniNews.scss'
 const formatter = buildFormatter(germanStrings)
 
 function MiniNews(props) {
-    let news = props.news;
-    console.log("TCL: MiniNews -> news", news)
-    
+    let news = props.news;    
     return (
       <MDBCard className="my-5 px-1 pb-1 hoverable" id="mini-news">
         <MDBCardBody>
