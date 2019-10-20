@@ -6,6 +6,10 @@ const newsSchema = new mongoose.Schema({
     required: [true, 'The title is required'],
     minlength: 1
   },
+  titlePic: {
+    type: String,
+    default: 'https://community.adobe.com/legacyfs/online/avatars/a754554_Capture.png'
+  },
   thumbnail: {
     type: String,
     default: 'https://community.adobe.com/legacyfs/online/avatars/a754554_Capture.png'
