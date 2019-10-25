@@ -10,16 +10,14 @@ function News(props) {
             <MDBCard className="my-5 px-5 pb-5">
                 <MDBCardBody>
                     <h2 className="h1-responsive font-weight-bold text-center my-5">
-                    Recent posts
+                    News
                     </h2>
                     <p className="text-center w-responsive mx-auto mb-5">
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                    cupidatat non proident, sunt in culpa qui officia deserunt mollit
-                    anim id est laborum.
+                    Hier kannst du dich über meine neusten Projekte, Events und Veröffentlichungen informieren.
                     </p>
-                    
+                    <div id="maxi-news-container">
                     {props.news.map((news,i) => <MaxiNews news={news} i={i} key={i}/>)}
+                    </div>
 
                 </MDBCardBody>
             </MDBCard>

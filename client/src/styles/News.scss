@@ -1,4 +1,10 @@
 #news {
+    #maxi-news-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     .card {
         padding: 0!important;
         margin: 10px 0 0 0!important;
