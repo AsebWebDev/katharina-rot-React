@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { MDBCard, MDBCardBody } from "mdbreact";
-import MaxiNews from '../MaxiNews'
+import MaxiNews from '../MaxiNews2'
 import '../../styles/News.scss'
 
 function News(props) {
