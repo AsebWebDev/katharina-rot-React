@@ -4,6 +4,7 @@
     flex-direction: column;
     align-items: flex-start;
     padding: 10px;
+    margin: 0 20px;
 
     img {
         max-width: 300px;
@@ -22,6 +23,10 @@
         margin: 0;
     }
 
+    #heart {
+        margin-left: 20px;
+    }
+
     #mini-data {
         display: flex;
         flex-direction: row;
@@ -32,9 +37,16 @@
         margin: 0 0 10px 0;
     }
 
+    #news-bottom {
+        width: 300px;
+        text-align: left;
+        font-size: 0.8rem;
+    }
+
     #description {
         padding: 0 10px;
         line-height: 1.5;
+        color: gray;
     }
 
     strong {
