@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { MDBCard, MDBCardBody } from "mdbreact";
-import MaxiNews from '../MaxiNews2'
+import MaxiNews from '../MaxiNews'
 import '../../styles/News.scss'
 
 function News(props) {
@@ -18,7 +18,6 @@ function News(props) {
                     <div id="maxi-news-container">
                     {props.news.map((news,i) => <MaxiNews news={news} i={i} key={i}/>)}
                     </div>
-
                 </MDBCardBody>
             </MDBCard>
         </div>

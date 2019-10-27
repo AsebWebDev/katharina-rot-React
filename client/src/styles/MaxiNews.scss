@@ -1,24 +1,72 @@
-.maxi-news {
+.maxi-news2 {
+    
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    margin: 0 20px;
 
-    width: 72%;
-    .view {
-        width:fit-content;
+    img {
+        max-width: 300px;
+        align-self: center;
     }
 
-    .col-lg-5 {
+    a {
+        color: gray;
+    }
+
+    a:hover {
+        color: black!important;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    #heart {
+        margin-left: 20px;
+    }
+
+    #mini-data {
         display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 0;
-    }
-    .col-lg-7 {
-        padding: 0;
-    }
-
-    hr {
-        width: 109%;
-        margin: 0
+        flex-direction: row;
+        justify-content: space-around;
+        align-self: center;
+        font-size: 0.8rem;
+        color: gray;
+        margin: 0 0 10px 0;
     }
 
+    #news-bottom {
+        width: 300px;
+        text-align: left;
+        font-size: 0.8rem;
+    }
+
+    #description {
+        padding: 0 10px;
+        line-height: 1.5;
+        color: gray;
+        height: 100%;
+    }
+
+    strong {
+        padding: 0 10px;
+        font-size: 1.4rem;
+        text-align: left;
+    }
+
+    .section {
+        overflow:hidden;
+        transition:transform 0.3s ease-out; // note that we're transitioning transform, not height!
+        height:auto;
+        transform:scaleY(1); // implicit, but good to specify explicitly
+        transform-origin:top; // keep the top of the element in the same place. this is optional.
+    }
+
+    .section.collapsed {
+        background-color: yellow;
+        transform:scaleY(0); // *squish*
+    }
+    
 }
