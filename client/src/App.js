@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import Collection from './components/pages/Collection';
 import Notification from './components/Notification'
 import PortfolioPDF from './components/pages/PortfolioPDF'
+import InformativeIllustration from './components/pages/InformativeIllustration'
 import News from './components/pages/News'
 import api from './api';
 import './styles/App.scss';
@@ -42,6 +43,7 @@ class App extends Component {
           <Route path="/admin" component={Admin} />
           <Route path="/login" component={Login} />
           <Route path="/portfoliopdf" component={PortfolioPDF} />
+          <Route path="/informative-illustration" component={InformativeIllustration} />
           <Route path="/collection/:id" component={Collection} />
           <Route path="/news" component={News} />
           <Route render={() => <h2>404</h2>} />
