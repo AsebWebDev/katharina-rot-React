@@ -31,7 +31,7 @@ function MiniNews(props) {
                 {/* TODO: Make function for string trunc */}
                 <strong>{news.title.slice(0,27)}{news.title.length > 27 ? "..." : ""}</strong>
                 </div>
-                <p>
+                <div>
                   <div>
                     <span>by</span>
                     <a href="#!">
@@ -41,7 +41,7 @@ function MiniNews(props) {
                   <div>
                     {<TimeAgo date={news.created_at} formatter={formatter} />}   
                   </div>
-                </p>
+                </div>
               </MDBCol>
             </MDBRow>
           </MDBContainer>
