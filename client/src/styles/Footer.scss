@@ -8,14 +8,20 @@
 }
 
 #footer-news {
-        .footer-title {
-            text-align: center;
-            justify-content: center;
-        }
+    .footer-title {
+        text-align: center;
+        justify-content: center;
+    }
 }
 
 a:hover {
     color: rgb(111, 111, 255) !important;
+}
+
+.footer-copyright {
+    span {
+        color: green;
+    }
 }
 
 @media only screen and (max-width: 765px) {
