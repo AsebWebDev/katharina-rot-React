@@ -54,9 +54,16 @@ export default {
   },
 
   addNews(body) {
-    console.log("Add News Api triggered.")
     return service
       .post('/news', body)
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
+  deleteNews(id) {
+    console.log("Delete News Api triggered.")
+    return service
+      .post('/news/'+id+'/delete')
       .then(res => res.data)
       .catch(errHandler)
   },
