@@ -97,5 +97,3 @@ function mapStateToProps(reduxState){
 }
 
 export default connect(mapStateToProps)(Card)
-
-// export default Card
