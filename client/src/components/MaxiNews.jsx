@@ -1,18 +1,45 @@
-import React, {useState, useEffect} from 'react'
-import { MDBAnimation } from 'mdbreact';
+import React, { useState } from 'react'
+import { connect } from 'react-redux';
+import { MDBAnimation, MDBBadge } from 'mdbreact';
 import TimeAgo from 'react-timeago'
 import germanStrings from 'react-timeago/lib/language-strings/de'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
+import { newNotification } from '../actioncreators'
+import api from '../api';
 import '../styles/MaxiNews.scss'
 
 const formatter = buildFormatter(germanStrings)
 
-export default function MaxiNews(props) {
-    const {news,i} = props;
+function MaxiNews(props) {
+    const { dispatch, news,i } = props;
     let [expand, setExpand] = useState(false)
     
     const toggle = () => {
         setExpand(!expand)
+    }
+
+    const handleDelete = (e) => {
+        console.log("Handle Delete")
+        console.log(news._id)
+        e.preventDefault();
+        e.stopPropagation();
+        api.deleteNews(news._id)
+        .then(result => {
+            dispatch(newNotification(
+                (result.success) 
+                ? `Your News '${news.title}' has been deleted`
+                : `Sorry, your News could not be deleted.`
+                , 'Deleted'
+            ))
+            api.getNews()
+                .then(collections => {
+                    dispatch({
+                        type: "GET_DATA", 
+                        collections
+                    })
+                }).catch (err => console.log(err))
+        })
+        .catch(err => dispatch(newNotification(err.toString())));
     }
 
     const section = "section" + i
@@ -20,6 +47,8 @@ export default function MaxiNews(props) {
 
     return (
         <div className="maxi-news2" onClick={toggle}>
+            {api.isLoggedIn() && <MDBBadge onClick={handleDelete} color="danger"><i className="fas fa-trash-alt"></i>Delete</MDBBadge>}
+
             <div id="news-top">
                 <img src={news.titlePic} alt="Title" />
                 <div id="mini-data">
@@ -30,13 +59,22 @@ export default function MaxiNews(props) {
             <div id="news-bottom">
                 <div id="title"><strong>{news.title}</strong></div>
                 <div id="description">
-                    {/* {!expand &&<p className={collapsible}>{news.description.slice(0,300)}{news.description.length > 300 ? "..." : ""}</p>} */}
-                    <p className={collapsible}>{news.description.slice(0,300)}{!expand && news.description.length > 300 
-                        ? "..." 
-                        : <MDBAnimation type="fadeIn">{news.description.slice(301,news.description.length)}</MDBAnimation>}
-                    </p>
+                    <div className={collapsible}>
+                        {news.description && news.description.slice(0,300)}
+                        {!expand && news.description && news.description.length > 300 
+                            ? "..." 
+                            : <MDBAnimation type="fadeIn">{news.description && news.description.slice(301,news.description.length)}</MDBAnimation>}
+                    </div>
                 </div>
             </div>
         </div>
     )
 }
+
+function mapStateToProps(reduxState){
+    return {
+      
+    }
+}
+
+export default connect(mapStateToProps)(MaxiNews)
