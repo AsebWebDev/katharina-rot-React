@@ -72,8 +72,8 @@ const FooterPage = (props) => {
       </MDBContainer>
       <div className="footer-copyright text-center py-3">
         <MDBContainer fluid className="flex-column">
-          <div> &copy; {new Date().getFullYear()} Copyright: </div>
-          <a href="http://www.katharina-rot.de/"> Sarah Katharina Heuzeroth</a>
+          <div> &copy; 2014 - {new Date().getFullYear()} Copyright: </div>
+          <a href="http://www.katharina-rot.de/"><span>Sarah Heuzeroth – green illustration for a better tomorrow</span></a>
           <a href="mailto:illustration@katharina-rot.de">illustration[at]katharina-rot.de</a>
         </MDBContainer>
       </div>
