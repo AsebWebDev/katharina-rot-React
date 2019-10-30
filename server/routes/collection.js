@@ -1,6 +1,6 @@
 const express = require('express');
 const Collection = require('../models/Collection')
-const {isLoggedIn, isAdmin} = require('../middlewares')
+const {isAdmin} = require('../middlewares')
 const router = express.Router();
 // const { seedDB } = require('../bin/seeds')
 
