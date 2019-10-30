@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import { MDBAnimation } from 'mdbreact';
 import TimeAgo from 'react-timeago'
 import germanStrings from 'react-timeago/lib/language-strings/de'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
@@ -29,8 +30,11 @@ export default function MaxiNews(props) {
             <div id="news-bottom">
                 <div id="title"><strong>{news.title}</strong></div>
                 <div id="description">
-                    {!expand &&<p className={collapsible}>{news.description.slice(0,300)}{news.description.length > 300 ? "..." : ""}</p>}
-                    {expand &&<p className={section}>{news.description}</p>}
+                    {/* {!expand &&<p className={collapsible}>{news.description.slice(0,300)}{news.description.length > 300 ? "..." : ""}</p>} */}
+                    <p className={collapsible}>{news.description.slice(0,300)}{!expand && news.description.length > 300 
+                        ? "..." 
+                        : <MDBAnimation type="fadeIn">{news.description.slice(301,news.description.length)}</MDBAnimation>}
+                    </p>
                 </div>
             </div>
         </div>
