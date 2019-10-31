@@ -2,10 +2,21 @@ import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux';
 import SlideModal from './Slider/SlideModal'
 import Coverflow from 'react-coverflow'
+import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import { toggleModal } from '../../actioncreators'
+import { calcCoverflow } from '../../helpers'
 import api from '../../api';
 import infografik1 from '../../media/infografik-ernährung1-ila1.jpg'
 import infografik2 from '../../media/fossile-energie_rotwebseite_b.jpg'
+import infografik3 from '../../media/Palmöl-Grafik1_rotwebseite-1024x962.jpg'
+import infografik4 from '../../media/Kupfer-Grafik_rotwebseite-991x1024.jpg'
+import infografik5 from '../../media/Boxenlaufstall_stand1806_ausschnitt-infografikseite-1024x725.jpg'
+import infografik6 from '../../media/Boxenlaufstall_stand1806_rotwebseite.jpg'
+import infografik7 from '../../media/Einführungsgrafik-1024x724.jpg'
+import infografik8 from '../../media/Wohnen-1024x724.jpg'
+import infografik9 from '../../media/infografikbild-komplett_kleinklein_quadrat-1024x1024.jpg'
+import infografik10 from '../../media/nitrat-teaser-webseite3-1024x675.jpg'
+
 import '../../styles/InformativeIllustration.scss'
 
 
@@ -13,6 +24,25 @@ function InformativeIllustration(props) {
     let { dispatch } = props;
     let parsedPictures = props.collections.map(item => item.titlePic)
     let [currentPic, setCurrentPic] = useState(null)
+    const coverFlowMedia = {
+        '@media (max-width: 361px)': {
+            width: '20px',
+            height: '300px'
+        },
+        '@media (max-width: 500px)': {
+            width: '400px',
+            height: '300px'
+        },
+        '@media (max-width: 900px)': {
+            width: '350px',
+            height: '300px'
+        },
+        '@media (min-width: 900px)': {
+            width: '900px',
+            height: '400px'
+        }
+    }
+    const size = useWindowSize();
 
     useEffect(() => {
         api.getCollections()
@@ -21,6 +51,36 @@ function InformativeIllustration(props) {
             collections
         })).catch (err => console.log(err))
     }, [dispatch])
+
+
+    // Hook
+    function useWindowSize() {
+        const isClient = typeof window === 'object';
+    
+        function getSize() {
+        return {
+            width: isClient ? window.innerWidth : undefined,
+            height: isClient ? window.innerHeight : undefined
+        };
+        }
+    
+        const [windowSize, setWindowSize] = useState(getSize);
+    
+        useEffect(() => {
+        if (!isClient) {
+            return false;
+        }
+        
+        function handleResize() {
+            setWindowSize(getSize());
+        }
+    
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+        }, []); // Empty array ensures that effect is only run on mount and unmount
+    
+        return windowSize;
+    }
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -34,7 +94,7 @@ function InformativeIllustration(props) {
             <div id="top">
                 <img src={infografik2} alt="Infografik" id="infografik2"/>
                 <div id="info-text">
-                    <span className="title">Informatiove Illustration</span>
+                    <h3 className="title">Informatiove Illustration</h3>
                     <p>
                         Ob für Unternehmen, NGO’s, Medien oder Politik: Eine gute und ansprechende Vermittlung von Inhalten kann oft von wesentlicher Bedeutung sein.
                         Da die visuelle Wahrnehmung beim Menschen am Anfang der Informationsaufnahme steht, wird die Infografik sogar als eine der effektivsten 
@@ -63,9 +123,10 @@ function InformativeIllustration(props) {
                     <Coverflow
                         width={690}
                         height={400} //TODO: Mobile 280
-                        displayQuantityOfSide={4} // TODO: Mobile 0.7
+                        displayQuantityOfSide={calcCoverflow(size.width)} // TODO: Mobile 0.7
                         navigation={false}
                         enableHeading={false}
+                        media={coverFlowMedia}
                     >
                         <div
                         // onClick={(pic) => console.log(pic)}
@@ -86,13 +147,30 @@ function InformativeIllustration(props) {
                         {parsedPictures && parsedPictures
                             .slice(1,parsedPictures.length)
                             .map(pic => 
-                                <img src={pic} onClick={handleClick} alt='gallery'/>
+                            <img src={pic} onClick={handleClick} alt='gallery'/>
                             )}
                     </Coverflow>
                 </div> 
             </div>
             <div id="bottom">
-
+                <MDBContainer>
+                    <MDBRow>
+                        <MDBCol md="6"><img src={infografik3} alt="Infografik" className="infografik"/></MDBCol>
+                        <MDBCol md="6"><img src={infografik4} alt="Infografik" className="infografik"/></MDBCol>
+                    </MDBRow>
+                    <MDBRow>
+                        <MDBCol md="6"><img src={infografik5} alt="Infografik" className="infografik"/></MDBCol>
+                        <MDBCol md="6"><img src={infografik6} alt="Infografik" className="infografik"/></MDBCol>
+                    </MDBRow>
+                    <MDBRow>
+                        <MDBCol md="6"><img src={infografik7} alt="Infografik" className="infografik"/></MDBCol>
+                        <MDBCol md="6"><img src={infografik8} alt="Infografik" className="infografik"/></MDBCol>
+                    </MDBRow>
+                    <MDBRow>
+                        <MDBCol md="6"><img src={infografik9} alt="Infografik" className="infografik"/></MDBCol>
+                        <MDBCol md="6"><img src={infografik10} alt="Infografik" className="infografik"/></MDBCol>
+                    </MDBRow>
+                </MDBContainer>
             </div>
             {props.modal && props.modal.isOpen && currentPic && <SlideModal img={currentPic} />}
         </div>
