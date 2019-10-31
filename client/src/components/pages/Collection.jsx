@@ -48,7 +48,6 @@ function Collection(props) {
               <ParallaxRight currentId={currentId}/>  
             </div>
           </div>
-          {/* {currentCollection.pictures.length > 0 && currentCollection.pictures.map((img,i) => <img key={i} src={img} alt="art"/>)} */}
           {props.modal && props.modal.isOpen && currentCollection.pictures && <SlideModal img={currentCollection.pictures[props.modal.currentIndex]} />}
       </div>
 
