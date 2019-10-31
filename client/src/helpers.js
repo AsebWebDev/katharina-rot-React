@@ -22,3 +22,15 @@ export function calcFont (length) {
         default: return "1.4rem"
     }
 }
+
+export function calcCoverflow (width) {
+    console.log(width)
+    switch(true) {
+        case width > 1200: return "3"; 
+        case width <= 1200 && width > 900 : return "2.8"; 
+        case width <= 900 && width > 765 : return "2.5"; 
+        case width <= 765 && width > 360 : return "2"; 
+        case width <= 360 : return "1.7"; 
+        default: return "1"
+    }
+}
