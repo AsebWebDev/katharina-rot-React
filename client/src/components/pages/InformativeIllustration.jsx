@@ -1,10 +1,33 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import { connect } from 'react-redux';
+import SlideModal from './Slider/SlideModal'
+import Coverflow from 'react-coverflow'
+import { toggleModal } from '../../actioncreators'
+import api from '../../api';
 import infografik1 from '../../media/infografik-ernährung1-ila1.jpg'
 import infografik2 from '../../media/fossile-energie_rotwebseite_b.jpg'
 import '../../styles/InformativeIllustration.scss'
 
 
-export default function InformativeIllustration() {
+function InformativeIllustration(props) {
+    let { dispatch } = props;
+    let parsedPictures = props.collections.map(item => item.titlePic)
+    let [currentPic, setCurrentPic] = useState(null)
+
+    useEffect(() => {
+        api.getCollections()
+        .then(collections => dispatch({
+            type: "GET_DATA", 
+            collections
+        })).catch (err => console.log(err))
+    }, [dispatch])
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        setCurrentPic(e.target.src)
+        // props.dispatch(toggleModal(props.modal))
+    }
+
     return (
         <div id="InformativeIllustration">
             <div><img src={infografik1} alt="Infografik" id="infografik1"/></div>
@@ -34,11 +57,53 @@ export default function InformativeIllustration() {
                 
             </div>
             <div id="middle">
-
+                <div className="divider"><hr/><strong>Infografik Projekte</strong><hr/></div>
+                <div id="coverflow">
+                    {/* TODO: Make this part mobile friendly, dynamic to window size */}
+                    <Coverflow
+                        width={690}
+                        height={400} //TODO: Mobile 280
+                        displayQuantityOfSide={4} // TODO: Mobile 0.7
+                        navigation={false}
+                        enableHeading={false}
+                    >
+                        <div
+                        // onClick={(pic) => console.log(pic)}
+                        // onKeyDown={() => fn()}
+                        role="menuitem"
+                        tabIndex="1"
+                        >
+                        {parsedPictures && 
+                            <img
+                            onClick={handleClick}
+                            src={parsedPictures[0]}
+                            alt='gallery'
+                            style={{ display: 'block', width: '100%' }}
+                        />
+                        }
+                        
+                        </div>
+                        {parsedPictures && parsedPictures
+                            .slice(1,parsedPictures.length)
+                            .map(pic => 
+                                <img src={pic} onClick={handleClick} alt='gallery'/>
+                            )}
+                    </Coverflow>
+                </div> 
             </div>
             <div id="bottom">
 
             </div>
+            {props.modal && props.modal.isOpen && currentPic && <SlideModal img={currentPic} />}
         </div>
     )
 }
+
+function mapStateToProps(reduxState){
+    return {
+        collections: reduxState.collections,
+        modal: reduxState.modal
+    }
+  }
+  
+export default connect(mapStateToProps)(InformativeIllustration)

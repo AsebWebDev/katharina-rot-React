@@ -34,7 +34,27 @@
 
     .title {
         color: green;
+    }
+}
 
+#middle {
+    display: flex; 
+    flex-direction: column;
+    width: 97%;
+
+    hr {
+        width: 40%;
+        border-top: 1px solid green;;
+    }
+
+    strong {
+        padding-top: 3px;
+    }
+
+    .divider {
+        display: flex; 
+        flex-direction: row;
+        margin-bottom: 10px;
     }
 }
 
