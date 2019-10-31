@@ -34,6 +34,7 @@
 
     .title {
         color: green;
+        text-align: center;
     }
 }
 
@@ -54,9 +55,29 @@
     .divider {
         display: flex; 
         flex-direction: row;
-        margin-bottom: 10px;
+        margin: 30px 0 5px 0;
     }
 }
+
+#bottom {
+    margin-top: 30px;
+    
+    .container {
+        padding: 0;
+    }
+
+    .infografik{
+        width: 100%;
+        margin: 10px;
+    }
+
+    @media (min-width: 1200px) {
+        .container {
+            max-width: 1188px;
+        }
+    }
+}
+        
 
 @media only screen and (max-width: 765px) {
     #InformativeIllustration {
@@ -71,12 +92,44 @@
         flex-direction: column;
         align-items: center;
 
+        .title {
+            margin-top: 20px;
+            text-align: center;
+        }
+
         #infografik2 {
             width: 90%;
         }
 
         #info-text {
             line-height: 1.5;
+            padding: 2px;
+        }
+    }
+
+    #middle {
+        hr {
+            width: 25%
+        }
+    }
+
+    #bottom {
+
+        display: flex;
+        justify-content: center;
+       
+        .row {
+            width: 100%;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .infografik {
+            margin: 10px 0;
         }
     }
     
