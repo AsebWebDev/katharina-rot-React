@@ -47,9 +47,9 @@ function NavbarPage (props) {
                 <span className="mr-2">Portfolio</span>
               </MDBDropdownToggle>
               <MDBDropdownMenu>
-                <MDBDropdownItem href="#!"><MDBNavLink to="/">Übersicht</MDBNavLink></MDBDropdownItem>
-                <MDBDropdownItem href="#!"><MDBNavLink to="/portfoliopdf">Portfolio PDF</MDBNavLink></MDBDropdownItem>
-                <MDBDropdownItem href="#!"><MDBNavLink to="/informative-illustration">Informative Illustration</MDBNavLink></MDBDropdownItem>
+                <MDBDropdownItem ><MDBNavLink to="/">Übersicht</MDBNavLink></MDBDropdownItem>
+                <MDBDropdownItem ><MDBNavLink to="/portfoliopdf">Portfolio PDF</MDBNavLink></MDBDropdownItem>
+                <MDBDropdownItem><MDBNavLink to="/informative-illustration">Informative Illustration</MDBNavLink></MDBDropdownItem>
               </MDBDropdownMenu>
             </MDBDropdown>
           </MDBNavItem>
@@ -59,9 +59,9 @@ function NavbarPage (props) {
                 <span className="mr-2">About</span>
               </MDBDropdownToggle>
               <MDBDropdownMenu>
-                <MDBDropdownItem href="#!"><MDBNavLink to="/">Über mich</MDBNavLink></MDBDropdownItem>
-                <MDBDropdownItem href="#!"><MDBNavLink to="/">Grüne Illustration</MDBNavLink></MDBDropdownItem>
-                <MDBDropdownItem href="#!"><MDBNavLink to="/">AGB</MDBNavLink></MDBDropdownItem>
+                <MDBDropdownItem ><MDBNavLink to="/">Über mich</MDBNavLink></MDBDropdownItem>
+                <MDBDropdownItem ><MDBNavLink to="/">Grüne Illustration</MDBNavLink></MDBDropdownItem>
+                <MDBDropdownItem ><MDBNavLink to="/">AGB</MDBNavLink></MDBDropdownItem>
               </MDBDropdownMenu>
             </MDBDropdown>
           </MDBNavItem>
@@ -71,8 +71,8 @@ function NavbarPage (props) {
                 <span className="mr-2">Contact</span>
               </MDBDropdownToggle>
               <MDBDropdownMenu>
-                <MDBDropdownItem href="#!"><MDBNavLink to="/">Contact</MDBNavLink></MDBDropdownItem>
-                <MDBDropdownItem href="#!"><MDBNavLink to="/">Impressum / Legals</MDBNavLink></MDBDropdownItem>
+                <MDBDropdownItem ><MDBNavLink to="/">Contact</MDBNavLink></MDBDropdownItem>
+                <MDBDropdownItem ><MDBNavLink to="/">Impressum / Legals</MDBNavLink></MDBDropdownItem>
               </MDBDropdownMenu>
             </MDBDropdown>
           </MDBNavItem>
