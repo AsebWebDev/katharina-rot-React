@@ -1,0 +1,30 @@
+#gruene-illu-top {
+
+    h4 {
+        color: rgb(50, 148, 50);
+        margin-bottom: 50px;
+    }
+
+    img {
+        width: 70%;
+        margin: 50px 0 20px 0;
+    }
+}
+
+#gruene-illu-middle {
+    display: flex;
+    justify-content: space-evenly;
+
+    img {
+        width: 150px;
+    }
+    
+}
+
+#gruene-illu-left {
+    width: 40%
+}
+
+#gruene-illu-right {
+    width: 40%
+}
