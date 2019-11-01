@@ -24,7 +24,6 @@ export function calcFont (length) {
 }
 
 export function calcCoverflow (width) {
-    console.log(width)
     switch(true) {
         case width > 1200: return "3"; 
         case width <= 1200 && width > 900 : return "2.8"; 
