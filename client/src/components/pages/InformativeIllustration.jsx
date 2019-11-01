@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import SlideModal from './Slider/SlideModal'
 import Coverflow from 'react-coverflow'
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
-import { toggleModal } from '../../actioncreators'
+// import { toggleModal } from '../../actioncreators'
 import { calcCoverflow } from '../../helpers'
+import { coverFlowMedia } from '../../configs/coverflow'
+import useWindowSize from '../../hooks/useWindowSize.jsx'
 import api from '../../api';
 import infografik1 from '../../media/infografik-ernährung1-ila1.jpg'
 import infografik2 from '../../media/fossile-energie_rotwebseite_b.jpg'
@@ -16,71 +18,34 @@ import infografik7 from '../../media/Einführungsgrafik-1024x724.jpg'
 import infografik8 from '../../media/Wohnen-1024x724.jpg'
 import infografik9 from '../../media/infografikbild-komplett_kleinklein_quadrat-1024x1024.jpg'
 import infografik10 from '../../media/nitrat-teaser-webseite3-1024x675.jpg'
-
 import '../../styles/InformativeIllustration.scss'
 
+let picArr = [infografik3, infografik4, infografik5, infografik6, infografik7, infografik8, infografik9, infografik10 ]
+
+let InformativeIllustrationPictures = (picArr) => {
+    let result = []
+    let count = 0;
+    while (count < picArr.length) {
+        result.push(<MDBRow key={count}>
+            <MDBCol md="6"><img src={picArr[count]} alt="Infografik" className="infografik"/></MDBCol>
+            <MDBCol md="6"><img src={picArr[count+1]} alt="Infografik" className="infografik"/></MDBCol>
+          </MDBRow>)
+        count += 2;
+    }
+    return result
+}
 
 function InformativeIllustration(props) {
     let { dispatch } = props;
     let parsedPictures = props.collections.map(item => item.titlePic)
     let [currentPic, setCurrentPic] = useState(null)
-    const coverFlowMedia = {
-        '@media (max-width: 361px)': {
-            width: '20px',
-            height: '300px'
-        },
-        '@media (max-width: 500px)': {
-            width: '400px',
-            height: '300px'
-        },
-        '@media (max-width: 900px)': {
-            width: '350px',
-            height: '300px'
-        },
-        '@media (min-width: 900px)': {
-            width: '900px',
-            height: '400px'
-        }
-    }
     const size = useWindowSize();
 
     useEffect(() => {
         api.getCollections()
-        .then(collections => dispatch({
-            type: "GET_DATA", 
-            collections
-        })).catch (err => console.log(err))
+        .then(collections => dispatch({ type: "GET_DATA", collections}))
+        .catch (err => console.log(err))
     }, [dispatch])
-
-
-    // Hook
-    function useWindowSize() {
-        const isClient = typeof window === 'object';
-    
-        function getSize() {
-        return {
-            width: isClient ? window.innerWidth : undefined,
-            height: isClient ? window.innerHeight : undefined
-        };
-        }
-    
-        const [windowSize, setWindowSize] = useState(getSize);
-    
-        useEffect(() => {
-        if (!isClient) {
-            return false;
-        }
-        
-        function handleResize() {
-            setWindowSize(getSize());
-        }
-    
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-        }, []); // Empty array ensures that effect is only run on mount and unmount
-    
-        return windowSize;
-    }
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -146,30 +111,15 @@ function InformativeIllustration(props) {
                         </div>
                         {parsedPictures && parsedPictures
                             .slice(1,parsedPictures.length)
-                            .map(pic => 
-                            <img src={pic} onClick={handleClick} alt='gallery'/>
+                            .map((pic, i) => 
+                            <img src={pic} onClick={handleClick} alt='gallery' key={i}/>
                             )}
                     </Coverflow>
                 </div> 
             </div>
             <div id="bottom">
                 <MDBContainer>
-                    <MDBRow>
-                        <MDBCol md="6"><img src={infografik3} alt="Infografik" className="infografik"/></MDBCol>
-                        <MDBCol md="6"><img src={infografik4} alt="Infografik" className="infografik"/></MDBCol>
-                    </MDBRow>
-                    <MDBRow>
-                        <MDBCol md="6"><img src={infografik5} alt="Infografik" className="infografik"/></MDBCol>
-                        <MDBCol md="6"><img src={infografik6} alt="Infografik" className="infografik"/></MDBCol>
-                    </MDBRow>
-                    <MDBRow>
-                        <MDBCol md="6"><img src={infografik7} alt="Infografik" className="infografik"/></MDBCol>
-                        <MDBCol md="6"><img src={infografik8} alt="Infografik" className="infografik"/></MDBCol>
-                    </MDBRow>
-                    <MDBRow>
-                        <MDBCol md="6"><img src={infografik9} alt="Infografik" className="infografik"/></MDBCol>
-                        <MDBCol md="6"><img src={infografik10} alt="Infografik" className="infografik"/></MDBCol>
-                    </MDBRow>
+                    {InformativeIllustrationPictures(picArr)}
                 </MDBContainer>
             </div>
             {props.modal && props.modal.isOpen && currentPic && <SlideModal img={currentPic} />}
