@@ -21,6 +21,10 @@ const collectionSchema = new mongoose.Schema({
   description: {
     type: String,
   },
+  likedSessions: {
+    type: [String],
+    default: []
+  }
 });
 
 const Collection = mongoose.model('Collection', collectionSchema);
