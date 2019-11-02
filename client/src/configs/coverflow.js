@@ -13,6 +13,6 @@ export const coverFlowMedia = {
     },
     '@media (min-width: 900px)': {
         width: '900px',
-        height: '400px'
+        height: '300px'
     }
 }
