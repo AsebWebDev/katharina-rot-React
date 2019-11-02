@@ -1,5 +1,6 @@
 import React from 'react'
 import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBIcon, MDBView, MDBContainer } from "mdbreact";
+import Heart from './Heart'
 import TimeAgo from 'react-timeago'
 import germanStrings from 'react-timeago/lib/language-strings/de'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
@@ -28,9 +29,10 @@ function MiniNews(props) {
                     {news.category}   
                   </p>
                 </a>
+                <Heart target={{type: "news", targetId: news._id, likes: news.likedSessions.length}} />
+                </div>
                 {/* TODO: Make function for string trunc */}
                 <strong>{news.title.slice(0,27)}{news.title.length > 27 ? "..." : ""}</strong>
-                </div>
                 <div>
                   <div>
                     <span>by</span>
