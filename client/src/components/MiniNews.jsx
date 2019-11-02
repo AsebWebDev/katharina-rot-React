@@ -29,7 +29,7 @@ function MiniNews(props) {
                     {news.category}   
                   </p>
                 </a>
-                <Heart target={{type: "news", targetId: news._id, likes: news.likedSessions.length}} />
+                <Heart target={{type: "News", targetId: news._id, likes: news.likedSessions.length}} />
                 </div>
                 {/* TODO: Make function for string trunc */}
                 <strong>{news.title.slice(0,27)}{news.title.length > 27 ? "..." : ""}</strong>

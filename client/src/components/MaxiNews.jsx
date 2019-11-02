@@ -52,7 +52,7 @@ function MaxiNews(props) {
                 <img src={news.titlePic} alt="Title" />
                 <div id="mini-data">
                     <p>by <a href="#!" className="font-weight-bold">Katharina Rot</a>, <span>{<TimeAgo date={news.created_at} formatter={formatter} />} </span></p>
-                    <Heart target={{type: "news", targetId: news._id, likes: news.likedSessions.length}} />
+                    <Heart target={{type: "News", targetId: news._id, likes: news.likedSessions.length}} />
                 </div>
             </div>
             <div id="news-bottom">
