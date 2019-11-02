@@ -25,10 +25,10 @@ const newsSchema = new mongoose.Schema({
   description: {
     type: String,
   },
-  likes: {
-    type: Number,
-    default: 0
-  }
+  likedSessions: {
+    type: [String],
+    default: []
+  },
 },
 {
     timestamps: {
