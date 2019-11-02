@@ -4,6 +4,7 @@ import { MDBAnimation, MDBBadge } from 'mdbreact';
 import TimeAgo from 'react-timeago'
 import germanStrings from 'react-timeago/lib/language-strings/de'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
+import Heart from './Heart'
 import { newNotification } from '../actioncreators'
 import api from '../api';
 import '../styles/MaxiNews.scss'
@@ -53,7 +54,7 @@ function MaxiNews(props) {
                 <img src={news.titlePic} alt="Title" />
                 <div id="mini-data">
                     <p>by <a href="#!" className="font-weight-bold">Katharina Rot</a>, <span>{<TimeAgo date={news.created_at} formatter={formatter} />} </span></p>
-                    <p id="heart">heart</p>
+                    <Heart target={{type: "news", targetId: news._id, likes: news.likedSessions.length}} />
                 </div>
             </div>
             <div id="news-bottom">
