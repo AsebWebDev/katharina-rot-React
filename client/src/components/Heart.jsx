@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import api from '../api';
-import { Collection } from "mongoose";
+import '../styles/Heart.scss'
 
 export default function Heart(props) {
 
@@ -25,9 +25,9 @@ export default function Heart(props) {
     return (
         <div id="heart">
                 {/* empty heart, if no like yet */}
-            {hasLiked && <p><i onClick={handleClick} className="red-heart fas fa-heart" />{likes}</p>}    
+            {hasLiked && <span><i onClick={handleClick} className="red-heart fas fa-heart" />{likes}</span>}    
                 {/* filled heart, if already liked */}
-            {!hasLiked && <p><i onClick={handleClick} className="far fa-heart" />{likes}</p>}   
+            {!hasLiked && <span><i onClick={handleClick} className="far fa-heart" />{likes}</span>}   
         </div>
     )
 }
