@@ -45,6 +45,21 @@ export default {
       .get('/logout')
   },
 
+  hasLiked(target) {
+    return service
+      .post('/checkheart', target)
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
+  addHeart(target) {
+    // target['userId'] = JSON.parse(localStorage.getItem('user'))._id
+    return service
+      .post('/heart', target)
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
   getNews() {
     console.log("Get News Api triggered.")
     return service
