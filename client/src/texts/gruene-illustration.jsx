@@ -34,7 +34,7 @@ export const text_pencil1= (
         Fähigkeiten eigenes Know-How und viel Engagement in die Arbeit in grünen Projekten mit. Ich arbeite bevorzugt für Unternehmen, 
         Organisationen und Projekte, deren Ziel es ist auf Missstände hinzuweisen, neue Perspektiven zu schaffen oder nachhaltige Konzepte zu 
         entwickeln. Mein inhaltlicher Fokus liegt besonders auf den Themenbereichen sozialer und ökologischer Gerechtigkeit, Tierrechte, 
-        Klimaschutz und der Transformation hin zu nachhaltigen Gesellschaften
+        Klimaschutz und der Transformation hin zu nachhaltigen Gesellschaften.
         </p>
     </div>
 )
