@@ -25,7 +25,7 @@ export default function Heart(props) {
     return (
         <div id="heart">
                 {/* empty heart, if no like yet */}
-            {hasLiked && <p><i onClick={handleClick} className="fas fa-heart" />{likes}</p>}    
+            {hasLiked && <p><i onClick={handleClick} className="red-heart fas fa-heart" />{likes}</p>}    
                 {/* filled heart, if already liked */}
             {!hasLiked && <p><i onClick={handleClick} className="far fa-heart" />{likes}</p>}   
         </div>
