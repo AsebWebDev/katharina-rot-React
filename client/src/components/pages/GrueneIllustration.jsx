@@ -1,11 +1,6 @@
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux';
+import React  from 'react'
 import { MDBBtn } from "mdbreact";
-import Coverflow from 'react-coverflow'
-import { calcCoverflow } from '../../helpers'
-import { coverFlowMedia } from '../../configs/coverflow'
-import api from '../../api';
-import useWindowSize from '../../hooks/useWindowSize.jsx'
+import Coverflow from '../CoverFlow'
 import banner from '../../media/banner-hambiwald-1024x164.jpg'
 import erdeHand from '../../media/erde-hand-icon_400px-300x300.jpg'
 import auge from '../../media/Auge_Icon_500px-1-300x300.jpg'
@@ -15,17 +10,7 @@ import spatz from '../../media/Spatz_ot-1500px-768x603.jpg'
 import { text_erdeHand, text_eye, text_pencil1, text_pencil2 } from '../../texts/gruene-illustration.jsx'
 import '../../styles/GrueneIllustration.scss'
 
-function GrueneIllustration(props) {
-    let { dispatch } = props;
-    let parsedPictures = props.collections.map(item => item.titlePic)
-    const size = useWindowSize();
-
-    useEffect(() => {
-        if (props.collections.length === 0) api.getCollections()
-        .then(collections => dispatch({ type: "GET_DATA", collections}))
-        .catch (err => console.log(err))
-    }, [dispatch, props.collections])
-
+export default function GrueneIllustration(props) {
     return (
         <div>
             <div id="gruene-illu-top">
@@ -49,48 +34,9 @@ function GrueneIllustration(props) {
             </div>
             <div id="gruene-illu-bottom">
                 <div className="divider"><hr/><strong>Hier sehen Sie eine Auswahl meiner bisherigen grünen Projekte</strong><hr/></div>
-                <div id="coverflow">
-                    <Coverflow
-                        width={690}
-                        height={400} 
-                        displayQuantityOfSide={calcCoverflow(size.width)} 
-                        navigation={false}
-                        enableHeading={false}
-                        media={coverFlowMedia}
-                    >
-                        <div
-                        // onClick={(pic) => console.log(pic)}
-                        // onKeyDown={() => fn()}
-                        role="menuitem"
-                        tabIndex="1"
-                        >
-                        {parsedPictures && 
-                            <img
-                            // onClick={handleClick}
-                            src={parsedPictures[0]}
-                            alt='gallery'
-                            style={{ display: 'block', width: '100%' }}
-                        />
-                        }
-                        
-                        </div>
-                        {parsedPictures && parsedPictures
-                            .slice(1,parsedPictures.length)
-                            .map((pic, i) => 
-                            <img src={pic} alt='gallery' key={i}/>
-                            )}
-                    </Coverflow>
-                </div> 
+                <Coverflow />
                 <img id="spatz" src={spatz} alt="Spatz"/>
             </div>
         </div>
     )
 }
-
-function mapStateToProps(reduxState){
-    return {
-        collections: reduxState.collections,
-    }
-  }
-  
-export default connect(mapStateToProps)(GrueneIllustration)
