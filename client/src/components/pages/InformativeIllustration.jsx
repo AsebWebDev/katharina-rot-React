@@ -43,10 +43,10 @@ function InformativeIllustration(props) {
     const size = useWindowSize();
 
     useEffect(() => {
-        api.getCollections()
+        if (props.collections.length === 0) api.getCollections()
         .then(collections => dispatch({ type: "GET_DATA", collections}))
         .catch (err => console.log(err))
-    }, [dispatch])
+    }, [dispatch, props.collections])
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -67,11 +67,10 @@ function InformativeIllustration(props) {
             <div id="middle">
                 <div className="divider"><hr/><strong>Infografik Projekte</strong><hr/></div>
                 <div id="coverflow">
-                    {/* TODO: Make this part mobile friendly, dynamic to window size */}
                     <Coverflow
                         width={690}
-                        height={400} //TODO: Mobile 280
-                        displayQuantityOfSide={calcCoverflow(size.width)} // TODO: Mobile 0.7
+                        height={400} 
+                        displayQuantityOfSide={calcCoverflow(size.width)} 
                         navigation={false}
                         enableHeading={false}
                         media={coverFlowMedia}
