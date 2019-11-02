@@ -1,16 +1,17 @@
 import React, {useState} from 'react'
 import { connect } from 'react-redux';
 import ReactCardFlip from 'react-card-flip';
+import Heart from './Heart'
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol, MDBNavLink, MDBBadge, MDBView, MDBIcon} from 'mdbreact';
 import { newNotification, toggleModal } from '../actioncreators'
 import { calcFont } from '../helpers'
 import api from '../api';
-import '../styles/Card.css'
+import '../styles/Card.scss'
 
 const Card = function (props) {
 
     let [isFlipped, setIsFlipped] = useState(false);
-    let {title, titlePic, description, tags, _id} = props.collection;
+    let {title, titlePic, description, tags, _id, likedSessions} = props.collection;
     let {dispatch} = props;
     
     let handleDelete = (e) => {
@@ -58,6 +59,7 @@ const Card = function (props) {
                     </MDBView>
                     <MDBCardBody>
                         <MDBCardTitle>
+                            <Heart target={{type: "Collection", targetId: _id, likes: likedSessions.length}} />
                             <div style={{ fontSize: calcFont(title.length) }} className="title">{title}</div>
                             <div className="card-buttons">
                                 {api.isLoggedIn() && <MDBBadge onClick={handleDelete} color="danger"><i className="fas fa-trash-alt"></i>Delete</MDBBadge>}
