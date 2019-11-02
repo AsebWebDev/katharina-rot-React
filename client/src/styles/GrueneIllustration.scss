@@ -1,7 +1,11 @@
+.green-font {
+    color: rgb(12, 209, 12);
+}
+
 #gruene-illu-top {
 
     h4 {
-        color: rgb(50, 148, 50);
+        color: rgb(12, 209, 12);
         margin-bottom: 50px;
     }
 
@@ -14,17 +18,38 @@
 #gruene-illu-middle {
     display: flex;
     justify-content: space-evenly;
-
     img {
         width: 150px;
     }
     
 }
 
+#gruene-illu-bottom {
+    .divider {
+        
+    }
+}
+
 #gruene-illu-left {
-    width: 40%
+
+    
 }
 
 #gruene-illu-right {
-    width: 40%
+    .btn-outline-success {
+        border-radius: 20px;
+        width: 280px;
+        color: black!important;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+}
+
+.gruene-illu-text {
+    width: 35%;
+    
+    p {
+        text-align: left;
+        line-height: 1.7;
+    }
 }
