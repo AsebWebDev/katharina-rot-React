@@ -20,8 +20,6 @@ function MaxiNews(props) {
     }
 
     const handleDelete = (e) => {
-        console.log("Handle Delete")
-        console.log(news._id)
         e.preventDefault();
         e.stopPropagation();
         api.deleteNews(news._id)
@@ -47,7 +45,7 @@ function MaxiNews(props) {
     const collapsible = section + " section collapsible"
 
     return (
-        <div className="maxi-news2" onClick={toggle}>
+        <div id="maxi-news" onClick={toggle}>
             {api.isLoggedIn() && <MDBBadge onClick={handleDelete} color="danger"><i className="fas fa-trash-alt"></i>Delete</MDBBadge>}
 
             <div id="news-top">
