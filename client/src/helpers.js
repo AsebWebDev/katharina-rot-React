@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 export function returnNotificationColor (string) {
     switch(string) {
         case("Deleted"): return "text-danger";
@@ -32,4 +34,12 @@ export function calcCoverflow (width) {
         case width <= 360 : return "1.7"; 
         default: return "1"
     }
+}
+
+export function checkMobile () {
+    return ($(window).width() <= 760) ? true : false
+}
+
+export function checkFullScreen () {
+    return ($(window).width() > 1200) ? true : false
 }
