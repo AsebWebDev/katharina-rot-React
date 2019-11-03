@@ -28,6 +28,7 @@ function Home (props) {
         <img className="banner" src={greenBanner} alt="green banner"/>
       </MDBAnimation>
       <div className="gallery">
+
         {/* DATA EXISTS */}
         {props.collections && props.collections
         .filter(item => isInQuery(item))
@@ -43,6 +44,7 @@ function Home (props) {
               <Spinner />
             </MDBContainer>
           </MDBJumbotron>}
+          
       </div>
       {props.modal.isOpen && <EditModal />}
     </div>
