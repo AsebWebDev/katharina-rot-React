@@ -50,10 +50,16 @@ function CreateNews(props) {
         let data = {...currentNews, titlePic, thumbnail}
         api.addNews(data)
         .then(result => {
+        console.log("TCL: handleSubmit -> result", result)
             dispatch(newNotification(`Your News '${result.news.title}' has been created`, 'Created'))
             setCurrentNews({tags: []})
             setTitlePic('')
             setThumbnail('')
+            api.getNews()
+                .then(news => props.dispatch({
+                    type: "GET_NEWS", 
+                    news
+                })).catch (err => console.log(err))
         }).catch(err => dispatch(newNotification(err.toString())));
     }
 

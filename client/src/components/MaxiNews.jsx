@@ -13,11 +13,11 @@ const formatter = buildFormatter(germanStrings)
 
 function MaxiNews(props) {
     const { dispatch, news,i } = props;
+    const section = "section" + i
+    const collapsible = section + " section collapsible"
     let [expand, setExpand] = useState(false)
-    
-    const toggle = () => {
-        setExpand(!expand)
-    }
+
+    const toggle = () => { setExpand(!expand) }
 
     const handleDelete = (e) => {
         e.preventDefault();
@@ -31,18 +31,10 @@ function MaxiNews(props) {
                 , 'Deleted'
             ))
             api.getNews()
-                .then(collections => {
-                    dispatch({
-                        type: "GET_DATA", 
-                        collections
-                    })
-                }).catch (err => console.log(err))
-        })
-        .catch(err => dispatch(newNotification(err.toString())));
+                .then(news => dispatch({ type: "GET_NEWS", news}))
+                .catch (err => console.log(err))
+        }).catch(err => dispatch(newNotification(err.toString())));
     }
-
-    const section = "section" + i
-    const collapsible = section + " section collapsible"
 
     return (
         <div id="maxi-news" onClick={toggle}>
@@ -72,7 +64,7 @@ function MaxiNews(props) {
 
 function mapStateToProps(reduxState){
     return {
-      
+        // news: reduxState.news      
     }
 }
 

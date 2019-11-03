@@ -5,6 +5,7 @@ import MaxiNews from '../MaxiNews'
 import '../../styles/News.scss'
 
 function News(props) {
+
     return (
         <div id="news">
             <MDBCard className="my-5 px-5 pb-5">

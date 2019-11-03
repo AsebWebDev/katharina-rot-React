@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { connect } from 'react-redux';
 import api from '../api';
 import '../styles/Heart.scss'
 
-export default function Heart(props) {
-
+function Heart(props) {
+    
+    let {dispatch} = props;
     let [target] = useState(props.target);
-    let [likes, setLikes] = useState(props.target.likes);
     let [hasLiked, setHasLikes] = useState(null);
 
     useEffect(() => {
@@ -18,16 +19,27 @@ export default function Heart(props) {
         e.preventDefault();
         e.stopPropagation();
         api.addHeart(target)
-        .then(newLikes => setLikes(newLikes))
-        .catch(err => console.log(err))
+        .then(() => {
+            api.getNews()
+                .then(news => dispatch({ type: "GET_NEWS", news }))
+                .catch (err => console.log(err))
+        }).catch(err => console.log(err))
     }
 
     return (
         <div id="heart">
                 {/* empty heart, if no like yet */}
-            {hasLiked && <span><i onClick={handleClick} className="red-heart fas fa-heart" />{likes}</span>}    
+            {hasLiked && <span><i onClick={handleClick} className="red-heart fas fa-heart" />{props.target.likes}</span>}    
                 {/* filled heart, if already liked */}
-            {!hasLiked && <span><i onClick={handleClick} className="far fa-heart" />{likes}</span>}   
+            {!hasLiked && <span><i onClick={handleClick} className="far fa-heart" />{props.target.likes}</span>}   
         </div>
     )
 }
+
+function mapStateToProps(reduxState){
+    return {
+      news: reduxState.news
+    }
+  }
+  
+export default connect(mapStateToProps)(Heart)
