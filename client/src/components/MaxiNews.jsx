@@ -38,7 +38,7 @@ function MaxiNews(props) {
 
     return (
         <div id="maxi-news" onClick={toggle}>
-            {api.isLoggedIn() && <MDBBadge onClick={handleDelete} color="danger"><i className="fas fa-trash-alt"></i>Delete</MDBBadge>}
+            {api.isLoggedIn() && <MDBBadge id="maxi-news-delete" onClick={handleDelete} color="danger"><i className="fas fa-trash-alt"></i>Delete</MDBBadge>}
 
             <div id="news-top">
                 <img src={news.titlePic} alt="Title" />
