@@ -33,7 +33,7 @@ router.post('/heart', (req, res, next) => {
         GroupModel.findByIdAndUpdate(req.body.targetId, {       // Update Database
           likedSessions
         }, { new: true }) // To access the updated Target (and not the old target)
-          .then(result => res.json(result.likedSessions.length))
+          .then(result => res.json(result))
           .catch(err => next(err))
       }).catch(err => next(err))
 });
