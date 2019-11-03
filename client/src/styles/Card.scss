@@ -17,6 +17,26 @@ i {
     margin: 0 4px 0 0;
 }
 
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .x {
+        display: none;
+    }
+
+    .badge:hover {
+        .x {
+            display: inline;
+            margin-right: 8px;
+            color: red;
+            font-weight: bolder;
+
+        }
+    }
+}
+
 .title {
     font-family: DKLemonYellowSun;
     font-size: 1.8rem;

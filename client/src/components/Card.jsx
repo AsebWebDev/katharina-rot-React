@@ -37,13 +37,25 @@ const Card = function (props) {
         setIsFlipped(!isFlipped)
     }
 
+    let handleTagClick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const tagId = e.target.getAttribute('id');
+        const tagName = e.target.getAttribute('name');
+        tags.splice(tagId,1)
+        let body = { ...props.collection, tags}
+        api.updateCollection(_id, body)
+        .then(result => {
+            dispatch({ type: "GET_DATA", collections: result.collections })
+            dispatch(newNotification(`Your Tag '${tagName}' has been removed from collection '${title}' .`, 'Updated'))
+        }).catch (err => console.log(err))
+    }
+
     let handleEdit = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        toggle()
+        dispatch(toggleModal(props.modal, _id))
     }
-
-    let toggle = () => { dispatch(toggleModal(props.modal, _id)) }
 
     return (
         <div id="card">
@@ -82,7 +94,17 @@ const Card = function (props) {
                             {description.slice(0,maxTextSize)}{description.length > maxTextSize && "..."}
                         </MDBCardText>
                         <div className="tags">
-                            {tags.map((tag,i) => <MDBBadge key={i} color="light-green accent-4" ><MDBIcon fas="true" icon="tag" />{tag}</MDBBadge>)}
+                            {tags.map((tag,i) => 
+                                <div>
+                                    <MDBBadge key={i} color="light-green accent-4" >
+                                        {api.isLoggedIn() && 
+                                            <span className="x">
+                                                <MDBIcon onClick={handleTagClick} id={i} name={tag} icon="trash-alt" />
+                                            </span>}
+                                        <MDBIcon fas="true" icon="tag" />{tag}
+                                    </MDBBadge>
+                                </div>)
+                            }
                         </div>
                         <MDBNavLink to={"/collection/"+ _id}><MDBBtn>Details</MDBBtn></MDBNavLink>                    
                     </MDBCardBody>
