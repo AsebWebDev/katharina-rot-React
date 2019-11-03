@@ -2,7 +2,9 @@
     #maxi-news-container {
         display: flex;
         flex-direction: row;
-        align-items: center;
+        justify-content: center;
+        align-items: flex-start;
+        flex-wrap: wrap;
     }
 
     .card {
