@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useEffect} from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Home from './components/pages/Home';
@@ -17,57 +17,50 @@ import './styles/App.scss';
 
 // TODO: * Implement User-Settings
 
-class App extends Component {
+function App (props) {
+  const { dispatch } = props;
 
-  componentDidMount(){
+  useEffect(() => {
+    console.log("Use Effect")
     api.getNews()
-      .then(news => this.props.dispatch({
+      .then(news => dispatch({
         type: "GET_NEWS", 
         news
       })).catch (err => console.log(err))
-  }
+  }, [dispatch])
 
-  componentDidUpdate() {
-    api.getNews()
-      .then(news => this.props.dispatch({
-        type: "GET_NEWS", 
-        news
-      })).catch (err => console.log(err))
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <Header />
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/admin" component={Admin} />
-          <Route path="/login" component={Login} />
-          <Route path="/portfoliopdf" component={PortfolioPDF} />
-          <Route path="/informative-illustration" component={InformativeIllustration} />
-          <Route path="/gruene-illustration" component={GrueneIllustration} />
-          <Route path="/collection/:id" component={Collection} />
-          <Route path="/news" component={News} />
-          <Route render={() => <h2>404</h2>} />
-        </Switch>
-        <Footer />
-        <div style={{
-                position: "fixed",
-                top: "10px",
-                right: "10px",
-                zIndex: 9999
-            }}>
-            {this.props.notifications && !!this.props.notifications.length && <Notification notifications={this.props.notifications}/>}
-        </div>
+  return (
+    <div className="App">
+      <Header />
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/admin" component={Admin} />
+        <Route path="/login" component={Login} />
+        <Route path="/portfoliopdf" component={PortfolioPDF} />
+        <Route path="/informative-illustration" component={InformativeIllustration} />
+        <Route path="/gruene-illustration" component={GrueneIllustration} />
+        <Route path="/collection/:id" component={Collection} />
+        <Route path="/news" component={News} />
+        <Route render={() => <h2>404</h2>} />
+      </Switch>
+      <Footer />
+      <div style={{
+              position: "fixed",
+              top: "10px",
+              right: "10px",
+              zIndex: 9999
+          }}>
+          {props.notifications && !!props.notifications.length && <Notification notifications={props.notifications}/>}
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 function mapStateToProps(reduxState){
   return {
     collections: reduxState.collections,
-    notifications: reduxState.notifications
+    notifications: reduxState.notifications,
+    news: reduxState.news,
   }
 }
 
