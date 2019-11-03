@@ -24,21 +24,6 @@ export function updateQuery(query) {
   }
 }
 
-// FIXME: make action creater work
-export function prepareDeleteNotification(timestamp) {
-  return {
-    type: PREPAREDELETE_NOTIFICATION,
-    timestamp
-  }
-}
-
-// FIXME: make action creater work
-export function updateNotifications(timestamp) {
-  return {
-    type: UPDATE_NOTIFICATIONS,
-  }
-}
-
 export function setUploadedPics(uploadedPictures, uploadedTitlePic) {
   return {
     type: SET_PIC_UPLOADS,
