@@ -24,14 +24,8 @@ router.post('/', isAdmin, (req, res, next) => {
 });
 
 router.post('/:id/delete', isAdmin, (req, res, next) => {
-  console.log("Route Delete News hit with id: " + req.params.id)
   News.deleteOne( { _id : req.params.id } )
-  .then(result => {
-    res.json({
-      success: true,
-      result
-    });
-  })
+  .then(result => res.json({ success: true, result}))
   .catch(err => next(err))
 });
 
