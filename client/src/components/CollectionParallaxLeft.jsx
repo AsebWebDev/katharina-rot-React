@@ -22,10 +22,10 @@ function CollectionParallaxLeft(props) {
 
   return (
     <div>
-          {currentCollection && currentCollection.pictures.map(pic => {
+          {currentCollection && currentCollection.pictures.map((pic,i) => {
             let style = { zIndex: count, position: "relative", height: "70vh" }
             count-- //set Index - 1 to let the next one overlap this instance
-            return (<Plx parallaxData={parallaxDataGalleryLeft} style={style}><img alt="art" src={pic} width="400vw"/></Plx>)
+            return (<Plx key={i} parallaxData={parallaxDataGalleryLeft} style={style}><img alt="art" src={pic} width="400vw"/></Plx>)
           })}
     </div>
   );
