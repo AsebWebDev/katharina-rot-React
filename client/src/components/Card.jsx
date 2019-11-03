@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux';
 import ReactCardFlip from 'react-card-flip';
 import Heart from './Heart'
@@ -10,10 +10,10 @@ import '../styles/Card.scss'
 
 const Card = function (props) {
 
-    let [isFlipped, setIsFlipped] = useState(false);
     let {title, titlePic, description, tags, _id, likedSessions} = props.collection;
+    let [isFlipped, setIsFlipped] = useState(false);
     let {dispatch} = props;
-    
+
     let handleDelete = (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -26,14 +26,9 @@ const Card = function (props) {
                 , 'Deleted'
             ))
             api.getCollections()
-                .then(collections => {
-                    dispatch({
-                        type: "GET_DATA", 
-                        collections
-                    })
-                }).catch (err => console.log(err))
-        })
-        .catch(err => dispatch(newNotification(err.toString())));
+                .then(collections => dispatch({ type: "GET_DATA", collections }))
+                .catch (err => console.log(err))
+        }).catch(err => dispatch(newNotification(err.toString())));
     }
     
     let handleClick = (e) => {
@@ -74,7 +69,10 @@ const Card = function (props) {
             <MDBCol key="back" onClick={handleClick}>
                 <MDBCard style={{ width: "15rem", height: "26rem" }}>
                     <MDBCardBody>
-                        <MDBCardTitle>{title}</MDBCardTitle>
+                        <MDBCardTitle>
+                            <Heart target={{type: "Collection", targetId: _id, likes: likedSessions.length}} />
+                            {title}
+                        </MDBCardTitle>
                         <MDBCardText>
                             {description}
                         </MDBCardText>
@@ -90,12 +88,4 @@ const Card = function (props) {
     )
 }
 
-function mapStateToProps(reduxState){
-    return {
-      collections: reduxState.collections,
-      notifications: reduxState.notifications,
-      modal: reduxState.modal
-    }
-}
-
-export default connect(mapStateToProps)(Card)
+export default connect()(Card)
