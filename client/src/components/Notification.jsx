@@ -51,6 +51,7 @@ function Notification (props) {
                                 delay={notification.toBeDeleted?"0s":"4s"}
                                 onAnimationEnd={() => handleNotificationFadeOut(notification.created)}>
                             <MDBNotification
+                            // autohide={7000} //in build function disabled, wrote my own logic to make notifications disappear to practice async tasks
                             show
                             fade
                             icon={returnNotificationSymbol(notification.typeOfNotification)}
