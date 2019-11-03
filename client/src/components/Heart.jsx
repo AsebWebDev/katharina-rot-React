@@ -20,8 +20,13 @@ function Heart(props) {
         e.stopPropagation();
         api.addHeart(target)
         .then(() => {
-            api.getNews()
+            if (target.type === "News") 
+                api.getNews()
                 .then(news => dispatch({ type: "GET_NEWS", news }))
+                .catch (err => console.log(err))
+            else if (target.type === "Collection") 
+                api.getCollections()
+                .then(collections => dispatch({ type: "GET_DATA", collections }))
                 .catch (err => console.log(err))
         }).catch(err => console.log(err))
     }
@@ -35,11 +40,5 @@ function Heart(props) {
         </div>
     )
 }
-
-function mapStateToProps(reduxState){
-    return {
-      news: reduxState.news
-    }
-  }
   
-export default connect(mapStateToProps)(Heart)
+export default connect()(Heart)
