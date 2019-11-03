@@ -21,12 +21,9 @@ function App (props) {
   const { dispatch } = props;
 
   useEffect(() => {
-    console.log("Use Effect")
     api.getNews()
-      .then(news => dispatch({
-        type: "GET_NEWS", 
-        news
-      })).catch (err => console.log(err))
+      .then(news => dispatch({ type: "GET_NEWS", news}))
+      .catch (err => console.log(err))
   }, [dispatch])
 
   return (
