@@ -61,7 +61,6 @@ export default {
   },
 
   getNews() {
-    console.log("Get News Api triggered.")
     return service
       .get('/news')
       .then(res => res.data)
