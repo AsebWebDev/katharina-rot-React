@@ -10,6 +10,7 @@ import '../styles/Card.scss'
 
 const Card = function (props) {
 
+    let maxTextSize = 140;
     let {title, titlePic, description, tags, _id, likedSessions} = props.collection;
     let [isFlipped, setIsFlipped] = useState(false);
     let {dispatch} = props;
@@ -51,15 +52,15 @@ const Card = function (props) {
                 <MDBCard style={{ width: "15rem", height: "26rem" }}>
                     <MDBView hover zoom>
                         <MDBCardImage className="img-fluid" src={titlePic} waves />
+                        <div className="card-buttons">
+                            {api.isLoggedIn() && <MDBBadge onClick={handleDelete} color="danger"><i className="fas fa-trash-alt"></i>Delete</MDBBadge>}
+                            {api.isLoggedIn() && <MDBBadge onClick={handleEdit} color="blue"><i className="fas fa-edit"></i>Edit</MDBBadge>}
+                        </div>
                     </MDBView>
                     <MDBCardBody>
                         <MDBCardTitle>
                             <Heart target={{type: "Collection", targetId: _id, likes: likedSessions.length}} />
                             <div style={{ fontSize: calcFont(title.length) }} className="title">{title}</div>
-                            <div className="card-buttons">
-                                {api.isLoggedIn() && <MDBBadge onClick={handleDelete} color="danger"><i className="fas fa-trash-alt"></i>Delete</MDBBadge>}
-                                {api.isLoggedIn() && <MDBBadge onClick={handleEdit} color="blue"><i className="fas fa-edit"></i>Edit</MDBBadge>}
-                            </div>
                         </MDBCardTitle>
                         <MDBNavLink to={"/collection/"+ _id}><MDBBtn>Details</MDBBtn></MDBNavLink>
                     </MDBCardBody>
@@ -68,13 +69,17 @@ const Card = function (props) {
 
             <MDBCol key="back" onClick={handleClick}>
                 <MDBCard style={{ width: "15rem", height: "26rem" }}>
+                    <div className="card-buttons">
+                        {api.isLoggedIn() && <MDBBadge onClick={handleDelete} color="danger"><i className="fas fa-trash-alt"></i>Delete</MDBBadge>}
+                        {api.isLoggedIn() && <MDBBadge onClick={handleEdit} color="blue"><i className="fas fa-edit"></i>Edit</MDBBadge>}
+                    </div>
                     <MDBCardBody>
                         <MDBCardTitle>
-                            <Heart target={{type: "Collection", targetId: _id, likes: likedSessions.length}} />
+                            <Heart target={{type: "Collection", targetId: _id, likes: likedSessions.length}} />     
                             {title}
                         </MDBCardTitle>
                         <MDBCardText>
-                            {description}
+                            {description.slice(0,maxTextSize)}{description.length > maxTextSize && "..."}
                         </MDBCardText>
                         <div className="tags">
                             {tags.map((tag,i) => <MDBBadge key={i} color="light-green accent-4" ><MDBIcon fas="true" icon="tag" />{tag}</MDBBadge>)}
@@ -88,4 +93,10 @@ const Card = function (props) {
     )
 }
 
-export default connect()(Card)
+function mapStateToProps(reduxState){
+    return {
+        modal: reduxState.modal      
+    }
+}
+
+export default connect(mapStateToProps)(Card)
