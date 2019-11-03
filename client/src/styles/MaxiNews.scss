@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: flex-start;
     padding: 10px;
-    margin: 0 20px;
+    margin: 10px;
 
     img {
         max-width: 300px;
@@ -24,6 +24,10 @@
 
     #heart {
         margin-left: 20px;
+    }
+
+    #maxi-news-delete {
+        position: absolute;
     }
 
     #mini-data {
