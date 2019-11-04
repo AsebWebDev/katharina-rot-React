@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import Collection from './components/pages/Collection';
 import Notification from './components/Notification'
 import PortfolioPDF from './components/pages/PortfolioPDF'
+import AboutMe from './components/pages/AboutMe'
 import InformativeIllustration from './components/pages/InformativeIllustration'
 import GrueneIllustration from './components/pages/GrueneIllustration'
 import News from './components/pages/News'
@@ -34,6 +35,7 @@ function App (props) {
         <Route path="/admin" component={Admin} />
         <Route path="/login" component={Login} />
         <Route path="/portfoliopdf" component={PortfolioPDF} />
+        <Route path="/aboutme" component={AboutMe} />
         <Route path="/informative-illustration" component={InformativeIllustration} />
         <Route path="/gruene-illustration" component={GrueneIllustration} />
         <Route path="/collection/:id" component={Collection} />
