@@ -1,13 +1,12 @@
 import React from "react";
 import { connect } from 'react-redux';
 import { MDBNotification, MDBContainer, MDBAnimation} from "mdbreact";
-
 import { PREPAREDELETE_NOTIFICATION, UPDATE_NOTIFICATIONS } from '../actioncreators'
 import { returnNotificationColor, returnNotificationSymbol } from '../helpers'
-
 import TimeAgo from 'react-timeago'
 import germanStrings from 'react-timeago/lib/language-strings/de'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
+import '../styles/Notification.scss'
 
 const formatter = buildFormatter(germanStrings)
 
@@ -51,7 +50,9 @@ function Notification (props) {
                                 delay={notification.toBeDeleted?"0s":"4s"}
                                 onAnimationEnd={() => handleNotificationFadeOut(notification.created)}>
                             <MDBNotification
-                            // autohide={7000} //in build function disabled, wrote my own logic to make notifications disappear to practice async tasks
+                            // autohide={7000} //in build function disabled, wrote my own logic to make notifications disappear and to practice async tasks
+                            // pauseOnHover={true}
+                            bodyClassName="notification-body"
                             show
                             fade
                             icon={returnNotificationSymbol(notification.typeOfNotification)}
