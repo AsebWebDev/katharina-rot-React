@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux';
 import $ from "jquery";
+import { MDBAnimation } from "mdbreact";
 import ParallaxLeft from '../CollectionParallaxLeft'
 import ParallaxRight from '../CollectionParallaxRight'
 import Slider from './Slider/Slider'
@@ -45,12 +46,15 @@ function Collection(props) {
       src: img
     })
   )}
+
+  let redirect = () => props.history.push('/')
   
   if (currentCollection) {
     let { title, description, pictures, titlePic } = currentCollection;
     let hasPictures = pictures.length > 0
     return (
       <div className="collection">
+          <MDBAnimation type="slideInLeft"><div onClick={redirect} className="backBtn"><i class="fas fa-arrow-circle-left"></i></div></MDBAnimation>
           <p className="title">{title}</p>
           {!isFullScreen && hasPictures && 
               <p>{description}</p>}
