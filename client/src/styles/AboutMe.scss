@@ -10,6 +10,10 @@
         width: 80%;
         margin-bottom: 30px;
 
+        hr {
+            width: 97%;
+        }
+
         img {
             width: 100%
         }
@@ -45,14 +49,25 @@
         text-align: left;
         
         .section2-left{
-            width: 30%;
-            
+            width: 30%; 
+
+            img {
+                width: 100%;
+                margin-top: 15px;
+            }
+            .customer-list {
+                padding-left: 20px;
+            }
         }
 
         .section2-right{
             width: 65%;
             padding-left: 70px;
             border-left: 1px solid black;
+
+            img {
+                width: 300px;
+            }
         }
     }
 
@@ -62,17 +77,43 @@
         text-transform: uppercase;
     }
 
-    @media only screen and (max-width: 765px) {
+    .publications {
 
-        #aboutme {
-            margin: 0;
+        ul{
+            list-style: none;
         }
 
+        li {
+            font-weight: bold;
+            color: #FF680B;
+        }
+
+        span {
+            padding-left: 20px;
+        }
+    }
+
+    .exhibitions {
+        display: flex;
+        justify-content: space-between;
+        li {
+            list-style: none;
+        }
+    }
+
+    @media only screen and (max-width: 765px) {
+
+        #about-me {
+            margin: 0;
+        }
+    
         .section1 {
             flex-direction: column;
             align-items: center;
             width: 100%;
+            margin-bottom: 0;
 
+    
             .section1-left {
                 width: 100%;
                 padding: 0;
@@ -86,11 +127,41 @@
                 padding: 0;
             }
         }
+    
+        .section2 {
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+    
+            .section2-left{
+                width: 90%;  
+            }
+    
+            .section2-right{
+                width: 90%;
+                padding-left: 0;
+                border-left: none;
+            }
+    
+            .customer-list {
+                padding: 5px 0 0 20px;
+            }
 
+            .publications {
+                // background-color: red;;
+            }
+        }
+    
         .aboutme-title{
             font-size: 1.6rem;
             display: flex;
             flex-direction: column;
         }
+    }
+}
+
+@media only screen and (max-width: 765px) {
+    #about-me {
+        margin-top: 0px;
     }
 }

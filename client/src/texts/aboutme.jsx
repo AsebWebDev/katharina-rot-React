@@ -29,7 +29,7 @@ export const section1b_text = (
 )
 
 export const customer_list = (
-    <div>
+    <div className="customer-list">
         <ul>
             <li>Leopoldina – Nationale Akademie</li>
             <li>der Wissenschaften</li>
@@ -61,3 +61,31 @@ export const vita = (
         <p><strong>1988</strong> | geboren in Hamburg</p>
     </div>
 )
+
+export const publications = (
+    <div className="publications">
+        <ul>
+            <li>Das Gute Leben für Alle!</li>
+            <span>Oekom Verlag, Februar | <strong>2019</strong></span>
+            <li>BOOKZINE #5 – Mensch</li>
+            <span>Correctiv, Mai | <strong>2018</strong></span>
+            <li>Auf Kosten Anderer</li>
+            <span>Oekom Verlag, Sommer | <strong>2017</strong></span>
+            <li>Schweinchen Schlau – Mein Papa gehört mir!</li>
+            <span>Echo Verlag | <strong>2016</strong></span>
+        </ul>
+    </div>
+)
+
+export const exhibitions = (
+    <div className="exhibitions">
+        <ul>
+            <li><strong>04.05. – 01.07.2018 | </strong>I WANNA BE YOUR DOG #2, Künstlerhaus Dortmund e.V.</li>
+            <li><strong>10.04.15 | </strong>Kunst und Pizza, Brakula, Bramfelder Kulturladen e.V, Hamburg</li>
+            <li><strong>01.08. – 31.08.13 | </strong>„Mensch und Tier“, Veganz, Hamburg</li>
+            <li><strong>02.06. – 15.06.12 | </strong>„What If“, Glassfabriken, Malmö, Schweden</li>
+            <li><strong>03.04. – 20.06.13 | </strong>Kulturhaus Eppendorf, Hamburg</li>
+        </ul>
+    </div>
+)
+
