@@ -74,7 +74,7 @@ const Card = function (props) {
                             <Heart target={{type: "Collection", targetId: _id, likes: likedSessions.length}} />
                             <div style={{ fontSize: calcFont(title.length) }} className="title">{title}</div>
                         </MDBCardTitle>
-                        <MDBNavLink to={"/collection/"+ _id}><MDBBtn>Details</MDBBtn></MDBNavLink>
+                        <MDBNavLink to={"/collection/"+ _id}><MDBBtn color="light">Details</MDBBtn></MDBNavLink>
                     </MDBCardBody>
                 </MDBCard>
             </MDBCol>
@@ -96,7 +96,7 @@ const Card = function (props) {
                         <div className="tags">
                             {tags.map((tag,i) => 
                                 <div>
-                                    <MDBBadge key={i} color="light-green accent-4" >
+                                    <MDBBadge key={i} color="info" >
                                         {api.isLoggedIn() && 
                                             <span className="x">
                                                 <MDBIcon onClick={handleTagClick} id={i} name={tag} icon="trash-alt" />
@@ -106,7 +106,7 @@ const Card = function (props) {
                                 </div>)
                             }
                         </div>
-                        <MDBNavLink to={"/collection/"+ _id}><MDBBtn>Details</MDBBtn></MDBNavLink>                    
+                        <MDBNavLink to={"/collection/"+ _id}><MDBBtn color="light">Details</MDBBtn></MDBNavLink>                    
                     </MDBCardBody>
                 </MDBCard>
             </MDBCol>

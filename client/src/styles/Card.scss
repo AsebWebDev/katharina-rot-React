@@ -5,6 +5,7 @@
 .gallery {
     .card {
         height: 24rem!important;
+        padding: 5px;
     }
 }
 
@@ -20,10 +21,17 @@ i {
 .tags {
     display: flex;
     flex-wrap: wrap;
+    overflow: overlay;
     justify-content: center;
+    max-height: 18%;
+    font-size: 0.5rem;
 
     .x {
         display: none;
+    }
+
+    .badge {
+        box-shadow: none;
     }
 
     .badge:hover {
@@ -32,7 +40,7 @@ i {
             margin-right: 8px;
             color: red;
             font-weight: bolder;
-
+            box-shadow: none;
         }
     }
 }
@@ -52,9 +60,13 @@ i {
 .card-body {
     display: flex;
     flex-direction: column;
-    min-height: 35%;
+    height: 46%;
     align-items: center;
     padding: 0.8rem;
+
+    btn {
+        align-self: flex-end;
+    }
 }
 
 .card-title {
@@ -85,17 +97,22 @@ i {
 .react-card-back {
     .card-body {
         justify-content: space-between;
+
+        p {
+            margin: 0;
+        }
     }
 
     .card-text {
         align-self: auto;
         overflow: hidden;
         max-height: 40%;
+        font-size: 0.7rem !important;
     }
 
     .card-title {
         height: 20%;
-        margin-top: 16%;
+        margin-top: 10%;
     }
 }
 
