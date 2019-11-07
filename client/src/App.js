@@ -12,6 +12,7 @@ import PortfolioPDF from './components/pages/PortfolioPDF'
 import AboutMe from './components/pages/AboutMe'
 import AGB from './components/pages/AGB'
 import Contact from './components/pages/Contact'
+import LiabilityAndCopyrights from './components/pages/LiabilityAndCopyrights'
 import InformativeIllustration from './components/pages/InformativeIllustration'
 import GrueneIllustration from './components/pages/GrueneIllustration'
 import News from './components/pages/News'
@@ -40,6 +41,7 @@ function App (props) {
         <Route path="/aboutme" component={AboutMe} />
         <Route path="/agb" component={AGB} />
         <Route path="/contact" component={Contact} />
+        <Route path="/impressum" component={LiabilityAndCopyrights} />
         <Route path="/informative-illustration" component={InformativeIllustration} />
         <Route path="/gruene-illustration" component={GrueneIllustration} />
         <Route path="/collection/:id" component={Collection} />
