@@ -11,7 +11,7 @@ import '../styles/Card.scss'
 const Card = function (props) {
 
     let maxTextSize = 140;
-    let {title, titlePic, description, tags, _id, likedSessions} = props.collection;
+    let { title, titlePic, description, tags, _id, likedSessions } = props.collection;
     let [isFlipped, setIsFlipped] = useState(false);
     let {dispatch} = props;
 
@@ -91,7 +91,7 @@ const Card = function (props) {
                             {title}
                         </MDBCardTitle>
                         <MDBCardText>
-                            {description.slice(0,maxTextSize)}{description.length > maxTextSize && "..."}
+                            {description && description.slice(0,maxTextSize)}{description && description.length > maxTextSize && "..."}
                         </MDBCardText>
                         <div className="tags">
                             {tags.map((tag,i) => 
