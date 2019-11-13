@@ -9,6 +9,7 @@ import api from '../../api';
 import { newNotification } from '../../actioncreators'
 import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import '../../styles/Create.scss';
+import '../../styles/Editor.scss'
 import uploadThumbnail from '../../media/upload-thumbnail2.gif';
 
 function CreateCollection(props) {
@@ -17,7 +18,6 @@ function CreateCollection(props) {
     let [pictures, setPictures] = useState([]);
     let [currentCollection, setCurrentCollection] = useState({tags: []})
     let [editorState, setEditorState] = useState(EditorState.createEmpty())
-    let [editorContentRaw, setEditorContentRaw] = useState(null)
 
     let uploadWidget = (e) => {
         e.preventDefault();
@@ -55,7 +55,6 @@ function CreateCollection(props) {
     let handleSubmit = (e) => {
         e.preventDefault();
         const contentState = JSON.stringify(convertToRaw(editorState.getCurrentContent()));
-        console.log("TCL: handleSubmit -> contentState", contentState)
         let data = {...currentCollection, pictures, titlePic, editorState: contentState}
         api.addCollection(data)
         .then(result => {
@@ -64,13 +63,6 @@ function CreateCollection(props) {
             setPictures([])
             setTitlePic('')
         }).catch(err => dispatch(newNotification(err.toString())));
-    }
-
-    let saveContent = (e) => {
-        e.preventDefault();
-        const contentState = editorState.getCurrentContent();
-        const raw = convertToRaw(contentState);
-        let test = convertFromRaw(raw)
     }
 
     return (
@@ -89,30 +81,20 @@ function CreateCollection(props) {
                         </MDBBtn></p>}
                         {currentCollection && currentCollection.tags && <InputTag id="input-tag" tags={currentCollection.tags} updateTags={e => updateTags(e)}/>}
                         <div id="input-description-create">
-                           <MDBInputGroup id="description" onChange={handleChange} value={currentCollection.description || ''} prepend="Description" type="textarea"/>
-                            <div id="editor">
+                           <MDBInputGroup id="description" onChange={handleChange} value={currentCollection.description || ''} prepend="Short Description" type="textarea"/>
+                            <div className="editor-content-edit">
                                 <Editor 
                                     wrapperClassName="editor-wrapper"
                                     editorClassName="editor-main"
                                     toolbarClassName="editor-toolbar"
                                     editorState={editorState}
                                     onEditorStateChange={setEditorState}
-                                    // onChange={handleEditorChange}
                                     localization={{ locale: 'de' }}
                                     // wrapperStyle={{backgroundColor: "#ffffff"}}
                                     // editorStyle={<editorStyleObject>}
                                     // toolbarStyle={<toolbarStyleObject>}
                                 />  
-                                <div>
-                                    {/* { test4 && <Editor 
-                                    readOnly={true} 
-                                    toolbarHidden
-                                    editorState={test4}
-                                    />} */}
-                                    {editorContentRaw && "Yes, there is stuff not null"}
-                                </div>
                             </div>
-                            <button onClick={saveContent}>Save</button>
                         </div>
                         <div id="main-menu-buttons">
                             <div><MDBBtn onClick={uploadWidget} id="upload-art" className="cloudinary-button">Upload Art</MDBBtn></div>
