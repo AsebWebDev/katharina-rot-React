@@ -1,41 +1,7 @@
 #plx-collection {
-    display: flex;
-    flex-direction: row;
     margin-top: 140px;
 }
 
-#plx-left {
-    width: 70%;
-    padding: 1%;
-}
-
-#plx-right {
-    width: 30%;
-    .flex {
-        display: flex;      
-        flex-direction: row;
-        justify-content: flex-end;
-    }
-    position: sticky;
-}
-
-#plx-description {
-        height: 10vh;
-    margin: 0 0px 0 0;
-    font-size: 2rem;
-    font-weight: 700;
-    
-    p {
-        font-size: 1.2rem;
-    }
-}
-
-
-
-.react-parallax {
-    margin-bottom: 20px;
-}
-
 .plx img{
-    box-shadow: 0 0 5px 5px black;
+    box-shadow: 0 0 1px 2px grey;
 }
