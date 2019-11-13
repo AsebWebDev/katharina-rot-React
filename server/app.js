@@ -1,6 +1,4 @@
 //TODO: add multiple picture upload to news, show gallery in details
-//TODO: use Draft.js for text editing
-//TODO: change parallax with plain view, add parallax in unser settings later
 //TODO: implement User Settings
 //TODO: use OAuth
 //TODO: try / practice GraphQl
