@@ -37,9 +37,9 @@ export function calcCoverflow (width) {
 }
 
 export function checkMobile () {
-    return ($(window).width() <= 760) ? true : false
+    return ($(window).width() <= 361) ? true : false
 }
 
 export function checkFullScreen () {
-    return ($(window).width() > 1200) ? true : false
+    return ($(window).width() > 1400) ? true : false
 }
