@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBInputGroup } from 'mdbreact';
 import { toggleModal, setUploadedPics, newNotification } from '../../actioncreators'
+import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
 import EditPictures from './EditPictures'
 import InputTag from '../InputTag'
 import api from '../../api';
@@ -11,10 +13,15 @@ function EditModal(props) {
   let {dispatch} = props;
   let currentId = props.modal.currentId;
   let [currentCollection, setCurrentCollection] = useState({})
+  let [editorState, setEditorState] = useState(EditorState.createEmpty())
 
   useEffect(() => {
     api.getOneCollection(currentId) // BACKEND REQUEST AND SET DATA TO STATE
-    .then(res => { setCurrentCollection(res.collection) })
+    .then(res => { 
+      setCurrentCollection(res.collection)
+      console.log("TCL: EditModal -> res.collection", res.collection)
+      setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(res.collection.editorState))))
+    })
     .catch (err => console.log(err))
   }, [currentId])
 
@@ -29,10 +36,12 @@ function EditModal(props) {
 
   let handleSubmit = (e) => {
     e.preventDefault();
+    const contentState = JSON.stringify(convertToRaw(editorState.getCurrentContent()));
     let body = {
       ...currentCollection,
       pictures: props.uploadedPictures ? props.uploadedPictures : currentCollection.pictures, // use uploaded pictures if exists
-      titlePic: props.uploadedTitlePic ? props.uploadedTitlePic : currentCollection.titlePic // use uploaded Titlepic if exists
+      titlePic: props.uploadedTitlePic ? props.uploadedTitlePic : currentCollection.titlePic, // use uploaded Titlepic if exists
+      editorState: contentState
     }
     api.updateCollection(currentId, body)
       .then(result => {
@@ -69,6 +78,19 @@ function EditModal(props) {
             {currentCollection && currentCollection.tags && <InputTag id="input-tag" tags={currentCollection.tags} updateTags={updateTags}/>}
             <div id="input-description">
               <MDBInputGroup id="description" onChange={handleChange} value={currentCollection.description} prepend="Description" type="textarea"/>
+              <div className="editor-content-edit">
+                  <Editor 
+                      wrapperClassName="editor-wrapper"
+                      editorClassName="editor-main"
+                      toolbarClassName="editor-toolbar"
+                      editorState={editorState}
+                      onEditorStateChange={setEditorState}
+                      localization={{ locale: 'de' }}
+                      // wrapperStyle={{backgroundColor: "#ffffff"}}
+                      // editorStyle={<editorStyleObject>}
+                      // toolbarStyle={<toolbarStyleObject>}
+                  />  
+              </div>
             </div>
           </MDBModalBody>
           <MDBModalFooter>
