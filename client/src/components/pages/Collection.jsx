@@ -4,8 +4,7 @@ import $ from "jquery";
 import { MDBAnimation } from "mdbreact";
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, convertFromRaw } from 'draft-js';
-import ParallaxLeft from '../CollectionParallaxLeft'
-import ParallaxRight from '../CollectionParallaxRight'
+import CollectionParallax from '../CollectionParallax'
 import Slider from './Slider/Slider'
 import SlideModal from './Slider/SlideModal'
 import api from '../../api';
@@ -57,34 +56,38 @@ function Collection(props) {
     let editorState = currentCollection.editorState 
       ? EditorState.createWithContent(convertFromRaw(JSON.parse(currentCollection.editorState)))
       : null
-    console.log("TCL: editorState", editorState)
     let hasPictures = pictures.length > 0
     return (
       <div className="collection">
           <MDBAnimation type="slideInLeft"><div onClick={redirect} className="backBtn"><i className="fas fa-arrow-circle-left"></i></div></MDBAnimation>
           <p className="title">{title}</p>
           <p className="description">{description}</p>
-          {!isFullScreen && hasPictures && 
-              <div className="editor-content">
-                <Editor 
-                readOnly={true} 
-                toolbarHidden
-                editorState={editorState}
-                />
-              </div>}
+
+          {/* Show only when gallery exists */}
           {hasPictures && 
-              <Slider heading="Example Slider" slides={parsedPictures} id={currentId} />}
-          {!isMobile && hasPictures 
-              && <Slider heading="Example Slider" slides={parsedPictures} id={currentId} /> 
-              &&  <div id="plx-collection">
-                    <div id="plx-left" className="plx">
-                      <ParallaxLeft currentId={currentId}/>
-                    </div>
-                    {isFullScreen && <div id="plx-right" className="plx">
-                      <ParallaxRight currentId={currentId}/>  
-                    </div>}
+              <div >
+                <Slider className="slider" heading="Example Slider" slides={parsedPictures} id={currentId} />
+                <div id="plx-collection">
+                  {isFullScreen && <div className="collection-left">
+                        <CollectionParallax currentId={currentId}/>
+                  </div>}
+                  {!isFullScreen && !isMobile && <div className="collection-left">
+                        {pictures.map((pic,i) => <img src={pic} key={i} alt="gallery"/>)}
+                  </div>}
+                  <div className="collection-right">
+                    <div className="editor-content">
+                      <Editor 
+                      readOnly={true} 
+                      toolbarHidden
+                      editorState={editorState}
+                      />
+                    </div>      
                   </div>
+                </div>
+              </div>
           }
+          
+          {/* Show this, when no gallery exists */}
           {!hasPictures && 
               <div id="no-pictures-div">
                 <img src={titlePic} alt="Titelbild"/>
@@ -96,6 +99,8 @@ function Collection(props) {
                   />
                 </div>
               </div>}
+          
+          {/* Modal, when clicked on gallery picture */}
           {props.modal && props.modal.isOpen && hasPictures && 
               <SlideModal img={pictures[props.modal.currentIndex]} />}
       </div>
