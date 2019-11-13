@@ -5,7 +5,7 @@ import { CloudinaryContext } from 'cloudinary-react';
 import InputTag from '../InputTag'
 import api from '../../api';
 import { newNotification } from '../../actioncreators'
-import '../../styles/Create.css'
+import '../../styles/Create.scss'
 import uploadThumbnail from '../../media/upload-thumbnail2.gif'
 
 function CreateNews(props) {
