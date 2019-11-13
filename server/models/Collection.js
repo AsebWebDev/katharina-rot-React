@@ -24,7 +24,11 @@ const collectionSchema = new mongoose.Schema({
   likedSessions: {
     type: [String],
     default: []
-  }
+  },
+  editorState: {
+    type: String,
+    default: null
+  },
 });
 
 const Collection = mongoose.model('Collection', collectionSchema);
