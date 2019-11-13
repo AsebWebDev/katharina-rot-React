@@ -61,6 +61,7 @@ function CreateNews(props) {
             setCurrentNews({tags: []})
             setTitlePic('')
             setThumbnail('')
+            setPictures([])
             api.getNews()
                 .then(news => props.dispatch({
                     type: "GET_NEWS", 
