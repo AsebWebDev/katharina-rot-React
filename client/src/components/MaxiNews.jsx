@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux';
-import { MDBAnimation, MDBBadge } from 'mdbreact';
+import { MDBAnimation, MDBBadge, MDBNavLink, MDBBtn } from 'mdbreact';
 import TimeAgo from 'react-timeago'
 import germanStrings from 'react-timeago/lib/language-strings/de'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
@@ -12,7 +12,8 @@ import '../styles/MaxiNews.scss'
 const formatter = buildFormatter(germanStrings)
 
 function MaxiNews(props) {
-    const { dispatch, news,i } = props;
+    console.log("TCL: props", props)
+    const { dispatch, news, i, } = props;
     const section = "section" + i
     const collapsible = section + " section collapsible"
     let [expand, setExpand] = useState(false)
@@ -57,6 +58,7 @@ function MaxiNews(props) {
                             : <MDBAnimation type="fadeIn">{news.description && news.description.slice(301,news.description.length)}</MDBAnimation>}
                     </div>
                 </div>
+                <MDBNavLink to={"/news/"+ news._id}><MDBBtn color="light">Details</MDBBtn></MDBNavLink>
             </div>
         </div>
     )
