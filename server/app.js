@@ -1,7 +1,13 @@
+//TODO: add multiple picture upload to news, show gallery in details
+//TODO: use Draft.js for text editing
+//TODO: change parallax with plain view, add parallax in unser settings later
+//TODO: implement User Settings
 //TODO: use OAuth
 //TODO: try / practice GraphQl
 //TODO: add decent animations
-//TODO: Add scrolling background to gallery (parallax)
+
+//FIXME: reset Tags after submitting news
+
 
 const path = require('path')
 require('dotenv').config({ path: path.join(__dirname, '.env') })
