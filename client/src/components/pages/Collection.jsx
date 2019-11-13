@@ -11,6 +11,7 @@ import SlideModal from './Slider/SlideModal'
 import api from '../../api';
 import { checkMobile, checkFullScreen } from '../../helpers'
 import '../../styles/Collection.scss'
+import '../../styles/Editor.scss'
 
 function Collection(props) {
   let [currentId] = useState(props.match.params.id)
@@ -53,7 +54,6 @@ function Collection(props) {
   
   if (currentCollection) {
     let { title, description, pictures, titlePic } = currentCollection;
-    console.log(currentCollection.editorState)
     let editorState = currentCollection.editorState 
       ? EditorState.createWithContent(convertFromRaw(JSON.parse(currentCollection.editorState)))
       : null
@@ -63,6 +63,7 @@ function Collection(props) {
       <div className="collection">
           <MDBAnimation type="slideInLeft"><div onClick={redirect} className="backBtn"><i className="fas fa-arrow-circle-left"></i></div></MDBAnimation>
           <p className="title">{title}</p>
+          <p className="description">{description}</p>
           {!isFullScreen && hasPictures && 
               <div className="editor-content">
                 <Editor 

@@ -1,0 +1,26 @@
+.editor-content-edit {
+
+    margin-top: 30px;
+
+    .editor-main {
+        border: 1px solid lightgrey;
+        border-radius: 5px;
+        padding: 0 10px;
+    }
+
+    .rdw-option-wrapper {
+        padding-top: 15px;
+    }
+}
+
+.editor-content {
+    
+    .rdw-editor-main {
+        display: flex;
+        justify-content: center;
+    }
+
+    .DraftEditor-root {
+        width: 90%
+    }
+}
