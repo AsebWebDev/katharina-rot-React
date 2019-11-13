@@ -7,6 +7,7 @@ import Admin from './components/pages/Admin';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Collection from './components/pages/Collection';
+import NewsDetails from './components/pages/NewsDetails';
 import Notification from './components/Notification'
 import PortfolioPDF from './components/pages/PortfolioPDF'
 import AboutMe from './components/pages/AboutMe'
@@ -45,6 +46,7 @@ function App (props) {
         <Route path="/informative-illustration" component={InformativeIllustration} />
         <Route path="/gruene-illustration" component={GrueneIllustration} />
         <Route path="/collection/:id" component={Collection} />
+        <Route path="/news/:id" component={NewsDetails} />
         <Route path="/news" component={News} />
         <Route render={() => <h2>404</h2>} />
       </Switch>
