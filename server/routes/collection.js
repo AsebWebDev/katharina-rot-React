@@ -42,12 +42,7 @@ router.post('/:id/', isAdmin, (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
   Collection.findById(req.params.id) // To access the updated collection (and not the old collection)
-    .then(collection => {
-      res.json({
-        message: "SUCCESS",
-        collection
-      })
-    })
+    .then(collection => { res.json({ message: "SUCCESS", collection }) })
     .catch(err => next(err))
 });
 
@@ -56,10 +51,7 @@ router.post('/', isAdmin, (req, res, next) => {
   let titlePic;
   if (req.body.titlePic) titlePic = req.body.titlePic // leave undefined if not provided, so Mongoose default is set
   Collection.create({ title, titlePic, pictures, tags, description,   editorState })
-    .then(Collection => {
-      console.log(Collection)
-      res.json({ success: true, Collection });
-    })
+    .then(Collection => { res.json({ success: true, Collection }) })
     .catch(err => next(err))
 });
 
