@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux';
 import $ from "jquery";
 import { MDBAnimation } from "mdbreact";
+import { Editor } from 'react-draft-wysiwyg';
+import { EditorState, convertFromRaw } from 'draft-js';
 import ParallaxLeft from '../CollectionParallaxLeft'
 import ParallaxRight from '../CollectionParallaxRight'
 import Slider from './Slider/Slider'
@@ -51,13 +53,24 @@ function Collection(props) {
   
   if (currentCollection) {
     let { title, description, pictures, titlePic } = currentCollection;
+    console.log(currentCollection.editorState)
+    let editorState = currentCollection.editorState 
+      ? EditorState.createWithContent(convertFromRaw(JSON.parse(currentCollection.editorState)))
+      : null
+    console.log("TCL: editorState", editorState)
     let hasPictures = pictures.length > 0
     return (
       <div className="collection">
-          <MDBAnimation type="slideInLeft"><div onClick={redirect} className="backBtn"><i class="fas fa-arrow-circle-left"></i></div></MDBAnimation>
+          <MDBAnimation type="slideInLeft"><div onClick={redirect} className="backBtn"><i className="fas fa-arrow-circle-left"></i></div></MDBAnimation>
           <p className="title">{title}</p>
           {!isFullScreen && hasPictures && 
-              <p>{description}</p>}
+              <div className="editor-content">
+                <Editor 
+                readOnly={true} 
+                toolbarHidden
+                editorState={editorState}
+                />
+              </div>}
           {hasPictures && 
               <Slider heading="Example Slider" slides={parsedPictures} id={currentId} />}
           {!isMobile && hasPictures 
@@ -74,7 +87,13 @@ function Collection(props) {
           {!hasPictures && 
               <div id="no-pictures-div">
                 <img src={titlePic} alt="Titelbild"/>
-                <p>{description}</p>
+                <div className="editor-content">
+                  <Editor 
+                  readOnly={true} 
+                  toolbarHidden
+                  editorState={editorState}
+                  />
+                </div>
               </div>}
           {props.modal && props.modal.isOpen && hasPictures && 
               <SlideModal img={pictures[props.modal.currentIndex]} />}

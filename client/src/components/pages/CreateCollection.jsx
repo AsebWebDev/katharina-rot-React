@@ -2,17 +2,22 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { MDBJumbotron, MDBBtn, MDBContainer, MDBRow, MDBCol, MDBInputGroup } from "mdbreact";
 import { CloudinaryContext } from 'cloudinary-react';
-import InputTag from '../InputTag'
+import { EditorState, convertToRaw, convertFromRaw, ContentState } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
+import InputTag from '../InputTag';
 import api from '../../api';
 import { newNotification } from '../../actioncreators'
-import '../../styles/Create.css'
-import uploadThumbnail from '../../media/upload-thumbnail2.gif'
+import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import '../../styles/Create.scss';
+import uploadThumbnail from '../../media/upload-thumbnail2.gif';
 
 function CreateCollection(props) {
     let {dispatch} = props;
     let [titlePic, setTitlePic] = useState('');
     let [pictures, setPictures] = useState([]);
     let [currentCollection, setCurrentCollection] = useState({tags: []})
+    let [editorState, setEditorState] = useState(EditorState.createEmpty())
+    let [editorContentRaw, setEditorContentRaw] = useState(null)
 
     let uploadWidget = (e) => {
         e.preventDefault();
@@ -45,12 +50,13 @@ function CreateCollection(props) {
             ...currentCollection,
             [e.target.id]: e.target.value
         })
-        console.log(currentCollection)
     }
 
     let handleSubmit = (e) => {
         e.preventDefault();
-        let data = {...currentCollection, pictures, titlePic}
+        const contentState = JSON.stringify(convertToRaw(editorState.getCurrentContent()));
+        console.log("TCL: handleSubmit -> contentState", contentState)
+        let data = {...currentCollection, pictures, titlePic, editorState: contentState}
         api.addCollection(data)
         .then(result => {
             dispatch(newNotification(`Your Collection '${result.Collection.title}' has been created`, 'Created'))
@@ -58,6 +64,13 @@ function CreateCollection(props) {
             setPictures([])
             setTitlePic('')
         }).catch(err => dispatch(newNotification(err.toString())));
+    }
+
+    let saveContent = (e) => {
+        e.preventDefault();
+        const contentState = editorState.getCurrentContent();
+        const raw = convertToRaw(contentState);
+        let test = convertFromRaw(raw)
     }
 
     return (
@@ -77,11 +90,34 @@ function CreateCollection(props) {
                         {currentCollection && currentCollection.tags && <InputTag id="input-tag" tags={currentCollection.tags} updateTags={e => updateTags(e)}/>}
                         <div id="input-description-create">
                            <MDBInputGroup id="description" onChange={handleChange} value={currentCollection.description || ''} prepend="Description" type="textarea"/>
+                            <div id="editor">
+                                <Editor 
+                                    wrapperClassName="editor-wrapper"
+                                    editorClassName="editor-main"
+                                    toolbarClassName="editor-toolbar"
+                                    editorState={editorState}
+                                    onEditorStateChange={setEditorState}
+                                    // onChange={handleEditorChange}
+                                    localization={{ locale: 'de' }}
+                                    // wrapperStyle={{backgroundColor: "#ffffff"}}
+                                    // editorStyle={<editorStyleObject>}
+                                    // toolbarStyle={<toolbarStyleObject>}
+                                />  
+                                <div>
+                                    {/* { test4 && <Editor 
+                                    readOnly={true} 
+                                    toolbarHidden
+                                    editorState={test4}
+                                    />} */}
+                                    {editorContentRaw && "Yes, there is stuff not null"}
+                                </div>
+                            </div>
+                            <button onClick={saveContent}>Save</button>
                         </div>
-                        <p id="main-menu-buttons">
-                            <p><MDBBtn onClick={uploadWidget} id="upload-art" className="cloudinary-button">Upload Art</MDBBtn></p>
-                            <p><MDBBtn onClick={handleSubmit} color="success">Submit</MDBBtn></p>
-                        </p>
+                        <div id="main-menu-buttons">
+                            <div><MDBBtn onClick={uploadWidget} id="upload-art" className="cloudinary-button">Upload Art</MDBBtn></div>
+                            <div><MDBBtn onClick={handleSubmit} color="success">Submit</MDBBtn></div>
+                        </div>
                     </form>
                     </CloudinaryContext>
                     <div id="gallery-create">
