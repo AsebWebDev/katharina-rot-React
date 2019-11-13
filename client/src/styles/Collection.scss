@@ -9,11 +9,20 @@
             padding: 0 10%;
             text-align: left;
         }
+
+        img {
+            margin-top: 20px;
+            width: 95%;
+        }
     }
 
     .backBtn {
         position: absolute;
         margin-left: 4%;
         font-size: 3rem;
+    }
+
+    .rdw-editor-main {
+        overflow: hidden;
     }
 }
