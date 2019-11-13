@@ -25,12 +25,14 @@ router.post('/:id/delete', isAdmin, (req, res, next) => {
 });
 
 router.post('/:id/', isAdmin, (req, res, next) => {
+  console.log("TCL: req.body", req.body)
   Collection.findByIdAndUpdate(req.params.id, {
     title: req.body.title,
     titlePic: req.body.titlePic,
     pictures: req.body.pictures,
     tags: req.body.tags.filter(tag => tag !== ''), // filter all blank spaces from array
     description: req.body.description,
+    editorState: req.body.editorState,
   }, { new: true }) // To access the updated collection (and not the old collection)
     .then(collection => {
       Collection.find()
@@ -50,16 +52,13 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/', isAdmin, (req, res, next) => {
-  let { title, pictures, description, tags} = req.body
+  let { title, pictures, description, tags, editorState} = req.body
   let titlePic;
   if (req.body.titlePic) titlePic = req.body.titlePic // leave undefined if not provided, so Mongoose default is set
-  Collection.create({ title, titlePic, pictures, tags, description })
+  Collection.create({ title, titlePic, pictures, tags, description,   editorState })
     .then(Collection => {
       console.log(Collection)
-      res.json({
-        success: true,
-        Collection
-      });
+      res.json({ success: true, Collection });
     })
     .catch(err => next(err))
 });
