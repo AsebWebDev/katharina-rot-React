@@ -21,6 +21,34 @@
     }
 
     .DraftEditor-root {
-        width: 90%
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .DraftEditor-editorContainer {
+        width: 50%;
+    }
+
+    .rdw-image-imagewrapper {
+        img {
+            width: 100%!important;
+        }
+    }
+}
+
+@media only screen and (max-width: 361px) {
+    .editor-content {
+    
+        .DraftEditor-editorContainer {
+            width: 90%;
+            font-size: 1rem;
+        }
+
+        .public-DraftStyleDefault-block {
+            white-space: normal;
+        }
+
     }
 }
