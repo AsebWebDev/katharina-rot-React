@@ -14,6 +14,10 @@ const newsSchema = new mongoose.Schema({
     type: String,
     default: 'https://community.adobe.com/legacyfs/online/avatars/a754554_Capture.png'
   },
+  pictures: {
+    type: [String],
+    default: []
+  },
   tags: {
     type: [String],
     default: []
@@ -28,6 +32,10 @@ const newsSchema = new mongoose.Schema({
   likedSessions: {
     type: [String],
     default: []
+  },
+  editorState: {
+    type: String,
+    default: null
   },
 },
 {
