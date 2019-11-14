@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { MDBJumbotron, MDBBtn, MDBContainer, MDBRow, MDBCol, MDBInputGroup } from "mdbreact";
 import { CloudinaryContext } from 'cloudinary-react';
+import { EditorState, convertToRaw } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
 import InputTag from '../InputTag'
 import api from '../../api';
 import { newNotification } from '../../actioncreators'
@@ -14,6 +16,7 @@ function CreateNews(props) {
     let [thumbnail, setThumbnail] = useState('');
     let [pictures, setPictures] = useState([]);
     let [currentNews, setCurrentNews] = useState({tags: []})
+    let [editorState, setEditorState] = useState(EditorState.createEmpty())
 
     let uploadWidget = (e) => {
         e.preventDefault();
@@ -53,15 +56,16 @@ function CreateNews(props) {
 
     let handleSubmit = (e) => {
         e.preventDefault();
-        let data = {...currentNews, titlePic, thumbnail}
+        const contentState = JSON.stringify(convertToRaw(editorState.getCurrentContent()));
+        let data = {...currentNews, titlePic, thumbnail, pictures, editorState: contentState}
         api.addNews(data)
         .then(result => {
-        console.log("TCL: handleSubmit -> result", result)
             dispatch(newNotification(`Your News '${result.news.title}' has been created`, 'Created'))
             setCurrentNews({tags: []})
             setTitlePic('')
             setThumbnail('')
             setPictures([])
+            setEditorState(EditorState.createEmpty())
             api.getNews()
                 .then(news => props.dispatch({
                     type: "GET_NEWS", 
@@ -86,12 +90,25 @@ function CreateNews(props) {
                         </MDBBtn></p>}
                         {currentNews && currentNews.tags && <InputTag id="input-tag" tags={currentNews.tags} updateTags={e => updateTags(e)}/>}
                         <div id="input-description-create">
-                           <MDBInputGroup id="description" onChange={handleChange} value={currentNews.description || ''} prepend="Description" type="textarea"/>
+                           <MDBInputGroup id="description" onChange={handleChange} value={currentNews.description || ''} prepend="Short Description" type="textarea"/>
+                           <div className="editor-content-edit">
+                                <Editor 
+                                    wrapperClassName="editor-wrapper"
+                                    editorClassName="editor-main"
+                                    toolbarClassName="editor-toolbar"
+                                    editorState={editorState}
+                                    onEditorStateChange={setEditorState}
+                                    localization={{ locale: 'de' }}
+                                    // wrapperStyle={{backgroundColor: "#ffffff"}}
+                                    // editorStyle={<editorStyleObject>}
+                                    // toolbarStyle={<toolbarStyleObject>}
+                                />  
+                            </div>
                         </div>
-                        <p id="main-menu-buttons">
-                            <p><MDBBtn onClick={uploadWidget} id="upload-art" className="cloudinary-button">Upload Art</MDBBtn></p>
-                            <p><MDBBtn onClick={handleSubmit}  color="success">Submit</MDBBtn></p>
-                        </p>
+                        <div id="main-menu-buttons">
+                            <div><MDBBtn onClick={uploadWidget} id="upload-art" className="cloudinary-button">Upload Art</MDBBtn></div>
+                            <div><MDBBtn onClick={handleSubmit}  color="success">Submit</MDBBtn></div>
+                        </div>
                     </form>
                     </CloudinaryContext>
                     <div id="gallery-create">
