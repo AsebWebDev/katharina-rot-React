@@ -67,6 +67,13 @@ export default {
       .catch(errHandler)
   },
 
+  getOneNews(id) {
+    return service
+      .get('/news/'+id)
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
   addNews(body) {
     return service
       .post('/news', body)
