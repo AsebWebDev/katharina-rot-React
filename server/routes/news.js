@@ -10,16 +10,17 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', isAdmin, (req, res, next) => {
-    let { title, thumbnail, description, tags} = req.body
+    let { title, thumbnail, description, tags, pictures, editorState} = req.body
     let titlePic
     if (req.body.titlePic) titlePic = req.body.titlePic 
-    News.create({ title, titlePic, thumbnail, tags, description })
-    .then(news => {  
-      res.json({
-        success: true,
-        news
-      });
-    })
+    News.create({ title, titlePic, thumbnail, tags, description, pictures, editorState })
+    .then(news => { res.json({ success: true, news}) })
+    .catch(err => next(err))
+});
+
+router.get('/:id', (req, res, next) => {
+  News.findById(req.params.id) // To access the updated collection (and not the old collection)
+    .then(news => { res.json({ message: "SUCCESS", news }) })
     .catch(err => next(err))
 });
 
