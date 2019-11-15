@@ -5,15 +5,14 @@ import TimeAgo from 'react-timeago'
 import germanStrings from 'react-timeago/lib/language-strings/de'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
 import Heart from './Heart'
-import { newNotification } from '../actioncreators'
+import { newNotification, toggleModal } from '../actioncreators'
 import api from '../api';
 import '../styles/MaxiNews.scss'
 
 const formatter = buildFormatter(germanStrings)
 
 function MaxiNews(props) {
-    console.log("TCL: props", props)
-    const { dispatch, news, i, } = props;
+    const { dispatch, news, i } = props;
     const section = "section" + i
     const collapsible = section + " section collapsible"
     let [expand, setExpand] = useState(false)
@@ -37,10 +36,18 @@ function MaxiNews(props) {
         }).catch(err => dispatch(newNotification(err.toString())));
     }
 
+    const handleEdit = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dispatch(toggleModal(props.modal, news._id, 0, "news"))
+    }
+
     return (
         <div id="maxi-news" onClick={toggle}>
-            {api.isLoggedIn() && <MDBBadge id="maxi-news-delete" onClick={handleDelete} color="danger"><i className="fas fa-trash-alt"></i>Delete</MDBBadge>}
-
+            <div id="maxi-news-delete">
+                {api.isLoggedIn() && <MDBBadge onClick={handleDelete} color="danger"><i className="fas fa-trash-alt"></i>Delete</MDBBadge>}
+                {api.isLoggedIn() && <MDBBadge onClick={handleEdit} color="blue"><i className="fas fa-edit"></i>Edit</MDBBadge>}
+            </div>
             <div id="news-top">
                 <img src={news.titlePic} alt="Title" />
                 <div id="mini-data">
@@ -66,7 +73,7 @@ function MaxiNews(props) {
 
 function mapStateToProps(reduxState){
     return {
-        // news: reduxState.news      
+        modal: reduxState.modal      
     }
 }
 
