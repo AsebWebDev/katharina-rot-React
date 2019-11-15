@@ -26,7 +26,6 @@ function CreateNews(props) {
             upload_preset: 'ypmn3qkk',
             multiple
         },(error, result) => {
-        console.log("TCL: uploadWidget -> result", result.info)
             if (!error && result && result.event === "success") { 
                 if (multiple) uploadedPictures.push(result.info.secure_url)   // If one of few files is uploaded, store in array to be pushed after user closes widget
                 else {
@@ -65,6 +64,7 @@ function CreateNews(props) {
             setTitlePic('')
             setThumbnail('')
             setPictures([])
+            setCurrentNews({tags: []})
             setEditorState(EditorState.createEmpty())
             api.getNews()
                 .then(news => props.dispatch({
