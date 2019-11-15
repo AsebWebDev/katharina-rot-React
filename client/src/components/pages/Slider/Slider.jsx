@@ -36,7 +36,7 @@ class Slider extends React.Component {
     }
     
     handleSlideClick(index) {
-      if (this.state.current === index) this.props.dispatch(toggleModal(this.props.modal, this.props.id, this.state.current))
+      if (this.state.current === index) this.props.dispatch(toggleModal(this.props.modal, this.props.id, this.state.current, this.props.type))
       if (this.state.current !== index) {
         this.setState({
           current: index
