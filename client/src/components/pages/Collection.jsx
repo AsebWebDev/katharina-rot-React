@@ -66,7 +66,7 @@ function Collection(props) {
           {/* Show only when gallery exists */}
           {hasPictures && 
               <div >
-                <Slider className="slider" heading="Example Slider" slides={parsedPictures} id={currentId} />
+                <Slider className="slider" heading="Example Slider" slides={parsedPictures} id={currentId} type="collection"/>
                 <div id="plx-collection">
                   {isFullScreen && <div className="collection-left">
                         <CollectionParallax currentId={currentId} type="collection"/>
