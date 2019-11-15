@@ -10,51 +10,61 @@ import api from '../../api';
 import '../../styles/EditModal.css'
 
 function EditModal(props) {
-  let {dispatch} = props;
-  let currentId = props.modal.currentId;
-  let [currentCollection, setCurrentCollection] = useState({})
+  let { dispatch } = props;
+  let { currentId, type } = props.modal;
+  let [currentTarget, setCurrentTarget] = useState({})
   let [editorState, setEditorState] = useState(EditorState.createEmpty())
 
   useEffect(() => {
-    api.getOneCollection(currentId) // BACKEND REQUEST AND SET DATA TO STATE
-    .then(res => { 
-      setCurrentCollection(res.collection)
-      console.log("TCL: EditModal -> res.collection", res.collection)
-      setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(res.collection.editorState))))
-    })
-    .catch (err => console.log(err))
-  }, [currentId])
+    (type === "collection")
+    ?   api.getOneCollection(currentId) // BACKEND REQUEST AND SET DATA TO STATE
+        .then(res => { 
+          setCurrentTarget(res.collection)
+          setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(res.collection.editorState))))
+        }).catch (err => console.log(err))
+    :   api.getOneNews(currentId) // BACKEND REQUEST AND SET DATA TO STATE
+        .then(res => { 
+          setCurrentTarget(res.news)
+          setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(res.news.editorState))))
+        }).catch (err => console.log(err))
+  }, [currentId, type])
 
   let toggle = () => { dispatch(toggleModal(props.modal)) }
 
   let updateTags = (newTags) => {
-    setCurrentCollection({
-      ...currentCollection,
-      tags: newTags  
-    })
+    setCurrentTarget({ ...currentTarget, tags: newTags })
   }
 
   let handleSubmit = (e) => {
     e.preventDefault();
     const contentState = JSON.stringify(convertToRaw(editorState.getCurrentContent()));
     let body = {
-      ...currentCollection,
-      pictures: props.uploadedPictures ? props.uploadedPictures : currentCollection.pictures, // use uploaded pictures if exists
-      titlePic: props.uploadedTitlePic ? props.uploadedTitlePic : currentCollection.titlePic, // use uploaded Titlepic if exists
+      ...currentTarget,
+      pictures: props.uploadedPictures ? props.uploadedPictures : currentTarget.pictures, // use uploaded pictures if exists
+      titlePic: props.uploadedTitlePic ? props.uploadedTitlePic : currentTarget.titlePic, // use uploaded Titlepic if exists
       editorState: contentState
-    }
-    api.updateCollection(currentId, body)
-      .then(result => {
-        dispatch({ type: "GET_DATA", collections: result.collections })
-        dispatch(newNotification(`Your Collection '${currentCollection.title}' has been updated.`, 'Updated'))
-      }).catch (err => console.log(err))
+    };
+    console.log("TCL: handleSubmit -> type", type);
+    (type === "collection")
+    ? api.updateCollection(currentId, body)
+          .then(result => {
+          console.log("TCL: handleSubmit -> result", result)
+            dispatch({ type: "GET_DATA", collections: result.collections })
+            dispatch(newNotification(`Your Collection '${currentTarget.title}' has been updated.`, 'Updated'))
+          }).catch (err => console.log(err))
+    :   api.updateNews(currentId, body)
+          .then(result => {
+          console.log("TCL: handleSubmit -> result", result)
+            dispatch({ type: "GET_NEWS", news: result.news })
+            dispatch(newNotification(`Your News '${currentTarget.title}' has been updated.`, 'Updated'))
+          }).catch (err => console.log(err))
     dispatch(setUploadedPics(null,null)) //clear uploaded pictures after successfull submit
     toggle();
   }
 
   let handleChange = (e) => {
-    setCurrentCollection({
-      ...currentCollection,
+    setCurrentTarget({
+      ...currentTarget,
       [e.target.id]: (e.target.id==="tags") 
                         ? e.target.value.split(' ') // turn input value into array
                         : e.target.value        
@@ -71,13 +81,13 @@ function EditModal(props) {
       <MDBModal size="lg" isOpen={props.modal.isOpen} toggle={toggle}>
         <form>    
           <MDBModalHeader toggle={toggle}>
-            <MDBInputGroup id="title" containerClassName="mb-3" onChange={handleChange} value={currentCollection.title} prepend="Title" hint="Title"/>
+            <MDBInputGroup id="title" containerClassName="mb-3" onChange={handleChange} value={currentTarget.title} prepend="Title" hint="Title"/>
           </MDBModalHeader>
           <MDBModalBody>
             <EditPictures />
-            {currentCollection && currentCollection.tags && <InputTag id="input-tag" tags={currentCollection.tags} updateTags={updateTags}/>}
+            {currentTarget && currentTarget.tags && <InputTag id="input-tag" tags={currentTarget.tags} updateTags={updateTags}/>}
             <div id="input-description">
-              <MDBInputGroup id="description" onChange={handleChange} value={currentCollection.description} prepend="Description" type="textarea"/>
+              <MDBInputGroup id="description" onChange={handleChange} value={currentTarget.description?currentTarget.description:''} prepend="Description" type="textarea"/>
               <div className="editor-content-edit">
                   <Editor 
                       wrapperClassName="editor-wrapper"
