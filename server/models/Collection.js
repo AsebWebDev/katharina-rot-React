@@ -20,6 +20,7 @@ const collectionSchema = new mongoose.Schema({
   },
   description: {
     type: String,
+    default: ''
   },
   likedSessions: {
     type: [String],
