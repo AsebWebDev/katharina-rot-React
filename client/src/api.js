@@ -60,6 +60,10 @@ export default {
       .catch(errHandler)
   },
 
+  // ==========
+  // News
+  // ==========
+
   getNews() {
     return service
       .get('/news')
@@ -81,13 +85,23 @@ export default {
       .catch(errHandler)
   },
 
+  updateNews(id, body) {
+    return service
+      .post('/news/'+id, body)
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
   deleteNews(id) {
-    console.log("Delete News Api triggered.")
     return service
       .post('/news/'+id+'/delete')
       .then(res => res.data)
       .catch(errHandler)
   },
+
+  // ==========
+  // Collections
+  // ==========
 
   getCollections() {
     return service
@@ -103,16 +117,16 @@ export default {
       .catch(errHandler)
   },
 
-  updateCollection(id, body) {
-    return service
-      .post('/collection/'+id, body)
-      .then(res => res.data)
-      .catch(errHandler)
-  },
-
   addCollection(body) {
     return service
       .post('/collection', body)
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+  
+  updateCollection(id, body) {
+    return service
+      .post('/collection/'+id, body)
       .then(res => res.data)
       .catch(errHandler)
   },
