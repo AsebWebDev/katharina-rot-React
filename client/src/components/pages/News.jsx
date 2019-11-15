@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { MDBCard, MDBCardBody } from "mdbreact";
+import EditModal from './EditModal'
 import MaxiNews from '../MaxiNews'
 import '../../styles/News.scss'
 
@@ -21,13 +22,15 @@ function News(props) {
                     </div>
                 </MDBCardBody>
             </MDBCard>
+            {props.modal.isOpen && <EditModal />}
         </div>
     )
 }
 
 function mapStateToProps(reduxState){
     return {
-      news: reduxState.news
+      news: reduxState.news,
+      modal: reduxState.modal,
     }
   }
   
