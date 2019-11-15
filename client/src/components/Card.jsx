@@ -54,7 +54,7 @@ const Card = function (props) {
     let handleEdit = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        dispatch(toggleModal(props.modal, _id))
+        dispatch(toggleModal(props.modal, _id, 0, "collection"))
     }
 
     return (
@@ -95,8 +95,8 @@ const Card = function (props) {
                         </MDBCardText>
                         <div className="tags">
                             {tags.map((tag,i) => 
-                                <div>
-                                    <MDBBadge key={i} color="info" >
+                                <div key={i}>
+                                    <MDBBadge color="info" >
                                         {api.isLoggedIn() && 
                                             <span className="x">
                                                 <MDBIcon onClick={handleTagClick} id={i} name={tag} icon="trash-alt" />
