@@ -6,18 +6,22 @@ import api from '../../api';
 import '../../styles/EditPictures.css'
 
 function EditPictures(props) {
-    let {dispatch} = props;
-    let currentId = props.modal.currentId;
-    let [currentCollection, setCurrentCollection] = useState({})
+    let { dispatch } = props;
+    let { currentId, type } = props.modal;
+    let [currentTarget, setCurrentTarget] = useState({})
     let [isUploadDone, setIsUploadDone] = useState(false)
     let [uploadedPictures, setUploadedPictures] = useState(props.uploadedPictures)
     let [uploadedTitlePic, setUploadedTitlePic] = useState(props.uploadedTitlePic)
 
     useEffect(() => {
-        api.getOneCollection(currentId) // BACKEND REQUEST AND SET DATA TO STATE
-        .then(res => { setCurrentCollection(res.collection) })
-        .catch (err => console.log(err))
-    }, [currentId, dispatch])
+        (type === "collection")
+        ? api.getOneCollection(currentId) // BACKEND REQUEST AND SET DATA TO STATE
+            .then(res => { setCurrentTarget(res.collection) })
+            .catch (err => console.log(err))
+        : api.getOneNews(currentId) // BACKEND REQUEST AND SET DATA TO STATE
+            .then(res => { setCurrentTarget(res.news) })
+            .catch (err => console.log(err))
+    }, [currentId, dispatch, type])
 
     useEffect(() => {
         if (isUploadDone) {
@@ -61,14 +65,14 @@ function EditPictures(props) {
         <div className="edit-pictures">
             <div className="left">
                 <div className="title-pic">
-                    <img className="mini-pic z-depth-3" src={props.uploadedTitlePic ? props.uploadedTitlePic : currentCollection.titlePic} alt="tital" /> 
+                    <img className="mini-pic z-depth-3" src={props.uploadedTitlePic ? props.uploadedTitlePic : currentTarget.titlePic} alt="tital" /> 
                 </div>
                 <div className="mini-gallery">
                     {props.uploadedPictures                  // if not undefined...
                         && props.uploadedPictures.length > 0 // ...and not empty...
                         && props.uploadedPictures            // ... show uploaded ones, else show old ones 
                             ? props.uploadedPictures && props.uploadedPictures.slice(0,3).map((pic,i) => <img className="mini-pic hoverable" key={i} src={pic} alt="gallery-pic" />)
-                            : currentCollection.pictures && currentCollection.pictures.slice(0,3).map((pic,i) => <img className="mini-pic hoverable" key={i} src={pic} alt="gallery-pic" />)
+                            : currentTarget.pictures && currentTarget.pictures.slice(0,3).map((pic,i) => <img className="mini-pic hoverable" key={i} src={pic} alt="gallery-pic" />)
                     }
                 </div>
             </div>
