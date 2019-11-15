@@ -2,7 +2,6 @@ import React from 'react'
 import Coverflow from '../CoverFlow'
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import { infoIlluMainText } from '../../texts/informative-illustration.jsx'
-import { toggleModal } from '../../actioncreators'
 import infografik1 from '../../media/infografik-ernährung1-ila1.jpg'
 import infografik2 from '../../media/fossile-energie_rotwebseite_b.jpg'
 import infografik3 from '../../media/Palmöl-Grafik1_rotwebseite-1024x962.jpg'
