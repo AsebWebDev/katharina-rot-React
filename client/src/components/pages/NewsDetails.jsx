@@ -3,7 +3,7 @@ import $ from "jquery";
 import { MDBAnimation } from "mdbreact";
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, convertFromRaw } from 'draft-js';
-import CollectionParallax from '../CollectionParallax'
+import CollectionParallax from '../ParallaxGalleryLeft'
 import Slider from './Slider/Slider'
 import SlideModal from './Slider/SlideModal'
 import { checkMobile, checkFullScreen } from '../../helpers'
@@ -70,7 +70,7 @@ export default function NewsDetails(props) {
                     <Slider className="slider" heading="Example Slider" slides={parsedPictures} id={currentId} />
                     <div id="plx-news">
                     {isFullScreen && <div className="news-left">
-                            <CollectionParallax currentId={currentId}/>
+                            <CollectionParallax currentId={currentId} type="news"/>
                     </div>}
                     {!isFullScreen && !isMobile && <div className="news-left">
                             {pictures.map((pic,i) => <img src={pic} key={i} alt="gallery"/>)}

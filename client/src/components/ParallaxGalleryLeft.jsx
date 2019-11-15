@@ -4,25 +4,30 @@ import { connect } from 'react-redux';
 import Plx from "react-plx";
 import api from '../api';
 import { parallaxDataGalleryLeft } from '../configs/parallax'
-import '../styles/CollectionParallax.scss'
+import '../styles/ParallaxGalleryLeft.scss'
   
-function CollectionParallaxLeft(props) {
+function ParallaxGalleryLeft(props) {
 
   let [currentId] = useState(props.currentId)
-  let [currentCollection, setCurrentCollection] = useState(null)
+  let [currentTarget, setCurrentTarget] = useState(null)
   // eslint-disable-next-line
   let [error, setError] = useState(null)
-  let count = (currentCollection)?currentCollection.pictures.length:null;
+  let type = props.type
+  let count = (currentTarget) ? currentTarget.pictures.length : null;
 
   useEffect(() => {
-    api.getOneCollection(currentId)
-    .then(result => setCurrentCollection(result.collection))
-    .catch (err => setError(err))
-  }, [currentId])
+    (type === "collection")                                     // Call one Collection
+    ?   api.getOneCollection(currentId)
+        .then(result => setCurrentTarget(result.collection))
+        .catch (err => setError(err))
+    :   api.getOneNews(currentId)                               // Else call one News
+        .then(result => setCurrentTarget(result.news))
+        .catch (err => setError(err))
+  }, [currentId, type])
 
   return (
     <div>
-          {currentCollection && currentCollection.pictures.map((pic,i) => {
+          {currentTarget && currentTarget.pictures.map((pic,i) => {
             let style = { zIndex: count, position: "relative", height: "70vh" }
             count-- //set Index - 1 to let the next one overlap this instance
             return (<Plx key={i} parallaxData={parallaxDataGalleryLeft} style={style}><img alt="art" src={pic} width="400vw"/></Plx>)
@@ -37,4 +42,4 @@ function mapStateToProps(reduxState){
     }
   }
   
-export default connect(mapStateToProps)(CollectionParallaxLeft)
+export default connect(mapStateToProps)(ParallaxGalleryLeft)

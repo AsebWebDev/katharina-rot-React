@@ -34,7 +34,6 @@ function CreateCollection(props) {
             }
             if (!error && result && result.event === "close" && multiple) {   // If user closes widget use all uploaded pictures stored while uploading
                 setPictures(uploadedPictures)                     // UPLOAD MULTIPLE PICTURES FOR THE GALLERY ON CLOSE
-                console.log("TCL: uploadWidget -> uploadedPictures", uploadedPictures)
             }
         }).open(); 
     }

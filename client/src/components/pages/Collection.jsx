@@ -4,7 +4,7 @@ import $ from "jquery";
 import { MDBAnimation } from "mdbreact";
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, convertFromRaw } from 'draft-js';
-import CollectionParallax from '../CollectionParallax'
+import CollectionParallax from '../ParallaxGalleryLeft'
 import Slider from './Slider/Slider'
 import SlideModal from './Slider/SlideModal'
 import api from '../../api';
@@ -69,7 +69,7 @@ function Collection(props) {
                 <Slider className="slider" heading="Example Slider" slides={parsedPictures} id={currentId} />
                 <div id="plx-collection">
                   {isFullScreen && <div className="collection-left">
-                        <CollectionParallax currentId={currentId}/>
+                        <CollectionParallax currentId={currentId} type="collection"/>
                   </div>}
                   {!isFullScreen && !isMobile && <div className="collection-left">
                         {pictures.map((pic,i) => <img src={pic} key={i} alt="gallery"/>)}
