@@ -67,7 +67,7 @@ export default function NewsDetails(props) {
             {/* Show only when gallery exists */}
             {hasPictures && 
                 <div >
-                    <Slider className="slider" heading="Example Slider" slides={parsedPictures} id={currentId} />
+                    <Slider className="slider" heading="Example Slider" slides={parsedPictures} id={currentId} type="news"/>
                     <div id="plx-news">
                     {isFullScreen && <div className="news-left">
                             <CollectionParallax currentId={currentId} type="news"/>
