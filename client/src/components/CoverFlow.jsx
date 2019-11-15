@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
 import Coverflow from 'react-coverflow'
 import { calcCoverflow } from '../helpers'
@@ -10,13 +10,13 @@ function CoverFlow(props) {
     const size = useWindowSize();
     let { dispatch } = props;
     let parsedPictures = props.collections.map(item => item.titlePic)
-    let [currentPic, setCurrentPic] = useState(null)
+    // let [currentPic, setCurrentPic] = useState(null)
 
-    const handleClick = (e) => {
-        e.preventDefault();
-        setCurrentPic(e.target.src)
-        // props.dispatch(toggleModal(props.modal))
-    }
+    // const handleClick = (e) => {
+    //     e.preventDefault();
+    //     setCurrentPic(e.target.src)
+    //     // props.dispatch(toggleModal(props.modal))
+    // }
 
     useEffect(() => {
         if (props.collections.length === 0) api.getCollections()
