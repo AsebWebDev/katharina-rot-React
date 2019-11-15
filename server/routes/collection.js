@@ -25,7 +25,6 @@ router.post('/:id/delete', isAdmin, (req, res, next) => {
 });
 
 router.post('/:id/', isAdmin, (req, res, next) => {
-  console.log("TCL: req.body", req.body)
   Collection.findByIdAndUpdate(req.params.id, {
     title: req.body.title,
     titlePic: req.body.titlePic,
