@@ -18,6 +18,24 @@ router.post('/', isAdmin, (req, res, next) => {
     .catch(err => next(err))
 });
 
+router.post('/:id/', isAdmin, (req, res, next) => {
+  let { title, titlePic, thumbnail, description, pictures, editorState} = req.body
+
+  News.findByIdAndUpdate(req.params.id, {
+    title,
+    titlePic,
+    thumbnail,
+    description,
+    tags: req.body.tags.filter(tag => tag !== ''), // filter all blank spaces from array
+    pictures,
+    editorState
+  }, { new: true }) // To access the updated collection (and not the old collection)
+    .then(() => {
+      News.find()
+      .then(news => { res.json({ news }) })
+    }).catch(err => next(err))
+});
+
 router.get('/:id', (req, res, next) => {
   News.findById(req.params.id) // To access the updated collection (and not the old collection)
     .then(news => { res.json({ message: "SUCCESS", news }) })
