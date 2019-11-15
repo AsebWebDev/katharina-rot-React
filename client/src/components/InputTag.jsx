@@ -1,62 +1,52 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import '../styles/InputTag.css'
 
-class InputTag extends Component {
-    constructor() {
-      super();
-      
-      this.state = {
-        tags: [
-          'Tags',
-          'Input'
-        ]
-      };
-    }
+function InputTag (props) {
+  let [tags, setTags] = useState(props.tags)
+  let [tagInput, setTagInput] = useState('')
 
-    componentDidMount(){
-      this.setState({tags: this.props.tags})
-    }
-    
-    removeTag = (i) => {
-      const newTags = [ ...this.state.tags ];
-      newTags.splice(i, 1);
-      this.setState({ tags: newTags });
-      this.props.updateTags(newTags)
-    }
+  useEffect(() => {
+    setTags(props.tags)
+  }, [props.tags])
+
   
-    inputKeyDown = (e) => {
-      const val = e.target.value;
-      if (e.key === 'Enter' && val) {
-        if (this.state.tags.find(tag => tag.toLowerCase() === val.toLowerCase())) {
-          return;
-        }
-        this.setState({ tags: [...this.state.tags, val]});
-        this.props.updateTags([...this.state.tags, val])
-        this.tagInput.value = null;
-      } else if (e.key === 'Backspace' && !val) {
-        this.removeTag(this.state.tags.length - 1);
+  let removeTag = (i) => {
+    const newTags = [ ...tags ];
+    newTags.splice(i, 1);
+    setTags(newTags);
+    props.updateTags(newTags)
+  }
+
+  let inputKeyDown = (e) => {
+    const val = e.target.value;
+    if (e.key === 'Enter' && val) {
+      if (tags.find(tag => tag.toLowerCase() === val.toLowerCase())) {
+        return;
       }
-    }
-  
-    render() {
-      const { tags } = this.state;
-  
-      return (
-        <div className="input-tag">
-          <ul className="input-tag__tags">
-            { tags.map((tag, i) => (
-              <li key={tag}>
-                {tag}
-                <button type="button" onClick={() => { this.removeTag(i); }}>+</button>
-              </li>
-            ))}
-            <li className="input-tag__tags__input"><input type="text" placeholder="New Tag..." onKeyDown={this.inputKeyDown} ref={c => { this.tagInput = c; }} /></li>
-          </ul>
-        </div>
-      );
+      setTags([...tags, val]);
+      props.updateTags([...tags, val])
+      setTagInput('');
+    } else if (e.key === 'Backspace' && !val) {
+      removeTag(tags.length - 1);
     }
   }
+
+  return (
+    <div className="input-tag">
+      <ul className="input-tag__tags">
+        { tags.map((tag, i) => (
+          <li key={tag}>
+            {tag}
+            <button type="button" onClick={() => { removeTag(i); }}>+</button>
+          </li>
+        ))}
+        <li className="input-tag__tags__input"><input type="text" placeholder="New Tag..." onKeyDown={inputKeyDown} onChange={e => setTagInput(e.target.value)} value={tagInput}/></li>
+      </ul> 
+    </div>
+  );
+
+}
 
   function mapStateToProps(reduxState){
     return {
