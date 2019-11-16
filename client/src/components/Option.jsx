@@ -22,7 +22,7 @@ export default function Option(props) {
                 value={optionVal ? optionVal : ''} 
                 size="sm" 
             />
-        ); break;
+        );
 
         case 'string' : return ( 
             <select 
@@ -33,7 +33,7 @@ export default function Option(props) {
                 <option value="Dark">Dark</option>
                 <option value="Winter">Winter</option>
             </select>
-        ); break;
+        );
 
         case 'boolean' : return ( 
             <input 
@@ -41,8 +41,8 @@ export default function Option(props) {
                 checked={optionVal} //FIXME: Clicking Checkbox twice to show in render needed, but works with other inputs
                 type="checkbox"
             />
-        ); break;
+        ); 
 
-        default: return ( <div><p>options</p></div> ); break;
+        default: return ( <div><p>options</p></div> ); 
     }
 }
