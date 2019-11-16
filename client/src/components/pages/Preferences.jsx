@@ -25,7 +25,6 @@ function Preferences(props) {
     }
 
     let handleChange = (e, val, settingType, option) => {
-        e.preventDefault();
         let newUserSettings = { ...userSettings }
         newUserSettings[settingType][option].val = val
         setUserSettings(newUserSettings)        
@@ -47,7 +46,7 @@ function Preferences(props) {
                                             {/* MAP OVER ALL CATEGORY OPTIONS */}
                                             {Object.entries(settingTypeValue).map(([option,optionValue])=>{
                                                 return (
-                                                    <MDBListGroupItem>
+                                                    <MDBListGroupItem className={(typeof(optionValue.val) === "boolean")?"reverse":''}>
                                                         <div>{optionValue.name} : </div>       
                                                         <div>{ 
                                                             <Option 
