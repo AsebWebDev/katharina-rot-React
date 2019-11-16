@@ -13,7 +13,13 @@ function seedDB() {
           username: "admin",
           password: bcrypt.hashSync(process.env.ADMIN_PASSWORD, bcrypt.genSaltSync(bcryptRounds)),
           isAdmin: true
-        }
+        },
+        {
+            username: "sarah",
+            password: bcrypt.hashSync(process.env.SARAH_PASSWORD, bcrypt.genSaltSync(bcryptRounds)),
+            isAdmin: true
+        },
+
     ]
     
     // let collections = []
