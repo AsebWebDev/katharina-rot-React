@@ -26,6 +26,12 @@
         margin-left: 20px;
     }
 
+    #news-top {
+        img {
+            max-height: 300px   
+        }
+    }
+
     #maxi-news-delete {
         position: absolute;
     }
