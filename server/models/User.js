@@ -7,6 +7,24 @@ const userSchema = new Schema({
   isAdmin: {
     type: Boolean,
     default: false
+  },
+  settings: {
+    type: Object,
+    default: {
+      Design: { 
+        boxShadow: {
+          val: false, name: "Box Shadow"
+        },
+        theme: {
+          val: "light", name: "Theme"
+        }
+      },
+      Performance: {
+        numberOfNewsToDisplay: {
+          val: 10, name: "Number of News to display"
+        },
+      }
+    }
   }
 }, {
     timestamps: {
