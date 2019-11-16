@@ -38,7 +38,7 @@ export default function Option(props) {
         case 'boolean' : return ( 
             <input 
                 onChange={(e) => handleChange(e, e.target.checked, settingType, option)}
-                checked={optionVal} //FIXME: Clicking Checkbox twice to show in render needed, but works with other inputs
+                checked={optionVal}
                 type="checkbox"
             />
         ); 
