@@ -36,6 +36,11 @@ a:hover {
   flex-direction: row;
 }
 
+.sticky {
+  position: sticky;
+  top:0;
+}
+
 .btn {
   box-shadow: none;
   opacity: 0.8;
