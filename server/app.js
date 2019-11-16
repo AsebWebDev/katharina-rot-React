@@ -1,11 +1,9 @@
-//TODO: add multiple picture upload to news, show gallery in details
+
 //TODO: implement User Settings
+//TODO: make news searchable
 //TODO: use OAuth
 //TODO: try / practice GraphQl
 //TODO: add decent animations
-
-//FIXME: reset Tags after submitting news
-
 
 const path = require('path')
 require('dotenv').config({ path: path.join(__dirname, '.env') })
