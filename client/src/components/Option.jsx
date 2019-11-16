@@ -4,12 +4,10 @@ import { MDBInput } from "mdbreact";
 export default function Option(props) {
     const { handleChange } = props
     let [optionVal, setOptionVal] = useState(props.optionValue.val)
-    console.log("TCL: Option -> optionVal", optionVal)
     const option = props.option
     const settingType = props.settingType
 
     useEffect(() => {
-        console.log("props.optionValue.val changed -> useEffect. props.optionValue.val is: " + props.optionValue.val)
         setOptionVal(props.optionValue.val)
     }, [props.optionValue.val])
 
