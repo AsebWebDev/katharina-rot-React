@@ -23,7 +23,7 @@ function CreateNews(props) {
         let uploadedPictures = []
         let multiple = (e.target.id === "upload-art"); // Multiple pictures for the gallery or one picture as title
         window.cloudinary.createUploadWidget({ 
-            upload_preset: 'ypmn3qkk',
+            upload_preset: 'mu7bkqlz',
             multiple
         },(error, result) => {
             if (!error && result && result.event === "success") { 
