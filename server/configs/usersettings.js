@@ -1,3 +1,5 @@
+// These are the default setttings 
+
 const userSettings = {
     type: Object,
     default: {
