@@ -1,7 +1,28 @@
 #preferences {
 
+    display: flex;
+    flex-direction: column;
+
+    #save-button {
+        display: flex;
+        justify-content: flex-end;
+        width: 30%;
+        align-self: flex-end;
+        margin: 0 0px 10px 0px;
+    }
+
     input {
         align-self: flex-end;
+    }
+
+    .category-header {
+        justify-content: space-between;
+        align-items: center;
+
+        button {
+            width: 35%;
+            font-size: 0.7rem;
+        }
     }
 
     .reverse {
@@ -23,7 +44,7 @@
 
     .jumbotron {
         margin: 15px 0;
-        padding-bottom: 20px;
+        padding: 10px 20px 20px 10px;
     }
 
     .list-group-item {

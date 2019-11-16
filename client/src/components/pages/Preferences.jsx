@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { MDBJumbotron, MDBBtn, MDBContainer, MDBRow, MDBCol, MDBInputGroup, MDBListGroup, MDBListGroupItem } from "mdbreact";
+import { MDBJumbotron, MDBBtn, MDBIcon, MDBContainer, MDBRow, MDBCol, MDBListGroup, MDBListGroupItem } from "mdbreact";
 import Option from '../Option'
 import '../../styles/Preferences.scss'
 
@@ -11,23 +11,16 @@ function Preferences(props) {
         ? JSON.parse(localStorage.getItem('user')).settings
         : null
     )
-    console.log("TCL: Preferences -> userSettings INITIAL", userSettings)
-    useEffect(() => {
-        console.log("UseEffect")
-    }, [userSettings])
-
-    let parseType = (val, type) => {
-        switch (type){
-            case "number": return Number(val);
-            case "boolean": return !val;
-            default: return val;
-        }
-    }
 
     let handleChange = (e, val, settingType, option) => {
         let newUserSettings = { ...userSettings }
         newUserSettings[settingType][option].val = val
         setUserSettings(newUserSettings)        
+    }
+
+    let handleSave = () => {
+        console.log("Submit")
+
     }
 
     return (
@@ -39,7 +32,12 @@ function Preferences(props) {
                         return (
                             <MDBCol>
                                 <MDBJumbotron>
-                                    <h4 className="h5 display-5">{settingType.toString()}</h4>
+                                    <div className="category-header flex-row">
+                                        <h4 className="h5 display-5">{settingType.toString()}</h4>
+                                        <div id="save-button"><MDBBtn size="sm" onClick={handleSave}  color="light">
+                                            <MDBIcon far icon="save" />Save</MDBBtn>
+                                        </div>
+                                    </div>
                                     <div className="preferences">
                                         <MDBListGroup style={{ width: "27rem" }}>
                                             
@@ -47,7 +45,7 @@ function Preferences(props) {
                                             {Object.entries(settingTypeValue).map(([option,optionValue])=>{
                                                 return (
                                                     <MDBListGroupItem className={(typeof(optionValue.val) === "boolean")?"reverse":''}>
-                                                        <div>{optionValue.name} : </div>       
+                                                        <div>{optionValue.name}</div>       
                                                         <div>{ 
                                                             <Option 
                                                                 settingType={settingType}       // pass in the settings category
@@ -60,6 +58,7 @@ function Preferences(props) {
                                                 );
                                                 })
                                             }
+
                                         </MDBListGroup>
                                     </div>
                                 </MDBJumbotron>
@@ -68,6 +67,7 @@ function Preferences(props) {
                     })
                 }
             </MDBRow>
+            <div id="save-button"><MDBBtn onClick={handleSave}  color="success"><MDBIcon fas icon="save" />Save</MDBBtn></div>
         </MDBContainer>
     )
 }
