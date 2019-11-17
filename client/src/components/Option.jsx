@@ -28,7 +28,6 @@ export default function Option(props) {
                 value={optionVal}
                 className="browser-default custom-select" 
                 onChange={(e) => handleChange(e, e.target.value, settingType, option)}>
-                <option>Choose your option</option>
                 <option value="Light">Light</option>
                 <option value="Dark">Dark</option>
                 <option value="Winter">Winter</option>
