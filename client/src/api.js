@@ -45,6 +45,13 @@ export default {
       .get('/logout')
   },
 
+  getUserSettings(userId) {
+    return service
+      .get('/user/' + userId + '/settings')
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
   saveUserSettings(userId, settings, settingType) {
     return service
       .post('/user/' + userId + '/settings', settings)
