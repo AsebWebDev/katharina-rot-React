@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { MDBJumbotron, MDBContainer, MDBAnimation } from "mdbreact";
+import { isInQuery } from '../../helpers'
 import Card from '../Card'
 import EditModal from './EditModal'
 import Spinner from '../Spinner'
@@ -18,9 +19,6 @@ function Home (props) {
       collections
     })).catch (err => console.log(err))
   }, [dispatch])
-
-  let isInQuery = (item) => ( item.title && item.title.toLowerCase().includes(query.toLowerCase()) ) // check title for query 
-        || ( item.tags  && item.tags.map(item => item.toLowerCase()).includes(query.toLowerCase()) ) // check tags for query
   
   return (
     <div className="Home">
@@ -31,7 +29,7 @@ function Home (props) {
 
         {/* DATA EXISTS */}
         {props.collections && props.collections
-        .filter(item => isInQuery(item))
+        .filter(item => isInQuery(item, props.query))
         .map((collection, i) => 
         <div key={collection._id}><Card collection={collection} dispatch={props.dispatch}/></div>)}
 
