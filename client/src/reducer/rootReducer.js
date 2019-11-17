@@ -7,7 +7,8 @@ import {
   CLEAR_NOTIFICATIONS, 
   SET_PIC_UPLOADS, 
   PREPAREDELETE_NOTIFICATION, 
-  UPDATE_NOTIFICATIONS 
+  UPDATE_NOTIFICATIONS,
+  UPDATE_USER_SETTINGS
 } from '../actioncreators';
 
 const initialState = {
@@ -21,7 +22,8 @@ const initialState = {
   },
   uploadedPictures: null,
   uploadedTitlePic: null,
-  query: ''
+  query: '',
+  userSettings: null
 }
 
 export default function rootReducer(state=initialState, action) {
@@ -71,6 +73,13 @@ export default function rootReducer(state=initialState, action) {
       return {
         ...newState,
         notifications: cleanedNotifications
+      }
+    }
+
+    case UPDATE_USER_SETTINGS: {
+      return {
+        ...newState,
+        userSettings: action.settings
       }
     }
 

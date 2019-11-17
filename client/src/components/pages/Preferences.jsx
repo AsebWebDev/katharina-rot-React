@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { MDBJumbotron, MDBBtn, MDBIcon, MDBContainer, MDBRow, MDBCol, MDBListGroup, MDBListGroupItem } from "mdbreact";
 import { newNotification } from '../../actioncreators'
@@ -14,7 +14,7 @@ function Preferences(props) {
     const localStorageSettings = localStorageUser.settings
 
     let {dispatch} = props;
-    let [userSettings, setUserSettings] = useState(localStorageSettings)
+    let [userSettings, setUserSettings] = useState(props.userSettings)
 
     let handleChange = (e, val, settingType, option) => {
         let newUserSettings = { ...userSettings }
@@ -24,9 +24,9 @@ function Preferences(props) {
 
     let handleSave = (settingType) => {
         api.saveUserSettings(localStorageUser._id, userSettings, settingType )
-        .then(result => {
-            console.log("TCL: handleSave -> result", result)
-            dispatch(newNotification(`Your Preferences for '${result}' has been created`, 'Created'))
+        .then(settings => {
+            dispatch({ type: "UPDATE_USER_SETTINGS", settings})
+            dispatch(newNotification(`Your ${settingType}-Preferences have been updated`, 'Updated'))
         }).catch(err => dispatch(newNotification(err.toString())));
     }
 
@@ -34,7 +34,7 @@ function Preferences(props) {
         <MDBContainer id="preferences" className="create-page mt-5 text-center">
             <MDBRow>
                 {/* MAP OVER ALL SETTING CATEGORIES */}
-                {Object.entries(userSettings)
+                {Object.entries(props.userSettings)
                     .map(([settingType,settingTypeValue],i)=>{    // settings category and the concrete option (settingTypeValue)
                         return (
                             <MDBCol key={i}>
@@ -83,6 +83,7 @@ function mapStateToProps(reduxState){
     return {
       collections: reduxState.collections,
       notifications: reduxState.notifications,
+      userSettings: reduxState.userSettings
     }
 }
   

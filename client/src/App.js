@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { newNotification } from './actioncreators'
 import Home from './components/pages/Home';
 import Login from './components/pages/Login';
 import Admin from './components/pages/Admin';
@@ -29,6 +30,11 @@ function App (props) {
     api.getNews()
       .then(news => dispatch({ type: "GET_NEWS", news}))
       .catch (err => console.log(err))
+    if (api.isLoggedIn()) {
+      api.getUserSettings(api.getLocalStorageUser()._id)
+      .then(settings => dispatch({ type: "UPDATE_USER_SETTINGS", settings}))
+      .catch(err => dispatch(newNotification(err.toString())))
+    }
   }, [dispatch])
 
   return (
