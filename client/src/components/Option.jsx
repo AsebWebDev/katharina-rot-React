@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Checkbox from '@material-ui/core/Checkbox';
 import { MDBInput } from "mdbreact";
 
 export default function Option(props) {
@@ -32,13 +33,15 @@ export default function Option(props) {
                 <option value="Winter">Winter</option>
             </select>
         );
-
+        
         case 'boolean' : return ( 
-            <input 
-                onChange={(e) => handleChange(e, e.target.checked, settingType, option)}
-                checked={optionVal}
-                type="checkbox"
-            />
+            <div class="ui checked checkbox"> 
+                <Checkbox 
+                    onChange={(e) => handleChange(e, e.target.checked, settingType, option)}
+                    checked={optionVal}
+                    type="checkbox"
+                />
+            </div>
         ); 
 
         default: return ( <div><p>options</p></div> ); 
