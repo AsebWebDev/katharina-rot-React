@@ -21,8 +21,6 @@ import News from './components/pages/News'
 import api from './api';
 import './styles/App.scss';
 
-// TODO: * Implement User-Settings
-
 function App (props) {
   const { dispatch } = props;
 
