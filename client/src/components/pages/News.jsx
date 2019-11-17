@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { MDBCard, MDBCardBody } from "mdbreact";
+import { isInQuery } from '../../helpers'
 import EditModal from './EditModal'
 import MaxiNews from '../MaxiNews'
 import '../../styles/News.scss'
@@ -18,7 +19,9 @@ function News(props) {
                     Hier kannst du dich über meine neusten Projekte, Events und Veröffentlichungen informieren.
                     </p>
                     <div id="maxi-news-container">
-                    {props.news.map((news,i) => <MaxiNews news={news} i={i} key={i}/>)}
+                    {props.news
+                    .filter(item => isInQuery(item, props.query))
+                    .map((news,i) => <MaxiNews news={news} i={i} key={i}/>)}
                     </div>
                 </MDBCardBody>
             </MDBCard>
@@ -31,6 +34,7 @@ function mapStateToProps(reduxState){
     return {
       news: reduxState.news,
       modal: reduxState.modal,
+      query: reduxState.query
     }
   }
   
