@@ -43,3 +43,10 @@ export function checkMobile () {
 export function checkFullScreen () {
     return ($(window).width() > 1400) ? true : false
 }
+
+export function isInQuery(item, query) {
+    return (
+            ( item.title && item.title.toLowerCase().includes(query.toLowerCase()) )                    // check title for query 
+        ||  ( item.tags  && item.tags.map(item => item.toLowerCase()).includes(query.toLowerCase()) )   // check tags for query
+    )
+} 
