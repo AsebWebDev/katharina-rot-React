@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { MDBJumbotron, MDBBtn, MDBIcon, MDBContainer, MDBRow, MDBCol, MDBListGroup, MDBListGroupItem } from "mdbreact";
+import { newNotification } from '../../actioncreators'
 import Option from '../Option'
+import api from '../../api';
 import '../../styles/Preferences.scss'
 
 function Preferences(props) {
-
-    let [userSettings, setUserSettings] = useState(
-        (localStorage.getItem('user') != null)
-        ? JSON.parse(localStorage.getItem('user')).settings
+    const localStorageUser = (localStorage.getItem('user') != null)
+        ? JSON.parse(localStorage.getItem('user'))
         : null
-    )
+    
+    const localStorageSettings = localStorageUser.settings
+
+    let {dispatch} = props;
+    let [userSettings, setUserSettings] = useState(localStorageSettings)
 
     let handleChange = (e, val, settingType, option) => {
         let newUserSettings = { ...userSettings }
@@ -18,9 +22,12 @@ function Preferences(props) {
         setUserSettings(newUserSettings)        
     }
 
-    let handleSave = () => {
-        console.log("Submit")
-
+    let handleSave = (settingType) => {
+        api.saveUserSettings(localStorageUser._id, userSettings, settingType )
+        .then(result => {
+            console.log("TCL: handleSave -> result", result)
+            dispatch(newNotification(`Your Preferences for '${result}' has been created`, 'Created'))
+        }).catch(err => dispatch(newNotification(err.toString())));
     }
 
     return (
@@ -28,13 +35,13 @@ function Preferences(props) {
             <MDBRow>
                 {/* MAP OVER ALL SETTING CATEGORIES */}
                 {Object.entries(userSettings)
-                    .map(([settingType,settingTypeValue])=>{    // settings category and the concrete option (settingTypeValue)
+                    .map(([settingType,settingTypeValue],i)=>{    // settings category and the concrete option (settingTypeValue)
                         return (
-                            <MDBCol>
+                            <MDBCol key={i}>
                                 <MDBJumbotron>
                                     <div className="category-header flex-row">
-                                        <h4 className="h5 display-5">{settingType.toString()}</h4>
-                                        <div id="save-button"><MDBBtn size="sm" onClick={handleSave}  color="light">
+                                        <h4 className="h5 display-5">{settingType}</h4>
+                                        <div id="save-button"><MDBBtn size="sm" onClick={() => handleSave(settingType)}  color="light">
                                             <MDBIcon far icon="save" />Save</MDBBtn>
                                         </div>
                                     </div>
@@ -42,9 +49,9 @@ function Preferences(props) {
                                         <MDBListGroup style={{ width: "27rem" }}>
                                             
                                             {/* MAP OVER ALL CATEGORY OPTIONS */}
-                                            {Object.entries(settingTypeValue).map(([option,optionValue])=>{
+                                            {Object.entries(settingTypeValue).map(([option,optionValue],i)=>{
                                                 return (
-                                                    <MDBListGroupItem className={(typeof(optionValue.val) === "boolean")?"reverse":''}>
+                                                    <MDBListGroupItem key={i} className={(typeof(optionValue.val) === "boolean")?"reverse":''}>
                                                         <div>{optionValue.name}</div>       
                                                         <div>{ 
                                                             <Option 
@@ -67,7 +74,7 @@ function Preferences(props) {
                     })
                 }
             </MDBRow>
-            <div id="save-button"><MDBBtn onClick={handleSave}  color="success"><MDBIcon fas icon="save" />Save</MDBBtn></div>
+            <div id="save-button"><MDBBtn onClick={handleSave} color="success"><MDBIcon icon="save" />Save</MDBBtn></div>
         </MDBContainer>
     )
 }
