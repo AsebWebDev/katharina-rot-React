@@ -1,5 +1,4 @@
 
-//TODO: implement User Settings
 //TODO: make news searchable
 //TODO: use OAuth
 //TODO: try / practice GraphQl
