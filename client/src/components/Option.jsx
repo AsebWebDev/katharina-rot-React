@@ -25,6 +25,7 @@ export default function Option(props) {
 
         case 'string' : return ( 
             <select 
+                value={optionVal}
                 className="browser-default custom-select" 
                 onChange={(e) => handleChange(e, e.target.value, settingType, option)}>
                 <option>Choose your option</option>
