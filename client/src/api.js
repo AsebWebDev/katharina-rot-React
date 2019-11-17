@@ -45,6 +45,13 @@ export default {
       .get('/logout')
   },
 
+  saveUserSettings(userId, settings, settingType) {
+    return service
+      .post('/user/' + userId + '/settings', settings)
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
   hasLiked(target) {
     return service
       .post('/checkheart', target)
