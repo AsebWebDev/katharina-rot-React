@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { MDBJumbotron, MDBBtn, MDBIcon, MDBContainer, MDBRow, MDBCol, MDBListGroup, MDBListGroupItem } from "mdbreact";
+import { MDBJumbotron, MDBIcon, MDBContainer, MDBRow, MDBCol, MDBListGroup, MDBListGroupItem } from "mdbreact";
+import Button from '@material-ui/core/Button';
 import { newNotification } from '../../actioncreators'
 import Option from '../Option'
 import api from '../../api';
@@ -41,8 +42,10 @@ function Preferences(props) {
                                 <MDBJumbotron>
                                     <div className="category-header flex-row">
                                         <h4 className="h5 display-5">{settingType}</h4>
-                                        <div id="save-button"><MDBBtn size="sm" onClick={() => handleSave(settingType)}  color="light">
-                                            <MDBIcon far icon="save" />Save</MDBBtn>
+                                        <div id="save-button">
+                                            <Button size="sm" onClick={() => handleSave(settingType)} color="light">
+                                                <MDBIcon far icon="save" />Save
+                                            </Button>
                                         </div>
                                     </div>
                                     <div className="preferences">
@@ -74,7 +77,7 @@ function Preferences(props) {
                     })
                 }
             </MDBRow>
-            <div id="save-button"><MDBBtn onClick={handleSave} color="success"><MDBIcon icon="save" />Save</MDBBtn></div>
+            <div id="save-button"><Button onClick={handleSave} variant="outlined" color="primary"><MDBIcon icon="save" />Save all</Button></div>
         </MDBContainer>
     )
 }
