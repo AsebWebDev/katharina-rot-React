@@ -18,7 +18,7 @@ export default function LiabilityAndCopyrights() {
                 Tel: 0151/74401842
             </p>
 
-            <p><strong>Alle Inhalte sind urheberrechtlich geschützt, Sarah Heuzeroth 2019</strong></p>
+            <p><strong>Alle Inhalte sind urheberrechtlich geschützt, Sarah Heuzeroth 2020</strong></p>
 
             
 
