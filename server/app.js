@@ -1,5 +1,4 @@
 
-//TODO: make news searchable
 //TODO: use OAuth
 //TODO: try / practice GraphQl
 //TODO: add decent animations
