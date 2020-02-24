@@ -8,7 +8,7 @@ import '../styles/Footer.scss'
 
 const FooterPage = (props) => {
   let [nNewsMax, setNNewsMax] = useState(4); // maximum number of news to show
-  
+
   useEffect(() => {
     $(window).resize(function(){
         if ($(window).width() > 1400) setNNewsMax(2)      // show only 2 news max
@@ -16,7 +16,6 @@ const FooterPage = (props) => {
         else if ($(window).width() < 1080) setNNewsMax(4) // show 4 news max
     })
   }, [nNewsMax])
-
 
   return (
     <MDBFooter color="elegant-color" id="footer" className="font-small pt-5 mt-5 flex-column">
@@ -63,7 +62,7 @@ const FooterPage = (props) => {
             <h5 className="footer-title">News</h5>
             {props.news && props.news.length > 0 && 
               <div>
-                {props.news.slice(0,nNewsMax).map((news,i) => <MiniNews key={i} news={news} />)}
+                {props.news.slice(0,nNewsMax).map((news,i) => <MiniNews key={i} news={news} props={props}/>)}
               </div>
             }
             {props.news && props.news.length === 0 && <Spinner />}
