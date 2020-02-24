@@ -50,7 +50,7 @@ function App (props) {
         <Route path="/informative-illustration" component={InformativeIllustration} />
         <Route path="/gruene-illustration" component={GrueneIllustration} />
         <Route path="/collection/:id" component={Collection} />
-        <Route path="/news/:id" component={NewsDetails} />
+        <Route exact path="/news/:id" component={NewsDetails} />
         <Route path="/news" component={News} />
         <Route render={() => <h2>404</h2>} />
       </Switch>
