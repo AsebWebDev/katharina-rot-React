@@ -8,7 +8,6 @@ import '../../../styles/Slider.scss'
 class Slider extends React.Component {
     constructor(props) {
       super(props)
-      
       this.state = { current: 0 }
       this.handlePreviousClick = this.handlePreviousClick.bind(this)
       this.handleNextClick = this.handleNextClick.bind(this)
