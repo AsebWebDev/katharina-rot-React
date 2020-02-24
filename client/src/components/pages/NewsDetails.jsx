@@ -12,12 +12,17 @@ import '../../styles/NewsDetails.scss'
 import '../../styles/Editor.scss'
 
 export default function NewsDetails(props) {
-    let [currentId] = useState(props.match.params.id)
+    let [currentId, setCurrentId] = useState(props.match.params.id)
     let [currentNews, setCurrentNews] = useState(null)
     let [parsedPictures, setParsedPictures] = useState([])
     let [error, setError] = useState(null)
     let [isMobile, setIsMobile] = useState(checkMobile())
     let [isFullScreen, setIsFullScreen] = useState(checkFullScreen())
+
+    useEffect(() => {
+        // Update Component, when new route is hit via router
+        setCurrentId(props.match.params.id)
+    }, [props.match.params.id])
 
     useEffect(() => {
         $(window).resize(function(){
