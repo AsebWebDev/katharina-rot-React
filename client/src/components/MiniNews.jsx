@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBIcon, MDBView, MDBContainer } from "mdbreact";
+import { withRouter } from 'react-router-dom';
+// import history from '../configs/history';
 import Heart from './Heart'
 import TimeAgo from 'react-timeago'
 import germanStrings from 'react-timeago/lib/language-strings/de'
@@ -9,9 +11,11 @@ import '../styles/MiniNews.scss'
 const formatter = buildFormatter(germanStrings)
 
 function MiniNews(props) {
-    let news = props.news;    
+    let news = props.news;  
+    let redirect = () => props.history.push('/news/'+news._id)
+
     return (
-      <MDBCard className="my-5 px-1 pb-1 hoverable" id="mini-news">
+      <MDBCard onClick={redirect} className="my-5 px-1 pb-1 hoverable" id="mini-news">
         <MDBCardBody>
           <MDBContainer>
             <MDBRow>
@@ -52,4 +56,4 @@ function MiniNews(props) {
     )
 }
 
-export default MiniNews
+export default withRouter(MiniNews)
