@@ -1,5 +1,3 @@
-
-//TODO: use OAuth
 //TODO: try / practice GraphQl
 //TODO: add decent animations
 
@@ -13,7 +11,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const logger = require('morgan')
 const nocache = require('nocache')
-const session = require("express-session")
+const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 const passportSetup = require('./configs/passport-setup')
 const authRoutes = require('./routes/oauth');
@@ -27,7 +25,6 @@ const app = express()
 app.use(nocache())
 app.use(cors({  // Set "Access-Control-Allow-Origin" header
   origin: (origin, cb) => {
-    // cb(null, origin && origin.startsWith('http://localhost:') )
     cb(null, origin && ( origin.startsWith('https://accounts.google.com') || origin.startsWith('http://localhost:') ) )
   },
   optionsSuccessStatus: 200,
@@ -47,7 +44,6 @@ app.use(session({
   store: new MongoStore({ mongooseConnection: mongoose.connection })
 }))
 require('./passport')(app)
-
 app.use('/api', require('./routes/index'))
 app.use('/api', require('./routes/auth'))
 app.use('/api/oauth', authRoutes)
