@@ -64,7 +64,7 @@ class LoginBox extends Component {
                   {this.state.message && <h2>{this.state.message}</h2>}
                 </form>
                 {/* GOOGLE OAUTH */}
-                <a href="http://localhost:5000/api/oauth/googlelogin"><button>Login with Google</button></a>
+                {/* <a href="http://localhost:5000/api/oauth/googlelogin"><button>Login with Google</button></a> */}
               </MDBCol>
             </MDBRow>
           </MDBContainer>
