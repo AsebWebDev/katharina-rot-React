@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const passport = require('passport')
+const { isLoggedIn } = require('../middlewares')
 
 //auth logout
 router.get('/logout', (req,res) => {
@@ -8,21 +9,17 @@ router.get('/logout', (req,res) => {
 })
 
 // auth with google
-// router.get('/googlelogin', () => {
-//     console.log("route hit")
-// });
 router.get('/googlelogin', passport.authenticate('google', {
          scope: ['profile']
     }), () => {
-    console.log("route hit")
+    console.log("Google Login route hit")
 });
-// router.get('/googlelogin', passport.authenticate('google', {
-//     scope: ['profile']
-// }), () => console.log("googleelogin hit"));
 
 // callback route for google to redirect to
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
     console.log('you reached a callback uri')
+    console.log(req.isAuthenticated())
+    res.redirect('http://localhost:3000')
 })
 
 module.exports = router;
