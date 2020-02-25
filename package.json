@@ -18,6 +18,8 @@
     "jquery": "^3.4.1",
     "mongoose": "^5.9.2",
     "npm-check-updates": "^4.0.1",
+    "passport": "^0.4.1",
+    "passport-google-oauth": "^2.0.0",
     "react-card-flip": "^1.0.10"
   }
 }
