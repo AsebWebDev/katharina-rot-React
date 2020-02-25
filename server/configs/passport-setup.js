@@ -1,7 +1,5 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-//FIXME: Use process.env instead of keys
-const keys = require('./keys')
 const User = require("../models/User")
 
 passport.serializeUser((user, done) => {
@@ -19,10 +17,8 @@ passport.use(
     new GoogleStrategy({
         // options for the googe strategy
         callbackURL: 'http://localhost:5000/api/oauth/google/redirect',
-        clientID: keys.google.clientID,
-        clientSecret: keys.google.clientSecret
-        // clientID: process.env.GOOGLE_CLIENTID,
-        // clientSecret: process.env.GOOGLE_CLIENTSECRET
+        clientID: process.env.GOOGLE_CLIENTID,
+        clientSecret: process.env.GOOGLE_CLIENTSECRET
     }, (accessToken, refreshToken, profile, done) => {
         //passport callback function
         User.findOne({googleId: profile.id})
