@@ -15,22 +15,20 @@ const logger = require('morgan')
 const nocache = require('nocache')
 const session = require("express-session")
 const MongoStore = require('connect-mongo')(session)
+const passportSetup = require('./configs/passport-setup')
+const authRoutes = require('./routes/oauth');
 
 require('./configs/database')
+mongoose.set('useFindAndModify', false) // prevent deprecation warning of fineByIdAndUpdate()
 
 const app_name = require('./package.json').name
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`)
-
 const app = express()
-
 app.use(nocache())
-
-mongoose.set('useFindAndModify', false) // prevent deprecation warning of fineByIdAndUpdate()
-
-// Set "Access-Control-Allow-Origin" header
-app.use(cors({
+app.use(cors({  // Set "Access-Control-Allow-Origin" header
   origin: (origin, cb) => {
-    cb(null, origin && origin.startsWith('http://localhost:'))
+    // cb(null, origin && origin.startsWith('http://localhost:') )
+    cb(null, origin && ( origin.startsWith('https://accounts.google.com') || origin.startsWith('http://localhost:') ) )
   },
   optionsSuccessStatus: 200,
   credentials: true
@@ -39,9 +37,7 @@ app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
-
 app.use(express.static(path.join(__dirname, '../client/build')))
-
 
 // Enable authentication using session + passport
 app.use(session({
@@ -52,9 +48,9 @@ app.use(session({
 }))
 require('./passport')(app)
 
-
 app.use('/api', require('./routes/index'))
 app.use('/api', require('./routes/auth'))
+app.use('/api/oauth', authRoutes)
 app.use('/api/collection', require('./routes/collection'))
 app.use('/api/news', require('./routes/news'))
 app.use('/api/user', require('./routes/user'))
