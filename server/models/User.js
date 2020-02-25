@@ -5,6 +5,7 @@ const userSettings = require('../configs/usersettings')
 const userSchema = new Schema({
   username: String,
   password: String,
+  googleId: String,
   isAdmin: {
     type: Boolean,
     default: false
