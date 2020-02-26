@@ -49,7 +49,6 @@ require('./passport')(app)
 // ===================
 app.use('/api', require('./routes/index'))
 app.use('/api', require('./routes/auth'))
-app.use('/api/oauth', authRoutes)
 app.use('/api/collection', require('./routes/collection'))
 app.use('/api/news', require('./routes/news'))
 app.use('/api/user', require('./routes/user'))
