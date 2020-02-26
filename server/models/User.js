@@ -6,6 +6,7 @@ const userSchema = new Schema({
   username: String,
   password: String,
   googleId: String,
+  profilePic: String,
   isAdmin: {
     type: Boolean,
     default: false

@@ -10,13 +10,15 @@ function LoginBox(props) {
 
   let [username, setUsername] = useState('');
   let [password, setPassword] = useState('');
-  let [message, setMessage] = useState(null);
+  let [message, setMessage] = useState('');
+  let [profilePic, setProfilePic] = useState(null);
   
   const handleInputChange = (stateFieldName, event) => {
     switch (stateFieldName) {
       case 'username': setUsername(event.target.value); break;
       case 'password': setPassword(event.target.value); break;
       case 'message': setMessage(event.target.value); break;
+      case 'profilePic': setMessage(event.target.value); break;
       default: return
     }
   }
@@ -31,10 +33,13 @@ function LoginBox(props) {
   }
 
   const responseOauth = (response) => {
+    console.log("TCL: responseOauth -> response", response)
     const googleId = response.googleId;
     const username = response.profileObj.name;
+    const profilePic = response.profileObj.imageUrl;
     setUsername(username);
-    api.googleLogin(googleId, username)
+    setProfilePic(profilePic);
+    api.googleLogin(googleId, username, profilePic)
     .then(result => {
       setMessage('Success!')
       props.history.push("/") // Redirect to the home page

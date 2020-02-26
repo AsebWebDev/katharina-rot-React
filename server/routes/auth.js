@@ -31,13 +31,13 @@ router.post("/login", (req, res, next) => {
 })
 
 router.post("/googlelogin", (req, res, next) => {
-  const { googleId, username } = req.body
+  const { googleId, username, profilePic } = req.body
 
   User.findOne({ googleId })
     .then(userDoc => {
       if (!userDoc) {
         console.log('No user in database')
-        new User({ username, googleId }).save()
+        new User({ username, googleId, profilePic }).save()
         .then((newUser) => {
             console.log('new user created: ' + newUser)
         }).catch(err => console.log(err))
