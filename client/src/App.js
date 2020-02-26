@@ -28,7 +28,7 @@ function App (props) {
     api.getNews()
       .then(news => dispatch({ type: "GET_NEWS", news}))
       .catch (err => console.log(err))
-    if (api.isLoggedIn()) {
+    if (api.isLoggedIn() && api.getLocalStorageUser()) {
       api.getUserSettings(api.getLocalStorageUser()._id)
       .then(settings => dispatch({ type: "UPDATE_USER_SETTINGS", settings}))
       .catch(err => dispatch(newNotification(err.toString())))
