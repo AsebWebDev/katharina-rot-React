@@ -65,8 +65,8 @@ const Card = function (props) {
                     <MDBView hover zoom>
                         <MDBCardImage className="img-fluid" src={titlePic} waves />
                         <div className="card-buttons">
-                            {api.isLoggedIn() && <MDBBadge onClick={handleDelete} color="danger"><i className="fas fa-trash-alt"></i>Delete</MDBBadge>}
-                            {api.isLoggedIn() && <MDBBadge onClick={handleEdit} color="blue"><i className="fas fa-edit"></i>Edit</MDBBadge>}
+                            {api.isAdmin() && <MDBBadge onClick={handleDelete} color="danger"><i className="fas fa-trash-alt"></i>Delete</MDBBadge>}
+                            {api.isAdmin() && <MDBBadge onClick={handleEdit} color="blue"><i className="fas fa-edit"></i>Edit</MDBBadge>}
                         </div>
                     </MDBView>
                     <MDBCardBody>
@@ -82,8 +82,8 @@ const Card = function (props) {
             <MDBCol key="back" onClick={handleClick}>
                 <MDBCard style={{ width: "15rem", height: "26rem" }}>
                     <div className="card-buttons">
-                        {api.isLoggedIn() && <MDBBadge onClick={handleDelete} color="danger"><i className="fas fa-trash-alt"></i>Delete</MDBBadge>}
-                        {api.isLoggedIn() && <MDBBadge onClick={handleEdit} color="blue"><i className="fas fa-edit"></i>Edit</MDBBadge>}
+                        {api.isAdmin() && <MDBBadge onClick={handleDelete} color="danger"><i className="fas fa-trash-alt"></i>Delete</MDBBadge>}
+                        {api.isAdmin() && <MDBBadge onClick={handleEdit} color="blue"><i className="fas fa-edit"></i>Edit</MDBBadge>}
                     </div>
                     <MDBCardBody>
                         <MDBCardTitle>
@@ -97,7 +97,7 @@ const Card = function (props) {
                             {tags.map((tag,i) => 
                                 <div key={i}>
                                     <MDBBadge color="info" >
-                                        {api.isLoggedIn() && 
+                                        {api.isAdmin() && 
                                             <span className="x">
                                                 <MDBIcon onClick={handleTagClick} id={i} name={tag} icon="trash-alt" />
                                             </span>}

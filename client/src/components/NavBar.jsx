@@ -81,7 +81,7 @@ function NavbarPage (props) {
             {api.isLoggedIn() && <MDBNavLink to="/" onClick={handleLogoutClick}>Logout</MDBNavLink>}
           </MDBNavItem>
           <MDBNavItem>
-            {api.isLoggedIn() && <MDBNavLink to="/admin">Admin</MDBNavLink>}
+            {api.isAdmin() && <MDBNavLink to="/admin">Admin</MDBNavLink>}
           </MDBNavItem>
         </MDBNavbarNav>
         <MDBNavbarNav right>
