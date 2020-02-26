@@ -4,6 +4,7 @@ import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
 import GoogleLogin from 'react-google-login';
 import keys from '../configs/keys';
 import api from '../api';
+import '../styles/LoginBox.scss'
 
 function LoginBox(props) {
 
@@ -41,15 +42,16 @@ function LoginBox(props) {
   }
 
   return (
-    <MDBContainer>
+    <MDBContainer id="loginbox">
       <MDBRow>
         <MDBCol md="12">
           <form onSubmit={(e) => handleClick(e)}>
-            <p className="h5 text-center mb-4">Please provide your credentials to login...</p>
+            <p className="h5 text-center mb-4">Please login...</p>
             <div className="grey-text">
               <MDBInput
+                className="loginbox-credentials"
                 label="Type your username"
-                icon="envelope"
+                icon="user"
                 group
                 type="text"
                 validate
@@ -59,6 +61,7 @@ function LoginBox(props) {
                 onChange={(e) => handleInputChange("username", e)}
               />
               <MDBInput
+                className="loginbox-credentials"
                 label="Type your password"
                 icon="lock"
                 group
@@ -74,10 +77,11 @@ function LoginBox(props) {
             {message && <h2>{message}</h2>}
           </form>
           {/* GOOGLE OAUTH */}
-          {/* <a href="http://localhost:5000/api/oauth/googlelogin"><button>Login with Google</button></a> */}
+          <hr />
+          <p className="h5 text-center mb-4">Or use your Google account...</p>
           <GoogleLogin
             clientId={keys.google.GOOGLE_CLIENTID}
-            buttonText="Login"
+            buttonText="Google Login"
             onSuccess={responseOauth}
             onFailure={responseOauth}
             cookiePolicy={'single_host_origin'}
