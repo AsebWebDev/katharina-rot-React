@@ -37,7 +37,7 @@ router.post("/googlelogin", (req, res, next) => {
     .then(userDoc => {
       if (!userDoc) {
         console.log('No user in database')
-        new User({ username, googleId}).save()
+        new User({ username, googleId }).save()
         .then((newUser) => {
             console.log('new user created: ' + newUser)
         }).catch(err => console.log(err))
