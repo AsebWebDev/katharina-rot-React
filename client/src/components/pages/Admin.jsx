@@ -22,7 +22,7 @@ function Admin (props){
     }
   }
   
-  if (api.isLoggedIn()) {
+  if (api.isAdmin()) {
     return (
     <div className="admin-page">
       <MDBContainer className="main-menu mt-5 text-center">
