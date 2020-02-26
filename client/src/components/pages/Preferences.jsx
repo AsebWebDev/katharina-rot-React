@@ -87,7 +87,6 @@ function mapStateToProps(reduxState){
       collections: reduxState.collections,
       notifications: reduxState.notifications,
       userSettings: reduxState.userSettings,
-      userSettingsTestMode: reduxState.userSettingsTestMode
     }
 }
   
