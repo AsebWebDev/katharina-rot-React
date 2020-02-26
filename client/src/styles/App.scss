@@ -58,3 +58,14 @@ a:hover {
 .card {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.16), 0 0px 2px 0 rgba(0, 0, 0, 0.12);
 }
+
+// U S E R    S E T T I N G S
+// classes CamelCase, because setting Schema is CamelCase due to easy visualisation in Preference when looping over settings object
+
+.Winter {
+  background-color: white;
+}
+
+.Dark {
+  background-color: darkgrey;
+}
