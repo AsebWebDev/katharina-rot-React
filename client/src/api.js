@@ -22,9 +22,10 @@ export default {
   },
 
   isAdmin() {
-    return (!!localStorage.getItem('user'))               // check if User exists in local Storage
-      ? JSON.parse(localStorage.getItem('user')).isAdmin  // if yes, check if admin
-      : false                                             // if not, return false
+    const user = localStorage.getItem('user');
+    return (user != null )        // check if User exists in local Storage, != because it can return string "null" or null
+      ? JSON.parse(user).isAdmin  // if yes, check if admin
+      : false                     // if not, return false
   },
 
   getLocalStorageUser() {
@@ -45,11 +46,9 @@ export default {
       .catch(errHandler)
   },
 
-  googleLogin(googleId) {
+  googleLogin(googleId, username) {
     return service
-      .post('/googlelogin', {
-        googleId
-      })
+      .post('/googlelogin', { googleId, username })
       .then(res => {
         // If we have localStorage.getItem('user') saved, the application will consider we are loggedin
         localStorage.setItem('user', JSON.stringify(res.data))
