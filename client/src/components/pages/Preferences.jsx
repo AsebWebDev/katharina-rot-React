@@ -12,15 +12,14 @@ function Preferences(props) {
         ? JSON.parse(localStorage.getItem('user'))
         : null
     
-    const localStorageSettings = localStorageUser.settings
-
     let {dispatch} = props;
     let [userSettings, setUserSettings] = useState(props.userSettings)
-
+    
     let handleChange = (e, val, settingType, option) => {
-        let newUserSettings = { ...userSettings }
-        newUserSettings[settingType][option].val = val
-        setUserSettings(newUserSettings)        
+        let settings = { ...userSettings } // new User Settings need to be called "settings", because dispatch is asking for this wording
+        settings[settingType][option].val = val
+        setUserSettings(settings)
+        dispatch({ type: "UPDATE_USER_SETTINGS", settings})     
     }
 
     let handleSave = (settingType) => {
@@ -28,6 +27,7 @@ function Preferences(props) {
         .then(settings => {
             dispatch({ type: "UPDATE_USER_SETTINGS", settings})
             dispatch(newNotification(`Your ${settingType}-Preferences have been updated`, 'Updated'))
+            setUserSettings(settings)
         }).catch(err => dispatch(newNotification(err.toString())));
     }
 
@@ -35,7 +35,7 @@ function Preferences(props) {
         <MDBContainer id="preferences" className="create-page mt-5 text-center">
             <MDBRow>
                 {/* MAP OVER ALL SETTING CATEGORIES */}
-                {Object.entries(props.userSettings)
+                {props.userSettings && Object.entries(props.userSettings)
                     .map(([settingType,settingTypeValue],i)=>{    // settings category and the concrete option (settingTypeValue)
                         return (
                             <MDBCol key={i}>
@@ -43,7 +43,7 @@ function Preferences(props) {
                                     <div className="category-header flex-row">
                                         <h4 className="h5 display-5">{settingType}</h4>
                                         <div id="save-button">
-                                            <Button size="sm" onClick={() => handleSave(settingType)} color="light">
+                                            <Button size="small" onClick={() => handleSave(settingType)} color="primary">
                                                 <MDBIcon far icon="save" />Save
                                             </Button>
                                         </div>
@@ -77,7 +77,7 @@ function Preferences(props) {
                     })
                 }
             </MDBRow>
-            <div id="save-button"><Button onClick={handleSave} variant="outlined" color="primary"><MDBIcon icon="save" />Save all</Button></div>
+            <div id="save-button"><Button onClick={() => handleSave('Global')} variant="outlined" color="primary"><MDBIcon icon="save" />Save all</Button></div>
         </MDBContainer>
     )
 }
@@ -86,7 +86,8 @@ function mapStateToProps(reduxState){
     return {
       collections: reduxState.collections,
       notifications: reduxState.notifications,
-      userSettings: reduxState.userSettings
+      userSettings: reduxState.userSettings,
+      userSettingsTestMode: reduxState.userSettingsTestMode
     }
 }
   
