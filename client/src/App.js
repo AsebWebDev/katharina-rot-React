@@ -35,8 +35,10 @@ function App (props) {
     }
   }, [dispatch])
 
+  const theme = props.userSettings ? props.userSettings.Design.theme.val : 'winter' // use Theme from User-Settings, Default "Winter"
+
   return (
-    <div className="App">
+    <div className={'App ' + theme}>
       <Header />
       <Switch>
         <Route path="/" exact component={Home} />
@@ -72,6 +74,8 @@ function mapStateToProps(reduxState){
     collections: reduxState.collections,
     notifications: reduxState.notifications,
     news: reduxState.news,
+    userSettings: reduxState.userSettings,
+    userSettingsTestMode: reduxState.userSettingsTestMode
   }
 }
 
