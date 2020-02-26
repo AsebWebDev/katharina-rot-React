@@ -1,16 +1,9 @@
 const express = require('express');
-const { isLoggedIn } = require('../middlewares')
+const { isLoggedIn, isAdmin } = require('../middlewares')
 const News = require('../models/News')
 const Collection = require('../models/Collection')
 const router = express.Router();
 const mongoose = require('mongoose');
-
-router.get('/admin', isLoggedIn, (req, res, next) => {
-  res.json({
-    secret: 42,
-    user: req.user
-  });
-});
 
 router.post('/checkheart', (req, res, next) => {
   const GroupModel = mongoose.model(req.body.type)
