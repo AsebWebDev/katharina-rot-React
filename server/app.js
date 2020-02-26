@@ -13,7 +13,6 @@ const logger = require('morgan')
 const nocache = require('nocache')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
-const authRoutes = require('./routes/oauth');
 
 require('./configs/database')
 mongoose.set('useFindAndModify', false) // prevent deprecation warning of fineByIdAndUpdate()
