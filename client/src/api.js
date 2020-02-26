@@ -18,7 +18,13 @@ export default {
   service: service,
 
   isLoggedIn() {
-    return localStorage.getItem('user') != null
+    return localStorage.getItem('user') != null           // app will consider user as logged in, when User exists in local Storage
+  },
+
+  isAdmin() {
+    return (!!localStorage.getItem('user'))               // check if User exists in local Storage
+      ? JSON.parse(localStorage.getItem('user')).isAdmin  // if yes, check if admin
+      : false                                             // if not, return false
   },
 
   getLocalStorageUser() {
@@ -30,6 +36,19 @@ export default {
       .post('/login', {
         username,
         password,
+      })
+      .then(res => {
+        // If we have localStorage.getItem('user') saved, the application will consider we are loggedin
+        localStorage.setItem('user', JSON.stringify(res.data))
+        return res.data
+      })
+      .catch(errHandler)
+  },
+
+  googleLogin(googleId) {
+    return service
+      .post('/googlelogin', {
+        googleId
       })
       .then(res => {
         // If we have localStorage.getItem('user') saved, the application will consider we are loggedin
