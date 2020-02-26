@@ -29,7 +29,7 @@ function Home (props) {
 
         {/* DATA EXISTS */}
         {props.collections && props.collections
-        .filter(item => isInQuery(item, props.query))
+        .filter(item => isInQuery(item, query))
         .map((collection, i) => 
         <div key={collection._id}><Card collection={collection} dispatch={props.dispatch}/></div>)}
 
