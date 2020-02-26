@@ -13,7 +13,6 @@ const logger = require('morgan')
 const nocache = require('nocache')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
-const passportSetup = require('./configs/passport-setup')
 const authRoutes = require('./routes/oauth');
 
 require('./configs/database')
@@ -44,6 +43,10 @@ app.use(session({
   store: new MongoStore({ mongooseConnection: mongoose.connection })
 }))
 require('./passport')(app)
+
+// ===================
+//     R O U T E S 
+// ===================
 app.use('/api', require('./routes/index'))
 app.use('/api', require('./routes/auth'))
 app.use('/api/oauth', authRoutes)
@@ -63,7 +66,9 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'))
 })
 
-// Error handler
+// ==================================
+//     E R R O R   H A N D L E R  
+// ==================================
 app.use((err, req, res, next) => {
   console.error("----- An error happened -----")
   console.error(err)
