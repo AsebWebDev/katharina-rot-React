@@ -35,7 +35,7 @@ export default function Option(props) {
         );
         
         case 'boolean' : return ( 
-            <div class="ui checked checkbox"> 
+            <div className="ui checked checkbox"> 
                 <Checkbox 
                     onChange={(e) => handleChange(e, e.target.checked, settingType, option)}
                     checked={optionVal}
