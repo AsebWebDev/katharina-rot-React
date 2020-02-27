@@ -23,7 +23,7 @@ export default {
 
   isAdmin() {
     const user = localStorage.getItem('user');
-    return (user != null && user != "null" ) 
+    return (user !== null && user !== "null" ) 
       ? JSON.parse(user).isAdmin  // if yes, check if admin
       : false                     // if not, return false
   },
