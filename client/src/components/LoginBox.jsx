@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
+import { newNotification } from '../actioncreators'
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
 import GoogleLogin from 'react-google-login';
 import keys from '../configs/keys';
@@ -7,7 +9,7 @@ import api from '../api';
 import '../styles/LoginBox.scss'
 
 function LoginBox(props) {
-
+  const { dispatch } = props;
   let [username, setUsername] = useState('');
   let [password, setPassword] = useState('');
   let [message, setMessage] = useState('');
@@ -26,14 +28,18 @@ function LoginBox(props) {
   const handleClick = (e) => {
     e.preventDefault();
     api.login(username, password)
-      .then(result => {
-        setMessage('Success!')
+      .then(() => {
+        api.getUserSettings(api.getLocalStorageUser()._id)
+        .then(settings => dispatch({ type: "UPDATE_USER_SETTINGS", settings}))
+        .catch(err => dispatch(newNotification(err.toString())))
+      })
+      .then(() => {
+        dispatch(newNotification('Successfully logged in, ' +  username))
         props.history.push("/") // Redirect to the home page
       }).catch(err => setMessage(err))
   }
 
   const responseOauth = (response) => {
-    console.log("TCL: responseOauth -> response", response)
     const googleId = response.googleId;
     const username = response.profileObj.name;
     const profilePic = response.profileObj.imageUrl;
@@ -41,7 +47,9 @@ function LoginBox(props) {
     setProfilePic(profilePic);
     api.googleLogin(googleId, username, profilePic)
     .then(result => {
-      setMessage('Success!')
+      dispatch(newNotification('Successfully logged in, ' +  username))
+      let userdata = { username, profilePic }
+      props.dispatch({ type: "UPDATE_USER_DATA", userdata })
       props.history.push("/") // Redirect to the home page
     }).catch(err => setMessage(err))
   }
@@ -97,4 +105,11 @@ function LoginBox(props) {
   )
 }
 
-export default withRouter(LoginBox)
+function mapStateToProps(reduxState){
+  return {
+    username: reduxState.username,
+    profilePic: reduxState.profilePic
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(LoginBox))
