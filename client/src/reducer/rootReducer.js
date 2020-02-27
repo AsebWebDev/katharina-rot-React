@@ -8,7 +8,8 @@ import {
   SET_PIC_UPLOADS, 
   PREPAREDELETE_NOTIFICATION, 
   UPDATE_NOTIFICATIONS,
-  UPDATE_USER_SETTINGS
+  UPDATE_USER_SETTINGS,
+  UPDATE_USER_DATA
 } from '../actioncreators';
 
 const initialState = {
@@ -23,7 +24,9 @@ const initialState = {
   uploadedPictures: null,
   uploadedTitlePic: null,
   query: '',
-  userSettings: null
+  userSettings: null,
+  username: null,
+  profilePic: '' 
 }
 
 export default function rootReducer(state=initialState, action) {
@@ -80,6 +83,14 @@ export default function rootReducer(state=initialState, action) {
       return {
         ...newState,
         userSettings: action.settings
+      }
+    }
+
+    case UPDATE_USER_DATA: {
+      return {
+        ...newState,
+        username: action.userdata.username,
+        profilePic: action.userdata.profilePic
       }
     }
 
