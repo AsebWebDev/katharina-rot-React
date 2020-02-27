@@ -19,6 +19,8 @@ function NavbarPage (props) {
 
   let handleLogoutClick= (e) => {
       api.logout()
+      let userdata = { username: null, profilePic: null }
+      props.dispatch({ type: "UPDATE_USER_DATA", userdata })
       api.getCollections()
         .then(collections => props.dispatch({
           type: "GET_DATA", 
@@ -83,6 +85,9 @@ function NavbarPage (props) {
           <MDBNavItem>
             {api.isAdmin() && <MDBNavLink to="/admin">Admin</MDBNavLink>}
           </MDBNavItem>
+          <MDBNavItem>
+            {api.isLoggedIn() && props.username && "Hello " + props.username }
+          </MDBNavItem>
         </MDBNavbarNav>
         <MDBNavbarNav right>
           <MDBNavItem>
@@ -102,7 +107,9 @@ function mapStateToProps(reduxState){
   return {
     collections: reduxState.collections,
     notifications: reduxState.notifications,
-    query: reduxState.query
+    query: reduxState.query,
+    username: reduxState.username,
+    profilePic: reduxState.profilePic
   }
 }
 
