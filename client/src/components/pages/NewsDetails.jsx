@@ -95,7 +95,7 @@ export default function NewsDetails(props) {
             {/* Show this, when no gallery exists */}
             {!hasPictures && 
                 <div id="no-pictures-div">
-                    <img src={titlePic} alt="Titelbild"/>
+                    <img className="news-title-pic" src={titlePic} alt="Titelbild"/>
                     <div className="editor-content">
                     <Editor 
                     readOnly={true} 
