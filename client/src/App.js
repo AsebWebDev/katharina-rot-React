@@ -2,6 +2,8 @@ import React, {useEffect} from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { newNotification } from './actioncreators'
+import { MDBAnimation } from "mdbreact";
+import $ from "jquery";
 import Home from './components/pages/Home';
 import Login from './components/pages/Login';
 import Admin from './components/pages/Admin';
@@ -24,11 +26,23 @@ import './styles/App.scss';
 function App (props) {
   const { dispatch } = props;
 
+  $(window).bind('scroll', function() {
+    if ($(window).scrollTop() > 100) {
+        $('#profile-login-icon').fadeOut();
+    }
+    else {
+        $('#profile-login-icon').fadeIn();
+    }
+  });
+
   useEffect(() => {
     api.getNews()
       .then(news => dispatch({ type: "GET_NEWS", news}))
       .catch (err => console.log(err))
     if (api.isLoggedIn() && api.getLocalStorageUser()) {
+      const { username, profilePic, _id } = api.getLocalStorageUser()
+      const userdata = { username, profilePic }
+      props.dispatch({ type: "UPDATE_USER_DATA", userdata })
       api.getUserSettings(api.getLocalStorageUser()._id)
       .then(settings => dispatch({ type: "UPDATE_USER_SETTINGS", settings}))
       .catch(err => dispatch(newNotification(err.toString())))
@@ -57,6 +71,10 @@ function App (props) {
         <Route render={() => <h2>404</h2>} />
       </Switch>
       <Footer />
+      <div id="profile-login-icon">
+        {props.profilePic && <img src={props.profilePic} id="profile-pic-sm"/>}
+        {api.isLoggedIn() && props.username && props.username}
+      </div>
       <div style={{
               position: "fixed",
               top: "10px",
@@ -74,7 +92,9 @@ function mapStateToProps(reduxState){
     collections: reduxState.collections,
     notifications: reduxState.notifications,
     news: reduxState.news,
-    userSettings: reduxState.userSettings
+    userSettings: reduxState.userSettings,
+    profilePic: reduxState.profilePic,
+    username: reduxState.username
   }
 }
 
