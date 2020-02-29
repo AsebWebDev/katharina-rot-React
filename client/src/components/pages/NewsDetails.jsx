@@ -56,7 +56,6 @@ export default function NewsDetails(props) {
     let redirect = () => props.history.push('/news')
 
     if (currentNews) {
-        console.log("TCL: currentNews", currentNews)
         let { title, description, pictures, titlePic } = currentNews;
         let editorState = currentNews.editorState 
             ? EditorState.createWithContent(convertFromRaw(JSON.parse(currentNews.editorState)))
