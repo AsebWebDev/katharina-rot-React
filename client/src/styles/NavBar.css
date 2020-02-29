@@ -1,8 +1,0 @@
-.navbar-nav:first-child {
-    align-items: flex-start;
-    margin-left: 10px;
-}
-
-.navbar-nav .searchbar {
-    width: 100%;
-}
