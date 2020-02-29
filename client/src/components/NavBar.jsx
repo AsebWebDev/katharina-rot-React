@@ -7,7 +7,7 @@ import {
 import { withRouter } from 'react-router-dom';
 import { updateQuery } from '../actioncreators'
 import api from '../api';
-import '../styles/NavBar.css'
+import '../styles/NavBar.scss'
 
 function NavbarPage (props) {
   let [isOpen, setIsOpen] = useState(false)
@@ -33,7 +33,7 @@ function NavbarPage (props) {
   }
 
   return (
-    <MDBNavbar light expand="md">
+    <MDBNavbar light expand="md" id="navbar">
       <MDBNavbarBrand>
         <MDBNavLink to="/"><strong className="black-text">Katharina Rot</strong></MDBNavLink>
       </MDBNavbarBrand>
@@ -84,9 +84,6 @@ function NavbarPage (props) {
           </MDBNavItem>
           <MDBNavItem>
             {api.isAdmin() && <MDBNavLink to="/admin">Admin</MDBNavLink>}
-          </MDBNavItem>
-          <MDBNavItem>
-            {api.isLoggedIn() && props.username && "Hello " + props.username }
           </MDBNavItem>
         </MDBNavbarNav>
         <MDBNavbarNav right>
