@@ -31,10 +31,10 @@ const FooterPage = (props) => {
             <h5 className="footer-title">Follow me</h5>
             <ul>
               <li className="list-unstyled">
-                <a href="#!"><MDBIcon fab icon="facebook-square" /> Facebook</a>
+                <a href="https://www.facebook.com/katharinarotillustration/"><MDBIcon fab icon="facebook-square" /> Facebook</a>
               </li>
               <li className="list-unstyled">
-                <a href="#!"><MDBIcon fab icon="instagram" /> Instagram</a>
+                <a href="https://www.instagram.com/sarahrot"><MDBIcon fab icon="instagram" /> Instagram</a>
               </li>
             </ul>
           </MDBCol>
