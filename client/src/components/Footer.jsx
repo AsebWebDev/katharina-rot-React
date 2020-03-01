@@ -42,19 +42,19 @@ const FooterPage = (props) => {
             <h5 className="footer-title">Links</h5>
             <ul id="footer-links">
               <li className="list-unstyled">
-                <a href="www.katharina-rot.de">Work</a>
+                <a href="/">Work</a>
               </li>
               <li className="list-unstyled">
-                <a href="www.katharina-rot.de/news">News</a>
+                <a href="/news">News</a>
               </li>
               <li className="list-unstyled">
-                <a href="www.katharina-rot.de/about">About</a>
+                <a href="/aboutme">About</a>
               </li>
               <li className="list-unstyled">
-                <a href="www.katharina-rot.de/contact">Contact</a>
+                <a href="contact">Contact</a>
               </li>
               <li className="list-unstyled">
-                <a href="www.katharina-rot.de/agb">AGB</a>
+                <a href="/agb">AGB</a>
               </li>
             </ul>
           </MDBCol>
