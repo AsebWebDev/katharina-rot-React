@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { newNotification } from './actioncreators'
-import { MDBAnimation } from "mdbreact";
 import $ from "jquery";
 import Home from './components/pages/Home';
 import Login from './components/pages/Login';
@@ -43,11 +42,11 @@ function App (props) {
       const { username, profilePic, _id } = api.getLocalStorageUser()
       const userdata = { username, profilePic }
       props.dispatch({ type: "UPDATE_USER_DATA", userdata })
-      api.getUserSettings(api.getLocalStorageUser()._id)
+      api.getUserSettings(_id)
       .then(settings => dispatch({ type: "UPDATE_USER_SETTINGS", settings}))
       .catch(err => dispatch(newNotification(err.toString())))
     }
-  }, [dispatch])
+  }, [dispatch, props])
 
   const theme = props.userSettings ? props.userSettings.Design.theme.val : 'winter' // use Theme from User-Settings, Default "Winter"
 
@@ -72,7 +71,7 @@ function App (props) {
       </Switch>
       <Footer />
       <div id="profile-login-icon">
-        {props.profilePic && <img src={props.profilePic} id="profile-pic-sm"/>}
+        {props.profilePic && <img src={props.profilePic} id="profile-pic-sm" alt="profile pic"/>}
         {api.isLoggedIn() && props.username && props.username}
       </div>
       <div style={{
