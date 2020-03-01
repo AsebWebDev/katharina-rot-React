@@ -41,12 +41,12 @@ function App (props) {
     if (api.isLoggedIn() && api.getLocalStorageUser()) {
       const { username, profilePic, _id } = api.getLocalStorageUser()
       const userdata = { username, profilePic }
-      props.dispatch({ type: "UPDATE_USER_DATA", userdata })
+      dispatch({ type: "UPDATE_USER_DATA", userdata })
       api.getUserSettings(_id)
       .then(settings => dispatch({ type: "UPDATE_USER_SETTINGS", settings}))
       .catch(err => dispatch(newNotification(err.toString())))
     }
-  }, [dispatch, props])
+  }, [dispatch])
 
   const theme = props.userSettings ? props.userSettings.Design.theme.val : 'winter' // use Theme from User-Settings, Default "Winter"
 
