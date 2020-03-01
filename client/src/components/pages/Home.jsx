@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { MDBJumbotron, MDBContainer, MDBAnimation } from "mdbreact";
 import { isInQuery } from '../../helpers'
 import Card from '../Card'
+import InstaStory from '../InstaStory'
 import EditModal from './EditModal'
 import Spinner from '../Spinner'
 import api from '../../api';
@@ -42,8 +43,8 @@ function Home (props) {
               <Spinner />
             </MDBContainer>
           </MDBJumbotron>}
-          
       </div>
+      <InstaStory />
       {props.modal.isOpen && <EditModal />}
     </div>
   );
