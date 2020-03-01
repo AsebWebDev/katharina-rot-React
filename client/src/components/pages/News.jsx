@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { MDBCard, MDBCardBody } from "mdbreact";
+import { MDBCard, MDBCardBody, MDBJumbotron, MDBContainer } from "mdbreact";
 import { isInQuery } from '../../helpers'
 import EditModal from './EditModal'
 import MaxiNews from '../MaxiNews'
+import Spinner from '../Spinner'
 import '../../styles/News.scss'
 
 function News(props) {
@@ -22,6 +23,16 @@ function News(props) {
                     {props.news
                     .filter(item => isInQuery(item, props.query))
                     .map((news,i) => <MaxiNews news={news} i={i} key={i}/>)}
+
+                    {/* NO DATA EXISTS */}
+                    { props.news && props.news.length === 0 &&
+                    <MDBJumbotron className="jumbo-spinner" fluid>
+                        <MDBContainer>
+                        <h2 className="display-4">Loading content</h2>
+                        <p className="lead">No data is yet provided, still loading...</p>
+                        <Spinner />
+                        </MDBContainer>
+                    </MDBJumbotron>}
                     </div>
                 </MDBCardBody>
             </MDBCard>
