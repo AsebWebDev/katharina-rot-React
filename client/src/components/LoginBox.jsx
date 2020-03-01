@@ -93,7 +93,8 @@ function LoginBox(props) {
           <hr />
           <p className="h5 text-center mb-4">Or use your Google account...</p>
           <GoogleLogin
-            clientId={keys.google.GOOGLE_CLIENTID}
+            // clientId={keys.google.GOOGLE_CLIENTID}
+            clientId={process.env.GOOGLE_CLIENTID}
             buttonText="Google Login"
             onSuccess={responseOauth}
             onFailure={responseOauth}
