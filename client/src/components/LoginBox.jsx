@@ -39,7 +39,6 @@ function LoginBox(props) {
   }
 
   const responseOauth = (response) => {
-    console.log("TCL: responseOauth -> response", response)
     const googleId = response.googleId;
     const username = response.profileObj.name;
     const profilePic = response.profileObj.imageUrl;
@@ -93,7 +92,6 @@ function LoginBox(props) {
           <hr />
           <p className="h5 text-center mb-4">Or use your Google account...</p>
           <GoogleLogin
-            // clientId={keys.google.GOOGLE_CLIENTID}
             clientId={process.env.REACT_APP_GOOGLE_CLIENTID}
             buttonText="Google Login"
             onSuccess={responseOauth}
