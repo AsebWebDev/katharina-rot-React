@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import { newNotification } from '../actioncreators'
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
 import GoogleLogin from 'react-google-login';
-import keys from '../configs/keys';
+// import keys from '../configs/keys';
 import api from '../api';
 import '../styles/LoginBox.scss'
 
