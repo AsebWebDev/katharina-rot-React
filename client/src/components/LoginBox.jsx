@@ -14,7 +14,6 @@ function LoginBox(props) {
   let [password, setPassword] = useState('');
   let [message, setMessage] = useState('');
   let [profilePic, setProfilePic] = useState(null);
-  
   const handleInputChange = (stateFieldName, event) => {
     switch (stateFieldName) {
       case 'username': setUsername(event.target.value); break;
@@ -94,7 +93,7 @@ function LoginBox(props) {
           <p className="h5 text-center mb-4">Or use your Google account...</p>
           <GoogleLogin
             // clientId={keys.google.GOOGLE_CLIENTID}
-            clientId={process.env.GOOGLE_CLIENTID}
+            clientId={process.env.REACT_APP_GOOGLE_CLIENTID}
             buttonText="Google Login"
             onSuccess={responseOauth}
             onFailure={responseOauth}
