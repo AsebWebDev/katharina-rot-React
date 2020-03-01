@@ -39,6 +39,7 @@ function LoginBox(props) {
   }
 
   const responseOauth = (response) => {
+    console.log("TCL: responseOauth -> response", response)
     const googleId = response.googleId;
     const username = response.profileObj.name;
     const profilePic = response.profileObj.imageUrl;
