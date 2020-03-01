@@ -9,7 +9,7 @@
     "dev:client": "cd client && npm run start"
   },
   "engines": {
-    "node": "8.9.4"
+    "node": "v12.5.0"
   },
   "dependencies": {
     "@material-ui/core": "^4.9.5",
