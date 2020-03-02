@@ -15,6 +15,14 @@ const userSettings = {
         numberOfNewsToDisplay: {
           val: 10, name: "Number of News to display"
         },
+      },
+      Effects: {
+        parallax: {
+          val: true, name: "Parallax"
+        },
+        slideGallery: {
+          val: true, name: "Slide Gallery"
+        }
       }
     }
 }
