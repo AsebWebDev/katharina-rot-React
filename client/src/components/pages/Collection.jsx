@@ -14,11 +14,21 @@ import '../../styles/Editor.scss'
 
 function Collection(props) {
   let [currentId] = useState(props.match.params.id)
+  let [useParallax, setUseParallax] = useState(null)
+  let [useSildeGallery, setUseSildeGallery] = useState(null)
   let [currentCollection, setCurrentCollection] = useState(null)
   let [parsedPictures, setParsedPictures] = useState([])
   let [error, setError] = useState(null)
   let [isMobile, setIsMobile] = useState(checkMobile())
   let [isFullScreen, setIsFullScreen] = useState(checkFullScreen())
+
+
+  useEffect(() => {
+    if (props.userSettings) {
+      setUseParallax(props.userSettings.Effects.parallax.val)
+      setUseSildeGallery(props.userSettings.Effects.slideGallery.val)
+    }
+  })
 
   useEffect(() => {
     $(window).resize(function(){
@@ -60,18 +70,23 @@ function Collection(props) {
     return (
       <div className="collection">
           <MDBAnimation type="slideInLeft"><div onClick={redirect} className="backBtn"><i className="fas fa-arrow-circle-left"></i></div></MDBAnimation>
-          <p className="title">{title}</p>
-          <p className="description">{description}</p>
+          {/* Show only when Slider is activated in preferences */}
+          { useSildeGallery && 
+            <div>
+              <p className="title">{title}</p> 
+              <p className="description">{description}</p>
+            </div>
+          }
 
           {/* Show only when gallery exists */}
           {hasPictures && 
               <div >
-                <Slider className="slider" heading="Example Slider" slides={parsedPictures} id={currentId} type="collection"/>
+                { useSildeGallery && <Slider className="slider" heading="Example Slider" slides={parsedPictures} id={currentId} type="collection"/> }
                 <div id="plx-collection">
-                  {isFullScreen && <div className="collection-left">
+                  {isFullScreen && useParallax && <div className="collection-left-with-plx">
                         <CollectionParallax currentId={currentId} type="collection"/>
                   </div>}
-                  {!isFullScreen && !isMobile && <div className="collection-left">
+                  { ( (!isFullScreen && !isMobile) || !useParallax ) && <div className="collection-left">
                         {pictures.map((pic,i) => <img src={pic} key={i} alt="gallery"/>)}
                   </div>}
                   <div className="collection-right">
@@ -111,7 +126,8 @@ function Collection(props) {
 function mapStateToProps(reduxState){
   return {
     collections: reduxState.collections,
-    modal: reduxState.modal
+    modal: reduxState.modal,
+    userSettings: reduxState.userSettings
   }
 }
   
