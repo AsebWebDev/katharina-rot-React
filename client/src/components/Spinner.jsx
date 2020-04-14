@@ -21,7 +21,6 @@ const SpinnerPage = () => {
           <span className="sr-only">Loading...</span>
         </div>
       </div>
-      <p>Loading...</p>
     </div>
   );
 }
