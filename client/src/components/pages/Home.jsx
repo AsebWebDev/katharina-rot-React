@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { MDBJumbotron, MDBContainer, MDBAnimation } from "mdbreact";
+import { MDBAnimation } from "mdbreact";
 import { isInQuery } from '../../helpers'
 import Card from '../Card'
 import InstaStory from '../InstaStory'
 import EditModal from './EditModal'
-import Spinner from '../Spinner'
+import LoadingInfo from '../LoadingInfo';
 import api from '../../api';
 import '../../styles/Home.css'
 import greenBanner from '../../media/banner-greenfuture-1-1024x287.jpg'
@@ -20,7 +20,11 @@ function Home (props) {
       collections
     })).catch (err => console.log(err))
   }, [dispatch])
-  
+
+  const queryExists = props.query.length > 0;
+  const filteredCollection = props.collections.filter(item => isInQuery(item, query))
+  const filteredCollectionExists = filteredCollection.length > 0;
+
   return (
     <div className="Home">
       <MDBAnimation type="fadeIn" delay="0.3s">
@@ -29,20 +33,29 @@ function Home (props) {
       <div className="gallery">
 
         {/* DATA EXISTS */}
-        {props.collections && props.collections
-        .filter(item => isInQuery(item, query))
-        .map((collection, i) => 
-        <div key={collection._id}><Card collection={collection} dispatch={props.dispatch}/></div>)}
+          {/* QUERY EXISTS */}
+          {filteredCollection.length === 0 && queryExists && 
+            <LoadingInfo 
+              title="Sorry"
+              text="Ihre Suche ergab leider keine Ergebnisse."
+              hasSpinner={false}
+            />
+          }   
+      
+          {/* NO QUERY EXISTS */}
+          {filteredCollectionExists && filteredCollection
+          .filter(item => isInQuery(item, query))
+          .map((collection, i) => 
+          <div key={collection._id}><Card collection={collection} dispatch={props.dispatch}/></div>)}   
 
-        {/* NO DATA EXISTS */}
-        { props.collections && props.collections.length === 0 &&
-          <MDBJumbotron className="jumbo-spinner" fluid>
-            <MDBContainer>
-              <h2 className="display-4">Loading content</h2>
-              <p className="lead">No data is yet provided, still loading...</p>
-              <Spinner />
-            </MDBContainer>
-          </MDBJumbotron>}
+        {/* NO DATA & NO QUERY EXISTS */}
+        { !filteredCollectionExists && !queryExists && 
+          <LoadingInfo 
+            title="Loading content"
+            text="No data is yet provided, still loading..."
+            hasSpinner={true}
+          />
+        }
       </div>
       <InstaStory />
       {props.modal.isOpen && <EditModal />}
