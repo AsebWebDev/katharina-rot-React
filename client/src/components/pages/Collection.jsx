@@ -28,7 +28,7 @@ function Collection(props) {
       setUseParallax(props.userSettings.Effects.parallax.val)
       setUseSildeGallery(props.userSettings.Effects.slideGallery.val)
     }
-  })
+  }, [props.userSettings])
 
   useEffect(() => {
     $(window).resize(function(){
