@@ -1,0 +1,25 @@
+{
+    "name": "mern-boilerplate",
+    "version": "2.0.0",
+    "private": true,
+    "scripts": {
+      "preinstall": "echo --- preinstall --- && cd server && npm install && cd ../client && npm install && npm run build && cd ..",
+      "start": "echo --- start --- && cd server && npm start",
+      "dev:server": "cd server && npm run dev",
+      "dev:client": "cd client && npm run start"
+    },
+    "engines": {
+      "node": "v12.5.0"
+    },
+    "dependencies": {
+      "@material-ui/core": "^4.11.0",
+      "bcrypt": "^5.0.0",
+      "dotenv": "^8.2.0",
+      "jquery": "^3.5.1",
+      "mongoose": "^5.10.7",
+      "npm-check-updates": "^9.0.3",
+      "passport": "^0.4.1",
+      "react-card-flip": "^1.0.11"
+    }
+  }
+  
