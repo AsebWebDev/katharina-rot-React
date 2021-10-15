@@ -14,7 +14,7 @@ const errHandler = err => {
   throw err
 }
 
-export default {
+const api = {
   service: service,
 
   isLoggedIn() {
@@ -170,3 +170,5 @@ export default {
       .catch(errHandler)
   }
 }
+
+export default api; 
