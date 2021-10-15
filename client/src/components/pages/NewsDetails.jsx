@@ -12,12 +12,12 @@ import '../../styles/NewsDetails.scss'
 import '../../styles/Editor.scss'
 
 export default function NewsDetails(props) {
-    let [currentId, setCurrentId] = useState(props.match.params.id)
-    let [currentNews, setCurrentNews] = useState(null)
-    let [parsedPictures, setParsedPictures] = useState([])
-    let [error, setError] = useState(null)
-    let [isMobile, setIsMobile] = useState(checkMobile())
-    let [isFullScreen, setIsFullScreen] = useState(checkFullScreen())
+    const [currentId, setCurrentId] = useState(props.match.params.id)
+    const [currentNews, setCurrentNews] = useState(null)
+    const [parsedPictures, setParsedPictures] = useState([])
+    const [error, setError] = useState(null)
+    const [isMobile, setIsMobile] = useState(checkMobile())
+    const [isFullScreen, setIsFullScreen] = useState(checkFullScreen())
 
     useEffect(() => {
         // Update Component, when new route is hit via router
@@ -43,7 +43,7 @@ export default function NewsDetails(props) {
         setParsedPictures(parsedPictures)
     }, [setParsedPictures, currentNews, currentId])
 
-    let parseDataForSlider = (array, id) => {
+    const parseDataForSlider = (array, id) => {
         return array.map((img,i) => ({
           index: i,
           id,
@@ -53,14 +53,14 @@ export default function NewsDetails(props) {
         })
     )}
     
-    let redirect = () => props.history.push('/news')
+    const redirect = () => props.history.push('/news')
 
     if (currentNews) {
-        let { title, description, pictures, titlePic } = currentNews;
-        let editorState = currentNews.editorState 
+        const { title, description, pictures, titlePic } = currentNews;
+        const editorState = currentNews.editorState 
             ? EditorState.createWithContent(convertFromRaw(JSON.parse(currentNews.editorState)))
             : null
-        let hasPictures = pictures.length > 0
+        const hasPictures = pictures.length > 0
         
         return (
         <div className="news">

@@ -12,17 +12,17 @@ function Preferences(props) {
         ? JSON.parse(localStorage.getItem('user'))
         : null
     
-    let {dispatch} = props;
-    let [userSettings, setUserSettings] = useState(props.userSettings)
+    const {dispatch} = props;
+    const [userSettings, setUserSettings] = useState(props.userSettings)
     
-    let handleChange = (e, val, settingType, option) => {
-        let settings = { ...userSettings } // new User Settings need to be called "settings", because dispatch is asking for this wording
+    const handleChange = (e, val, settingType, option) => {
+        const settings = { ...userSettings } // new User Settings need to be called "settings", because dispatch is asking for this wording
         settings[settingType][option].val = val
         setUserSettings(settings)
         dispatch({ type: "UPDATE_USER_SETTINGS", settings})     
     }
 
-    let handleSave = (settingType) => {
+    const handleSave = (settingType) => {
         api.saveUserSettings(localStorageUser._id, userSettings, settingType )
         .then(settings => {
             dispatch({ type: "UPDATE_USER_SETTINGS", settings})

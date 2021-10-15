@@ -14,14 +14,14 @@ function Notification (props) {
 
     // TODO: UNCOMMENT THIS PART WHEN USERSETTIGS ARE IMPLEMENTED
     // TODO: //////////////////////////////////////////////////
-    // let handleClick = () => {
+    // const handleClick = () => {
     //     props.dispatch({
     //         type: 'CLEAR_NOTIFICATIONS'
     //     })
     // }
     // TODO: //////////////////////////////////////////////////
 
-    let handleNotificationFadeOut = (timestamp) => {
+    const handleNotificationFadeOut = (timestamp) => {
         props.dispatch({type:PREPAREDELETE_NOTIFICATION,timestamp})
         setTimeout(() => props.dispatch({type:UPDATE_NOTIFICATIONS, timestamp}), 2000)
     }

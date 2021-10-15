@@ -10,16 +10,16 @@ import api from '../api';
 import '../styles/NavBar.scss'
 
 function NavbarPage (props) {
-  let [isOpen, setIsOpen] = useState(false)
-  let { dispatch } = props;
+  const [isOpen, setIsOpen] = useState(false)
+  const { dispatch } = props;
 
-  let toggleCollapse = () => {
+  const toggleCollapse = () => {
     setIsOpen(!isOpen)
   }
 
-  let handleLogoutClick= (e) => {
+  const handleLogoutClick= (e) => {
       api.logout()
-      let userdata = { username: null, profilePic: null }
+      const userdata = { username: null, profilePic: null }
       props.dispatch({ type: "UPDATE_USER_DATA", userdata })
       api.getCollections()
         .then(collections => props.dispatch({
@@ -28,7 +28,7 @@ function NavbarPage (props) {
         })).catch (err => console.log(err))
   }
 
-  let handleChange = (e) => {
+  const handleChange = (e) => {
     dispatch(updateQuery(e.target.value))
   }
 

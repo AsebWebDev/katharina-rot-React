@@ -9,9 +9,9 @@ import api from '../../api';
 import '../../styles/Admin.css'
 
 function Admin (props){
-  let [mode, setMode] = useState("default")
+  const [mode, setMode] = useState("default")
   
-  let toggle = (choice) => {
+  const toggle = (choice) => {
     if (mode === choice) choice = "default"
     switch (choice) {
       case 'createCollection': setMode('createCollection'); break;

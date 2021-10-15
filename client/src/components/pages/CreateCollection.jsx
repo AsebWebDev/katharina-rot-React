@@ -13,16 +13,16 @@ import '../../styles/Editor.scss'
 import uploadThumbnail from '../../media/upload-thumbnail2.gif';
 
 function CreateCollection(props) {
-    let {dispatch} = props;
-    let [titlePic, setTitlePic] = useState('');
-    let [pictures, setPictures] = useState([]);
-    let [currentCollection, setCurrentCollection] = useState({tags: []})
-    let [editorState, setEditorState] = useState(EditorState.createEmpty())
+    const {dispatch} = props;
+    const [titlePic, setTitlePic] = useState('');
+    const [pictures, setPictures] = useState([]);
+    const [currentCollection, setCurrentCollection] = useState({tags: []})
+    const [editorState, setEditorState] = useState(EditorState.createEmpty())
 
-    let uploadWidget = (e) => {
+    const uploadWidget = (e) => {
         e.preventDefault();
-        let uploadedPictures = []
-        let multiple = (e.target.id === "upload-art"); // Multiple pictures for the gallery or one picture as title
+        const uploadedPictures = []
+        const multiple = (e.target.id === "upload-art"); // Multiple pictures for the gallery or one picture as title
         window.cloudinary.createUploadWidget({ 
             upload_preset: 'mu7bkqlz',
             multiple
@@ -38,24 +38,24 @@ function CreateCollection(props) {
         }).open(); 
     }
 
-    let updateTags = (newTags) => {
+    const updateTags = (newTags) => {
         setCurrentCollection({
         ...currentCollection,
         tags: newTags  
         })
     }
 
-    let handleChange = (e) => {
+    const handleChange = (e) => {
         setCurrentCollection({
             ...currentCollection,
             [e.target.id]: e.target.value
         })
     }
 
-    let handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         const contentState = JSON.stringify(convertToRaw(editorState.getCurrentContent()));
-        let data = {...currentCollection, pictures, titlePic, editorState: contentState}
+        const data = {...currentCollection, pictures, titlePic, editorState: contentState}
         api.addCollection(data)
         .then(result => {
             dispatch(newNotification(`Your Collection '${result.Collection.title}' has been created`, 'Created'))
@@ -91,9 +91,6 @@ function CreateCollection(props) {
                                     editorState={editorState}
                                     onEditorStateChange={setEditorState}
                                     localization={{ locale: 'de' }}
-                                    // wrapperStyle={{backgroundColor: "#ffffff"}}
-                                    // editorStyle={<editorStyleObject>}
-                                    // toolbarStyle={<toolbarStyleObject>}
                                 />  
                             </div>
                         </div>

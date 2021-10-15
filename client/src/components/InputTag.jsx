@@ -3,22 +3,22 @@ import { connect } from 'react-redux';
 import '../styles/InputTag.css'
 
 function InputTag (props) {
-  let [tags, setTags] = useState(props.tags)
-  let [tagInput, setTagInput] = useState('')
+  const [tags, setTags] = useState(props.tags)
+  const [tagInput, setTagInput] = useState('')
 
   useEffect(() => {
     setTags(props.tags)
   }, [props.tags])
 
   
-  let removeTag = (i) => {
+  const removeTag = (i) => {
     const newTags = [ ...tags ];
     newTags.splice(i, 1);
     setTags(newTags);
     props.updateTags(newTags)
   }
 
-  let inputKeyDown = (e) => {
+  const inputKeyDown = (e) => {
     const val = e.target.value;
     if (e.key === 'Enter' && val) {
       if (tags.find(tag => tag.toLowerCase() === val.toLowerCase())) {

@@ -11,7 +11,7 @@ import '../../styles/Home.css'
 import greenBanner from '../../media/banner-greenfuture-1-1024x287.jpg'
 
 function Home (props) {
-  let { dispatch, query } = props;
+  const { dispatch, query } = props;
 
   useEffect(() => {
     api.getCollections()

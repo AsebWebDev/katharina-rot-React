@@ -8,8 +8,8 @@ import api from '../api';
 
 function CoverFlow(props) {
     const size = useWindowSize();
-    let { dispatch } = props;
-    let parsedPictures = props.collections.map(item => item.titlePic)
+    const { dispatch } = props;
+    const parsedPictures = props.collections.map(item => item.titlePic)
 
     useEffect(() => {
         if (props.collections.length === 0) api.getCollections()

@@ -14,10 +14,10 @@ import infografik9 from '../../media/infografikbild-komplett_kleinklein_quadrat-
 import infografik10 from '../../media/nitrat-teaser-webseite3-1024x675.jpg'
 import '../../styles/InformativeIllustration.scss'
 
-let picArr = [infografik3, infografik4, infografik5, infografik6, infografik7, infografik8, infografik9, infografik10 ]
+const picArr = [infografik3, infografik4, infografik5, infografik6, infografik7, infografik8, infografik9, infografik10 ]
 
-let InformativeIllustrationPictures = (picArr) => {
-    let result = []
+const InformativeIllustrationPictures = (picArr) => {
+    const result = []
     let count = 0;
     while (count < picArr.length) {
         result.push(<MDBRow key={count}>

@@ -11,17 +11,17 @@ import '../../styles/Create.scss'
 import uploadThumbnail from '../../media/upload-thumbnail2.gif'
 
 function CreateNews(props) {
-    let {dispatch} = props;
-    let [titlePic, setTitlePic] = useState('');
-    let [thumbnail, setThumbnail] = useState('');
-    let [pictures, setPictures] = useState([]);
-    let [currentNews, setCurrentNews] = useState({tags: []})
-    let [editorState, setEditorState] = useState(EditorState.createEmpty())
+    const {dispatch} = props;
+    const [titlePic, setTitlePic] = useState('');
+    const [thumbnail, setThumbnail] = useState('');
+    const [pictures, setPictures] = useState([]);
+    const [currentNews, setCurrentNews] = useState({tags: []})
+    const [editorState, setEditorState] = useState(EditorState.createEmpty())
 
-    let uploadWidget = (e) => {
+    const uploadWidget = (e) => {
         e.preventDefault();
-        let uploadedPictures = []
-        let multiple = (e.target.id === "upload-art"); // Multiple pictures for the gallery or one picture as title
+        const uploadedPictures = []
+        const multiple = (e.target.id === "upload-art"); // Multiple pictures for the gallery or one picture as title
         window.cloudinary.createUploadWidget({ 
             upload_preset: 'mu7bkqlz',
             multiple
@@ -39,24 +39,24 @@ function CreateNews(props) {
         }).open(); 
     }
 
-    let updateTags = (newTags) => {
+    const updateTags = (newTags) => {
         setCurrentNews({
         ...currentNews,
         tags: newTags  
         })
     }
 
-    let handleChange = (e) => {
+    const handleChange = (e) => {
         setCurrentNews({
             ...currentNews,
             [e.target.id]: e.target.value
         })
     }
 
-    let handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         const contentState = JSON.stringify(convertToRaw(editorState.getCurrentContent()));
-        let data = {...currentNews, titlePic, thumbnail, pictures, editorState: contentState}
+        const data = {...currentNews, titlePic, thumbnail, pictures, editorState: contentState}
         api.addNews(data)
         .then(result => {
             dispatch(newNotification(`Your News '${result.news.title}' has been created`, 'Created'))
@@ -99,9 +99,6 @@ function CreateNews(props) {
                                     editorState={editorState}
                                     onEditorStateChange={setEditorState}
                                     localization={{ locale: 'de' }}
-                                    // wrapperStyle={{backgroundColor: "#ffffff"}}
-                                    // editorStyle={<editorStyleObject>}
-                                    // toolbarStyle={<toolbarStyleObject>}
                                 />  
                             </div>
                         </div>

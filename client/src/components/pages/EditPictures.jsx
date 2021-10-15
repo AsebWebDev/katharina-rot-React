@@ -6,12 +6,12 @@ import api from '../../api';
 import '../../styles/EditPictures.css'
 
 function EditPictures(props) {
-    let { dispatch } = props;
-    let { currentId, type } = props.modal;
-    let [currentTarget, setCurrentTarget] = useState({})
-    let [isUploadDone, setIsUploadDone] = useState(false)
-    let [uploadedPictures, setUploadedPictures] = useState(props.uploadedPictures)
-    let [uploadedTitlePic, setUploadedTitlePic] = useState(props.uploadedTitlePic)
+    const { dispatch } = props;
+    const { currentId, type } = props.modal;
+    const [currentTarget, setCurrentTarget] = useState({})
+    const [isUploadDone, setIsUploadDone] = useState(false)
+    const [uploadedPictures, setUploadedPictures] = useState(props.uploadedPictures)
+    const [uploadedTitlePic, setUploadedTitlePic] = useState(props.uploadedTitlePic)
 
     useEffect(() => {
         (type === "collection")
@@ -39,10 +39,10 @@ function EditPictures(props) {
         setUploadedTitlePic(null)   // clear formerly uploaded Title Picture, when model is opened
     }, [props.modal.isOpen, dispatch])
     
-    let uploadWidget = (e) => {
+    const uploadWidget = (e) => {
         e.preventDefault();
-        let newArr = uploadedPictures?[...uploadedPictures]:[];
-        let multiple = (e.target.id === "upload-art"); // Multiple pictures for the gallery or one picture as title
+        const newArr = uploadedPictures?[...uploadedPictures]:[];
+        const multiple = (e.target.id === "upload-art"); // Multiple pictures for the gallery or one picture as title
         window.cloudinary.createUploadWidget({ 
           upload_preset: 'mu7bkqlz',
           multiple,
@@ -53,7 +53,7 @@ function EditPictures(props) {
                 newArr.push(result.info.secure_url) 
                 setUploadedPictures(newArr)
               } else {
-                let newURL = result.info.secure_url  
+                const newURL = result.info.secure_url  
                 setUploadedTitlePic(newURL)
                 setIsUploadDone(true)
               }

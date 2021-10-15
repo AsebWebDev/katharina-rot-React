@@ -7,7 +7,7 @@ import $ from "jquery";
 import '../styles/Footer.scss'
 
 const FooterPage = (props) => {
-  let [nNewsMax, setNNewsMax] = useState(4); // maximum number of news to show
+  const [nNewsMax, setNNewsMax] = useState(4); // maximum number of news to show
 
   useEffect(() => {
     $(window).resize(function(){

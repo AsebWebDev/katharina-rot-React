@@ -13,14 +13,14 @@ import '../../styles/Collection.scss'
 import '../../styles/Editor.scss'
 
 function Collection(props) {
-  let [currentId] = useState(props.match.params.id)
-  let [useParallax, setUseParallax] = useState(null)
-  let [useSildeGallery, setUseSildeGallery] = useState(null)
-  let [currentCollection, setCurrentCollection] = useState(null)
-  let [parsedPictures, setParsedPictures] = useState([])
-  let [error, setError] = useState(null)
-  let [isMobile, setIsMobile] = useState(checkMobile())
-  let [isFullScreen, setIsFullScreen] = useState(checkFullScreen())
+  const [currentId] = useState(props.match.params.id)
+  const [useParallax, setUseParallax] = useState(null)
+  const [useSildeGallery, setUseSildeGallery] = useState(null)
+  const [currentCollection, setCurrentCollection] = useState(null)
+  const [parsedPictures, setParsedPictures] = useState([])
+  const [error, setError] = useState(null)
+  const [isMobile, setIsMobile] = useState(checkMobile())
+  const [isFullScreen, setIsFullScreen] = useState(checkFullScreen())
 
 
   useEffect(() => {
@@ -49,7 +49,7 @@ function Collection(props) {
    setParsedPictures(parsedPictures)
   }, [setParsedPictures, currentCollection, currentId])
 
-  let parseDataForSlider = (array, id) => {
+  const parseDataForSlider = (array, id) => {
     return array.map((img,i) => ({
       index: i,
       id,
@@ -59,14 +59,14 @@ function Collection(props) {
     })
   )}
 
-  let redirect = () => props.history.push('/')
+  const redirect = () => props.history.push('/')
   
   if (currentCollection) {
-    let { title, description, pictures, titlePic } = currentCollection;
-    let editorState = currentCollection.editorState 
+    const { title, description, pictures, titlePic } = currentCollection;
+    const editorState = currentCollection.editorState 
       ? EditorState.createWithContent(convertFromRaw(JSON.parse(currentCollection.editorState)))
       : null
-    let hasPictures = pictures.length > 0
+    const hasPictures = pictures.length > 0
     return (
       <div className="collection">
           <MDBAnimation type="slideInLeft"><div onClick={redirect} className="backBtn"><i className="fas fa-arrow-circle-left"></i></div></MDBAnimation>

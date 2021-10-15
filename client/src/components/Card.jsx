@@ -10,12 +10,12 @@ import '../styles/Card.scss'
 
 const Card = function (props) {
 
-    let maxTextSize = 140;
-    let { title, titlePic, description, tags, _id, likedSessions } = props.collection;
-    let [isFlipped, setIsFlipped] = useState(false);
-    let {dispatch} = props;
+    const maxTextSize = 140;
+    const { title, titlePic, description, tags, _id, likedSessions } = props.collection;
+    const [isFlipped, setIsFlipped] = useState(false);
+    const {dispatch} = props;
 
-    let handleDelete = (e) => {
+    const handleDelete = (e) => {
         e.preventDefault();
         e.stopPropagation();
         api.deleteCollection(_id)
@@ -32,18 +32,18 @@ const Card = function (props) {
         }).catch(err => dispatch(newNotification(err.toString())));
     }
     
-    let handleClick = (e) => {
+    const handleClick = (e) => {
         e.preventDefault();
         setIsFlipped(!isFlipped)
     }
 
-    let handleTagClick = (e) => {
+    const handleTagClick = (e) => {
         e.preventDefault();
         e.stopPropagation();
         const tagId = e.target.getAttribute('id');
         const tagName = e.target.getAttribute('name');
         tags.splice(tagId,1)
-        let body = { ...props.collection, tags}
+        const body = { ...props.collection, tags}
         api.updateCollection(_id, body)
         .then(result => {
             dispatch({ type: "GET_DATA", collections: result.collections })
@@ -51,7 +51,7 @@ const Card = function (props) {
         }).catch (err => console.log(err))
     }
 
-    let handleEdit = (e) => {
+    const handleEdit = (e) => {
         e.preventDefault();
         e.stopPropagation();
         dispatch(toggleModal(props.modal, _id, 0, "collection"))
