@@ -10,13 +10,6 @@ function CoverFlow(props) {
     const size = useWindowSize();
     let { dispatch } = props;
     let parsedPictures = props.collections.map(item => item.titlePic)
-    // let [currentPic, setCurrentPic] = useState(null)
-
-    // const handleClick = (e) => {
-    //     e.preventDefault();
-    //     setCurrentPic(e.target.src)
-    //     // props.dispatch(toggleModal(props.modal))
-    // }
 
     useEffect(() => {
         if (props.collections.length === 0) api.getCollections()
@@ -35,14 +28,11 @@ function CoverFlow(props) {
                         media={coverFlowMedia}
                     >
                         <div
-                        // onClick={(pic) => console.log(pic)}
-                        // onKeyDown={() => fn()}
                         role="menuitem"
                         tabIndex="1"
                         >
                         {parsedPictures && 
                             <img
-                            // onClick={handleClick}
                             src={parsedPictures[0]}
                             alt='gallery'
                             style={{ display: 'block', width: '100%' }}

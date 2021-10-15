@@ -1,6 +1,3 @@
-//TODO: try / practice GraphQl
-//TODO: add decent animations
-
 const path = require('path')
 require('dotenv').config({ path: path.join(__dirname, '.env') })
 
@@ -12,10 +9,9 @@ const mongoose = require('mongoose')
 const logger = require('morgan')
 const nocache = require('nocache')
 const session = require('express-session')
-const MongoStore = require('connect-mongo')(session)
+const MongoStore = require('connect-mongo')
 
 require('./configs/database')
-mongoose.set('useFindAndModify', false) // prevent deprecation warning of fineByIdAndUpdate()
 
 const app_name = require('./package.json').name
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`)
@@ -36,10 +32,10 @@ app.use(express.static(path.join(__dirname, '../client/build')))
 
 // Enable authentication using session + passport
 app.use(session({
-  secret: process.env.SESSION_SECRET || 'katharinarotI00sTheAnswer42', // TODO: Change Session Secret,
+  secret: process.env.SESSION_SECRET,
   resave: true,
   saveUninitialized: true,
-  store: new MongoStore({ mongooseConnection: mongoose.connection })
+  store: MongoStore.create({ mongoUrl: process.env.DB_URI  })
 }))
 require('./passport')(app)
 
