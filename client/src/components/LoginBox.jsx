@@ -4,16 +4,15 @@ import { withRouter } from "react-router-dom";
 import { newNotification } from '../actioncreators'
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
 import GoogleLogin from 'react-google-login';
-// import keys from '../configs/keys';
 import api from '../api';
 import '../styles/LoginBox.scss'
 
 function LoginBox(props) {
   const { dispatch } = props;
-  let [username, setUsername] = useState('');
-  let [password, setPassword] = useState('');
-  let [message, setMessage] = useState('');
-  let [profilePic, setProfilePic] = useState(null);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
+  const [, setProfilePic] = useState(null);
   const handleInputChange = (stateFieldName, event) => {
     switch (stateFieldName) {
       case 'username': setUsername(event.target.value); break;
@@ -47,7 +46,7 @@ function LoginBox(props) {
     api.googleLogin(googleId, username, profilePic)
     .then(result => {
       dispatch(newNotification('Successfully logged in, ' +  username))
-      let userdata = { username, profilePic }
+      const userdata = { username, profilePic }
       props.dispatch({ type: "UPDATE_USER_DATA", userdata })
       props.history.push("/") // Redirect to the home page
     }).catch(err => setMessage(err))
