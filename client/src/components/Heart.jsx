@@ -5,9 +5,9 @@ import '../styles/Heart.scss'
 
 function Heart(props) {
     
-    let {dispatch} = props;
-    let [target] = useState(props.target);
-    let [hasLiked, setHasLikes] = useState(null);
+    const {dispatch} = props;
+    const [target] = useState(props.target);
+    const [hasLiked, setHasLikes] = useState(null);
 
     useEffect(() => {
         api.hasLiked(target)

@@ -4,7 +4,7 @@ import { MDBInput } from "mdbreact";
 
 export default function Option(props) {
     const { handleChange } = props
-    let [optionVal, setOptionVal] = useState(props.optionValue.val)
+    const [optionVal, setOptionVal] = useState(props.optionValue.val)
     const option = props.option
     const settingType = props.settingType
 

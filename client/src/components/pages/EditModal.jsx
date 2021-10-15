@@ -10,10 +10,10 @@ import api from '../../api';
 import '../../styles/EditModal.css'
 
 function EditModal(props) {
-  let { dispatch } = props;
-  let { currentId, type } = props.modal;
-  let [currentTarget, setCurrentTarget] = useState({})
-  let [editorState, setEditorState] = useState(EditorState.createEmpty())
+  const { dispatch } = props;
+  const { currentId, type } = props.modal;
+  const [currentTarget, setCurrentTarget] = useState({})
+  const [editorState, setEditorState] = useState(EditorState.createEmpty())
 
   useEffect(() => {
     (type === "collection")
@@ -29,16 +29,16 @@ function EditModal(props) {
         }).catch (err => console.log(err))
   }, [currentId, type])
 
-  let toggle = () => { dispatch(toggleModal(props.modal)) }
+  const toggle = () => { dispatch(toggleModal(props.modal)) }
 
-  let updateTags = (newTags) => {
+  const updateTags = (newTags) => {
     setCurrentTarget({ ...currentTarget, tags: newTags })
   }
 
-  let handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const contentState = JSON.stringify(convertToRaw(editorState.getCurrentContent()));
-    let body = {
+    const body = {
       ...currentTarget,
       pictures: props.uploadedPictures ? props.uploadedPictures : currentTarget.pictures, // use uploaded pictures if exists
       titlePic: props.uploadedTitlePic ? props.uploadedTitlePic : currentTarget.titlePic, // use uploaded Titlepic if exists
@@ -48,13 +48,11 @@ function EditModal(props) {
     (type === "collection")
     ? api.updateCollection(currentId, body)
           .then(result => {
-          console.log("TCL: handleSubmit -> result", result)
             dispatch({ type: "GET_DATA", collections: result.collections })
             dispatch(newNotification(`Your Collection '${currentTarget.title}' has been updated.`, 'Updated'))
           }).catch (err => console.log(err))
     :   api.updateNews(currentId, body)
           .then(result => {
-          console.log("TCL: handleSubmit -> result", result)
             dispatch({ type: "GET_NEWS", news: result.news })
             dispatch(newNotification(`Your News '${currentTarget.title}' has been updated.`, 'Updated'))
           }).catch (err => console.log(err))
@@ -62,7 +60,7 @@ function EditModal(props) {
     toggle();
   }
 
-  let handleChange = (e) => {
+  const handleChange = (e) => {
     setCurrentTarget({
       ...currentTarget,
       [e.target.id]: (e.target.id==="tags") 
@@ -71,7 +69,7 @@ function EditModal(props) {
     })
   }
 
-  let handleclose = () => {
+  const handleclose = () => {
     dispatch(setUploadedPics(null,null)) //clear uploaded pictures after cancelling
     toggle()
   }
@@ -96,9 +94,6 @@ function EditModal(props) {
                       editorState={editorState}
                       onEditorStateChange={setEditorState}
                       localization={{ locale: 'de' }}
-                      // wrapperStyle={{backgroundColor: "#ffffff"}}
-                      // editorStyle={<editorStyleObject>}
-                      // toolbarStyle={<toolbarStyleObject>}
                   />  
               </div>
             </div>

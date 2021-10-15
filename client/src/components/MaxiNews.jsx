@@ -15,7 +15,7 @@ function MaxiNews(props) {
     const { dispatch, news, i } = props;
     const section = "section" + i
     const collapsible = section + " section collapsible"
-    let [expand, setExpand] = useState(false)
+    const [expand, setExpand] = useState(false)
 
     const toggle = () => { setExpand(!expand) }
 

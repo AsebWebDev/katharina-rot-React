@@ -11,8 +11,8 @@ import '../styles/MiniNews.scss'
 const formatter = buildFormatter(germanStrings)
 
 function MiniNews(props) {
-    let news = props.news;  
-    let redirect = () => props.history.push('/news/'+news._id)
+    const news = props.news;  
+    const redirect = () => props.history.push('/news/'+news._id)
 
     return (
       <MDBCard onClick={redirect} className="my-5 px-1 pb-1 hoverable" id="mini-news">

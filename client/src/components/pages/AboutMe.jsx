@@ -8,7 +8,7 @@ import { section1a_text, section1b_text, customer_list, vita, publications, exhi
 import '../../styles/AboutMe.scss'
 
 export default function AboutMe(props) {
-    let redirect = () => props.history.push('/gruene-illustration')
+    const redirect = () => props.history.push('/gruene-illustration')
 
     return (
         <div id="about-me">
