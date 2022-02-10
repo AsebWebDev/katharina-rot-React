@@ -11,7 +11,7 @@
     "gulp": "^4.0.2",
     "jquery": "^3.6.0",
     "mdbreact": "^4.27.0",
-    "node-sass": "^6.0.1",
+    "node-sass": "^7.0.0",
     "react": "^16.13.1",
     "react-card-flip": "^1.0.11",
     "react-coverflow": "^0.2.20",
